@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme-monitor.css" media="all" />
 </head>
 <body>
 
@@ -22,7 +23,9 @@
             "sections": [
                 {
                     "title": "mySectionTitle1",
-                    "jobList": [
+                    "url": "http://localhost/url",
+                    "description": "Test description",
+                    "jobs": [
                         {
                             "title": "myJobTitle1",
                             "url": "http://localhost/11"
@@ -30,18 +33,47 @@
                         {
                             "title": "myJobTitle2",
                             "url": "http://localhost/22"
+                        },
+                        {
+                            "title": "myJobTitle3",
+                            "url": "http://localhost/22"
+                        },
+                        {
+                            "title": "myJobTitle4",
+                            "url": "http://localhost/22"
+                        },
+                        {
+                            "title": "myJobTitle5",
+                            "url": "http://localhost/22"
                         }
                     ]
                 },
                 {
                     "title": "mySectionTitle2",
-                    "jobList": [
+                    "url": "http://localhost/url",
+                    "description": "Test description",
+                    "jobs": [
                         {
                             "title": "myJobTitle21",
                             "url": "http://localhost/211"
                         },
                         {
                             "title": "myJobTitle22",
+                            "url": "http://localhost/222"
+                        }
+                    ]
+                },
+                {
+                    "title": "mySectionTitle3",
+                    "url": "http://localhost/url",
+                    "description": "Test description",
+                    "jobs": [
+                        {
+                            "title": "myJobTitle31",
+                            "url": "http://localhost/211"
+                        },
+                        {
+                            "title": "myJobTitle32",
                             "url": "http://localhost/222"
                         }
                     ]
@@ -69,18 +101,39 @@
     </script>
 
 
-    <h1 id="mainTitle" data-bind="text: title" ></h1>
+    <!-- ko if: title -->
+    <h1 id="mainTitle" class="alert alert-info" data-bind="text: title"></h1>
+    <!-- /ko -->
     <div id="content" data-bind="template: { name: 'section-template', foreach: sections }" ></div>
 
     <script type="text/html" id="section-template">
-        <h2 data-bind="text: title"></h2>
-        <div data-bind="template: { name: 'job-template', foreach: jobList, afterRender: $root.getData }"></div>
+        <div class="block">
+            <!-- ko if: title -->
+            <h2 class="alert alert-none">
+                <!-- ko if: url -->
+                <a class="alert-link" data-bind="attr: { href: url, title: title }, text: title"></a>
+                <!-- /ko -->
+                <!-- ko ifnot: url -->
+                <span data-bind="text: title"></span>
+                <!-- /ko -->
+            </h2>
+            <!-- /ko -->
+            <!-- ko if: description -->
+            <p data-bind="text: description"></p>
+            <!-- /ko -->
+            <!-- ko if: jobs -->
+            <div data-bind="template: { name: 'job-template', foreach: jobs, afterRender: $root.getData }"></div>
+            <!-- /ko -->
+            <!-- ko if: sections -->
+            <div data-bind="template: { name: 'section-template', foreach: sections }"></div>
+            <!-- /ko -->
+        </div>
     </script>
 
     <script type="text/html" id="job-template">
-        <h3 data-bind="text: title"></h3>
-        <span data-bind="text: url"></span>
-        <span data-bind="text: status"></span>
+        <div data-bind="attr: { class: status}">
+            <a class="alert-link" data-bind="attr: { href: url, title: title }, text: title"></a>
+        </div>
     </script>
 
 </body>
