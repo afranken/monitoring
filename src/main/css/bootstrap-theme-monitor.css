@@ -1,0 +1,76 @@
+body {
+  padding: 0 10px;
+}
+body, table {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  color: #000000;
+  background: #ffffff;
+}
+
+h1, h2, h3, p {
+  text-align: center;
+}
+
+.block {
+  float: left;
+  margin: 0 10px 15px 10px;
+}
+
+.small-block {
+  float: left;
+  margin: 0 15px 15px 15px;
+  min-width: 150px;
+}
+
+.floatKiller {
+  clear: both;
+}
+
+.codeviolation {
+  margin: 1px;
+  min-width: 50px;
+  padding: 0 10px 0 0;
+  text-align: right;
+}
+
+table.jobmatrix * th a {
+  color: #a9a9a9;
+  font-size: 12px;
+}
+
+.codeviolation {
+  padding: 0;
+  margin: 0;
+}
+
+.jobstatus {
+  padding: 5px;
+  margin-bottom: 2px;
+  background-color: #EEEEFF;
+}
+
+table * th a {
+  color: #a9a9a9;
+  font-size: 12px;
+}
+
+.alert-none {
+  color: #bbb;
+  background-color: #f7f7f9;
+  border-color: #e1e1e8;
+}
+
+.alert-none .alert-link {
+  color: #999999;
+}
+
+.alert-disabled {
+  color: #999999;
+  background-color: #cccccc;
+  border-color: #333333;
+}
+
+.alert-disabled .alert-link {
+  color: #666666;
+}
