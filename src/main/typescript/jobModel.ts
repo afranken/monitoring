@@ -9,11 +9,11 @@ class JobModel {
         this.status("unknown");
     }
 
-    public setStatus(title: string): void {
+    public updateStatus() {
         this.status("TEST");
     }
 
-    private title:string;
+    public title:string;
     public url:string;
     public status:KnockoutObservable<string> = ko.observable<string>();
 

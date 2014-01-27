@@ -66,18 +66,18 @@
 
 
     <h1 id="mainTitle" data-bind="text: title" ></h1>
-    <div id="content" data-bind="foreach: sections" >
+    <div id="content" data-bind="template: { name: 'section-template', foreach: sections }" ></div>
+
+    <script type="text/html" id="section-template">
         <h2 data-bind="text: title"></h2>
-        <div data-bind="foreach: jobList">
-            <h3 data-bind="text: title"></h3>
-            <span data-bind="text: url"></span>
-            <span data-bind="text: status"></span>
-            <!-- for debug purposes -->
-            <button data-bind="click: setStatus">Change Status</button>
-        </div>
-    </div>
+        <div data-bind="template: { name: 'job-template', foreach: jobList, afterRender: $root.getData }"></div>
+    </script>
 
-
+    <script type="text/html" id="job-template">
+        <h3 data-bind="text: title"></h3>
+        <span data-bind="text: url"></span>
+        <span data-bind="text: status"></span>
+    </script>
 
 </body>
 </html>
