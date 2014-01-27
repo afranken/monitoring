@@ -8,8 +8,10 @@ interface Application {
 
 interface Section {
     title?: string;
-    jobList?: Job[];
-    subSections?: SubSection[];
+    url?: string;
+    description?: string;
+    jobs?: Job[];
+    sections?: SubSection[];
 }
 
 interface SubSection extends Section {
@@ -17,8 +19,8 @@ interface SubSection extends Section {
 }
 
 interface Job {
-    title?: string;
-    url?: string;
+    title: string;
+    url: string;
 }
 
 interface Configuration {
