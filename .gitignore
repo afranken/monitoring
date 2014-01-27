@@ -1,0 +1,6 @@
+.idea/
+target/
+*.iws
+*.iml
+node_modules/
+src/main/typescript/**/*.js*

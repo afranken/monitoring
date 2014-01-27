@@ -1,0 +1,24 @@
+{
+    "title": "myTitle",
+    "sections": [
+        {
+            "title": "sectionTitle",
+            "jobList": [
+                {
+                    "title": "jobTitle",
+                     "url": "http://www.mydomain.com/"
+                }
+            ]
+        }
+    ],
+    "configuration": {
+        "hosts": [
+            {
+                "hostname": "",
+                "username": "",
+                "password": ""
+            }
+        ],
+        "expiry": 36
+    }
+}

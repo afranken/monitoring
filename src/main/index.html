@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="javascript/vendor/jquery-2.0.3.js"></script>
+    <script type="text/javascript" src="javascript/vendor/knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="typescript/vendor/collections.js"></script>
+    <script type="text/javascript" src="typescript/application.js"></script>
+    <script type="text/javascript" src="typescript/sectionModel.js"></script>
+    <script type="text/javascript" src="typescript/jobModel.js"></script>
+</head>
+<body>
+
+    <script type='text/javascript'>
+
+        json = {
+            "title": "myTitle",
+            "sections": [
+                {
+                    "title": "mySectionTitle1",
+                    "jobList": [
+                        {
+                            "title": "myJobTitle1",
+                            "url": "http://localhost/11"
+                        },
+                        {
+                            "title": "myJobTitle2",
+                            "url": "http://localhost/22"
+                        }
+                    ]
+                },
+                {
+                    "title": "mySectionTitle2",
+                    "jobList": [
+                        {
+                            "title": "myJobTitle21",
+                            "url": "http://localhost/211"
+                        },
+                        {
+                            "title": "myJobTitle22",
+                            "url": "http://localhost/222"
+                        }
+                    ]
+                }
+            ],
+            "configuration": {
+                "hosts": [
+                    {
+                        "hostname": "",
+                        "username": "",
+                        "password": ""
+                    }
+                ],
+                "expiry": 36
+            }
+        };
+
+        //init application
+        $(function ()
+        {
+            var applicationViewModel = new ApplicationViewModel(json);
+            ko.applyBindings(applicationViewModel);
+        });
+
+    </script>
+
+
+    <h1 id="mainTitle" data-bind="text: title" ></h1>
+    <div id="content" data-bind="foreach: sections" >
+        <h2 data-bind="text: title"></h2>
+        <div data-bind="foreach: jobList">
+            <h3 data-bind="text: title"></h3>
+            <span data-bind="text: url"></span>
+            <span data-bind="text: status"></span>
+            <!-- for debug purposes -->
+            <button data-bind="click: setStatus">Change Status</button>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
