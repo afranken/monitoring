@@ -2,20 +2,16 @@
 
 interface Application {
     title?: string;
-    sections?: Section[];
+    sections: Section[];
     settings?: Configuration;
 }
 
 interface Section {
-    title?: string;
+    title: string;
     url?: string;
     description?: string;
     jobs?: Job[];
-    sections?: SubSection[];
-}
-
-interface SubSection extends Section {
-
+    sections?: Section[];
 }
 
 interface Job {
@@ -29,7 +25,7 @@ interface Configuration {
 }
 
 interface Host {
-    hostname?: string;
+    hostname: string;
     username?: string;
     password?: string;
 }
