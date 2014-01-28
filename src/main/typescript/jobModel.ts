@@ -1,22 +1,11 @@
-/// <reference path="json.d.ts" />
 /// <reference path="vendor/knockout.d.ts" />
 
-class JobModel {
+interface JobModel {
 
-    constructor(private job:Job) {
-        this.title = job.title;
-        this.url = job.url;
-        this.status(this.basicStyle);
-    }
+    type: string;
+    status: KnockoutObservable<string>;
 
-    public updateStatus() {
-        this.status(this.basicStyle + " alert-success");
-    }
+    updateStatus(): void;
 
-    public title:string;
-    public url:string;
-    public status:KnockoutObservable<string> = ko.observable<string>();
-
-    private basicStyle: string = "jobstatus alert";
 
 }

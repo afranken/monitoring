@@ -17,6 +17,7 @@ interface Section {
 interface Job {
     title: string;
     url: string;
+    type?: string;
 }
 
 interface Configuration {
