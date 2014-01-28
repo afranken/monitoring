@@ -1,7 +1,8 @@
 /// <reference path="json.d.ts" />
 /// <reference path="vendor/knockout.d.ts" />
 /// <reference path="vendor/collections.ts" />
-/// <reference path="jobModel.ts" />
+/// <reference path="jobmodel.ts" />
+/// <reference path="jenkinsjobmodel.ts" />
 
 class SectionModel {
 
@@ -19,9 +20,18 @@ class SectionModel {
         }
 
 
+
         if(section.jobs !== undefined) {
             section.jobs.forEach(job => {
-                    var jobViewModel = new JobModel(job);
+                    var jobViewModel;
+                    if(job.type === undefined || job.type === "jenkins") {
+                        jobViewModel = new JenkinsJobModel(job);
+                    }
+                    else if(job.type === "sonar") {
+
+                    } else if (job.type === "nagios") {
+
+                    }
                     this.jobs.push(jobViewModel);
                 }
             );
