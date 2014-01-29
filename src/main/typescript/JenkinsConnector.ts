@@ -1,6 +1,6 @@
-import Json = require("json");
-import Connector = require("connector");
-import Configuration = require("configuration");
+import Json = require("JsonInterfaces");
+import Connector = require("Connector");
+import Configuration = require("Configuration");
 
 class JenkinsConnector implements Connector {
 

@@ -1,7 +1,7 @@
 /// <reference path="vendor/knockout.d.ts" />
-import JobModel = require("jobmodel")
-import JenkinsJobModel = require("jenkinsjobmodel")
-import Json = require("json");
+import JobModel = require("JobModel")
+import JenkinsJobModel = require("JenkinsJobModel")
+import Json = require("JsonInterfaces");
 
 class SectionModel {
 

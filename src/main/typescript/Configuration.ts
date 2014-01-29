@@ -1,5 +1,5 @@
-import Json = require("json");
-import HostConfiguration = require("hostconfiguration");
+import Json = require("JsonInterfaces");
+import HostConfiguration = require("HostConfiguration");
 
 class Configuration {
 

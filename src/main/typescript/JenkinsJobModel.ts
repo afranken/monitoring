@@ -1,6 +1,6 @@
 /// <reference path="vendor/knockout.d.ts" />
-import JobModel = require("./jobmodel")
-import Json = require("json");
+import JobModel = require("JobModel")
+import Json = require("JsonInterfaces");
 
 class JenkinsJobModel implements JobModel {
 
