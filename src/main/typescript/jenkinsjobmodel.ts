@@ -1,10 +1,10 @@
-/// <reference path="json.d.ts" />
-/// <reference path="jobmodel.ts" />
 /// <reference path="vendor/knockout.d.ts" />
+import JobModel = require("./jobmodel")
+import Json = require("json");
 
 class JenkinsJobModel implements JobModel {
 
-    constructor(private job:Job) {
+    constructor(private job:Json.Job) {
         this.title = job.title;
         this.url = job.url;
         this.status(this.basicStyle);
@@ -55,3 +55,5 @@ class JenkinsJobModel implements JobModel {
     private basicStyle:string = "jobstatus alert";
 
 }
+
+export = JenkinsJobModel;

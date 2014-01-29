@@ -1,13 +1,11 @@
-/// <reference path="json.d.ts" />
-/// <reference path="vendor/collections.ts" />
 /// <reference path="vendor/knockout.d.ts" />
-/// <reference path="sectionModel.ts" />
-/// <reference path="jobModel.ts" />
-
+import JobModel = require("jobmodel");
+import SectionModel = require("sectionmodel");
+import Json = require("json");
 
 class ApplicationViewModel {
 
-    constructor(private json:Application) {
+    constructor(private json:Json.Application) {
         this.title = json.title;
         this.configuration = json.settings;
         json.sections.forEach(section => {
@@ -22,7 +20,7 @@ class ApplicationViewModel {
     }
 
     public title:string;
-    public configuration:Configuration;
+    public configuration: Json.Settings;
     public sections:SectionModel[] = [];
 
 }

@@ -9,3 +9,5 @@ interface JobModel {
 
 
 }
+
+export = JobModel;

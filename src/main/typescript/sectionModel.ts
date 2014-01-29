@@ -1,12 +1,11 @@
-/// <reference path="json.d.ts" />
 /// <reference path="vendor/knockout.d.ts" />
-/// <reference path="vendor/collections.ts" />
-/// <reference path="jobmodel.ts" />
-/// <reference path="jenkinsjobmodel.ts" />
+import JobModel = require("jobmodel")
+import JenkinsJobModel = require("jenkinsjobmodel")
+import Json = require("json");
 
 class SectionModel {
 
-    constructor(private section:Section) {
+    constructor(private section:Json.Section) {
         this.title = section.title;
         this.url = section.url;
         this.description = section.description;
@@ -45,3 +44,5 @@ class SectionModel {
     public sections:SectionModel[] = [];
 
 }
+
+export = SectionModel;
