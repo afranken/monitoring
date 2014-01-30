@@ -1,6 +1,17 @@
+# IDEA
 .idea/
-target/
-*.iws
 *.iml
-node_modules/
+*.ipr
+*.iws
+
 src/main/typescript/**/*.js*
+
+# Maven
+target
+*/target/
+*/*/target/
+
+# Grunt
+.grunt/
+bower_components/
+node_modules/
