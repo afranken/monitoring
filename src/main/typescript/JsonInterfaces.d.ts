@@ -1,6 +1,6 @@
 //definition of json
 
-declare module Interfaces {
+declare module JsonInterfaces {
 
     interface Application {
         title?: string;
@@ -34,4 +34,4 @@ declare module Interfaces {
     }
 }
 
-export = Interfaces;
+export = JsonInterfaces;

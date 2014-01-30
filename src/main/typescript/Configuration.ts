@@ -1,4 +1,4 @@
-import Json = require("JsonInterfaces");
+import JsonInterfaces = require("JsonInterfaces");
 import HostConfiguration = require("HostConfiguration");
 
 class Configuration {
@@ -6,14 +6,19 @@ class Configuration {
     private hosts: HostConfiguration[];
     private expiry: number;
 
-    constructor(private json: Json.Settings) {
+    constructor(private json: JsonInterfaces.Settings) {
+        this.expiry = json.expiry;
+
+        this.init(json);
+    }
+
+    private init(json: JsonInterfaces.Settings) {
         json.hosts.forEach(host => {
             this.hosts.push(new HostConfiguration(host));
         });
-        this.expiry = json.expiry;
     }
 
-    private getHost(name: String): HostConfiguration {
+    public getHost(name: String): HostConfiguration {
         return this.hosts[0];
     }
 

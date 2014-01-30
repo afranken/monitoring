@@ -7,7 +7,6 @@ interface JobModel {
 
     updateStatus(): void;
 
-
 }
 
 export = JobModel;

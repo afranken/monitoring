@@ -1,10 +1,10 @@
-import Json = require("JsonInterfaces");
+import JsonInterfaces = require("JsonInterfaces");
 import Connector = require("Connector");
 import Configuration = require("Configuration");
 
 class JenkinsConnector implements Connector {
 
-    private configuration: Json.Settings;
+    private configuration: JsonInterfaces.Settings;
 
     //suffix that ensures that Jenkins returns JSONP
     private JSONP_SUFFIX = "/api/json?jsonp=?";
@@ -15,8 +15,11 @@ class JenkinsConnector implements Connector {
     //suffix that tells Jenkins to only include certain properties of modules in response
     private MODULES_STATUS_SUFFIX = "&tree=modules[name,url,displayName,color,lastBuild[timestamp]]&depth=1";
 
-    getJson(host:string, url:string) {
+    getJson(host:string, url:string): string {
 
+        return 'blue';
     }
 
 }
+
+export = JenkinsConnector;
