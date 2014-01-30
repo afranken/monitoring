@@ -3,6 +3,7 @@
 import JobModel = require("JobModel")
 import Connector = require("Connector")
 import JsonInterfaces = require("JsonInterfaces");
+import ko = require("knockout");
 
 class JenkinsJobModel implements JobModel {
 
@@ -18,7 +19,7 @@ class JenkinsJobModel implements JobModel {
         this.title = job.title;
         this.url = job.url;
         this.status(this.basicStyle);
-        this.type = job.type;
+        this.type = job.type !== undefined ? job.type : 'jenkins';
         this.connector = connector;
     }
 
@@ -28,13 +29,7 @@ class JenkinsJobModel implements JobModel {
 
             
             var color = self.translateColor(self.connector.getJson("",""));
-            $.getJSON("",
-                function (json) {
 
-                    var color = self.translateColor(json.color);
-
-//                    applyExpiration(ttl, json.lastBuild.timestamp, statusElement); // 36h
-                });
 
 
             // Whatever happens here happens because of the AJAX call having completed.

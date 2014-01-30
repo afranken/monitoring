@@ -4,6 +4,7 @@ import SectionModel = require("SectionModel");
 import JsonInterfaces = require("JsonInterfaces");
 import Connector = require("Connector");
 import JenkinsConnector = require("JenkinsConnector");
+import ko = require("knockout");
 
 class ApplicationViewModel {
 
@@ -38,3 +39,5 @@ class ApplicationViewModel {
     }
 
 }
+
+export = ApplicationViewModel;
