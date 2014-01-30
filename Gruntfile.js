@@ -20,8 +20,17 @@ module.exports = function(grunt) {
             // location where all build files shall be placed
             "target": "target",
 
+            //location where all javascript files are located
+            "source_js": "src/main/javascript",
+
+            //location where all css files are located
+            "source_css": "src/main/css",
+
+            //location to place css files
+            "target_css": '<%= "target/"+project.name+"-"+project.version+"/css" %>',
+
             // location to place (compiled) javascript files
-            "target_js": '<%= "target/"+project.name+"-"+project.version+"/modules" %>',  //"target/js"
+            "target_js": '<%= "target/"+project.name+"-"+project.version+"/" %>',  //"target/js"
             // location to place (compiles) javascript test files
             "target_test_js": "target/js-test",
             // location to place documentation, etc.
@@ -29,8 +38,42 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            files: ['src/main/typescript/**/*.ts'],
+          ts: {
+            files: ['<%= dir.source_ts %>/**/*.ts'],
             tasks: ['typescript:compile']
+          },
+          html: {
+            files: ['<%= dir.source %>/example/*.html'],
+            tasks: ['copy:html']
+          }
+
+        },
+
+        copy: {
+          js: {
+            flatten: true,
+            expand: true,
+            filter: 'isFile',
+            cwd: '<%= dir.source_js %>/vendor/',
+            src:'**',
+            dest:'<%= dir.target_js %>/vendor/'
+          },
+          html: {
+            flatten: true,
+            expand: true,
+            filter: 'isFile',
+            cwd: '<%= dir.source %>/example/',
+            src:'**',
+            dest:'<%= dir.target_js %>/'
+          },
+          css: {
+            flatten: true,
+            expand: true,
+            filter: 'isFile',
+            cwd: '<%= dir.source_css %>',
+            src:'**',
+            dest:'<%= dir.target_css %>/'
+          }
         },
 
         // ---- clean workspace
@@ -181,9 +224,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     // Default task(s).
-    grunt.registerTask('default', [/*'clean',*/'typescript:compile','typescript:compile_test'/*,'jasmine'*//*,'uglify'*/]);
+    grunt.registerTask('default', [/*'clean',*/ 'copy', 'typescript:compile','typescript:compile_test'/*,'jasmine'*//*,'uglify'*/]);
 
     // Task for running compilation/assembling stuff (corresponds to Maven's "compile" or "resources" lifecycle phase)
     grunt.registerTask('compile', ['typescript:compile','uglify']);
