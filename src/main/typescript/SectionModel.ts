@@ -33,7 +33,7 @@ class SectionModel {
             section.jobs.forEach(job => {
                     var jobViewModel;
                     if(job.type === undefined || job.type === "jenkins") {
-                        jobViewModel = new JenkinsJobModel(job, connectors["jenkins"]);
+                        jobViewModel = new JenkinsJobModel(job, connectors["jenkins"], section.hostname);
                     }
                     else if(job.type === "sonar") {
 

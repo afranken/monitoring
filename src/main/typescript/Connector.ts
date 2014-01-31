@@ -1,7 +1,8 @@
+/// <reference path="vendor/knockout.d.ts" />
 
 interface Connector {
 
-    getJson(host:string, url: string): string;
+    getJson(name:string, hostname:string, status:KnockoutObservable<string>, style:KnockoutObservable<string>): void;
 
 }
 

@@ -22,26 +22,19 @@
                             "title": "mySectionTitle1",
                             "url": "http://localhost/url",
                             "description": "Test description",
+                            "hostname": "cm7-ci.coremedia.com",
                             "jobs": [
                                 {
-                                    "title": "myJobTitle1",
-                                    "url": "11"
+                                    "title": "Workspace",
+                                    "name": "bazaar-jdk7-1"
                                 },
                                 {
-                                    "title": "myJobTitle2",
-                                    "url": "http://localhost/22"
+                                    "title": "Retest System",
+                                    "name": "bazaar-test-1"
                                 },
                                 {
-                                    "title": "myJobTitle3",
-                                    "url": "http://localhost/22"
-                                },
-                                {
-                                    "title": "myJobTitle4",
-                                    "url": "http://localhost/22"
-                                },
-                                {
-                                    "title": "myJobTitle5",
-                                    "url": "http://localhost/22"
+                                    "title": "Smoke Tests",
+                                    "name": "bazaar-smoke-tests-1"
                                 }
                             ]
                         },
@@ -52,11 +45,11 @@
                             "jobs": [
                                 {
                                     "title": "myJobTitle21",
-                                    "url": "http://localhost/211"
+                                    "name": "http://localhost/211"
                                 },
                                 {
                                     "title": "myJobTitle22",
-                                    "url": "http://localhost/222"
+                                    "name": "http://localhost/222"
                                 }
                             ]
                         }
@@ -69,16 +62,16 @@
                     "jobs": [
                         {
                             "title": "myJobTitle31",
-                            "url": "http://localhost/211"
+                            "name": "http://localhost/211"
                         },
                         {
                             "title": "myJobTitle32",
-                            "url": "http://localhost/222"
+                            "name": "http://localhost/222"
                         }
                     ]
                 }
             ],
-            "configuration": {
+            "settings": {
                 "hosts": [
                     {
                         "hostname": "",
@@ -139,7 +132,7 @@
     </script>
 
     <script type="text/html" id="job-template">
-        <div data-bind="attr: { class: status}">
+        <div data-bind="attr: { class: status, style: style}">
             <a class="alert-link" data-bind="attr: { href: url, title: title }, text: title"></a>
         </div>
     </script>

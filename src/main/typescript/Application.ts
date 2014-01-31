@@ -23,7 +23,7 @@ class ApplicationViewModel {
     private init(json: JsonInterfaces.Application) {
 
         //create connectors
-        this.connectors['jenkins'] = new JenkinsConnector();
+        this.connectors['jenkins'] = new JenkinsConnector(this.configuration);
 
         json.sections.forEach(section => {
                 var sectionModel = new SectionModel(section, this.connectors);

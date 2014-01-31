@@ -3,14 +3,15 @@
 declare module JsonInterfaces {
 
     interface Application {
-        title?: string;
+        title?: string; //
         sections: Section[];
         settings?: Settings;
     }
 
     interface Section {
-        title: string;
-        url?: string;
+        title: string; //the section title
+        url?: string; //section title will use link if configured. (e.g. a Jenkins View)
+        hostname: string; //will be used for all Jobs. May be overwritten by Job.
         description?: string;
         jobs?: Job[];
         sections?: Section[];
@@ -18,13 +19,14 @@ declare module JsonInterfaces {
 
     interface Job {
         title: string;
-        url: string;
+        name: string;
+        hostname: string; //host the job is configured on. Overwrites Section#host
         type?: string;
     }
 
     interface Settings {
         hosts?: Host[];
-        expiry?: number;
+        expiry?: number; //time in hours after which jobs are faded out
     }
 
     interface Host {
