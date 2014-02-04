@@ -1,8 +1,9 @@
 /// <reference path="vendor/knockout.d.ts" />
+import JobModel = require("JobModel");
 
 interface Connector {
 
-    getJson(name:string, hostname:string, status:KnockoutObservable<string>, style:KnockoutObservable<string>): void;
+    getJson(id:string, hostname:string, model: JobModel): void;
 
 }
 

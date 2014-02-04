@@ -2,9 +2,6 @@
 
 interface JobModel {
 
-    type: string;
-    status: KnockoutObservable<string>;
-
     updateStatus(): void;
 
 }

@@ -2,9 +2,9 @@
 /// <reference path="vendor/knockout.d.ts" />
 import JsonInterfaces = require("JsonInterfaces");
 import Connector = require("Connector");
+import JenkinsJobModel = require("JenkinsJobModel");
 import Configuration = require("Configuration");
 import jQuery = require("jquery");
-//import ko = require("knockout");
 
 class JenkinsConnector implements Connector {
 
@@ -29,7 +29,7 @@ class JenkinsConnector implements Connector {
         this.configuration = configuration;
     }
 
-    getJson(url:string, hostname:string, color:KnockoutObservable<string>, style:KnockoutObservable<string>):void {
+    getJson(url:string, hostname:string, model:JenkinsJobModel):void {
 
         var self = this;
 
@@ -38,8 +38,8 @@ class JenkinsConnector implements Connector {
         var jobUrl = url + JenkinsConnector.JSONP_SUFFIX + JenkinsConnector.JOB_STATUS_SUFFIX;
         jQuery.getJSON(jobUrl,
                 function (json) {
-                    color(JenkinsConnector.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
-                    style(JenkinsConnector.OPACITY+self.applyExpiration(json.lastBuild.timestamp));
+                    model.status(JenkinsConnector.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
+                    model.style(JenkinsConnector.OPACITY+self.applyExpiration(json.lastBuild.timestamp));
                 })
             .fail(function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown, jobUrl);

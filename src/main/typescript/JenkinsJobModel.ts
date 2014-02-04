@@ -8,29 +8,27 @@ import ko = require("knockout");
 
 class JenkinsJobModel implements JobModel {
 
-    public title:string;
-    public type:string;
-    public url:string;
+    public static TYPE = 'jenkins';
+
     public name:string;
+    public type:string = JenkinsJobModel.TYPE;
+    public url:string;
+    public id:string;
     public hostname:string;
     public status:KnockoutObservable<string> = ko.observable<string>();
     public style:KnockoutObservable<string> = ko.observable<string>();
 
-    private connector: Connector;
-
-    constructor(private job:JsonInterfaces.Job, connector:Connector, hostname:string) {
-        this.title = job.title;
+    constructor(private job:JsonInterfaces.Job, public connector:Connector, hostname:string) {
         this.name = job.name;
+        this.id = job.id;
         this.hostname = job.hostname !== undefined ? job.hostname : hostname;
         this.status(JenkinsConnector.BASIC_CLASSES);
         this.style(JenkinsConnector.BASIC_STYLE);
-        this.type = job.type !== undefined ? job.type : 'jenkins';
-        this.connector = connector;
-        this.url = "http://" + this.hostname + "/job/" + this.name;
+        this.url = "http://" + this.hostname + "/job/" + this.id;
     }
 
     public updateStatus():void {
-        this.connector.getJson(this.url,this.hostname,this.status, this.style);
+        this.connector.getJson(this.url,this.hostname,this);
     }
 
 }
