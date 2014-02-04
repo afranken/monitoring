@@ -43,10 +43,13 @@ module.exports = function(grunt) {
             tasks: ['typescript:compile']
           },
           html: {
-            files: ['<%= dir.source %>/example/*.html'],
+            files: ['<%= dir.source %>/example/*.*'],
             tasks: ['copy:html']
+          },
+          js: {
+            files: ['<%= dir.source_js %>/*.*'],
+            tasks: ['copy:js']
           }
-
         },
 
         copy: {
@@ -54,8 +57,16 @@ module.exports = function(grunt) {
             flatten: true,
             expand: true,
             filter: 'isFile',
+            cwd: '<%= dir.source_js %>/',
+            src:'*',
+            dest:'<%= dir.target_js %>/'
+          },
+          vendorjs: {
+            flatten: true,
+            expand: true,
+            filter: 'isFile',
             cwd: '<%= dir.source_js %>/vendor/',
-            src:'**',
+            src:'*',
             dest:'<%= dir.target_js %>/vendor/'
           },
           html: {
@@ -63,7 +74,7 @@ module.exports = function(grunt) {
             expand: true,
             filter: 'isFile',
             cwd: '<%= dir.source %>/example/',
-            src:'**',
+            src:'*',
             dest:'<%= dir.target_js %>/'
           },
           css: {
@@ -71,7 +82,7 @@ module.exports = function(grunt) {
             expand: true,
             filter: 'isFile',
             cwd: '<%= dir.source_css %>',
-            src:'**',
+            src:'*',
             dest:'<%= dir.target_css %>/'
           }
         },
@@ -94,7 +105,7 @@ module.exports = function(grunt) {
                 options: {
                     base_path: '<%= dir.source_ts %>',
                     target: 'es5',
-                    declaration: true,
+                    declaration: false,
                     comments: true,
                     module: 'amd'
                 }
