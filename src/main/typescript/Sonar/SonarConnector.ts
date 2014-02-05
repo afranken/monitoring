@@ -1,8 +1,8 @@
 import Interfaces = require("../JsonInterfaces.d");
 import Connector = require("../Connector");
 import Configuration = require("../Configuration/Configuration");
-import SonarModuleModel = require("SonarModuleModel");
-import SonarViolation = require("SonarViolation");
+import SonarModuleModel = require("./SonarModuleModel");
+import SonarViolation = require("./SonarViolation");
 import jQuery = require("jquery");
 
 /**

@@ -1,8 +1,8 @@
 /// <reference path="vendor/knockout.d.ts" />
 import JobModel = require("JobModel")
 import Connector = require("Connector")
-import JenkinsJobModel = require("Jenkins/JenkinsJobModel")
-import SonarJobModel = require("Sonar/SonarJobModel")
+import JenkinsJobModel = require("./Jenkins/JenkinsJobModel")
+import SonarJobModel = require("./Sonar/SonarJobModel")
 import JsonInterfaces = require("JsonInterfaces");
 
 class SectionModel {

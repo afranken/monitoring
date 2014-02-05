@@ -1,8 +1,8 @@
 /// <reference path="../vendor/knockout.d.ts" />
 import ko = require("knockout");
-import JobModel = require("JobModel");
-import Connector = require("Connector");
-import SonarViolation = require("SonarViolation");
+import JobModel = require("../JobModel");
+import Connector = require("../Connector");
+import SonarViolation = require("./SonarViolation");
 
 /**
  * TODO: clean up

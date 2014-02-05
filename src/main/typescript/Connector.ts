@@ -1,5 +1,5 @@
 /// <reference path="vendor/knockout.d.ts" />
-import JobModel = require("JobModel");
+import JobModel = require("./JobModel");
 
 interface Connector {
 

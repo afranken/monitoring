@@ -1,9 +1,9 @@
 /// <reference path="../vendor/jquery.d.ts" />
 /// <reference path="../vendor/knockout.d.ts" />
-import JobModel = require("JobModel")
-import Connector = require("Connector")
-import JenkinsConnector = require("JenkinsConnector")
-import JsonInterfaces = require("JsonInterfaces");
+import JobModel = require("../JobModel")
+import Connector = require("../Connector")
+import JenkinsConnector = require("./JenkinsConnector")
+import JsonInterfaces = require("../JsonInterfaces");
 import ko = require("knockout");
 
 class JenkinsJobModel implements JobModel {

@@ -1,10 +1,10 @@
 /// <reference path="../vendor/jquery.d.ts" />
 /// <reference path="../vendor/knockout.d.ts" />
-import JobModel = require("JobModel")
-import Connector = require("Connector")
+import JobModel = require("../JobModel")
+import Connector = require("../Connector")
 import JenkinsConnector = require("../Jenkins/JenkinsConnector")
-import JsonInterfaces = require("JsonInterfaces");
-import SonarModuleModel = require("SonarModuleModel");
+import JsonInterfaces = require("../JsonInterfaces");
+import SonarModuleModel = require("./SonarModuleModel");
 import ko = require("knockout");
 
 /**

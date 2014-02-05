@@ -1,6 +1,6 @@
 /// <reference path="../vendor/knockout.d.ts" />
 import ko = require("knockout");
-import Interfaces = require("JsonInterfaces");
+import Interfaces = require("../JsonInterfaces");
 
 class SonarViolation {
 
