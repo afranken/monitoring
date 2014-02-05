@@ -3,10 +3,10 @@ import JobModel = require("JobModel");
 import SectionModel = require("SectionModel");
 import JsonInterfaces = require("JsonInterfaces");
 import Connector = require("Connector");
-import JenkinsConnector = require("JenkinsConnector");
-import SonarConnector = require("SonarConnector");
-import JenkinsJobModel = require("JenkinsJobModel");
-import SonarJobModel = require("SonarJobModel");
+import JenkinsConnector = require("Jenkins/JenkinsConnector");
+import JenkinsJobModel = require("Jenkins/JenkinsJobModel");
+import SonarJobModel = require("Sonar/SonarJobModel");
+import SonarConnector = require("Sonar/SonarConnector");
 import ko = require("knockout");
 
 class ApplicationViewModel {

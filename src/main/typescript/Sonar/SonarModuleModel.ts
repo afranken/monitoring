@@ -1,4 +1,4 @@
-/// <reference path="vendor/knockout.d.ts" />
+/// <reference path="../vendor/knockout.d.ts" />
 import ko = require("knockout");
 import JobModel = require("JobModel");
 import Connector = require("Connector");

@@ -1,5 +1,5 @@
-/// <reference path="vendor/jquery.d.ts" />
-/// <reference path="vendor/knockout.d.ts" />
+/// <reference path="../vendor/jquery.d.ts" />
+/// <reference path="../vendor/knockout.d.ts" />
 import JobModel = require("JobModel")
 import Connector = require("Connector")
 import JenkinsConnector = require("JenkinsConnector")
