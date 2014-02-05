@@ -32,6 +32,7 @@ h1, h2, h3, p {
   min-width: 50px;
   padding: 0 10px 0 0;
   text-align: right;
+  background-color: #EEEEFF;
 }
 
 table.jobmatrix * th a {
