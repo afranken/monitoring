@@ -1,7 +1,7 @@
 /// <reference path="vendor/knockout.d.ts" />
-import JobModel = require("JobModel")
+import MonitorModel = require("MonitorModel")
 import Connector = require("Connector")
-import JenkinsJobModel = require("./Jenkins/JenkinsJobModel")
+import JenkinsMonitorModel = require("./Jenkins/JenkinsMonitorModel")
 import SonarJobModel = require("./Sonar/SonarJobModel")
 import JsonInterfaces = require("JsonInterfaces");
 
@@ -10,7 +10,7 @@ class SectionModel {
     public title:string;
     public url:string;
     public description:string;
-    public jobs:JobModel[] = [];
+    public monitorModels:MonitorModel[] = [];
     public sonar:SonarJobModel[] = [];
     public sections:SectionModel[] = [];
 
@@ -32,13 +32,13 @@ class SectionModel {
             );
         }
 
-        if(section.jobs !== undefined) {
-            section.jobs.forEach(job => {
-                    var jobViewModel;
-                    if(job.type === undefined || job.type === JenkinsJobModel.TYPE) {
-                        jobViewModel = new JenkinsJobModel(job, connectors[JenkinsJobModel.TYPE], this.hostname);
+        if(section.monitors !== undefined) {
+            section.monitors.forEach(monitor => {
+                    var monitorModel;
+                    if(monitor.type === undefined || monitor.type === JenkinsMonitorModel.TYPE) {
+                        monitorModel = new JenkinsMonitorModel(monitor, connectors[JenkinsMonitorModel.TYPE], this.hostname);
                     }
-                    this.jobs.push(jobViewModel);
+                    this.monitorModels.push(monitorModel);
                 }
             );
         }

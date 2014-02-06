@@ -1,7 +1,7 @@
 import Interfaces = require("../JsonInterfaces.d");
 import Connector = require("../Connector");
 import Configuration = require("../Configuration/Configuration");
-import SonarModuleModel = require("./SonarModuleModel");
+import SonarMonitorModel = require("./SonarMonitorModel");
 import SonarViolation = require("./SonarViolation");
 import jQuery = require("jquery");
 
@@ -21,7 +21,7 @@ class SonarConnector implements Connector {
      * @param hostname
      * @param model
      */
-    public getJson(id:string, hostname:string, model:SonarModuleModel):void {
+    public getJson(id:string, hostname:string, model:SonarMonitorModel):void {
 
         model.url("http://" + hostname + SonarConnector.SONAR_DRILLDOWN_VIOLATIONS_SUFFIX + id);
         var apiUrl = "http://" + hostname + SonarConnector.SONAR_RESOURCE_VIOLATIONS_API_SUFFIX + id;

@@ -1,14 +1,16 @@
 /// <reference path="../vendor/knockout.d.ts" />
 import ko = require("knockout");
-import JobModel = require("../JobModel");
+import MonitorModel = require("../MonitorModel");
 import Connector = require("../Connector");
 import SonarViolation = require("./SonarViolation");
 
 /**
  * TODO: clean up
  */
-class SonarModuleModel implements JobModel{
+class SonarMonitorModel implements MonitorModel {
 
+    public static TYPE = 'sonar';
+    public type:string = SonarMonitorModel.TYPE;
     public url:KnockoutObservable<string> = ko.observable<string>();
     public violations:SonarViolation[] = [];
 
@@ -31,4 +33,4 @@ class SonarModuleModel implements JobModel{
 
 }
 
-export = SonarModuleModel;
+export = SonarMonitorModel;

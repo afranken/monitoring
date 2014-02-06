@@ -1,10 +1,10 @@
 /// <reference path="vendor/knockout.d.ts" />
-import JobModel = require("./JobModel");
+import JobModel = require("./MonitorModel");
 import SectionModel = require("./SectionModel");
 import JsonInterfaces = require("./JsonInterfaces");
 import Connector = require("./Connector");
 import JenkinsConnector = require("./Jenkins/JenkinsConnector");
-import JenkinsJobModel = require("./Jenkins/JenkinsJobModel");
+import JenkinsMonitorModel = require("./Jenkins/JenkinsMonitorModel");
 import SonarJobModel = require("./Sonar/SonarJobModel");
 import SonarConnector = require("./Sonar/SonarConnector");
 import ko = require("knockout");
@@ -26,7 +26,7 @@ class ApplicationViewModel {
     private init(json: JsonInterfaces.Application) {
 
         //create connectors
-        this.connectors[JenkinsJobModel.TYPE] = new JenkinsConnector(this.configuration);
+        this.connectors[JenkinsMonitorModel.TYPE] = new JenkinsConnector(this.configuration);
         this.connectors[SonarJobModel.TYPE] = new SonarConnector(this.configuration);
 
         json.sections.forEach(section => {
@@ -43,7 +43,7 @@ class ApplicationViewModel {
 
 //        jQuery(job).trigger('cssClassChanged');
 //        jQuery('.status-building').bind('cssClassChanged', function(element:JQuery){
-//            //add pulsating effect for jobs that are currently running
+//            //add pulsating effect for monitorModels that are currently running
 //            for(var i = 0; i < 500; i++) {
 //                element.animate({opacity: "toggle"}, {duration: 1000}).animate({opacity: "toggle"}, {duration: 1000});
 //            }

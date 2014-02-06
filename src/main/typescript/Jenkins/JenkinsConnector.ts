@@ -2,7 +2,7 @@
 /// <reference path="../vendor/knockout.d.ts" />
 import JsonInterfaces = require("../JsonInterfaces");
 import Connector = require("../Connector");
-import JenkinsJobModel = require("./JenkinsJobModel");
+import JenkinsMonitorModel = require("./JenkinsMonitorModel");
 import Configuration = require("../Configuration/Configuration");
 import jQuery = require("jquery");
 
@@ -29,7 +29,7 @@ class JenkinsConnector implements Connector {
         this.configuration = configuration;
     }
 
-    getJson(url:string, hostname:string, model:JenkinsJobModel):void {
+    getJson(url:string, hostname:string, model:JenkinsMonitorModel):void {
 
         var self = this;
 

@@ -14,8 +14,9 @@ declare module JsonInterfaces {
         url?: string; //section title will use link if configured. (e.g. a Jenkins View)
         hostname: string; //will be used for all Jobs. May be overwritten by Job.
         description?: string; //will be displayed below the title
-        jobs?: Job[];
+        monitors?: Monitor[];
         sonar?: Sonar[];
+        infrastructure?: Nagios[];
         sections?: Section[]; //child sections
         elements: string;
     }
@@ -23,7 +24,7 @@ declare module JsonInterfaces {
     /**
      * Build
      */
-    interface Job {
+    interface Monitor {
         name: string;
         id: string;
         hostname: string; //host the job is configured on. Overwrites Section#host
@@ -33,10 +34,7 @@ declare module JsonInterfaces {
     /**
      * CodeCoverage
      */
-    interface Sonar {
-        name: string;
-        id?: string; //unused
-        hostname?: string;
+    interface Sonar extends Monitor {
         modules: SonarModule[];
     }
 
@@ -59,6 +57,7 @@ declare module JsonInterfaces {
      * Infrastructure
      */
     interface Nagios {
+        name: string;
         hostnames: string[];
     }
 

@@ -1,24 +1,24 @@
 /// <reference path="../vendor/jquery.d.ts" />
 /// <reference path="../vendor/knockout.d.ts" />
-import JobModel = require("../JobModel")
+import MonitorModel = require("../MonitorModel")
 import Connector = require("../Connector")
 import JenkinsConnector = require("./JenkinsConnector")
 import JsonInterfaces = require("../JsonInterfaces");
 import ko = require("knockout");
 
-class JenkinsJobModel implements JobModel {
+class JenkinsJobModel implements MonitorModel {
 
     public static TYPE = 'jenkins';
 
-    public name:string;
     public type:string = JenkinsJobModel.TYPE;
-    public url:string;
+    public name:string;
     public id:string;
     public hostname:string;
     public status:KnockoutObservable<string> = ko.observable<string>();
     public style:KnockoutObservable<string> = ko.observable<string>();
+    public url:string;
 
-    constructor(private job:JsonInterfaces.Job, public connector:Connector, hostname:string) {
+    constructor(private job:JsonInterfaces.Monitor, public connector:Connector, hostname:string) {
         this.name = job.name;
         this.id = job.id;
         this.hostname = job.hostname !== undefined ? job.hostname : hostname;

@@ -1,9 +1,10 @@
 /// <reference path="vendor/knockout.d.ts" />
 
-interface JobModel {
+interface MonitorModel {
 
+    type :string;
     updateStatus(): void;
 
 }
 
-export = JobModel;
+export = MonitorModel;
