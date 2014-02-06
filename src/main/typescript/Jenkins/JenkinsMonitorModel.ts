@@ -1,10 +1,10 @@
 /// <reference path="../vendor/jquery.d.ts" />
 /// <reference path="../vendor/knockout.d.ts" />
-import MonitorModel = require("../MonitorModel")
-import Connector = require("../Connector")
-import JenkinsConnector = require("./JenkinsConnector")
-import JsonInterfaces = require("../JsonInterfaces");
-import ko = require("knockout");
+import MonitorModel = require('../MonitorModel');
+import Connector = require('../Connector');
+import JenkinsConnector = require('./JenkinsConnector');
+import JsonInterfaces = require('../JsonInterfaces');
+import ko = require('knockout');
 
 class JenkinsJobModel implements MonitorModel {
 
@@ -24,7 +24,7 @@ class JenkinsJobModel implements MonitorModel {
         this.hostname = job.hostname !== undefined ? job.hostname : hostname;
         this.status(JenkinsConnector.BASIC_CLASSES);
         this.style(JenkinsConnector.BASIC_STYLE);
-        this.url = "http://" + this.hostname + "/job/" + this.id;
+        this.url = 'http://' + this.hostname + '/job/' + this.id;
     }
 
     public updateStatus():void {

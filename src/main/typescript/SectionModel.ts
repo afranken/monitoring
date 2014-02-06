@@ -1,9 +1,9 @@
 /// <reference path="vendor/knockout.d.ts" />
-import MonitorModel = require("MonitorModel")
-import Connector = require("Connector")
-import JenkinsMonitorModel = require("./Jenkins/JenkinsMonitorModel")
-import SonarJobModel = require("./Sonar/SonarJobModel")
-import JsonInterfaces = require("JsonInterfaces");
+import MonitorModel = require('MonitorModel')
+import Connector = require('Connector')
+import JenkinsMonitorModel = require('./Jenkins/JenkinsMonitorModel')
+import SonarJobModel = require('./Sonar/SonarJobModel')
+import JsonInterfaces = require('JsonInterfaces');
 
 class SectionModel {
 
@@ -38,6 +38,7 @@ class SectionModel {
                     if(monitor.type === undefined || monitor.type === JenkinsMonitorModel.TYPE) {
                         monitorModel = new JenkinsMonitorModel(monitor, connectors[JenkinsMonitorModel.TYPE], this.hostname);
                     }
+
                     this.monitorModels.push(monitorModel);
                 }
             );

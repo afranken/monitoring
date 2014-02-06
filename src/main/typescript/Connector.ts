@@ -1,5 +1,5 @@
 /// <reference path="vendor/knockout.d.ts" />
-import MonitorModel = require("./MonitorModel");
+import MonitorModel = require('./MonitorModel');
 
 interface Connector {
 

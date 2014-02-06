@@ -1,28 +1,28 @@
 /// <reference path="../vendor/jquery.d.ts" />
 /// <reference path="../vendor/knockout.d.ts" />
-import JsonInterfaces = require("../JsonInterfaces");
-import Connector = require("../Connector");
-import JenkinsMonitorModel = require("./JenkinsMonitorModel");
-import Configuration = require("../Configuration/Configuration");
-import jQuery = require("jquery");
+import JsonInterfaces = require('../JsonInterfaces');
+import Connector = require('../Connector');
+import JenkinsMonitorModel = require('./JenkinsMonitorModel');
+import Configuration = require('../Configuration/Configuration');
+import jQuery = require('jquery');
 
 class JenkinsConnector implements Connector {
 
     private configuration:JsonInterfaces.Settings;
 
-    public static BASIC_CLASSES:string = "jobstatus alert ";
+    public static BASIC_CLASSES:string = 'jobstatus alert ';
 
-    private static OPACITY = "opacity: ";
-    public static BASIC_STYLE:string = JenkinsConnector.OPACITY +"1.0";
+    private static OPACITY = 'opacity: ';
+    public static BASIC_STYLE:string = JenkinsConnector.OPACITY +'1.0';
 
     //suffix that ensures that Jenkins returns JSONP
-    private static JSONP_SUFFIX:string = "/api/json?jsonp=?";
+    private static JSONP_SUFFIX:string = '/api/json?jsonp=?';
 
     //suffix that tells Jenkins to only include certain properties in response
-    private static JOB_STATUS_SUFFIX:string = "&tree=lastBuild[timestamp],name,color&depth=1";
+    private static JOB_STATUS_SUFFIX:string = '&tree=lastBuild[timestamp],name,color&depth=1';
 
     //suffix that tells Jenkins to only include certain properties of modules in response
-    private static MODULES_STATUS_SUFFIX:string = "&tree=modules[name,url,displayName,color,lastBuild[timestamp]]&depth=1";
+    private static MODULES_STATUS_SUFFIX:string = '&tree=modules[name,url,displayName,color,lastBuild[timestamp]]&depth=1';
 
 
     constructor(configuration: JsonInterfaces.Settings) {
@@ -74,25 +74,25 @@ class JenkinsConnector implements Connector {
     private static translateColor(color:string):string {
         var colorTranslation;
         if (color === 'blue') {
-            colorTranslation = "alert-success";
+            colorTranslation = 'alert-success';
         }
         else if (color === 'red') {
-            colorTranslation = "alert-danger";
+            colorTranslation = 'alert-danger';
         }
         else if (color === 'yellow') {
-            colorTranslation = "alert-warning";
+            colorTranslation = 'alert-warning';
         }
         else if (color === 'yellow_anime') {
-            colorTranslation = "status-building alert-warning";
+            colorTranslation = 'status-building alert-warning';
         }
         else if (color === 'red_anime') {
-            colorTranslation = "status-building alert-danger";
+            colorTranslation = 'status-building alert-danger';
         }
         else if (color === 'blue_anime') {
-            colorTranslation = "status-building alert-success";
+            colorTranslation = 'status-building alert-success';
         }
         else {
-            colorTranslation = "alert-disabled";
+            colorTranslation = 'alert-disabled';
         }
         return colorTranslation;
     }

@@ -1,8 +1,8 @@
 /// <reference path="../vendor/knockout.d.ts" />
-import ko = require("knockout");
-import MonitorModel = require("../MonitorModel");
-import Connector = require("../Connector");
-import SonarViolation = require("./SonarViolation");
+import ko = require('knockout');
+import MonitorModel = require('../MonitorModel');
+import Connector = require('../Connector');
+import SonarViolation = require('./SonarViolation');
 
 /**
  * TODO: clean up
@@ -15,7 +15,7 @@ class SonarMonitorModel implements MonitorModel {
     public violations:SonarViolation[] = [];
 
     constructor(public name:string, public id:string, private hostname:string, private connector: Connector) {
-        this.url("");
+        this.url('');
         this.init();
     }
 

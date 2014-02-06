@@ -1,11 +1,11 @@
 /// <reference path="../vendor/jquery.d.ts" />
 /// <reference path="../vendor/knockout.d.ts" />
-import JobModel = require("../MonitorModel")
-import Connector = require("../Connector")
-import JenkinsConnector = require("../Jenkins/JenkinsConnector")
-import JsonInterfaces = require("../JsonInterfaces");
-import SonarMonitorModel = require("./SonarMonitorModel");
-import ko = require("knockout");
+import JobModel = require('../MonitorModel')
+import Connector = require('../Connector')
+import JenkinsConnector = require('../Jenkins/JenkinsConnector')
+import JsonInterfaces = require('../JsonInterfaces');
+import SonarMonitorModel = require('./SonarMonitorModel');
+import ko = require('knockout');
 
 /**
  * TODO: clean up
@@ -24,7 +24,7 @@ class SonarJobModel {
         this.name = sonar.name;
         this.hostname = sonar.hostname !== undefined ? sonar.hostname : hostname;
         this.type = SonarJobModel.TYPE;
-        this.url = "http://" + this.hostname + "/sonar/";
+        this.url = 'http://' + this.hostname + '/sonar/';
 
         this.init(sonar);
     }
