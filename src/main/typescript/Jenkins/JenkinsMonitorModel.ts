@@ -16,7 +16,7 @@ class JenkinsJobModel implements MonitorModel {
     public hostname:string;
     public status:KnockoutObservable<string> = ko.observable<string>();
     public style:KnockoutObservable<string> = ko.observable<string>();
-    public url:string;
+    public url:KnockoutObservable<string> = ko.observable<string>();
 
     constructor(private job:Config.Monitor, public connector:Connector, hostname:string) {
         this.name = job.name;
@@ -24,11 +24,11 @@ class JenkinsJobModel implements MonitorModel {
         this.hostname = job.hostname !== undefined ? job.hostname : hostname;
         this.status(JenkinsConnector.BASIC_CLASSES);
         this.style(JenkinsConnector.BASIC_STYLE);
-        this.url = 'http://' + this.hostname + '/job/' + this.id;
+        this.url('');
     }
 
     public updateStatus():void {
-        this.connector.getJson(this.url,this.hostname,this);
+        this.connector.getJson(this.id,this.hostname,this);
     }
 
 }

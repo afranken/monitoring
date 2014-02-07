@@ -14,6 +14,8 @@ class JenkinsConnector implements Connector {
     private static OPACITY = 'opacity: ';
     public static BASIC_STYLE:string = JenkinsConnector.OPACITY +'1.0';
 
+    private static JOB_PREFIX: string = '/job/';
+
     //suffix that ensures that Jenkins returns JSONP
     private static JSONP_SUFFIX:string = '/api/json?jsonp=?';
 
@@ -26,15 +28,17 @@ class JenkinsConnector implements Connector {
 
     constructor(private configuration: Configuration) {}
 
-    public getJson(url:string, hostname:string, model:JenkinsMonitorModel):void {
-        var jobUrl = url + JenkinsConnector.JSONP_SUFFIX + JenkinsConnector.JOB_STATUS_SUFFIX;
-        jQuery.getJSON(jobUrl,
+    public getJson(id:string, hostname:string, model:JenkinsMonitorModel):void {
+        var jobUrl = this.configuration.getProtocol(hostname) + hostname + JenkinsConnector.JOB_PREFIX + id;
+        model.url(jobUrl);
+        var apiUrl = jobUrl + JenkinsConnector.JSONP_SUFFIX + JenkinsConnector.JOB_STATUS_SUFFIX;
+        jQuery.getJSON(apiUrl,
                 (json : JenkinsJsonResponse.JenkinsJson) => {
                     model.status(JenkinsConnector.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
                     model.style(JenkinsConnector.OPACITY+JenkinsConnector.calculateExpiration(json.lastBuild.timestamp, this.configuration.getExpiry()));
                 })
             .fail(function (jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR, textStatus, errorThrown, jobUrl);
+                console.log(jqXHR, textStatus, errorThrown, apiUrl);
             });
     }
 
