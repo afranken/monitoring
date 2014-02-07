@@ -4,6 +4,7 @@ import Connector = require('../Connector');
 import CssClasses = require('../CssClasses');
 import JenkinsMonitorModel = require('./JenkinsMonitorModel');
 import Configuration = require('../Configuration/Configuration');
+import JenkinsJsonResponse = require('../JsonInterfaces/JenkinsResponse');
 import jQuery = require('jquery');
 
 class JenkinsConnector implements Connector {
@@ -28,7 +29,7 @@ class JenkinsConnector implements Connector {
     public getJson(url:string, hostname:string, model:JenkinsMonitorModel):void {
         var jobUrl = url + JenkinsConnector.JSONP_SUFFIX + JenkinsConnector.JOB_STATUS_SUFFIX;
         jQuery.getJSON(jobUrl,
-                (json) => {
+                (json : JenkinsJsonResponse.JenkinsJson) => {
                     model.status(JenkinsConnector.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
                     model.style(JenkinsConnector.OPACITY+JenkinsConnector.calculateExpiration(json.lastBuild.timestamp, this.configuration.getExpiry()));
                 })
