@@ -3,7 +3,7 @@ import MonitorModel = require('MonitorModel')
 import Connector = require('Connector')
 import JenkinsMonitorModel = require('./Jenkins/JenkinsMonitorModel')
 import SonarJobModel = require('./Sonar/SonarJobModel')
-import JsonInterfaces = require('JsonInterfaces');
+import Config = require('./JsonInterfaces/Config');
 
 class SectionModel {
 
@@ -14,7 +14,7 @@ class SectionModel {
     public sonar:SonarJobModel[] = [];
     public sections:SectionModel[] = [];
 
-    constructor(private section:JsonInterfaces.Section, private connectors: {[type: string]: Connector}, private hostname: string) {
+    constructor(private section:Config.Section, private connectors: {[type: string]: Connector}, private hostname: string) {
         this.title = section.title;
         this.url = section.url;
         this.description = section.description;
@@ -23,7 +23,7 @@ class SectionModel {
         this.init(section, connectors);
     }
 
-    private init(section: JsonInterfaces.Section, connectors: {[type: string]: Connector}) {
+    private init(section: Config.Section, connectors: {[type: string]: Connector}) {
         if(section.sections !== undefined) {
             section.sections.forEach(subSection => {
                     var sectionViewModel = new SectionModel(subSection, connectors, this.hostname);

@@ -3,7 +3,7 @@
 import MonitorModel = require('../MonitorModel');
 import Connector = require('../Connector');
 import JenkinsConnector = require('./JenkinsConnector');
-import JsonInterfaces = require('../JsonInterfaces');
+import Config = require('../JsonInterfaces/Config');
 import ko = require('knockout');
 
 class JenkinsJobModel implements MonitorModel {
@@ -18,7 +18,7 @@ class JenkinsJobModel implements MonitorModel {
     public style:KnockoutObservable<string> = ko.observable<string>();
     public url:string;
 
-    constructor(private job:JsonInterfaces.Monitor, public connector:Connector, hostname:string) {
+    constructor(private job:Config.Monitor, public connector:Connector, hostname:string) {
         this.name = job.name;
         this.id = job.id;
         this.hostname = job.hostname !== undefined ? job.hostname : hostname;

@@ -1,4 +1,4 @@
-import JsonInterfaces = require('../JsonInterfaces.d');
+import Config = require('../JsonInterfaces/Config');
 import HostConfiguration = require('./HostConfiguration');
 
 class Configuration {
@@ -10,13 +10,13 @@ class Configuration {
     public expiry: number;
     private hostConfigurations: { [name: string]: HostConfiguration; } = { };
 
-    constructor(private json: JsonInterfaces.Configuration) {
+    constructor(private json: Config.Configuration) {
         this.expiry = json.expiry;
 
         this.init(json);
     }
 
-    private init(json: JsonInterfaces.Configuration) {
+    private init(json: Config.Configuration) {
         json.hosts.forEach(host => {
             this.hostConfigurations[host.hostname] = new HostConfiguration(host);
         });

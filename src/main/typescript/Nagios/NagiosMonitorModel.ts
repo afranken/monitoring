@@ -1,4 +1,4 @@
-import JsonInterfaces = require('../JsonInterfaces');
+import Config = require('../JsonInterfaces/Config');
 import MonitorModel = require('../MonitorModel');
 import Connector = require('../Connector');
 import NagiosConnector = require('./NagiosConnector');

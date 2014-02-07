@@ -3,7 +3,7 @@
 import JobModel = require('../MonitorModel')
 import Connector = require('../Connector')
 import JenkinsConnector = require('../Jenkins/JenkinsConnector')
-import JsonInterfaces = require('../JsonInterfaces');
+import Config = require('../JsonInterfaces/Config');
 import SonarMonitorModel = require('./SonarMonitorModel');
 import ko = require('knockout');
 
@@ -20,7 +20,7 @@ class SonarJobModel {
     public hostname:string;
     public violations: SonarMonitorModel[] = [];
 
-    constructor(private sonar:JsonInterfaces.Sonar, public connector:Connector, hostname:string) {
+    constructor(private sonar:Config.Sonar, public connector:Connector, hostname:string) {
         this.name = sonar.name;
         this.hostname = sonar.hostname !== undefined ? sonar.hostname : hostname;
         this.type = SonarJobModel.TYPE;
@@ -29,7 +29,7 @@ class SonarJobModel {
         this.init(sonar);
     }
 
-    private init(sonar:JsonInterfaces.Sonar){
+    private init(sonar:Config.Sonar){
         sonar.modules.forEach(module => {
             this.violations.push(new SonarMonitorModel(module.name, module.id, this.hostname,this.connector));
         });

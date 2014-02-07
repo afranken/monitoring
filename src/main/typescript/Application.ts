@@ -1,7 +1,7 @@
 /// <reference path="vendor/knockout.d.ts" />
 import JobModel = require('./MonitorModel');
 import SectionModel = require('./SectionModel');
-import JsonInterfaces = require('./JsonInterfaces');
+import Config = require('./JsonInterfaces/Config');
 import Connector = require('./Connector');
 import Configuration = require('./Configuration/Configuration');
 import JenkinsConnector = require('./Jenkins/JenkinsConnector');
@@ -19,7 +19,7 @@ class ApplicationViewModel {
     public sections:SectionModel[] = [];
     public connectors: { [type: string]: Connector; } = { };
 
-    constructor(private json:JsonInterfaces.Application) {
+    constructor(private json:Config.Application) {
         this.title = json.title;
         if(json.configuration !== undefined) {
             this.configuration = new Configuration(json.configuration);
@@ -28,7 +28,7 @@ class ApplicationViewModel {
         this.init(json);
     }
 
-    private init(json: JsonInterfaces.Application) {
+    private init(json: Config.Application) {
 
         //create connectors
         this.connectors[JenkinsMonitorModel.TYPE] = new JenkinsConnector(this.configuration);

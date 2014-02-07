@@ -1,7 +1,7 @@
 /**
  * These interfaces describe the JSON used to configure the application.
  */
-declare module JsonInterfaces {
+declare module Config {
 
     interface Application {
         title?: string; //main page title
@@ -61,8 +61,6 @@ declare module JsonInterfaces {
         hostnames: string[];
     }
 
-
-
     interface Configuration {
         hosts?: Host[]; //host configuration
         expiry?: number; //time in hours after which jobs are faded out
@@ -77,4 +75,4 @@ declare module JsonInterfaces {
 
 }
 
-export = JsonInterfaces;
+export = Config;

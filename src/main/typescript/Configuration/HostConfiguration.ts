@@ -1,4 +1,4 @@
-import JsonInterfaces = require('../JsonInterfaces.d');
+import Config = require('../JsonInterfaces/Config');
 
 class HostConfiguration {
 
@@ -7,7 +7,7 @@ class HostConfiguration {
     public username: string;
     public password: string;
 
-    constructor(json: JsonInterfaces.Host) {
+    constructor(json: Config.Host) {
         this.hostname = json.hostname;
         this.protocol = json.protocol;
         this.username = json.username;
