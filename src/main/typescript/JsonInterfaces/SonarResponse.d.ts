@@ -2,10 +2,8 @@
  * This file contains Interfaces mapping the Sonar responses
  */
 
-/**
- * Root
- */
 declare module SonarJsonResponse {
+
     interface SonarJsons {
         responses: SonarJson[];
     }
