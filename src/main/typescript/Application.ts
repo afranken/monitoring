@@ -3,22 +3,27 @@ import JobModel = require('./MonitorModel');
 import SectionModel = require('./SectionModel');
 import JsonInterfaces = require('./JsonInterfaces');
 import Connector = require('./Connector');
+import Configuration = require('./Configuration/Configuration');
 import JenkinsConnector = require('./Jenkins/JenkinsConnector');
 import JenkinsMonitorModel = require('./Jenkins/JenkinsMonitorModel');
 import SonarJobModel = require('./Sonar/SonarJobModel');
 import SonarConnector = require('./Sonar/SonarConnector');
+import NagiosConnector = require('./Nagios/NagiosConnector');
+import NagiosMonitorModel = require('./Nagios/NagiosMonitorModel');
 import ko = require('knockout');
 
 class ApplicationViewModel {
 
     public title:string;
-    public configuration: JsonInterfaces.Settings;
+    public configuration: Configuration;
     public sections:SectionModel[] = [];
     public connectors: { [type: string]: Connector; } = { };
 
     constructor(private json:JsonInterfaces.Application) {
         this.title = json.title;
-        this.configuration = json.settings;
+        if(json.configuration !== undefined) {
+            this.configuration = new Configuration(json.configuration);
+        }
 
         this.init(json);
     }
@@ -28,6 +33,7 @@ class ApplicationViewModel {
         //create connectors
         this.connectors[JenkinsMonitorModel.TYPE] = new JenkinsConnector(this.configuration);
         this.connectors[SonarJobModel.TYPE] = new SonarConnector(this.configuration);
+        this.connectors[NagiosMonitorModel.TYPE] = new NagiosConnector(this.configuration);
 
         json.sections.forEach(section => {
                 var sectionModel = new SectionModel(section, this.connectors, undefined);

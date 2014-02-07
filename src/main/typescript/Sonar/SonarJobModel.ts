@@ -12,7 +12,7 @@ import ko = require('knockout');
  */
 class SonarJobModel {
 
-    public static TYPE = 'sonar';
+    public static TYPE: string = 'sonar';
 
     public name:string;
     public type:string;

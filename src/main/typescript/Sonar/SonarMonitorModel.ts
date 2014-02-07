@@ -9,7 +9,7 @@ import SonarViolation = require('./SonarViolation');
  */
 class SonarMonitorModel implements MonitorModel {
 
-    public static TYPE = 'sonar';
+    public static TYPE: string = 'sonar';
     public type:string = SonarMonitorModel.TYPE;
     public url:KnockoutObservable<string> = ko.observable<string>();
     public violations:SonarViolation[] = [];

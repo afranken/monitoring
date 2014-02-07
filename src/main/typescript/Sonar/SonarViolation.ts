@@ -1,10 +1,12 @@
 /// <reference path="../vendor/knockout.d.ts" />
 import ko = require('knockout');
 import Interfaces = require('../JsonInterfaces');
+import SonarResponse = require('../JsonInterfaces/SonarResponse');
+import CssClasses = require('../CssClasses');
 
 class SonarViolation {
 
-    public static BASIC_CLASSES:string = 'codeviolation alert ';
+    public static BASIC_CLASSES:string = ' codeviolation ' + CssClasses.ALERT;
 
     public static BLOCKER:string = 'blocker_violations';
     public static CRITICAL:string = 'critical_violations';
@@ -23,16 +25,16 @@ class SonarViolation {
     public setStatus(count:number): void{
         if(count > 0) {
             if(this.type === SonarViolation.BLOCKER || this.type === SonarViolation.CRITICAL) {
-                this.status(SonarViolation.BASIC_CLASSES + 'alert-danger');
+                this.status(SonarViolation.BASIC_CLASSES + CssClasses.FAILURE);
             } else {
-                this.status(SonarViolation.BASIC_CLASSES + 'alert-warning');
+                this.status(SonarViolation.BASIC_CLASSES + CssClasses.WARNING);
             }
         } else {
-            this.status(SonarViolation.BASIC_CLASSES + 'alert-success');
+            this.status(SonarViolation.BASIC_CLASSES + CssClasses.SUCCESS);
         }
     }
 
-    public setCount(violations: Interfaces.SonarViolations):void {
+    public setCount(violations: SonarResponse.SonarJsons):void {
         var vio: number = 0;
         violations[0].msr.forEach(violation => {
             if(this.type === violation.key) {

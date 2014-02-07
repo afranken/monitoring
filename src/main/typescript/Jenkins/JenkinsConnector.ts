@@ -1,16 +1,14 @@
 /// <reference path="../vendor/jquery.d.ts" />
 /// <reference path="../vendor/knockout.d.ts" />
-import JsonInterfaces = require('../JsonInterfaces');
 import Connector = require('../Connector');
+import CssClasses = require('../CssClasses');
 import JenkinsMonitorModel = require('./JenkinsMonitorModel');
 import Configuration = require('../Configuration/Configuration');
 import jQuery = require('jquery');
 
 class JenkinsConnector implements Connector {
 
-    private configuration:JsonInterfaces.Settings;
-
-    public static BASIC_CLASSES:string = 'jobstatus alert ';
+    public static BASIC_CLASSES:string = ' jobstatus ' + CssClasses.ALERT;
 
     private static OPACITY = 'opacity: ';
     public static BASIC_STYLE:string = JenkinsConnector.OPACITY +'1.0';
@@ -25,36 +23,34 @@ class JenkinsConnector implements Connector {
     private static MODULES_STATUS_SUFFIX:string = '&tree=modules[name,url,displayName,color,lastBuild[timestamp]]&depth=1';
 
 
-    constructor(configuration: JsonInterfaces.Settings) {
-        this.configuration = configuration;
-    }
+    constructor(private configuration: Configuration) {}
 
-    getJson(url:string, hostname:string, model:JenkinsMonitorModel):void {
-
-        var self = this;
-
-
-
+    public getJson(url:string, hostname:string, model:JenkinsMonitorModel):void {
         var jobUrl = url + JenkinsConnector.JSONP_SUFFIX + JenkinsConnector.JOB_STATUS_SUFFIX;
         jQuery.getJSON(jobUrl,
-                function (json) {
+                (json) => {
                     model.status(JenkinsConnector.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
-                    model.style(JenkinsConnector.OPACITY+self.applyExpiration(json.lastBuild.timestamp));
+                    model.style(JenkinsConnector.OPACITY+JenkinsConnector.calculateExpiration(json.lastBuild.timestamp, this.configuration.getExpiry()));
                 })
             .fail(function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown, jobUrl);
             });
-
     }
 
-    private applyExpiration(buildTimestamp):number {
+    /**
+     *
+     * @param buildTimestamp
+     * @returns {*}
+     * @param expiry
+     */
+    private static calculateExpiration(buildTimestamp: number, expiry: number):number {
 
         var expireStyle;
 
         //calculate timestamp and expiration
         var nowTimestamp = new Date().getTime();
         var ageMinutes = Math.round(nowTimestamp - buildTimestamp) / (1000 * 60);
-        var expiredPercent = 1 - (ageMinutes / (this.configuration.expiry * 60));  // 0=expired, 1=fresh
+        var expiredPercent = 1 - (ageMinutes / (expiry * 60));  // 0=expired, 1=fresh
 
         if (expiredPercent < 0) {
 
@@ -74,25 +70,25 @@ class JenkinsConnector implements Connector {
     private static translateColor(color:string):string {
         var colorTranslation;
         if (color === 'blue') {
-            colorTranslation = 'alert-success';
+            colorTranslation = CssClasses.SUCCESS;
         }
         else if (color === 'red') {
-            colorTranslation = 'alert-danger';
+            colorTranslation = CssClasses.FAILURE;
         }
         else if (color === 'yellow') {
-            colorTranslation = 'alert-warning';
+            colorTranslation = CssClasses.WARNING;
         }
         else if (color === 'yellow_anime') {
-            colorTranslation = 'status-building alert-warning';
+            colorTranslation = CssClasses.BUILDING+CssClasses.WARNING;
         }
         else if (color === 'red_anime') {
-            colorTranslation = 'status-building alert-danger';
+            colorTranslation = CssClasses.BUILDING+CssClasses.FAILURE;
         }
         else if (color === 'blue_anime') {
-            colorTranslation = 'status-building alert-success';
+            colorTranslation = CssClasses.BUILDING+CssClasses.SUCCESS;
         }
         else {
-            colorTranslation = 'alert-disabled';
+            colorTranslation = CssClasses.DISABLED;
         }
         return colorTranslation;
     }

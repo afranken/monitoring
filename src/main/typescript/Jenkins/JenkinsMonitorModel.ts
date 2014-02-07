@@ -8,7 +8,7 @@ import ko = require('knockout');
 
 class JenkinsJobModel implements MonitorModel {
 
-    public static TYPE = 'jenkins';
+    public static TYPE: string = 'jenkins';
 
     public type:string = JenkinsJobModel.TYPE;
     public name:string;

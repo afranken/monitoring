@@ -5,7 +5,7 @@ import NagiosConnector = require('./NagiosConnector');
 
 class NagiosMonitorModel implements MonitorModel {
 
-    public static TYPE = 'nagios';
+    public static TYPE: string = 'nagios';
     public type:string = NagiosMonitorModel.TYPE;
 
     updateStatus():void {

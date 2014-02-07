@@ -1,4 +1,4 @@
-import Interfaces = require('../JsonInterfaces.d');
+import SonarResponse = require('../JsonInterfaces/SonarResponse');
 import Connector = require('../Connector');
 import Configuration = require('../Configuration/Configuration');
 import SonarMonitorModel = require('./SonarMonitorModel');
@@ -13,7 +13,7 @@ class SonarConnector implements Connector {
     private static SONAR_DRILLDOWN_VIOLATIONS_SUFFIX:string = '/sonar/drilldown/violations/';
     private static SONAR_RESOURCE_VIOLATIONS_API_SUFFIX:string = '/sonar/api/resources?callback=?&format=json&metrics=blocker_violations,critical_violations,major_violations,minor_violations,info_violations&resource=';
 
-    constructor(configuration) {}
+    constructor(private configuration: Configuration) {}
 
     /**
      *
@@ -22,12 +22,12 @@ class SonarConnector implements Connector {
      * @param model
      */
     public getJson(id:string, hostname:string, model:SonarMonitorModel):void {
-
-        model.url('http://' + hostname + SonarConnector.SONAR_DRILLDOWN_VIOLATIONS_SUFFIX + id);
-        var apiUrl = 'http://' + hostname + SonarConnector.SONAR_RESOURCE_VIOLATIONS_API_SUFFIX + id;
+        var protocol = this.configuration.getProtocol(hostname);
+        model.url(protocol + hostname + SonarConnector.SONAR_DRILLDOWN_VIOLATIONS_SUFFIX + id);
+        var apiUrl = protocol + hostname + SonarConnector.SONAR_RESOURCE_VIOLATIONS_API_SUFFIX + id;
 
         jQuery.getJSON(apiUrl,
-            function(violations: Interfaces.SonarViolations) {
+            function(violations: SonarResponse.SonarJsons) {
 
                 model.violations.forEach(violation => {
                     violation.setCount(violations);

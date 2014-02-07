@@ -6,7 +6,7 @@ declare module JsonInterfaces {
     interface Application {
         title?: string; //main page title
         sections: Section[];
-        settings?: Settings;
+        configuration?: Configuration;
     }
 
     interface Section {
@@ -63,7 +63,7 @@ declare module JsonInterfaces {
 
 
 
-    interface Settings {
+    interface Configuration {
         hosts?: Host[]; //host configuration
         expiry?: number; //time in hours after which jobs are faded out
     }
