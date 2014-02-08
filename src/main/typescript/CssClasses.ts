@@ -3,6 +3,8 @@ class CssClasses {
 
     public static ALERT: string = ' alert ';
 
+    public static BASIC_CLASSES: string = ' jobstatus ' + CssClasses.ALERT;
+
     public static SUCCESS: string = ' alert-success ';
     public static WARNING: string = ' alert-warning ';
     public static FAILURE: string = ' alert-danger ';

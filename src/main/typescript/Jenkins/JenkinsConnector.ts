@@ -1,5 +1,4 @@
 /// <reference path="../vendor/jquery.d.ts" />
-/// <reference path="../vendor/knockout.d.ts" />
 import Connector = require('../Connector');
 import CssClasses = require('../CssClasses');
 import JenkinsMonitorModel = require('./JenkinsMonitorModel');
@@ -8,8 +7,6 @@ import JenkinsJsonResponse = require('../JsonInterfaces/JenkinsResponse');
 import jQuery = require('jquery');
 
 class JenkinsConnector implements Connector {
-
-    public static BASIC_CLASSES:string = ' jobstatus ' + CssClasses.ALERT;
 
     private static OPACITY = 'opacity: ';
     public static BASIC_STYLE:string = JenkinsConnector.OPACITY +'1.0';
@@ -34,7 +31,7 @@ class JenkinsConnector implements Connector {
         var apiUrl = jobUrl + JenkinsConnector.JSONP_SUFFIX + JenkinsConnector.JOB_STATUS_SUFFIX;
         jQuery.getJSON(apiUrl,
                 (json : JenkinsJsonResponse.JenkinsJson) => {
-                    model.status(JenkinsConnector.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
+                    model.status(CssClasses.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
                     model.style(JenkinsConnector.OPACITY+JenkinsConnector.calculateExpiration(json.lastBuild.timestamp, this.configuration.getExpiry()));
                 })
             .fail(function (jqXHR, textStatus, errorThrown) {

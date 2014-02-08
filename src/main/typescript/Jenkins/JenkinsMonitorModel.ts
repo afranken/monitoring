@@ -2,6 +2,7 @@
 /// <reference path="../vendor/knockout.d.ts" />
 import MonitorModel = require('../MonitorModel');
 import Connector = require('../Connector');
+import CssClasses = require('../CssClasses');
 import JenkinsConnector = require('./JenkinsConnector');
 import Config = require('../JsonInterfaces/Config');
 import ko = require('knockout');
@@ -18,11 +19,11 @@ class JenkinsJobModel implements MonitorModel {
     public style:KnockoutObservable<string> = ko.observable<string>();
     public url:KnockoutObservable<string> = ko.observable<string>();
 
-    constructor(private job:Config.Monitor, public connector:Connector, hostname:string) {
+    constructor(private job:Config.Monitor, private connector:Connector, hostname:string) {
         this.name = job.name;
         this.id = job.id;
         this.hostname = job.hostname !== undefined ? job.hostname : hostname;
-        this.status(JenkinsConnector.BASIC_CLASSES);
+        this.status(CssClasses.BASIC_CLASSES);
         this.style(JenkinsConnector.BASIC_STYLE);
         this.url('');
     }

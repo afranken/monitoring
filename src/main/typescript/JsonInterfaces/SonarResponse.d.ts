@@ -5,13 +5,13 @@
 declare module SonarJsonResponse {
 
     interface SonarJsons {
-        responses: SonarJson[];
+        responses: Array<SonarJson>;
     }
 
     interface SonarJson {
         id: number;
         date: Date;
-        msr: Measurement[];
+        msr: Array<Measurement>;
     }
 
     interface Measurement {

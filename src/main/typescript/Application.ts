@@ -16,7 +16,7 @@ class ApplicationViewModel {
 
     public title:string;
     public configuration: Configuration;
-    public sections:SectionModel[] = [];
+    public sections: Array<SectionModel> = [];
     public connectors: { [type: string]: Connector; } = { };
 
     constructor(private json:Config.Application) {

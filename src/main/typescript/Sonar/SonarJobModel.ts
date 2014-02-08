@@ -18,7 +18,7 @@ class SonarJobModel {
     public type:string;
     public url:string;
     public hostname:string;
-    public violations: SonarMonitorModel[] = [];
+    public violations: Array<SonarMonitorModel> = [];
 
     constructor(private sonar:Config.Sonar, public connector:Connector, hostname:string) {
         this.name = sonar.name;

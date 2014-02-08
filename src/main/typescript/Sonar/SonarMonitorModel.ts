@@ -12,7 +12,7 @@ class SonarMonitorModel implements MonitorModel {
     public static TYPE: string = 'sonar';
     public type:string = SonarMonitorModel.TYPE;
     public url:KnockoutObservable<string> = ko.observable<string>();
-    public violations:SonarViolation[] = [];
+    public violations: Array<SonarViolation> = [];
 
     constructor(public name:string, public id:string, private hostname:string, private connector: Connector) {
         this.url('');

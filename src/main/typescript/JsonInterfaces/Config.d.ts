@@ -5,7 +5,7 @@ declare module Config {
 
     interface Application {
         title?: string; //main page title
-        sections: Section[];
+        sections: Array<Section>;
         configuration?: Configuration;
     }
 
@@ -14,10 +14,9 @@ declare module Config {
         url?: string; //section title will use link if configured. (e.g. a Jenkins View)
         hostname: string; //will be used for all Jobs. May be overwritten by Job.
         description?: string; //will be displayed below the title
-        monitors?: Monitor[];
-        sonar?: Sonar[];
-        infrastructure?: Nagios[];
-        sections?: Section[]; //child sections
+        monitors?: Array<Monitor>;
+        sonar?: Array<Sonar>;
+        sections?: Array<Section>; //child sections
         elements: string;
     }
 
@@ -27,7 +26,7 @@ declare module Config {
     interface Monitor {
         name: string;
         id: string;
-        hostname: string; //host the job is configured on. Overwrites Section#host
+        hostname: string; //host the job is configured on. Overwrites Section#hostname
         type?: string;
     }
 
@@ -35,7 +34,7 @@ declare module Config {
      * CodeCoverage
      */
     interface Sonar extends Monitor {
-        modules: SonarModule[];
+        modules: Array<SonarModule>;
     }
 
     interface SonarModule {
@@ -44,25 +43,8 @@ declare module Config {
         hostname?: string;
     }
 
-    interface SonarViolations {
-        msr: SonarViolation[];
-    }
-
-    interface SonarViolation {
-        key: string;
-        val: number;
-    }
-
-    /**
-     * Infrastructure
-     */
-    interface Nagios {
-        name: string;
-        hostnames: string[];
-    }
-
     interface Configuration {
-        hosts?: Host[]; //host configuration
+        hosts?: Array<Host>; //host configuration
         expiry?: number; //time in hours after which jobs are faded out
     }
 
