@@ -1,7 +1,27 @@
 {
-  "name": "bazaar-test-6",
+  "displayName": "displayName",
+  "name": "name",
+  "url": "http://hostname/job/name/",
   "color": "blue",
   "lastBuild": {
-    "timestamp": 1391722895713
+    "actions": [
+      {
+        "lastBuiltRevision": {
+          "branch": [
+            {
+              "SHA1": "00AAEEFF",
+              "name": "origin/master"
+            }
+          ]
+        }
+      }
+    ],
+    "building": false,
+    "duration": 2923735,
+    "id":"2014-02-07_01-29-34",
+    "number":209,
+    "result": "SUCCESS",
+    "timestamp": 1391732974152,
+    "url": "http://hostname/job/name/209/"
   }
 }
