@@ -6,7 +6,7 @@ import Connector = require('./Connector');
 import Configuration = require('./Configuration/Configuration');
 import JenkinsConnector = require('./Jenkins/JenkinsConnector');
 import JenkinsMonitorModel = require('./Jenkins/JenkinsMonitorModel');
-import SonarJobModel = require('./Sonar/SonarJobModel');
+import SonarMonitorModel = require('./Sonar/SonarMonitorModel');
 import SonarConnector = require('./Sonar/SonarConnector');
 import NagiosConnector = require('./Nagios/NagiosConnector');
 import NagiosMonitorModel = require('./Nagios/NagiosMonitorModel');
@@ -32,7 +32,7 @@ class ApplicationViewModel {
 
         //create connectors
         this.connectors[JenkinsMonitorModel.TYPE] = new JenkinsConnector(this.configuration);
-        this.connectors[SonarJobModel.TYPE] = new SonarConnector(this.configuration);
+        this.connectors[SonarMonitorModel.TYPE] = new SonarConnector(this.configuration);
         this.connectors[NagiosMonitorModel.TYPE] = new NagiosConnector(this.configuration);
 
         json.sections.forEach(section => {

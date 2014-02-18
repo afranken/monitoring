@@ -26,6 +26,16 @@ class Configuration {
         return this.expiry !== undefined ? this.expiry : Configuration.DEFAULT_EXPIRY;
     }
 
+    public getPrefix(hostname:string): string {
+        var prefix:string = '';
+        var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
+        if(hostConfiguration !== undefined) {
+            prefix = '/' + hostConfiguration.prefix;
+        }
+
+        return prefix;
+    }
+
     public getUsername(hostname: string): string {
         var username: string;
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);

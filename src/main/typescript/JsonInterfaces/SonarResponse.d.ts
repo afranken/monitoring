@@ -10,6 +10,7 @@ declare module SonarJsonResponse {
 
     interface SonarJson {
         id: number;
+        name: string;
         date: Date;
         msr: Array<Measurement>;
     }

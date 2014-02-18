@@ -10,8 +10,8 @@ import jQuery = require('jquery');
  */
 class SonarConnector implements Connector {
 
-    private static SONAR_DRILLDOWN_VIOLATIONS_SUFFIX:string = '/sonar/drilldown/violations/';
-    private static SONAR_RESOURCE_VIOLATIONS_API_SUFFIX:string = '/sonar/api/resources?callback=?&format=json&metrics=blocker_violations,critical_violations,major_violations,minor_violations,info_violations&resource=';
+    private static SONAR_DRILLDOWN_VIOLATIONS_SUFFIX:string = '/drilldown/violations/';
+    private static SONAR_RESOURCE_VIOLATIONS_API_SUFFIX:string = '/api/resources?callback=?&format=json&metrics=blocker_violations,critical_violations,major_violations,minor_violations,info_violations&resource=';
 
     constructor(private configuration: Configuration) {}
 
@@ -22,20 +22,23 @@ class SonarConnector implements Connector {
      * @param model
      */
     public getJson(id:string, hostname:string, model:SonarMonitorModel):void {
+        var moduleNames: string[] = id.split(',');
         var protocol = this.configuration.getProtocol(hostname);
-        model.url(protocol + hostname + SonarConnector.SONAR_DRILLDOWN_VIOLATIONS_SUFFIX + id);
-        var apiUrl = protocol + hostname + SonarConnector.SONAR_RESOURCE_VIOLATIONS_API_SUFFIX + id;
+        var prefix = this.configuration.getPrefix(hostname);
 
-        jQuery.getJSON(apiUrl,
-            function(violations: SonarResponse.SonarJsons) {
+        moduleNames.forEach(moduleName => {
+            model.addUrl(moduleName, protocol + hostname + prefix + SonarConnector.SONAR_DRILLDOWN_VIOLATIONS_SUFFIX + moduleName);
 
-                model.violations.forEach(violation => {
-                    violation.setCount(violations);
-                    violation.setStatus(violation.count());
+            var apiUrl = protocol + hostname + prefix + SonarConnector.SONAR_RESOURCE_VIOLATIONS_API_SUFFIX + moduleName;
+            jQuery.getJSON(apiUrl,
+                function(violations: SonarResponse.SonarJsons) {
+                    var violationName = violations[0].name;
+                    model.addName(moduleName,violationName);
+                    model.addViolations(moduleName,violations);
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR, textStatus, errorThrown, apiUrl);
                 });
-        })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR, textStatus, errorThrown, apiUrl);
         });
     }
 

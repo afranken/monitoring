@@ -27,7 +27,7 @@ declare module Config {
         name: string;
         id: string;
         hostname: string; //host the job is configured on. Overwrites Section#hostname
-        type?: string;
+        type?: string; //default: jenkins
     }
 
     /**
@@ -51,6 +51,7 @@ declare module Config {
     interface Host {
         hostname: string; //the hostname this configuration is used for
         protocol?: string; //the protocol to use. Default: http
+        prefix?: string; //the prefix to use. Default: none
         username?: string; //the username to use for AJAX calls
         password?: string; //the password to use for AJAX calls
     }

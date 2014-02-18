@@ -3,7 +3,7 @@ import MonitorModel = require('MonitorModel');
 import Connector = require('Connector');
 import JenkinsMonitorModel = require('./Jenkins/JenkinsMonitorModel');
 import NagiosMonitorModel = require('./Nagios/NagiosMonitorModel');
-import SonarJobModel = require('./Sonar/SonarJobModel');
+import SonarMonitorModel = require('./Sonar/SonarMonitorModel');
 import Config = require('./JsonInterfaces/Config');
 
 class SectionModel {
@@ -12,7 +12,6 @@ class SectionModel {
     public url:string;
     public description:string;
     public monitorModels: Array<MonitorModel> = [];
-    public sonar: Array<SonarJobModel> = [];
     public sections: Array<SectionModel> = [];
 
     constructor(private section:Config.Section, private connectors: {[type: string]: Connector}, private hostname: string) {
@@ -40,18 +39,11 @@ class SectionModel {
                         monitorModel = new JenkinsMonitorModel(monitor, connectors[JenkinsMonitorModel.TYPE], this.hostname);
                     } else if(monitor.type === NagiosMonitorModel.TYPE) {
                         monitorModel = new NagiosMonitorModel(monitor, connectors[NagiosMonitorModel.TYPE], this.hostname);
+                    } else if(monitor.type === SonarMonitorModel.TYPE) {
+                        monitorModel = new SonarMonitorModel(monitor, connectors[SonarMonitorModel.TYPE], this.hostname);
                     }
 
                     this.monitorModels.push(monitorModel);
-                }
-            );
-        }
-
-        if(section.sonar !== undefined) {
-            section.sonar.forEach(sonar => {
-                    var jobViewModel;
-                        jobViewModel = new SonarJobModel(sonar, connectors[SonarJobModel.TYPE], this.hostname);
-                    this.sonar.push(jobViewModel);
                 }
             );
         }
