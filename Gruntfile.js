@@ -223,7 +223,53 @@ module.exports = function(grunt) {
                     outdir: '<%= dir.target_report %>/apidoc'
                 }
             }
+        },
+
+        requirejs: {
+
+          // these defaults will be used as a base for every target we define
+          options: {
+            // the name is used to find js/amd/app.js, basically
+            name: 'Application',
+
+            // this should be set to the path from your project root to the
+            // root of your AMD JavaScript files.
+            baseUrl: '<%= dir.target_js %>',
+
+            // where we want the compilation result to go
+            out: '<%= dir.target_js %>/js/monitoring.min.js',
+
+            paths: {
+              'Application': './Application',
+              'jquery': './vendor/jquery-2.0.3',
+              'knockout': './vendor/knockout-3.0.0'
+            }
+          },
+
+          debug: {
+
+            // These options also get merged with the defaults defined above
+            options: {
+
+              // for some reason, generating source maps requires this to be off
+              // and it's on by default...
+              preserveLicenseComments: false,
+
+              // we want source maps because we're bundling everything together
+              // learn more about source maps here:
+              // http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/
+              generateSourceMaps: true,
+
+              // also required by the generateSourceMaps option
+              optimize: 'none'
+            }
+          },
+
+          // This target will inherit the default options, which is
+          // enough for us. The defaults are tuned to optimize.
+          release: {}
         }
+
     });
 
 
@@ -236,15 +282,16 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     // Default task(s).
-    grunt.registerTask('default', [/*'clean',*/ 'copy', 'typescript:compile','typescript:compile_test'/*,'jasmine'*//*,'uglify'*/]);
+    grunt.registerTask('default', [/*'clean',*/ 'copy', 'typescript:compile'/*,'typescript:compile_test'*//*,'jasmine'*/,'requirejs:release']);
 
     // Task for running compilation/assembling stuff (corresponds to Maven's "compile" or "resources" lifecycle phase)
     grunt.registerTask('compile', ['typescript:compile','uglify']);
     // Task for running testing stuff (corresponds to Maven's "test" lifecycle phase)
-    grunt.registerTask('test', ['typescript:compile_test', 'jasmine']);
+//    grunt.registerTask('test', ['typescript:compile_test', 'jasmine']);
     // Task for running testing stuff (corresponds to Maven's "prepare-package" lifecycle phase)
-    grunt.registerTask('package', [/*'uglify'*/]);
+//    grunt.registerTask('package', ['uglify']);
 
 };

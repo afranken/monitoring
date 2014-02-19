@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" data-main="Application" src="vendor/require.js"></script>
+    <script type="text/javascript" src="js/monitoring.min.js"></script>
+    <script type="text/javascript" src="init.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme-monitor.css" media="all" />
+</head>
+<body>
+
+<!-- ko if: title -->
+<h1 id="mainTitle" class="alert alert-info" data-bind="text: title"></h1>
+<!-- /ko -->
+<div id="content" data-bind="template: { name: 'section-template', foreach: sections, afterRender: $root.testMethod }" ></div>
+
+<script type="text/html" id="section-template">
+    <div class="block">
+        <div data-bind="attr: { id: title}">
+            <!-- ko if: title -->
+            <h2 class="alert alert-none">
+                <!-- ko if: url -->
+                <a class="alert-link" data-bind="attr: { href: url, title: title }, text: title"></a>
+                <!-- /ko -->
+                <!-- ko ifnot: url -->
+                <span data-bind="text: title"></span>
+                <!-- /ko -->
+            </h2>
+            <!-- /ko -->
+            <!-- ko if: description -->
+            <p data-bind="html: description"></p>
+            <!-- /ko -->
+            <!-- ko if: monitorModels -->
+            <div data-bind="template: { name: 'monitor-template', foreach: monitorModels, afterRender: $root.getData }"></div>
+            <!-- /ko -->
+            <!-- ko if: sections -->
+            <div data-bind="template: { name: 'section-template', foreach: sections }"></div>
+            <!-- /ko -->
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="monitor-template">
+    <!-- ko if: type === "jenkins" -->
+    <div data-bind="attr: { class: status, style: style}"><a class="alert-link" data-bind="attr: { href: url, title: id }, text: id"></a></div>
+    <!-- /ko -->
+    <!-- ko if: type === "nagios" -->
+    <h3 data-bind="text: name"></h3>
+    <table>
+        <tbody data-bind="template: { name: 'nagios-hostmodel-template', foreach: hostmodels }"></tbody>
+    </table>
+    <!-- /ko -->
+    <!-- ko if: type === "sonar" -->
+    <div data-bind="template: { name: 'sonar-violationmodel-template' }"></div>
+    <!-- /ko -->
+</script>
+
+<script type="text/html" id="nagios-hostmodel-template">
+    <tr>
+        <td>
+            <div data-bind="attr: { class: getStatus()}, html: getText()"></div>
+        </td>
+        <th class="nagiosHost"><a class="alert-link" data-bind="attr: { href: url, title: hostname }, text: hostname"></a></th>
+    </tr>
+</script>
+
+<script type="text/html" id="sonar-violationmodel-template">
+    <h3><a class="alert-link" data-bind="attr: { href: url, title: name }, text: name"></a></h3>
+    <table class="codeviolations">
+        <thead>
+        <tr>
+            <th>Blocker</th>
+            <th>Critical</th>
+            <th>Major</th>
+            <th>Minor</th>
+            <th>Info</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody data-bind="foreach: violationModels"><tr data-bind="template: {name: 'sonar-violation-template', foreach: violations}"></tr></tbody>
+    </table>
+</script>
+
+<script type="text/html" id="sonar-violation-template">
+    <td><div data-bind="attr: {class: status}, text: count"></div></td>
+    <!-- ko if: ($index() === ($parent.violations.length - 1)) -->
+    <th><a data-bind="attr: { href: $parent.url, title: $parent.name }, text: $parent.name"></a></th>
+    <!-- /ko -->
+</script>
+
+
+
+
+
+</body>
+</html>
