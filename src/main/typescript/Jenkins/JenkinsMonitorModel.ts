@@ -1,11 +1,11 @@
 /// <reference path="../vendor/jquery.d.ts" />
 /// <reference path="../vendor/knockout.d.ts" />
+import ko = require('knockout');
 import MonitorModel = require('../MonitorModel');
 import Connector = require('../Connector');
 import CssClasses = require('../CssClasses');
 import JenkinsConnector = require('./JenkinsConnector');
 import Config = require('../JsonInterfaces/Config');
-import ko = require('knockout');
 
 class JenkinsJobModel implements MonitorModel {
 

@@ -1,4 +1,3 @@
-/// <reference path="../vendor/knockout.d.ts" />
 import Config = require('../JsonInterfaces/Config');
 import MonitorModel = require('../MonitorModel');
 import Connector = require('../Connector');
@@ -6,7 +5,6 @@ import CssClasses = require('../CssClasses');
 import NagiosConnector = require('./NagiosConnector');
 import NagiosHostModel = require('./NagiosHostModel');
 import NagiosJsonResponse = require('../JsonInterfaces/NagiosResponse');
-import ko = require('knockout');
 
 class NagiosMonitorModel implements MonitorModel {
 

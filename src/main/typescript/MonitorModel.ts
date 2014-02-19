@@ -1,4 +1,3 @@
-/// <reference path="vendor/knockout.d.ts" />
 
 interface MonitorModel {
 

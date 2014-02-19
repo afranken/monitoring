@@ -1,10 +1,10 @@
 /// <reference path="../vendor/jquery.d.ts" />
+import jQuery = require('jquery');
 import Connector = require('../Connector');
 import CssClasses = require('../CssClasses');
 import JenkinsMonitorModel = require('./JenkinsMonitorModel');
 import Configuration = require('../Configuration/Configuration');
 import JenkinsJsonResponse = require('../JsonInterfaces/JenkinsResponse');
-import jQuery = require('jquery');
 
 class JenkinsConnector implements Connector {
 

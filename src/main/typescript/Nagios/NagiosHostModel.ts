@@ -1,7 +1,7 @@
 /// <reference path="../vendor/knockout.d.ts" />
+import ko = require('knockout');
 import CssClasses = require('../CssClasses');
 import NagiosJsonResponse = require('../JsonInterfaces/NagiosResponse');
-import ko = require('knockout');
 
 class NagiosHostModel {
 

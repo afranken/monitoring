@@ -1,4 +1,3 @@
-/// <reference path="vendor/knockout.d.ts" />
 import JobModel = require('./MonitorModel');
 import SectionModel = require('./SectionModel');
 import Config = require('./JsonInterfaces/Config');
@@ -10,7 +9,6 @@ import SonarMonitorModel = require('./Sonar/SonarMonitorModel');
 import SonarConnector = require('./Sonar/SonarConnector');
 import NagiosConnector = require('./Nagios/NagiosConnector');
 import NagiosMonitorModel = require('./Nagios/NagiosMonitorModel');
-import ko = require('knockout');
 
 class ApplicationViewModel {
 
