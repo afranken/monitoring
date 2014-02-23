@@ -3,58 +3,55 @@
  */
 declare module Config {
 
+    /**
+     * This is the root interface
+     */
     interface Application {
         title?: string; //main page title
         sections: Array<Section>;
-        configuration?: Configuration;
+        configuration?: Configuration; //host configuration used throughout the application
     }
 
-    interface Section {
-        title: string; //the section title
-        url?: string; //section title will use link if configured. (e.g. a Jenkins View)
-        hostname: string; //will be used for all Jobs. May be overwritten by Job.
-        description?: string; //will be displayed below the title
-        monitors?: Array<Monitor>;
-        sonar?: Array<Sonar>;
-        sections?: Array<Section>; //child sections
-        elements: string;
-    }
+        /**
+         * A collection of Section or Monitor elements and various display / configuration properties
+         */
+        interface Section {
+            title: string; //the section title
+            url?: string; //section title will use link if configured. (e.g. a Jenkins View)
+            hostname: string; //will be used for all Monitors. May be overwritten by Monitor.
+            description?: string; //will be displayed below the title
+            monitors?: Array<Monitor>;
+            sections?: Array<Section>; //child sections
+        }
+
+            /**
+             *
+             */
+            interface Monitor {
+                name: string; //depending on the monitor type, this may be used as a display name, description or a heading
+                id: string; //unique id that is used to retrieve information from a backend. (e.g. a Jenkins Job name or a Nagios Host name)
+                hostname: string; //host of the backend to retrieve data from. Overwrites Section#hostname
+                type?: string; //default: jenkins. Also available: sonar, nagios.
+            }
 
     /**
-     * Build
+     * Configures the application. {@see Configuration}
      */
-    interface Monitor {
-        name: string;
-        id: string;
-        hostname: string; //host the job is configured on. Overwrites Section#hostname
-        type?: string; //default: jenkins
-    }
-
-    /**
-     * CodeCoverage
-     */
-    interface Sonar extends Monitor {
-        modules: Array<SonarModule>;
-    }
-
-    interface SonarModule {
-        name: string;
-        id: string;
-        hostname?: string;
-    }
-
     interface Configuration {
-        hosts?: Array<Host>; //host configuration
-        expiry?: number; //time in hours after which jobs are faded out
+        hosts?: Array<Host>; //host configurations
+        expiry?: number; //time in hours after which monitors are faded out
     }
 
-    interface Host {
-        hostname: string; //the hostname this configuration is used for
-        protocol?: string; //the protocol to use. Default: http
-        prefix?: string; //the prefix to use. Default: none
-        username?: string; //the username to use for AJAX calls
-        password?: string; //the password to use for AJAX calls
-    }
+        /**
+         * Configuration for one Host. {@see HostConfiguration}
+         */
+        interface Host {
+            hostname: string; //the hostname this configuration is used for
+            protocol?: string; //the protocol to use. Default: http
+            prefix?: string; //the prefix to use. Default: none
+            username?: string; //the username to use for AJAX calls
+            password?: string; //the password to use for AJAX calls
+        }
 
 }
 
