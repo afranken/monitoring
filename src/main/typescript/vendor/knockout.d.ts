@@ -139,6 +139,8 @@ interface KnockoutBindingHandlers {
     css: KnockoutBindingHandler;
     style: KnockoutBindingHandler;
     attr: KnockoutBindingHandler;
+    //add custom binding
+    pulsate: KnockoutBindingHandler;
 
     // Control Flow
     foreach: KnockoutBindingHandler;

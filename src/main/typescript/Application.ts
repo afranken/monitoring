@@ -1,7 +1,12 @@
-import JobModel = require('./MonitorModel');
+/// <reference path="./vendor/jquery.d.ts" />
+/// <reference path="./vendor/knockout.d.ts" />
+import ko = require('knockout');
+import jQuery = require('jquery');
+import MonitorModel = require('./MonitorModel');
 import SectionModel = require('./SectionModel');
 import Config = require('./JsonInterfaces/Config');
 import Connector = require('./Connector');
+import CssClasses = require('./CssClasses');
 import Configuration = require('./Configuration/Configuration');
 import JenkinsConnector = require('./Jenkins/JenkinsConnector');
 import JenkinsMonitorModel = require('./Jenkins/JenkinsMonitorModel');
@@ -10,6 +15,9 @@ import SonarConnector = require('./Sonar/SonarConnector');
 import NagiosConnector = require('./Nagios/NagiosConnector');
 import NagiosMonitorModel = require('./Nagios/NagiosMonitorModel');
 
+/**
+ * Main application class
+ */
 class ApplicationViewModel {
 
     public title:string;
@@ -26,6 +34,20 @@ class ApplicationViewModel {
         this.init(json);
     }
 
+    /**
+     * Trigger {@link MonitorModel.updateStatus()} in Knockout's "afterRender" binding.
+     *
+     * @param node the currently rendered DOM node
+     * @param monitor the MonitorModel that is rendered
+     */
+    public getData(node: Node, monitor: MonitorModel):void {
+        monitor.updateStatus();
+    }
+
+    /**
+     * Initialize
+     * @param json Config.Application
+     */
     private init(json: Config.Application) {
 
         //create connectors
@@ -34,27 +56,37 @@ class ApplicationViewModel {
         this.connectors[NagiosMonitorModel.TYPE] = new NagiosConnector(this.configuration);
 
         json.sections.forEach(section => {
-                var sectionModel = new SectionModel(section, this.connectors, undefined);
-
-                this.sections.push(sectionModel)
+                this.sections.push(new SectionModel(section, this.connectors, undefined))
             }
         );
 
+        this.registerPulsateBindingHandler();
     }
 
-    public getData(node: Node, job: JobModel) {
-        job.updateStatus();
+    /**
+     * Register custom handler "pulsate".
+     * Usage: data-bind="pulsate: <observable property>"
+     * If observable property contains {@link CssClasses.BUILDING}, DOM Element will start to pulsate.
+     */
+    private registerPulsateBindingHandler(): void {
+        ko.bindingHandlers.pulsate = {
+            update: function(element: Node, valueAccessor, allBindings) {
+                // First get the latest data that we're bound to
+                var value = valueAccessor();
 
-//        jQuery(job).trigger('cssClassChanged');
-//        jQuery('.status-building').bind('cssClassChanged', function(element:JQuery){
-//            //add pulsating effect for monitorModels that are currently running
-//            for(var i = 0; i < 500; i++) {
-//                element.animate({opacity: 'toggle'}, {duration: 1000}).animate({opacity: 'toggle'}, {duration: 1000});
-//            }
-//        });
+                // Next, whether or not the supplied model property is observable, get its current value
+                var valueUnwrapped: string = ko.unwrap(value);
 
+                // Now manipulate the DOM element
+                if (~valueUnwrapped.indexOf(CssClasses.BUILDING)) {
+                    //add pulsating effect for jobs that are currently running
+                    for(var i = 0; i < 500; i++) {
+                        jQuery(element).animate({opacity: "toggle"}, {duration: 1500}).animate({opacity: "toggle"}, {duration: 1500});
+                    }
+                }
+            }
+        }
     }
-
 }
 
 export = ApplicationViewModel;
