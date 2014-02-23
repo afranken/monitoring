@@ -7,7 +7,7 @@ import SonarMonitorModel = require('./SonarMonitorModel');
 import SonarViolation = require('./SonarViolation');
 
 /**
- * TODO: clean up
+ *
  */
 class SonarConnector implements Connector {
 
@@ -18,19 +18,17 @@ class SonarConnector implements Connector {
 
     /**
      *
-     * @param id
-     * @param hostname
      * @param model
      */
-    public getJson(id:string, hostname:string, model:SonarMonitorModel):void {
-        var moduleNames: string[] = id.split(',');
-        var protocol = this.configuration.getProtocol(hostname);
-        var prefix = this.configuration.getPrefix(hostname);
+    public getRemoteData(model:SonarMonitorModel):void {
+        var moduleNames: string[] = model.id.split(',');
+        var protocol = this.configuration.getProtocol(model.hostname);
+        var prefix = this.configuration.getPrefix(model.hostname);
 
         moduleNames.forEach(moduleName => {
-            model.addUrl(moduleName, protocol + hostname + prefix + SonarConnector.SONAR_DRILLDOWN_VIOLATIONS_SUFFIX + moduleName);
+            model.addUrl(moduleName, protocol + model.hostname + prefix + SonarConnector.SONAR_DRILLDOWN_VIOLATIONS_SUFFIX + moduleName);
 
-            var apiUrl = protocol + hostname + prefix + SonarConnector.SONAR_RESOURCE_VIOLATIONS_API_SUFFIX + moduleName;
+            var apiUrl = protocol + model.hostname + prefix + SonarConnector.SONAR_RESOURCE_VIOLATIONS_API_SUFFIX + moduleName;
             jQuery.getJSON(apiUrl,
                 function(violations: SonarResponse.SonarJsons) {
                     var violationName = violations[0].name;

@@ -11,10 +11,10 @@ class NagiosMonitorModel implements MonitorModel {
     public static TYPE:string = 'nagios';
     public type:string = NagiosMonitorModel.TYPE;
     public hostmodels:Array<NagiosHostModel> = [];
+    public id:string;
+    public hostname:string;
 
     private name:string;
-    private id:string;
-    private hostname:string;
     private connector:NagiosConnector;
 
     constructor(job:Config.Monitor, connector:Connector, hostname:string) {
@@ -44,7 +44,7 @@ class NagiosMonitorModel implements MonitorModel {
     }
 
     public updateStatus():void {
-        this.connector.getJson(this.id,this.hostname,this);
+        this.connector.getRemoteData(this);
     }
 
 

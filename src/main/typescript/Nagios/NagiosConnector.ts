@@ -25,11 +25,11 @@ class NagiosConnector implements Connector {
 
     constructor(private configuration: Configuration) {}
 
-    public getJson(id:string, hostname:string, model:NagiosMonitorModel):void {
-        var hostnames: string[] = id.split(',');
+    public getRemoteData(model:NagiosMonitorModel):void {
+        var hostnames: string[] = model.id.split(',');
         var apiUrl: string =
-            this.configuration.getProtocol(hostname) +
-                hostname +
+            this.configuration.getProtocol(model.hostname) +
+                model.hostname +
                 NagiosConnector.NAGIOS_PREFIX +
                 NagiosConnector.NAGIOS_HOST_SUFFIX +
                 NagiosConnector.DISPLAY_ALL_HOSTS +

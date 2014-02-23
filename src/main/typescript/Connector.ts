@@ -1,8 +1,16 @@
 import MonitorModel = require('./MonitorModel');
 
+/**
+ * Connectors get data from remote services
+ */
 interface Connector {
 
-    getJson(id:string, hostname:string, model: MonitorModel): void;
+    /**
+     * Get remote data for given MonitorModel
+     *
+     * @param model the model to add the retrieved data to
+     */
+    getRemoteData(model: MonitorModel): void;
 
 }
 

@@ -25,8 +25,8 @@ class JenkinsConnector implements Connector {
 
     constructor(private configuration: Configuration) {}
 
-    public getJson(id:string, hostname:string, model:JenkinsMonitorModel):void {
-        var jobUrl = this.configuration.getProtocol(hostname) + hostname + JenkinsConnector.JOB_PREFIX + id;
+    public getRemoteData(model:JenkinsMonitorModel):void {
+        var jobUrl = this.configuration.getProtocol(model.hostname) + model.hostname + JenkinsConnector.JOB_PREFIX + model.id;
         model.url(jobUrl);
         var apiUrl = jobUrl + JenkinsConnector.JSONP_SUFFIX + JenkinsConnector.JOB_STATUS_SUFFIX;
         jQuery.getJSON(apiUrl,

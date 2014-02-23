@@ -7,7 +7,7 @@ import Connector = require('../Connector');
 import SonarViolationModel = require('./SonarViolationModel');
 
 /**
- * TODO: clean up
+ *
  */
 class SonarMonitorModel implements MonitorModel {
 
@@ -37,7 +37,7 @@ class SonarMonitorModel implements MonitorModel {
     }
 
     public updateStatus():void {
-        this.connector.getJson(this.id,this.hostname,this);
+        this.connector.getRemoteData(this);
     }
 
     public addViolations(moduleName:string, violations:SonarResponse.SonarJsons):void {

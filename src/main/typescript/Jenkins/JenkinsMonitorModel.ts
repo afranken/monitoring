@@ -29,7 +29,7 @@ class JenkinsJobModel implements MonitorModel {
     }
 
     public updateStatus():void {
-        this.connector.getJson(this.id,this.hostname,this);
+        this.connector.getRemoteData(this);
     }
 
 }
