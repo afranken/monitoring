@@ -12,13 +12,3 @@ require(['Application', 'knockout'], function(ApplicationViewModel, ko) {
   var applicationViewModel = new ApplicationViewModel(json);
   ko.applyBindings(applicationViewModel);
 });
-
-//
-require(['jquery'], function(jQuery){
-  jQuery(function(){
-
-  });
-});
-
-
-
