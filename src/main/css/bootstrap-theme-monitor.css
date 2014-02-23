@@ -46,9 +46,13 @@ table.jobmatrix * th a {
 }
 
 .jobstatus {
-  padding: 5px;
-  margin-bottom: 2px;
+  padding: 10px 15px;
+  margin-bottom: 0;
   background-color: #EEEEFF;
+}
+
+th {
+  text-align: left;
 }
 
 table * th a {
@@ -74,4 +78,8 @@ table * th a {
 
 .alert-disabled .alert-link {
   color: #666666;
+}
+
+.panel-default {
+  border-color: transparent;
 }
