@@ -1,12 +1,13 @@
 /// <reference path="../vendor/jquery.d.ts" />
 import jQuery = require('jquery');
-import Connector = require('../Connector')
+import Connector = require('../Connector/Connector');
+import ConnectorBase = require('../Connector/ConnectorBase');
 import MonitorModel = require('../MonitorModel');
 import NagiosJsonResponse = require('../JsonInterfaces/NagiosResponse');
 import Configuration = require('../Configuration/Configuration');
 import NagiosMonitorModel = require('./NagiosMonitorModel');
 
-class NagiosConnector implements Connector {
+class NagiosConnector extends ConnectorBase implements Connector {
 
     //the nagios host
     public static NAGIOS_PREFIX: string = '/nagios/cgi-bin/status-json.cgi?';
@@ -23,17 +24,14 @@ class NagiosConnector implements Connector {
 
     private static NAGIOS_HOSTINFO_PREFIX = '/nagios/cgi-bin/extinfo.cgi?type=1&host=';
 
-    constructor(private configuration: Configuration) {}
-
     public getRemoteData(model:NagiosMonitorModel):void {
         var hostnames: string[] = model.id.split(',');
-        var apiUrl: string =
-            this.configuration.getProtocol(model.hostname) +
-                model.hostname +
-                NagiosConnector.NAGIOS_PREFIX +
-                NagiosConnector.NAGIOS_HOST_SUFFIX +
-                NagiosConnector.DISPLAY_ALL_HOSTS +
-                NagiosConnector.NAGIOS_JSONP_SUFFIX;
+        var apiUrl: string = this.getUrl(model.hostname,
+            NagiosConnector.NAGIOS_PREFIX +
+            NagiosConnector.NAGIOS_HOST_SUFFIX +
+            NagiosConnector.DISPLAY_ALL_HOSTS +
+            NagiosConnector.NAGIOS_JSONP_SUFFIX);
+
         jQuery.getJSON(apiUrl,function(json: NagiosJsonResponse.NagiosServices) {
 
             //--------- iterate over JSON response, save services that should be displayed
@@ -48,7 +46,7 @@ class NagiosConnector implements Connector {
     }
 
     public getHostInfoUrl(nagiosHostname:string,hostname:string):string {
-        return this.configuration.getProtocol(nagiosHostname) +
+        return this.getConfiguration().getProtocol(nagiosHostname) +
             nagiosHostname +
             NagiosConnector.NAGIOS_HOSTINFO_PREFIX +
             hostname;

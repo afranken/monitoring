@@ -1,14 +1,15 @@
 /// <reference path="../vendor/jquery.d.ts" />
 import jQuery = require('jquery');
-import Connector = require('../Connector');
+import Connector = require('../Connector/Connector');
+import ConnectorBase = require('../Connector/ConnectorBase');
 import CssClasses = require('../CssClasses');
 import JenkinsMonitorModel = require('./JenkinsMonitorModel');
 import Configuration = require('../Configuration/Configuration');
 import JenkinsJsonResponse = require('../JsonInterfaces/JenkinsResponse');
 
-class JenkinsConnector implements Connector {
+class JenkinsConnector extends ConnectorBase implements Connector {
 
-    private static OPACITY = 'opacity: ';
+    private static OPACITY:string = 'opacity: ';
     public static BASIC_STYLE:string = JenkinsConnector.OPACITY +'1.0';
 
     private static JOB_PREFIX: string = '/job/';
@@ -22,17 +23,14 @@ class JenkinsConnector implements Connector {
     //suffix that tells Jenkins to only include certain properties of modules in response
     private static MODULES_STATUS_SUFFIX:string = '&tree=modules[name,url,displayName,color,lastBuild[timestamp,actions[lastBuiltRevision[branch[SHA1,name]],failCount,skipCount,totalCount]]&depth=1';
 
-
-    constructor(private configuration: Configuration) {}
-
     public getRemoteData(model:JenkinsMonitorModel):void {
-        var jobUrl = this.configuration.getProtocol(model.hostname) + model.hostname + JenkinsConnector.JOB_PREFIX + model.id;
+        var jobUrl:string = this.getUrl(model.hostname, JenkinsConnector.JOB_PREFIX + model.id);
         model.url(jobUrl);
-        var apiUrl = jobUrl + JenkinsConnector.JSONP_SUFFIX + JenkinsConnector.JOB_STATUS_SUFFIX;
+        var apiUrl:string = jobUrl + JenkinsConnector.JSONP_SUFFIX + JenkinsConnector.JOB_STATUS_SUFFIX;
         jQuery.getJSON(apiUrl,
                 (json : JenkinsJsonResponse.JenkinsJson) => {
                     model.status(CssClasses.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
-                    model.style(JenkinsConnector.OPACITY+JenkinsConnector.calculateExpiration(json.lastBuild.timestamp, this.configuration.getExpiry()));
+                    model.style(JenkinsConnector.OPACITY+JenkinsConnector.calculateExpiration(json.lastBuild.timestamp, this.getConfiguration().getExpiry()));
                 })
             .fail(function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown, apiUrl);
@@ -47,11 +45,11 @@ class JenkinsConnector implements Connector {
      */
     private static calculateExpiration(buildTimestamp: number, expiry: number):number {
 
-        var expireStyle;
+        var expireStyle:number;
 
         //calculate timestamp and expiration
-        var nowTimestamp = new Date().getTime();
-        var ageMinutes = Math.round(nowTimestamp - buildTimestamp) / (1000 * 60);
+        var nowTimestamp:number = new Date().getTime();
+        var ageMinutes:number = Math.round(nowTimestamp - buildTimestamp) / (1000 * 60);
         var expiredPercent = 1 - (ageMinutes / (expiry * 60));  // 0=expired, 1=fresh
 
         if (expiredPercent < 0) {
@@ -70,7 +68,7 @@ class JenkinsConnector implements Connector {
 
     //translate colors from Jenkins to bootstrap styles
     private static translateColor(color:string):string {
-        var colorTranslation;
+        var colorTranslation:string;
         if (color === 'blue') {
             colorTranslation = CssClasses.SUCCESS;
         }

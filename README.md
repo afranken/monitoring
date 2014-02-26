@@ -1,7 +1,13 @@
-monitoring
-==========
+Monitor Page
+============
 
-A simple Jenkins Monitor Single Page Application
+An easy to use Single Page Application to monitor your build infrastructure.
+
+Currently supported:
+
+* Jenkins Jobs
+* Sonar
+* Nagios Hosts
 
 
 

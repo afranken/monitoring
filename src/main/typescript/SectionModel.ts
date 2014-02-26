@@ -1,5 +1,5 @@
-import MonitorModel = require('MonitorModel');
-import Connector = require('Connector');
+import MonitorModel = require('./MonitorModel');
+import Connector = require('./Connector/Connector');
 import JenkinsMonitorModel = require('./Jenkins/JenkinsMonitorModel');
 import NagiosMonitorModel = require('./Nagios/NagiosMonitorModel');
 import SonarMonitorModel = require('./Sonar/SonarMonitorModel');

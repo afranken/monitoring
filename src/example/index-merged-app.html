@@ -6,16 +6,18 @@
     <script type="text/javascript" src="js/monitoring.min.js"></script>
     <script type="text/javascript" src="init.js"></script>
     <script type="text/javascript" src="config.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" media="all" />
+    <script type="text/javascript" src="vendor/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme-monitor.css" media="all" />
+    <!--<link rel="stylesheet" type="text/css" href="css/bootstrap-theme-monitor-dark.css" media="all" />-->
 </head>
 <body>
 
 <!-- ko if: title -->
 <h1 id="mainTitle" class="alert alert-info" data-bind="text: title"></h1>
 <!-- /ko -->
-<div id="content" data-bind="template: { name: 'section-template', foreach: sections, afterRender: $root.testMethod }" ></div>
+<div id="content" data-bind="template: { name: 'section-template', foreach: sections }" ></div>
 
 <script type="text/html" id="section-template">
     <div class="block">
@@ -34,7 +36,7 @@
             <p data-bind="html: description"></p>
             <!-- /ko -->
             <!-- ko if: monitorModels -->
-            <div data-bind="template: { name: 'monitor-template', foreach: monitorModels, afterRender: $root.getData }"></div>
+                <div class="panel-group" data-bind="template: { name: 'monitor-template', foreach: monitorModels, afterRender: $root.getData }"></div>
             <!-- /ko -->
             <!-- ko if: sections -->
             <div data-bind="template: { name: 'section-template', foreach: sections }"></div>
@@ -45,7 +47,10 @@
 
 <script type="text/html" id="monitor-template">
     <!-- ko if: type === "jenkins" -->
-    <div data-bind="attr: { class: status, style: style}"><a class="alert-link" data-bind="attr: { href: url, title: id }, text: id"></a></div>
+    <div class="panel panel-default">
+        <div data-bind="attr: {style: style}, css: status, pulsate: status"><a class="alert-link" data-bind="attr: { href: url, title: id }, text: id"></a></div>
+        <div class="panel-collapse collapse">asdf</div>
+    </div>
     <!-- /ko -->
     <!-- ko if: type === "nagios" -->
     <h3 data-bind="text: name"></h3>
@@ -61,7 +66,7 @@
 <script type="text/html" id="nagios-hostmodel-template">
     <tr>
         <td>
-            <div data-bind="attr: { class: getStatus()}, html: getText()"></div>
+            <div data-bind="css: getStatus(), html: getText()"></div>
         </td>
         <th class="nagiosHost"><a class="alert-link" data-bind="attr: { href: url, title: hostname }, text: hostname"></a></th>
     </tr>
@@ -85,7 +90,7 @@
 </script>
 
 <script type="text/html" id="sonar-violation-template">
-    <td><div data-bind="attr: {class: status}, text: count"></div></td>
+    <td><div data-bind="css: status, text: count"></div></td>
     <!-- ko if: ($index() === ($parent.violations.length - 1)) -->
     <th><a data-bind="attr: { href: $parent.url, title: $parent.name }, text: $parent.name"></a></th>
     <!-- /ko -->

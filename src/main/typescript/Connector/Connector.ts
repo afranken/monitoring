@@ -1,4 +1,4 @@
-import MonitorModel = require('./MonitorModel');
+import MonitorModel = require('./../MonitorModel');
 
 /**
  * Connectors get data from remote services

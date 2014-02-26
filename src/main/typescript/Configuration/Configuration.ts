@@ -3,41 +3,55 @@ import HostConfiguration = require('./HostConfiguration');
 
 class Configuration {
 
-    private static DEFAULT_EXPIRY: number = 36;
-    private static DEFAULT_PROTOCOL: string = 'http';
-    private static PROTOCOL_SUFFIX: string = '://';
+    private static _DEFAULT_EXPIRY: number = 36;
+    private static _DEFAULT_PROTOCOL: string = 'http';
+    private static _PROTOCOL_SUFFIX: string = '://';
 
-    public expiry: number;
-    private hostConfigurations: { [name: string]: HostConfiguration; } = { };
+    private _expiry: number;
+    private _hostConfigurations: { [name: string]: HostConfiguration; } = { };
 
     constructor(private json: Config.Configuration) {
-        this.expiry = json.expiry;
+        this._expiry = json.expiry;
 
         this.init(json);
     }
 
     private init(json: Config.Configuration) {
         json.hosts.forEach(host => {
-            this.hostConfigurations[host.hostname] = new HostConfiguration(host);
+            this._hostConfigurations[host.hostname] = new HostConfiguration(host);
         });
     }
 
     public getExpiry(): number {
-        return this.expiry !== undefined ? this.expiry : Configuration.DEFAULT_EXPIRY;
+        return this._expiry !== undefined ? this._expiry : Configuration._DEFAULT_EXPIRY;
     }
 
     public getPrefix(hostname:string): string {
         var prefix:string = '';
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
         if(hostConfiguration !== undefined) {
-            prefix = '/' + hostConfiguration.prefix;
+            if(hostConfiguration.prefix !== undefined) {
+                prefix = '/' + hostConfiguration.prefix;
+            }
         }
 
         return prefix;
     }
 
+    public getPort(hostname:string): string {
+        var port:string = '';
+        var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
+        if(hostConfiguration !== undefined) {
+            if(hostConfiguration.port !== undefined) {
+                port = ':' + hostConfiguration.port;
+            }
+        }
+
+        return port;
+    }
+
     public getUsername(hostname: string): string {
-        var username: string;
+        var username: string = '';
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
         if(hostConfiguration !== undefined) {
             username = hostConfiguration.username;
@@ -47,7 +61,7 @@ class Configuration {
     }
 
     public getPassword(hostname: string): string {
-        var password: string;
+        var password: string = undefined;
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
         if(hostConfiguration !== undefined) {
             password = hostConfiguration.password;
@@ -56,21 +70,28 @@ class Configuration {
         return password;
     }
 
+    /**
+     * Get protocol for given hostname.
+     * Default: http
+     *
+     * @param hostname
+     * @returns string the protocol including the suffix {@link _PROTOCOL_SUFFIX}
+     */
     public getProtocol(hostname: string): string {
-        var protocol: string;
+        var protocol: string = undefined;
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
         if(hostConfiguration !== undefined) {
             protocol = hostConfiguration.protocol;
         }
         if(protocol === undefined) {
-            protocol = Configuration.DEFAULT_PROTOCOL;
+            protocol = Configuration._DEFAULT_PROTOCOL;
         }
 
-        return protocol+Configuration.PROTOCOL_SUFFIX;
+        return protocol+Configuration._PROTOCOL_SUFFIX;
     }
 
-    public getHostConfiguration(hostname: string): HostConfiguration {
-        return this.hostConfigurations[hostname];
+    private getHostConfiguration(hostname: string): HostConfiguration {
+        return this._hostConfigurations[hostname];
     }
 
 }

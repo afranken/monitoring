@@ -1,6 +1,6 @@
 import Config = require('../JsonInterfaces/Config');
 import MonitorModel = require('../MonitorModel');
-import Connector = require('../Connector');
+import Connector = require('../Connector/Connector');
 import CssClasses = require('../CssClasses');
 import NagiosConnector = require('./NagiosConnector');
 import NagiosHostModel = require('./NagiosHostModel');
