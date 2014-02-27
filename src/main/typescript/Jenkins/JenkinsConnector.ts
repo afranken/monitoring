@@ -7,21 +7,35 @@ import JenkinsMonitorModel = require('./JenkinsMonitorModel');
 import Configuration = require('../Configuration/Configuration');
 import JenkinsJsonResponse = require('../JsonInterfaces/JenkinsResponse');
 
+/**
+ * Get data from Jenkins {@link http://jenkins-ci.org/}
+ */
 class JenkinsConnector extends ConnectorBase implements Connector {
 
     private static OPACITY:string = 'opacity: ';
+    /**
+     * Default: completely visible
+     */
     public static BASIC_STYLE:string = JenkinsConnector.OPACITY +'1.0';
 
     private static JOB_PREFIX: string = '/job/';
 
-    //suffix that ensures that Jenkins returns JSONP
+    /**
+     * suffix that ensures that Jenkins returns JSONP
+     */
     private static JSONP_SUFFIX:string = '/api/json?jsonp=?';
 
-    //suffix that tells Jenkins to only include certain properties in response
-    private static JOB_STATUS_SUFFIX:string = '&tree=name,url,displayName,color,lastBuild[timestamp,building,duration,url,result,number,id,failCount,skipCount,totalCount,actions[lastBuiltRevision[branch[SHA1,name]]]]&depth=1';
+    /**
+     * suffix that tells Jenkins to only include certain properties in response
+     */
+    private static JOB_STATUS_SUFFIX:string = '&tree=name,url,displayName,color,lastBuild[timestamp,building,duration,url,result,number,id,failCount,skipCount,totalCount,' +
+        'actions[lastBuiltRevision[branch[SHA1,name]]]]&depth=1';
 
-    //suffix that tells Jenkins to only include certain properties of modules in response
-    private static MODULES_STATUS_SUFFIX:string = '&tree=modules[name,url,displayName,color,lastBuild[timestamp,actions[lastBuiltRevision[branch[SHA1,name]],failCount,skipCount,totalCount]]&depth=1';
+    /**
+     * suffix that tells Jenkins to only include certain properties of modules in response
+     */
+    private static MODULES_STATUS_SUFFIX:string = '&tree=modules[name,url,displayName,color,' +
+        'lastBuild[timestamp,actions[lastBuiltRevision[branch[SHA1,name]],failCount,skipCount,totalCount]]&depth=1';
 
     public getRemoteData(model:JenkinsMonitorModel):void {
         var jobUrl:string = this.getUrl(model.hostname, JenkinsConnector.JOB_PREFIX + model.id);
@@ -38,10 +52,12 @@ class JenkinsConnector extends ConnectorBase implements Connector {
     }
 
     /**
+     * Get expiration based on the amount of time that passed between the {@link JenkinsJsonResponse.LastBuild.timestamp} and now.
      *
+     * @param expiry time in hours
      * @param buildTimestamp
-     * @returns {*}
-     * @param expiry
+     *
+     * @returns number between 0.25 (=expired) and 1.0 (job ran recently)
      */
     private static calculateExpiration(buildTimestamp: number, expiry: number):number {
 
@@ -66,7 +82,11 @@ class JenkinsConnector extends ConnectorBase implements Connector {
         return expireStyle;
     }
 
-    //translate colors from Jenkins to bootstrap styles
+    /**
+     * Translate colors from Jenkins to twitter bootstrap styles
+     * @param color
+     * @returns string
+     */
     private static translateColor(color:string):string {
         var colorTranslation:string;
         if (color === 'blue') {

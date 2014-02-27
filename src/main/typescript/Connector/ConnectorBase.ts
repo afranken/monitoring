@@ -15,8 +15,8 @@ class ConnectorBase implements Connector {
 
     /**
      * Get an absolute URL for the given hostname, including configured
-     * {@link Config.Configuration.hosts.protocol}, {@link Config.Configuration.hosts.port},
-     * and {@link Config.Configuration.hosts.prefix}.
+     * {@link Config.Host.protocol}, {@link Config.Host.port},
+     * and {@link Config.Host.prefix}.
      *
      * @param hostname the hostname to get the URL for
      * @param suffix optional suffix to be added to the URL

@@ -5,6 +5,8 @@ class Configuration {
     private static _DEFAULT_EXPIRY: number = 36;
     private static _DEFAULT_PROTOCOL: string = 'http';
     private static _PROTOCOL_SUFFIX: string = '://';
+    private static _PORT_PREFIX: string = ':';
+    private static _SLASH: string = '/';
 
     private _expiry: number;
     private _hostConfigurations: { [name: string]: HostConfiguration; } = { };
@@ -21,34 +23,60 @@ class Configuration {
         });
     }
 
+    /**
+     * Get the expiry.
+     * Default: {@link _DEFAULT_EXPIRY}
+     * @returns number {@link _DEFAULT_EXPIRY} or {@link Configuration.expiry}
+     */
     public getExpiry(): number {
         return this._expiry !== undefined ? this._expiry : Configuration._DEFAULT_EXPIRY;
     }
 
+    /**
+     * Get prefix for given hostname.
+     * Default: empty string ''
+     *
+     * @param hostname
+     * @returns string {@link _SLASH} and the prefix (e.g. '/sonar'), or ''
+     */
     public getPrefix(hostname:string): string {
         var prefix:string = '';
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
         if(hostConfiguration !== undefined) {
             if(hostConfiguration.prefix !== undefined) {
-                prefix = '/' + hostConfiguration.prefix;
+                prefix = Configuration._SLASH + hostConfiguration.prefix;
             }
         }
 
         return prefix;
     }
 
+    /**
+     * Get port for given hostname.
+     * Default: empty string ''
+     *
+     * @param hostname
+     * @returns string {@link _PORT_PREFIX} and the port (e.g. :8080), or ''
+     */
     public getPort(hostname:string): string {
         var port:string = '';
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
         if(hostConfiguration !== undefined) {
             if(hostConfiguration.port !== undefined) {
-                port = ':' + hostConfiguration.port;
+                port = Configuration._PORT_PREFIX + hostConfiguration.port;
             }
         }
 
         return port;
     }
 
+    /**
+     * Get username for given hostname.
+     * Default: {@link undefined}
+     *
+     * @param hostname
+     * @returns string the username, or undefined
+     */
     public getUsername(hostname: string): string {
         var username: string = undefined;
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
@@ -59,6 +87,13 @@ class Configuration {
         return username;
     }
 
+    /**
+     * Get configured password for given hostname.
+     * Default: {@link undefined}
+     *
+     * @param hostname
+     * @returns string the password, or undefined
+     */
     public getPassword(hostname: string): string {
         var password: string = undefined;
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
@@ -70,8 +105,8 @@ class Configuration {
     }
 
     /**
-     * Get protocol for given hostname.
-     * Default: http
+     * Get {@link Config.Configuration} protocol for given hostname.
+     * Default: "http://"
      *
      * @param hostname
      * @returns string the protocol including the suffix {@link _PROTOCOL_SUFFIX}
