@@ -6,10 +6,12 @@ import NagiosConnector = require('./NagiosConnector');
 import NagiosHostModel = require('./NagiosHostModel');
 import NagiosJsonResponse = require('../JsonInterfaces/NagiosResponse');
 
+/**
+ * Model that represents a list of Nagios hosts
+ */
 class NagiosMonitorModel implements MonitorModel {
 
     public static TYPE:string = 'nagios';
-    public type:string = NagiosMonitorModel.TYPE;
     public hostmodels:Array<NagiosHostModel> = [];
     public id:string;
     public hostname:string;
@@ -33,6 +35,10 @@ class NagiosMonitorModel implements MonitorModel {
             nagiosHostModel.setUrl(this.connector.getHostInfoUrl(this.hostname,hostname));
             this.hostmodels.push(nagiosHostModel);
         });
+    }
+
+    public getType():string {
+        return NagiosMonitorModel.TYPE;
     }
 
     public addService(hostname:string, service:NagiosJsonResponse.NagiosService):void {

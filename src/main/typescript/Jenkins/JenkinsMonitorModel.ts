@@ -7,11 +7,13 @@ import CssClasses = require('../CssClasses');
 import JenkinsConnector = require('./JenkinsConnector');
 import Config = require('../JsonInterfaces/Config');
 
-class JenkinsJobModel implements MonitorModel {
+/**
+ * Model that represents a Jenkins Job
+ */
+class JenkinsMonitorModel implements MonitorModel {
 
     public static TYPE: string = 'jenkins';
 
-    public type:string = JenkinsJobModel.TYPE;
     public name:string;
     public id:string;
     public hostname:string;
@@ -32,6 +34,11 @@ class JenkinsJobModel implements MonitorModel {
         this.connector.getRemoteData(this);
     }
 
+    public getType():string {
+        return JenkinsMonitorModel.TYPE;
+    }
+
+
 }
 
-export = JenkinsJobModel;
+export = JenkinsMonitorModel;

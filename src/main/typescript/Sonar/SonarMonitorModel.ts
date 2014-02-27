@@ -7,12 +7,11 @@ import Connector = require('../Connector/Connector');
 import SonarViolationModel = require('./SonarViolationModel');
 
 /**
- *
+ * Model that represents a list of Sonar modules
  */
 class SonarMonitorModel implements MonitorModel {
 
     public static TYPE: string = 'sonar';
-    public type:string = SonarMonitorModel.TYPE;
     public url:KnockoutObservable<string> = ko.observable<string>();
     public violationModels: Array<SonarViolationModel> = [];
     public name:string;
@@ -22,7 +21,6 @@ class SonarMonitorModel implements MonitorModel {
     constructor(private monitor:Config.Monitor, public connector:Connector, hostname:string) {
         this.name = monitor.name;
         this.hostname = monitor.hostname !== undefined ? monitor.hostname : hostname;
-        this.type = SonarMonitorModel.TYPE;
         this.id = monitor.id;
         this.url('');
 
@@ -38,6 +36,10 @@ class SonarMonitorModel implements MonitorModel {
 
     public updateStatus():void {
         this.connector.getRemoteData(this);
+    }
+
+    public getType():string {
+        return SonarMonitorModel.TYPE;
     }
 
     public addViolations(moduleName:string, violations:SonarResponse.SonarJsons):void {
