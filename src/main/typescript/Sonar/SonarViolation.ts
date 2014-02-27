@@ -6,7 +6,7 @@ import CssClasses = require('../CssClasses');
 
 class SonarViolation {
 
-    public static BASIC_CLASSES:string = ' codeviolation ' + CssClasses.ALERT;
+    public static BASIC_CLASSES:string = ' codeviolation ' + CssClasses.BASIC;
 
     public static BLOCKER:string = 'blocker_violations';
     public static CRITICAL:string = 'critical_violations';
