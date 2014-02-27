@@ -3,112 +3,26 @@
 <head>
     <title></title>
     <script type="text/javascript" data-main="Application" src="vendor/require.js"></script>
+    <script type="text/javascript" src="init.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+
+    <script type="text/javascript" src="vendor/jquery-2.0.3.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme-monitor.css" media="all" />
+    <!--<link rel="stylesheet" type="text/css" href="css/bootstrap-theme-monitor-dark.css" media="all" />-->
 </head>
 <body>
 
+<!-- ko if: title -->
+<h1 id="mainTitle" class="alert alert-info" data-bind="text: title"></h1>
+<!-- /ko -->
+<div id="content" data-bind="template: { name: 'section-template', foreach: sections }" ></div>
 
-    <script type='text/javascript'>
-
-        json = {
-            "title": "myTitle",
-            "sections": [
-                {
-                    "title": "mainSectionTitle1",
-                    "sections": [
-                        {
-                            "title": "mySectionTitle1",
-                            "url": "http://localhost/url",
-                            "description": "Test description",
-                            "hostname": "cm7-ci.coremedia.com",
-                            "jobs": [
-                                {
-                                    "title": "Workspace",
-                                    "name": "bazaar-jdk7-1"
-                                },
-                                {
-                                    "title": "Retest System",
-                                    "name": "bazaar-test-1"
-                                },
-                                {
-                                    "title": "Smoke Tests",
-                                    "name": "bazaar-smoke-tests-1"
-                                }
-                            ]
-                        },
-                        {
-                            "title": "mySectionTitle2",
-                            "url": "http://localhost/url",
-                            "description": "Test description",
-                            "jobs": [
-                                {
-                                    "title": "myJobTitle21",
-                                    "name": "http://localhost/211"
-                                },
-                                {
-                                    "title": "myJobTitle22",
-                                    "name": "http://localhost/222"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "mySectionTitle3",
-                    "url": "http://localhost/url",
-                    "description": "Test description",
-                    "jobs": [
-                        {
-                            "title": "myJobTitle31",
-                            "name": "http://localhost/211"
-                        },
-                        {
-                            "title": "myJobTitle32",
-                            "name": "http://localhost/222"
-                        }
-                    ]
-                }
-            ],
-            "settings": {
-                "hosts": [
-                    {
-                        "hostname": "",
-                        "username": "",
-                        "password": ""
-                    }
-                ],
-                "expiry": 36
-            }
-        };
-
-        requirejs.config({
-            paths: {
-                // location of three.js library
-//        'threejs': 'https://raw.github.com/mrdoob/three.js/r62/build/three'
-                'Application': './Application',
-                'jquery': "./vendor/jquery-2.0.3",
-                'knockout': "./vendor/knockout-3.0.0"
-            }
-        });
-
-        //init application
-            require(["Application", "knockout"], function(ApplicationViewModel, ko) {
-                var applicationViewModel = new ApplicationViewModel(json);
-                ko.applyBindings(applicationViewModel);
-            });
-
-    </script>
-
-
-    <!-- ko if: title -->
-    <h1 id="mainTitle" class="alert alert-info" data-bind="text: title"></h1>
-    <!-- /ko -->
-    <div id="content" data-bind="template: { name: 'section-template', foreach: sections }" ></div>
-
-    <script type="text/html" id="section-template">
-        <div class="block">
+<script type="text/html" id="section-template">
+    <div class="block">
+        <div data-bind="attr: { id: title}">
             <!-- ko if: title -->
             <h2 class="alert alert-none">
                 <!-- ko if: url -->
@@ -120,22 +34,67 @@
             </h2>
             <!-- /ko -->
             <!-- ko if: description -->
-            <p data-bind="text: description"></p>
+            <p data-bind="html: description"></p>
             <!-- /ko -->
-            <!-- ko if: jobs -->
-            <div data-bind="template: { name: 'job-template', foreach: jobs, afterRender: $root.getData }"></div>
+            <!-- ko if: monitorModels -->
+            <div class="panel-group" data-bind="template: { name: 'monitor-template', foreach: monitorModels, afterRender: $root.getData }"></div>
             <!-- /ko -->
             <!-- ko if: sections -->
             <div data-bind="template: { name: 'section-template', foreach: sections }"></div>
             <!-- /ko -->
         </div>
-    </script>
+    </div>
+</script>
 
-    <script type="text/html" id="job-template">
-        <div data-bind="attr: { class: status, style: style}">
-            <a class="alert-link" data-bind="attr: { href: url, title: title }, text: title"></a>
-        </div>
-    </script>
+<script type="text/html" id="monitor-template">
+    <!-- ko if: type === "jenkins" -->
+    <div class="panel panel-default">
+        <div data-bind="attr: {style: style}, css: status, pulsate: status"><a class="alert-link" data-bind="attr: { href: url, title: id }, text: id"></a></div>
+        <div class="panel-collapse collapse">asdf</div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: type === "nagios" -->
+    <h3 data-bind="text: name"></h3>
+    <table>
+        <tbody data-bind="template: { name: 'nagios-hostmodel-template', foreach: hostmodels }"></tbody>
+    </table>
+    <!-- /ko -->
+    <!-- ko if: type === "sonar" -->
+    <div data-bind="template: { name: 'sonar-violationmodel-template' }"></div>
+    <!-- /ko -->
+</script>
 
+<script type="text/html" id="nagios-hostmodel-template">
+    <tr>
+        <td>
+            <div data-bind="css: getStatus(), html: getText()"></div>
+        </td>
+        <th class="nagiosHost"><a class="alert-link" data-bind="attr: { href: url, title: hostname }, text: hostname"></a></th>
+    </tr>
+</script>
+
+<script type="text/html" id="sonar-violationmodel-template">
+    <h3><a class="alert-link" data-bind="attr: { href: url, title: name }, text: name"></a></h3>
+    <table class="codeviolations">
+        <thead>
+        <tr>
+            <th>Blocker</th>
+            <th>Critical</th>
+            <th>Major</th>
+            <th>Minor</th>
+            <th>Info</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody data-bind="foreach: violationModels"><tr data-bind="template: {name: 'sonar-violation-template', foreach: violations}"></tr></tbody>
+    </table>
+</script>
+
+<script type="text/html" id="sonar-violation-template">
+    <td><div data-bind="css: status, text: count"></div></td>
+    <!-- ko if: ($index() === ($parent.violations.length - 1)) -->
+    <th><a data-bind="attr: { href: $parent.url, title: $parent.name }, text: $parent.name"></a></th>
+    <!-- /ko -->
+</script>
 </body>
 </html>
