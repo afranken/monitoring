@@ -49,6 +49,7 @@ table.jobmatrix * th a {
   padding: 10px 15px;
   margin-bottom: 0;
   background-color: #EEEEFF;
+  width: 100%;
 }
 
 th {
@@ -78,8 +79,4 @@ table * th a {
 
 .alert-disabled .alert-link {
   color: #666666;
-}
-
-.panel-default {
-  border-color: transparent;
 }
