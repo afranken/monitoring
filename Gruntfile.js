@@ -69,6 +69,14 @@ module.exports = function(grunt) {
             src:'*',
             dest:'<%= dir.target_js %>/vendor/'
           },
+          vendorjs_test: {
+            flatten: true,
+            expand: true,
+            filter: 'isFile',
+            cwd: '<%= dir.source_js %>/vendor/',
+            src:['*','!bootstrap*'],
+            dest:'<%= dir.target_test_js %>/main/typescript/vendor/'
+          },
           html: {
             flatten: true,
             expand: true,
@@ -128,11 +136,11 @@ module.exports = function(grunt) {
         jasmine: {
             run: {
                 // the code to be tested
-                src: ['<%= dir.target_test_js %>/main/ts/**/*.js'],
+                src: ['<%= dir.target_test_js %>/main/typescript/**/*.js'],
                 options: {
 
                     // the tests
-                    specs: '<%= dir.target_test_js %>/test/ts/**/*Spec.js',
+                    specs: '<%= dir.target_test_js %>/test/typescript/**/*Spec.js',
                     keepRunner: true, // useful for debugging
 
                     // -- additional JUnit compliant test reports that Jenkins is able to analyze
@@ -179,6 +187,11 @@ module.exports = function(grunt) {
                           			'.gruntgrunt-contrib-jasminegrunt-template-jasmine-istanbul\reporter.js':
                                         '.grunt/grunt-contrib-jasmine/grunt-template-jasmine-istanbul/reporter.js'
                                   }
+                                },
+                                paths: {
+                                  'Application': './target/js-test/main/typescript/Application',
+                                  'jquery': './target/js-test/main/typescript/vendor/jquery-2.0.3',
+                                  'knockout': './target/js-test/main/typescript/vendor/knockout-3.0.0'
                                 }
                             }
 //                        }
@@ -285,7 +298,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     // Default task(s).
-    grunt.registerTask('default', [/*'clean',*/ 'copy', 'typescript:compile'/*,'typescript:compile_test'*//*,'jasmine'*/,'requirejs:release']);
+    grunt.registerTask('default', [/*'clean',*/ 'copy', 'typescript:compile','typescript:compile_test','jasmine','requirejs:release']);
 
     // Task for running compilation/assembling stuff (corresponds to Maven's "compile" or "resources" lifecycle phase)
     grunt.registerTask('compile', ['typescript:compile','uglify']);
