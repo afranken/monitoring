@@ -46,10 +46,7 @@ class NagiosConnector extends ConnectorBase implements Connector {
     }
 
     public getHostInfoUrl(nagiosHostname:string,hostname:string):string {
-        return this.getConfiguration().getProtocol(nagiosHostname) +
-            nagiosHostname +
-            NagiosConnector.NAGIOS_HOSTINFO_PREFIX +
-            hostname;
+        return this.getUrl(nagiosHostname, NagiosConnector.NAGIOS_HOSTINFO_PREFIX + hostname);
     }
 }
 

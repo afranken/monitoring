@@ -30,7 +30,7 @@ class JenkinsConnector extends ConnectorBase implements Connector {
         jQuery.getJSON(apiUrl,
                 (json : JenkinsJsonResponse.JenkinsJson) => {
                     model.status(CssClasses.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
-                    model.style(JenkinsConnector.OPACITY+JenkinsConnector.calculateExpiration(json.lastBuild.timestamp, this.getConfiguration().getExpiry()));
+                    model.style(JenkinsConnector.OPACITY+JenkinsConnector.calculateExpiration(json.lastBuild.timestamp, this.getExpiry()));
                 })
             .fail(function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown, apiUrl);

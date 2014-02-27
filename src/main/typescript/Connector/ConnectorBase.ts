@@ -12,10 +12,10 @@ class ConnectorBase implements Connector {
 
     public getUrl(hostname:string, suffix?:string):string {
         var url:string = '';
-        url = this.getConfiguration().getProtocol(hostname);
+        url = this._configuration.getProtocol(hostname);
         url = url+hostname;
-        url = url+this.getConfiguration().getPort(hostname);
-        url = url+this.getConfiguration().getPrefix(hostname);
+        url = url+this._configuration.getPort(hostname);
+        url = url+this._configuration.getPrefix(hostname);
         if(suffix) {
             url = url+suffix;
         }
@@ -23,12 +23,15 @@ class ConnectorBase implements Connector {
         return url;
     }
 
-    public getConfiguration():Configuration {
-        return this._configuration;
+    public getExpiry():number {
+        return this._configuration.getExpiry();
     }
 
     public getRemoteData(model:MonitorModel):void {
-        throw "UNSUPPORTED, IMPLEMENT THIS METHOD";
+        throw {
+            name: 'Error',
+            message: 'UNSUPPORTED, IMPLEMENT THIS METHOD'
+        };
     }
 
 }

@@ -17,16 +17,19 @@ describe("ConnectorBase", function():void {
                 "port": "8080",
                 "prefix": "myprefix"
             }
-        ]
+        ],
+        "expiry": 888
     });
 
     var testling = new ConnectorBase(configuration);
 
     /**
-     * Test default values
+     * Test all methods
      */
-    it("BaseCase", function():void {
+    it("TestMethods", function():void {
+        expect(testling.getExpiry()).toBe(888);
         expect(testling.getUrl(_HOST)).toBe('https://myhost:8080/myprefix');
+        expect(()=>testling.getRemoteData(undefined)).toThrow('UNSUPPORTED, IMPLEMENT THIS METHOD');
     });
 
 });
