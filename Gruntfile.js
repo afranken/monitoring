@@ -152,49 +152,38 @@ module.exports = function(grunt) {
 
                     // -- Optional: code coverage reports
                     //   See https://github.com/maenu/grunt-template-jasmine-istanbul
-//                    template: require('grunt-template-jasmine-istanbul'),
-//                    templateOptions: {
-//
-//                        // options for jasmine-istanbul
-//                        coverage: '<%= dir.target_report %>/coverage/coverage.json',
-//                        report: [
-//                            {
-//                                type: 'html',
-//                                options: { dir: '<%= dir.target_report %>/coverage/html' }
-//                            },
-//                            {
-//                                // generate a cobertura-style report
-//                                type: 'cobertura',
-//                                options: { dir: '<%= dir.target_report %>/coverage/cobertura' }
-//                            },
-//                            {
-//                                type: 'text-summary'
-//                            }
-//                        ],
+                    template: require('grunt-template-jasmine-istanbul'),
+                    templateOptions: {
+
+                        // options for jasmine-istanbul
+                        coverage: '<%= dir.target_report %>/coverage/coverage.json',
+                        report: [
+                            {
+                                type: 'html',
+                                options: { dir: '<%= dir.target_report %>/coverage/html' }
+                            },
+                            {
+                                // generate a cobertura-style report
+                                type: 'cobertura',
+                                options: { dir: '<%= dir.target_report %>/coverage/cobertura' }
+                            },
+                            {
+                                type: 'text-summary'
+                            }
+                        ],
 
                         // Run jasmine in AMD/RequireJS mode (because all compiled files are AMD!)
                         //   https://github.com/cloudchen/grunt-template-jasmine-requirejs
                         template: require('grunt-template-jasmine-requirejs'),
                         templateOptions: {
                             requireConfig: {
-                                // as described in https://github.com/maenu/grunt-template-jasmine-istanbul:
-                                // use instrumented classes rather than the originals
-                                //baseUrl: '.grunt/grunt-contrib-jasmine/<%= target_test_js %>',
-                                // HACK: Fix nasty 'wrong uri' problem on windows. The location of the reporter.js
-                                //  contains backslashes that can't be resolved by requirejs
-                                map: {
-                                  '*': {
-                          			'.gruntgrunt-contrib-jasminegrunt-template-jasmine-istanbul\reporter.js':
-                                        '.grunt/grunt-contrib-jasmine/grunt-template-jasmine-istanbul/reporter.js'
-                                  }
-                                },
                                 paths: {
                                   'Application': './target/js-test/main/typescript/Application',
                                   'jquery': './target/js-test/main/typescript/vendor/jquery-2.0.3',
                                   'knockout': './target/js-test/main/typescript/vendor/knockout-3.0.0'
                                 }
                             }
-//                        }
+                        }
                     }
                 }
             }
