@@ -57,23 +57,23 @@ module.exports = function(grunt) {
             flatten: true,
             expand: true,
             filter: 'isFile',
-            cwd: '<%= dir.source_js %>/',
+            cwd: '<%= dir.source_js %>/js',
             src:'*',
-            dest:'<%= dir.target_js %>/'
+            dest:'<%= dir.target_js %>/js'
           },
           vendorjs: {
             flatten: true,
             expand: true,
             filter: 'isFile',
-            cwd: '<%= dir.source_js %>/vendor/',
+            cwd: '<%= dir.source_js %>/js/vendor/',
             src:'*',
-            dest:'<%= dir.target_js %>/vendor/'
+            dest:'<%= dir.target_js %>/js/vendor/'
           },
           vendorjs_test: {
             flatten: true,
             expand: true,
             filter: 'isFile',
-            cwd: '<%= dir.source_js %>/vendor/',
+            cwd: '<%= dir.source_js %>/js/vendor/',
             src:['*','!bootstrap*'],
             dest:'<%= dir.target_test_js %>/main/typescript/vendor/'
           },
@@ -86,11 +86,11 @@ module.exports = function(grunt) {
             dest:'<%= dir.target_js %>/'
           },
           css: {
-            flatten: true,
+//            flatten: true,
             expand: true,
             filter: 'isFile',
             cwd: '<%= dir.source_css %>',
-            src:'*',
+            src:['**','!bootstrap.css','!bootstrap-theme.css'],
             dest:'<%= dir.target_css %>/'
           }
         },
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
             // Compiles main code. Add declaration file files
             compile: {
                 src: ['<%= dir.source_ts %>/**/*.ts'],
-                dest: '<%= dir.target_js %>',
+                dest: '<%= dir.target_js %>/app',
                 options: {
                     base_path: '<%= dir.source_ts %>',
                     target: 'es5',
@@ -247,15 +247,15 @@ module.exports = function(grunt) {
 
             // this should be set to the path from your project root to the
             // root of your AMD JavaScript files.
-            baseUrl: '<%= dir.target_js %>',
+            baseUrl: '<%= dir.target_js %>/app',
 
             // where we want the compilation result to go
             out: '<%= dir.target_js %>/js/monitoring.min.js',
 
             paths: {
               'Application': './Application',
-              'jquery': './vendor/jquery-2.0.3',
-              'knockout': './vendor/knockout-3.0.0'
+              'jquery': '../js/vendor/jquery-2.0.3',
+              'knockout': '../js/vendor/knockout-3.0.0'
             }
           },
 
