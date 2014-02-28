@@ -113,7 +113,8 @@ module.exports = function(grunt) {
                 options: {
                     base_path: '<%= dir.source_ts %>',
                     target: 'es5',
-                    declaration: false,
+                    declaration: true,
+                    sourcemap: true,
                     comments: true,
                     module: 'amd'
                 }
@@ -287,7 +288,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     // Default task(s).
-    grunt.registerTask('default', [/*'clean',*/ 'copy', 'typescript:compile','typescript:compile_test','jasmine','requirejs:release']);
+    grunt.registerTask('default', [/*'clean',*/ 'copy', 'typescript:compile','typescript:compile_test','jasmine','requirejs:debug']);
 
     // Task for running compilation/assembling stuff (corresponds to Maven's "compile" or "resources" lifecycle phase)
     grunt.registerTask('compile', ['typescript:compile','uglify']);
