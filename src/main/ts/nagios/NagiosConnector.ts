@@ -29,7 +29,9 @@ class NagiosConnector extends ConnectorBase implements Connector {
             (json: NagiosJsonResponse.NagiosServices)=> {
                 this.updateModel(json,model);
             }
-        );
+        ).fail((jqXHR, textStatus, errorThrown) => {
+            console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model));
+        });
     }
 
     public updateModel(json : NagiosJsonResponse.NagiosServices, model:NagiosMonitorModel):void {
