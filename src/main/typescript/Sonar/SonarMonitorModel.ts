@@ -1,5 +1,6 @@
 /// <reference path="../vendor/knockout.d.ts" />
 import ko = require('knockout');
+import Types = require('../Types');
 import Config = require('../JsonInterfaces/Config');
 import SonarResponse = require('../JsonInterfaces/SonarResponse');
 import MonitorModel = require('../MonitorModel');
@@ -11,7 +12,6 @@ import SonarViolationModel = require('./SonarViolationModel');
  */
 class SonarMonitorModel implements MonitorModel {
 
-    public static TYPE: string = 'sonar';
     public url:KnockoutObservable<string> = ko.observable<string>();
     public violationModels: Array<SonarViolationModel> = [];
     public name:string;
@@ -39,7 +39,7 @@ class SonarMonitorModel implements MonitorModel {
     }
 
     public getType():string {
-        return SonarMonitorModel.TYPE;
+        return Types.SONAR;
     }
 
     public addViolations(moduleName:string, violations:SonarResponse.SonarJsons):void {

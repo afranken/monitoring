@@ -1,3 +1,4 @@
+import Types = require('../Types');
 import Config = require('../JsonInterfaces/Config');
 import MonitorModel = require('../MonitorModel');
 import Connector = require('../Connector/Connector');
@@ -11,7 +12,6 @@ import NagiosJsonResponse = require('../JsonInterfaces/NagiosResponse');
  */
 class NagiosMonitorModel implements MonitorModel {
 
-    public static TYPE:string = 'nagios';
     public hostmodels:Array<NagiosHostModel> = [];
     public id:string;
     public hostname:string;
@@ -32,20 +32,20 @@ class NagiosMonitorModel implements MonitorModel {
         var hostnames:string[] = id.split(',');
         hostnames.forEach((hostname:string) => {
             var nagiosHostModel = new NagiosHostModel(hostname);
-            nagiosHostModel.setUrl(this.connector.getHostInfoUrl(this.hostname,hostname));
+            nagiosHostModel.setUrl(this.connector.getHostInfoUrl(this.hostname, hostname));
             this.hostmodels.push(nagiosHostModel);
         });
     }
 
     public getType():string {
-        return NagiosMonitorModel.TYPE;
+        return Types.NAGIOS;
     }
 
     public addService(hostname:string, service:NagiosJsonResponse.NagiosService):void {
         this.hostmodels.forEach(hostmodel => {
-           if(hostmodel.hostname === hostname) {
-               hostmodel.addService(service);
-           }
+            if (hostmodel.hostname === hostname) {
+                hostmodel.addService(service);
+            }
         });
     }
 

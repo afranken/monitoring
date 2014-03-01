@@ -1,6 +1,7 @@
 /// <reference path="../vendor/jquery.d.ts" />
 /// <reference path="../vendor/knockout.d.ts" />
 import ko = require('knockout');
+import Types = require('../Types');
 import MonitorModel = require('../MonitorModel');
 import Connector = require('../Connector/Connector');
 import CssClasses = require('../CssClasses');
@@ -11,8 +12,6 @@ import Config = require('../JsonInterfaces/Config');
  * Model that represents a Jenkins Job
  */
 class JenkinsMonitorModel implements MonitorModel {
-
-    public static TYPE: string = 'jenkins';
 
     public name:string;
     public id:string;
@@ -35,7 +34,7 @@ class JenkinsMonitorModel implements MonitorModel {
     }
 
     public getType():string {
-        return JenkinsMonitorModel.TYPE;
+        return Types.JENKINS;
     }
 
 
