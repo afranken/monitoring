@@ -66,7 +66,7 @@ declare module Config {
                 /**
                  * host of the backend to retrieve data from. Overwrites Section#hostname
                  */
-                hostname: string;
+                hostname?: string;
                 /**
                  * default: jenkins. Also available: sonar, nagios.
                  */
