@@ -35,11 +35,11 @@
 
     
       require.config({
-                      "paths": {
-                        "Application": "./target/js-test/main/typescript/Application",
-                        "jquery": "./target/js-test/main/typescript/vendor/jquery-2.0.3",
-                        "knockout": "./target/js-test/main/typescript/vendor/knockout-3.0.0"
-                      }
+  "paths": {
+    "Application": "./target/js-test/main/typescript/Application",
+    "jquery": "./target/js-test/main/typescript/vendor/jquery-2.0.3",
+    "knockout": "./target/js-test/main/typescript/vendor/knockout-3.0.0"
+  }
 });
     
   </script>
@@ -116,7 +116,7 @@
       
     ],
     function(){
-      require(['target/js-test/test/typescript/Configuration/ConfigurationSpec.js','target/js-test/test/typescript/Connector/ConnectorBaseSpec.js','.grunt/grunt-contrib-jasmine/grunt-template-jasmine-istanbul/reporter.js','.grunt/grunt-contrib-jasmine/reporter.js'], function(){
+      require(['target/js-test/test/typescript/Configuration/ConfigurationSpec.js','target/js-test/test/typescript/Connector/ConnectorBaseSpec.js','target/js-test/test/typescript/Jenkins/JenkinsConnectorSpec.js','.grunt/grunt-contrib-jasmine/grunt-template-jasmine-istanbul/reporter.js','.grunt/grunt-contrib-jasmine/reporter.js'], function(){
         require(['.grunt/grunt-contrib-jasmine/jasmine-helper.js'], function(){
           // good to go! Our tests should already be running.
         })
