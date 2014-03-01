@@ -1,5 +1,5 @@
 import Connector = require('./Connector');
-import Configuration = require('../Configuration/Configuration');
+import Configuration = require('../configuration/Configuration');
 import MonitorModel = require('../MonitorModel');
 
 /**

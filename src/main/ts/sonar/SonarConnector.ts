@@ -1,9 +1,9 @@
 /// <reference path="../vendor/jquery.d.ts" />
 import jQuery = require('jquery');
-import SonarResponse = require('../JsonInterfaces/SonarResponse');
-import Connector = require('../Connector/Connector');
-import ConnectorBase = require('../Connector/ConnectorBase');
-import Configuration = require('../Configuration/Configuration');
+import SonarResponse = require('../jsonInterfaces/SonarResponse');
+import Connector = require('../connector/Connector');
+import ConnectorBase = require('../connector/ConnectorBase');
+import Configuration = require('../configuration/Configuration');
 import SonarMonitorModel = require('./SonarMonitorModel');
 import SonarViolation = require('./SonarViolation');
 

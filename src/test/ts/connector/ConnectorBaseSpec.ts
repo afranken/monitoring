@@ -1,6 +1,6 @@
 /// <reference path="../jasmine"/>
-import Configuration = require('../../../main/typescript/Configuration/Configuration');
-import ConnectorBase = require('../../../main/typescript/Connector/ConnectorBase');
+import Configuration = require('../../../main/ts/configuration/Configuration');
+import ConnectorBase = require('../../../main/ts/connector/ConnectorBase');
 
 /**
  * Tests {@link Configuration}

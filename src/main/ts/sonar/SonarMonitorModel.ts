@@ -1,10 +1,10 @@
 /// <reference path="../vendor/knockout.d.ts" />
 import ko = require('knockout');
 import Types = require('../Types');
-import Config = require('../JsonInterfaces/Config');
-import SonarResponse = require('../JsonInterfaces/SonarResponse');
+import Config = require('../jsonInterfaces/Config');
+import SonarResponse = require('../jsonInterfaces/SonarResponse');
 import MonitorModel = require('../MonitorModel');
-import Connector = require('../Connector/Connector');
+import Connector = require('../connector/Connector');
 import SonarViolationModel = require('./SonarViolationModel');
 
 /**

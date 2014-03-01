@@ -1,11 +1,11 @@
 import MonitorModel = require('./MonitorModel');
 import MonitorModels = require('./MonitorModels');
-import Connector = require('./Connector/Connector');
-import Configuration = require('./Configuration/Configuration');
-import JenkinsMonitorModel = require('./Jenkins/JenkinsMonitorModel');
-import NagiosMonitorModel = require('./Nagios/NagiosMonitorModel');
-import SonarMonitorModel = require('./Sonar/SonarMonitorModel');
-import Config = require('./JsonInterfaces/Config');
+import Connector = require('./connector/Connector');
+import Configuration = require('./configuration/Configuration');
+import JenkinsMonitorModel = require('./jenkins/JenkinsMonitorModel');
+import NagiosMonitorModel = require('./nagios/NagiosMonitorModel');
+import SonarMonitorModel = require('./sonar/SonarMonitorModel');
+import Config = require('./jsonInterfaces/Config');
 
 class SectionModel {
 

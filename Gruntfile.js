@@ -13,15 +13,15 @@ module.exports = function(grunt) {
             "source": "src",
 
             // location where TypeScript source files are located
-            "source_ts": "src/main/typescript",
+            "source_ts": "src/main/ts",
             // location where TypeScript/Jasmine test files are located
-            "source_test_ts": "src/test/typescript",
+            "source_test_ts": "src/test/ts",
 
             // location where all build files shall be placed
             "target": "target",
 
             //location where all javascript files are located
-            "source_js": "src/main/javascript",
+            "source_js": "src/main/js",
 
             //location where all css files are located
             "source_css": "src/main/css",
@@ -75,7 +75,7 @@ module.exports = function(grunt) {
             filter: 'isFile',
             cwd: '<%= dir.source_js %>/js/vendor/',
             src:['*','!bootstrap*'],
-            dest:'<%= dir.target_test_js %>/main/typescript/vendor/'
+            dest:'<%= dir.target_test_js %>/main/ts/vendor/'
           },
           html: {
             flatten: true,
@@ -137,11 +137,11 @@ module.exports = function(grunt) {
         jasmine: {
             run: {
                 // the code to be tested
-                src: ['<%= dir.target_test_js %>/main/typescript/**/*.js'],
+                src: ['<%= dir.target_test_js %>/main/ts/**/*.js'],
                 options: {
 
                     // the tests
-                    specs: '<%= dir.target_test_js %>/test/typescript/**/*Spec.js',
+                    specs: '<%= dir.target_test_js %>/test/ts/**/*Spec.js',
                     keepRunner: true, // useful for debugging
 
                     // -- additional JUnit compliant test reports that Jenkins is able to analyze
@@ -179,9 +179,9 @@ module.exports = function(grunt) {
                         templateOptions: {
                             requireConfig: {
                                 paths: {
-                                  'Application': './target/js-test/main/typescript/Application',
-                                  'jquery': './target/js-test/main/typescript/vendor/jquery-2.0.3',
-                                  'knockout': './target/js-test/main/typescript/vendor/knockout-3.0.0'
+                                  'Application': './target/js-test/main/ts/Application',
+                                  'jquery': './target/js-test/main/ts/vendor/jquery-2.0.3',
+                                  'knockout': './target/js-test/main/ts/vendor/knockout-3.0.0'
                                 }
                             }
                         }

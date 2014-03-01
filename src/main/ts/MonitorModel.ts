@@ -1,7 +1,7 @@
 /// <reference path="./vendor/knockout.d.ts" />
 import ko = require('knockout');
-import Config = require('./JsonInterfaces/Config');
-import Connector = require('./Connector/Connector');
+import Config = require('./jsonInterfaces/Config');
+import Connector = require('./connector/Connector');
 
 /**
  * Model used for rendering {@link Config.Monitor}

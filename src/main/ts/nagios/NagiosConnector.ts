@@ -1,10 +1,10 @@
 /// <reference path="../vendor/jquery.d.ts" />
 import jQuery = require('jquery');
-import Connector = require('../Connector/Connector');
-import ConnectorBase = require('../Connector/ConnectorBase');
+import Connector = require('../connector/Connector');
+import ConnectorBase = require('../connector/ConnectorBase');
 import MonitorModel = require('../MonitorModel');
-import NagiosJsonResponse = require('../JsonInterfaces/NagiosResponse');
-import Configuration = require('../Configuration/Configuration');
+import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
+import Configuration = require('../configuration/Configuration');
 import NagiosMonitorModel = require('./NagiosMonitorModel');
 
 class NagiosConnector extends ConnectorBase implements Connector {

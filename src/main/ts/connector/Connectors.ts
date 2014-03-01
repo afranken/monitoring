@@ -1,12 +1,12 @@
 import Connector = require('./Connector');
 import Types = require('../Types');
-import Configuration = require('../Configuration/Configuration');
-import SonarConnector = require('../Sonar/SonarConnector');
-import NagiosConnector = require('../Nagios/NagiosConnector');
-import JenkinsConnector = require('../Jenkins/JenkinsConnector');
-import SonarMonitorModel = require('../Sonar/SonarMonitorModel');
-import NagiosMonitorModel = require('../Nagios/NagiosMonitorModel');
-import JenkinsMonitorModel = require('../Jenkins/JenkinsMonitorModel');
+import Configuration = require('../configuration/Configuration');
+import SonarConnector = require('../sonar/SonarConnector');
+import NagiosConnector = require('../nagios/NagiosConnector');
+import JenkinsConnector = require('../jenkins/JenkinsConnector');
+import SonarMonitorModel = require('../sonar/SonarMonitorModel');
+import NagiosMonitorModel = require('../nagios/NagiosMonitorModel');
+import JenkinsMonitorModel = require('../jenkins/JenkinsMonitorModel');
 
 /**
  * This class contains static methods that help with {@link Connector}.

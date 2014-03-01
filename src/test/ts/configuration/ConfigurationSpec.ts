@@ -1,5 +1,5 @@
 /// <reference path="../jasmine"/>
-import Configuration = require('../../../main/typescript/Configuration/Configuration');
+import Configuration = require('../../../main/ts/configuration/Configuration');
 
 /**
  * Tests {@link Configuration}

@@ -1,12 +1,12 @@
 import Types = require('./Types');
 import MonitorModel = require('./MonitorModel');
-import Config = require('./JsonInterfaces/Config');
-import Configuration = require('./Configuration/Configuration');
-import Connector = require('./Connector/Connector');
-import Connectors = require('./Connector/Connectors');
-import SonarMonitorModel = require('./Sonar/SonarMonitorModel');
-import NagiosMonitorModel = require('./Nagios/NagiosMonitorModel');
-import JenkinsMonitorModel = require('./Jenkins/JenkinsMonitorModel');
+import Config = require('./jsonInterfaces/Config');
+import Configuration = require('./configuration/Configuration');
+import Connector = require('./connector/Connector');
+import Connectors = require('./connector/Connectors');
+import SonarMonitorModel = require('./sonar/SonarMonitorModel');
+import NagiosMonitorModel = require('./nagios/NagiosMonitorModel');
+import JenkinsMonitorModel = require('./jenkins/JenkinsMonitorModel');
 
 /**
  * This class contains static methods that help with MonitorModels.

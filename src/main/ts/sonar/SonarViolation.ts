@@ -1,7 +1,7 @@
 /// <reference path="../vendor/knockout.d.ts" />
 import ko = require('knockout');
-import Config = require('../JsonInterfaces/Config');
-import SonarResponse = require('../JsonInterfaces/SonarResponse');
+import Config = require('../jsonInterfaces/Config');
+import SonarResponse = require('../jsonInterfaces/SonarResponse');
 import CssClasses = require('../CssClasses');
 
 class SonarViolation {

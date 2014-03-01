@@ -1,11 +1,11 @@
 /// <reference path="../jasmine"/>
-import Configuration = require('../../../main/typescript/Configuration/Configuration');
-import MonitorModels = require('../../../main/typescript/MonitorModels');
-import JenkinsMonitorModel = require('../../../main/typescript/Jenkins/JenkinsMonitorModel');
-import JenkinsConnector = require('../../../main/typescript/Jenkins/JenkinsConnector');
-import JenkinsJsonResponse = require('../../../main/typescript/JsonInterfaces/JenkinsResponse');
-import ConnectorBase = require('../../../main/typescript/Connector/ConnectorBase');
-import Config = require('../../../main/typescript/JsonInterfaces/Config');
+import Configuration = require('../../../main/ts/configuration/Configuration');
+import MonitorModels = require('../../../main/ts/MonitorModels');
+import JenkinsMonitorModel = require('../../../main/ts/jenkins/JenkinsMonitorModel');
+import JenkinsConnector = require('../../../main/ts/jenkins/JenkinsConnector');
+import JenkinsJsonResponse = require('../../../main/ts/jsonInterfaces/JenkinsResponse');
+import ConnectorBase = require('../../../main/ts/connector/ConnectorBase');
+import Config = require('../../../main/ts/jsonInterfaces/Config');
 
 /**
  * Tests {@link Configuration}

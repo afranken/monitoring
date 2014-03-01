@@ -3,10 +3,10 @@
 import ko = require('knockout');
 import Types = require('../Types');
 import MonitorModel = require('../MonitorModel');
-import Connector = require('../Connector/Connector');
+import Connector = require('../connector/Connector');
 import CssClasses = require('../CssClasses');
 import JenkinsConnector = require('./JenkinsConnector');
-import Config = require('../JsonInterfaces/Config');
+import Config = require('../jsonInterfaces/Config');
 
 /**
  * Model that represents a Jenkins Job

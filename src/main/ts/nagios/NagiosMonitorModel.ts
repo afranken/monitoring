@@ -1,11 +1,11 @@
 import Types = require('../Types');
-import Config = require('../JsonInterfaces/Config');
+import Config = require('../jsonInterfaces/Config');
 import MonitorModel = require('../MonitorModel');
-import Connector = require('../Connector/Connector');
+import Connector = require('../connector/Connector');
 import CssClasses = require('../CssClasses');
 import NagiosConnector = require('./NagiosConnector');
 import NagiosHostModel = require('./NagiosHostModel');
-import NagiosJsonResponse = require('../JsonInterfaces/NagiosResponse');
+import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
 
 /**
  * Model that represents a list of Nagios hosts

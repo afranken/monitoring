@@ -36,9 +36,9 @@
     
       require.config({
   "paths": {
-    "Application": "./target/js-test/main/typescript/Application",
-    "jquery": "./target/js-test/main/typescript/vendor/jquery-2.0.3",
-    "knockout": "./target/js-test/main/typescript/vendor/knockout-3.0.0"
+    "Application": "./target/js-test/main/ts/Application",
+    "jquery": "./target/js-test/main/ts/vendor/jquery-2.0.3",
+    "knockout": "./target/js-test/main/ts/vendor/knockout-3.0.0"
   }
 });
     
@@ -49,74 +49,74 @@
     require([
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Application' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/Application' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Configuration/Configuration' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/CssClasses' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Connector/Connector' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/MonitorModel' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Connector/ConnectorBase' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/MonitorModels' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Connector/Connectors' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/SectionModel' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/CssClasses' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/Types' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Jenkins/JenkinsConnector' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/configuration/Configuration' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Jenkins/JenkinsMonitorModel' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/connector/Connector' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/MonitorModel' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/connector/ConnectorBase' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/MonitorModels' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/connector/Connectors' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Nagios/NagiosConnector' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/jenkins/JenkinsConnector' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Nagios/NagiosHostModel' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/jenkins/JenkinsMonitorModel' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Nagios/NagiosMonitorModel' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/nagios/NagiosConnector' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/SectionModel' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/nagios/NagiosHostModel' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Sonar/SonarConnector' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/nagios/NagiosMonitorModel' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Sonar/SonarMonitorModel' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/sonar/SonarConnector' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Sonar/SonarViolation' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/sonar/SonarMonitorModel' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Sonar/SonarViolationModel' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/sonar/SonarViolation' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/Types' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/sonar/SonarViolationModel' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/vendor/jquery-2.0.3' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/vendor/jquery-2.0.3' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/vendor/knockout-3.0.0' ,
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/vendor/knockout-3.0.0' ,
       
         
-        '.grunt/grunt-contrib-jasmine/target/js-test/main/typescript/vendor/require' 
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/vendor/require' 
       
     ],
     function(){
-      require(['target/js-test/test/typescript/Configuration/ConfigurationSpec.js','target/js-test/test/typescript/Connector/ConnectorBaseSpec.js','target/js-test/test/typescript/Jenkins/JenkinsConnectorSpec.js','target/js-test/test/typescript/nagios/NagiosConnectorSpec.js','.grunt/grunt-contrib-jasmine/grunt-template-jasmine-istanbul/reporter.js','.grunt/grunt-contrib-jasmine/reporter.js'], function(){
+      require(['target/js-test/test/ts/Jenkins/JenkinsConnectorSpec.js','target/js-test/test/ts/configuration/ConfigurationSpec.js','target/js-test/test/ts/connector/ConnectorBaseSpec.js','target/js-test/test/ts/nagios/NagiosConnectorSpec.js','.grunt/grunt-contrib-jasmine/grunt-template-jasmine-istanbul/reporter.js','.grunt/grunt-contrib-jasmine/reporter.js'], function(){
         require(['.grunt/grunt-contrib-jasmine/jasmine-helper.js'], function(){
           // good to go! Our tests should already be running.
         })
