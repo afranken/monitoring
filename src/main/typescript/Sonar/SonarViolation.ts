@@ -34,7 +34,7 @@ class SonarViolation {
         }
     }
 
-    public setCount(violations: SonarResponse.SonarJsons):void {
+    public setCount(violations: SonarResponse.Jsons):void {
         violations[0].msr.forEach(violation => {
             if(this.type === violation.key) {
                 //in some versions of Sonar, values will be formatted '789.0' instead of '789'

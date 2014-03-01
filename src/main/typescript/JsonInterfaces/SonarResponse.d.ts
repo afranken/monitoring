@@ -4,11 +4,11 @@
 
 declare module SonarJsonResponse {
 
-    interface SonarJsons {
-        responses: Array<SonarJson>;
+    interface Jsons {
+        responses: Array<Json>;
     }
 
-    interface SonarJson {
+    interface Json {
         id: number;
         name: string;
         date: Date;

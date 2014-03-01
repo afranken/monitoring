@@ -30,7 +30,7 @@ class SonarConnector extends ConnectorBase implements Connector {
 
             var apiUrl:string = baseUrl+ SonarConnector.SONAR_RESOURCE_VIOLATIONS_API_SUFFIX + moduleName;
             jQuery.getJSON(apiUrl,
-                function(violations: SonarResponse.SonarJsons) {
+                function(violations: SonarResponse.Jsons) {
                     var violationName = violations[0].name;
                     model.addName(moduleName,violationName);
                     model.addViolations(moduleName,violations);

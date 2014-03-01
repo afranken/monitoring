@@ -42,7 +42,7 @@ class SonarMonitorModel implements MonitorModel {
         return Types.SONAR;
     }
 
-    public addViolations(moduleName:string, violations:SonarResponse.SonarJsons):void {
+    public addViolations(moduleName:string, violations:SonarResponse.Jsons):void {
         this.violationModels.forEach(violationModel => {
             if(violationModel.moduleName === moduleName) {
                 violationModel.violations.forEach(violation => {
