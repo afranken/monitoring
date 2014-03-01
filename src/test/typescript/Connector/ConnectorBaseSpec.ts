@@ -8,6 +8,7 @@ import ConnectorBase = require('../../../main/typescript/Connector/ConnectorBase
 describe("ConnectorBase", function():void {
 
     var _HOST:string = "myhost";
+    var _EXPIRY:number = 888;
 
     var configuration: Configuration = new Configuration({
         "hosts": [
@@ -18,7 +19,7 @@ describe("ConnectorBase", function():void {
                 "prefix": "myprefix"
             }
         ],
-        "expiry": 888
+        "expiry": _EXPIRY
     });
 
     var testling = new ConnectorBase(configuration);
@@ -27,9 +28,9 @@ describe("ConnectorBase", function():void {
      * Test all methods
      */
     it("TestMethods", function():void {
-        expect(testling.getExpiry()).toBe(888);
+        expect(testling.getExpiry()).toBe(_EXPIRY);
         expect(testling.getUrl(_HOST)).toBe('https://myhost:8080/myprefix');
-        expect(()=>testling.getRemoteData(undefined)).toThrow('UNSUPPORTED, IMPLEMENT THIS METHOD');
+        expect(()=>testling.getRemoteData(undefined)).toThrow(ConnectorBase._MESSAGE);
     });
 
 });
