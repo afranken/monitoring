@@ -2,6 +2,7 @@
 /// <reference path="./vendor/knockout.d.ts" />
 import ko = require('knockout');
 import jQuery = require('jquery');
+import Types = require('./Types');
 import MonitorModel = require('./MonitorModel');
 import SectionModel = require('./SectionModel');
 import Config = require('./JsonInterfaces/Config');
@@ -16,26 +17,50 @@ import NagiosConnector = require('./Nagios/NagiosConnector');
 import NagiosMonitorModel = require('./Nagios/NagiosMonitorModel');
 
 /**
- * Main application class
+ * Main application class and Knockout ViewModel.
+ * Accessible in View Layer as "$root"
  */
 class ApplicationViewModel {
 
-    public title:string;
-    public configuration: Configuration;
-    public sections: Array<SectionModel> = [];
-    public connectors: { [type: string]: Connector; } = { };
+    private _title:string;
+    private _configuration: Configuration;
+    private _sections: Array<SectionModel> = [];
 
     constructor(private json:Config.Application) {
-        this.title = json.title;
+        this._title = json.title;
         if(json.configuration !== undefined) {
-            this.configuration = new Configuration(json.configuration);
+            this._configuration = new Configuration(json.configuration);
         }
 
-        this.init(json);
+        json.sections.forEach(section => {
+                this._sections.push(new SectionModel(section, this._configuration, undefined))
+            }
+        );
+
+        this.registerPulsateBindingHandler();
     }
 
     /**
-     * Trigger {@link MonitorModel.updateStatus()} in Knockout's "afterRender" binding.
+     * This method is only needed for Knockout view layer.
+     *
+     * @returns string
+     */
+    public getTitle() {
+        return this._title;
+    }
+
+    /**
+     * This method is only needed for Knockout view layer.
+     *
+     * @returns Array<SectionModel>
+     */
+    public getSections() {
+        return this._sections;
+    }
+
+    /**
+     * This method is only needed for Knockout view layer.
+     * Used to trigger {@link MonitorModel.updateStatus()} in Knockout's "afterRender" binding.
      *
      * @param node the currently rendered DOM node
      * @param monitor the MonitorModel that is rendered
@@ -45,23 +70,15 @@ class ApplicationViewModel {
     }
 
     /**
-     * Initialize
-     * @param json Config.Application
+     * This method is only needed for Knockout view layer.
+     *
+     * @returns Types
      */
-    private init(json: Config.Application) {
-
-        //create connectors
-        this.connectors[JenkinsMonitorModel.TYPE] = new JenkinsConnector(this.configuration);
-        this.connectors[SonarMonitorModel.TYPE] = new SonarConnector(this.configuration);
-        this.connectors[NagiosMonitorModel.TYPE] = new NagiosConnector(this.configuration);
-
-        json.sections.forEach(section => {
-                this.sections.push(new SectionModel(section, this.connectors, undefined))
-            }
-        );
-
-        this.registerPulsateBindingHandler();
+    public getTypes(): Types {
+        return Types;
     }
+
+    //==================================================================================================================
 
     /**
      * Register custom handler "pulsate".
@@ -81,7 +98,8 @@ class ApplicationViewModel {
                 if (~valueUnwrapped.indexOf(CssClasses.BUILDING)) {
                     //add pulsating effect for jobs that are currently running
                     for(var i = 0; i < 500; i++) {
-                        jQuery(element).animate({opacity: "toggle"}, {duration: 1500}).animate({opacity: "toggle"}, {duration: 1500});
+                        jQuery(element).animate({opacity: "toggle"}, {duration: 1500})
+                                       .animate({opacity: "toggle"}, {duration: 1500});
                     }
                 }
             }

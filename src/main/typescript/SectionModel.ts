@@ -1,5 +1,7 @@
 import MonitorModel = require('./MonitorModel');
+import MonitorModels = require('./MonitorModels');
 import Connector = require('./Connector/Connector');
+import Configuration = require('./Configuration/Configuration');
 import JenkinsMonitorModel = require('./Jenkins/JenkinsMonitorModel');
 import NagiosMonitorModel = require('./Nagios/NagiosMonitorModel');
 import SonarMonitorModel = require('./Sonar/SonarMonitorModel');
@@ -13,36 +15,26 @@ class SectionModel {
     public monitorModels: Array<MonitorModel> = [];
     public sections: Array<SectionModel> = [];
 
-    constructor(private section:Config.Section, private connectors: {[type: string]: Connector}, private hostname: string) {
+    constructor(private section:Config.Section, private configuration:Configuration, private hostname: string) {
         this.title = section.title;
         this.url = section.url;
         this.description = section.description;
         this.hostname = section.hostname !== undefined ? section.hostname : hostname;
 
-        this.init(section, connectors);
+        this.init(section, configuration);
     }
 
-    private init(section: Config.Section, connectors: {[type: string]: Connector}) {
+    private init(section: Config.Section, configuration:Configuration) {
         if(section.sections !== undefined) {
             section.sections.forEach(subSection => {
-                    var sectionViewModel = new SectionModel(subSection, connectors, this.hostname);
-                    this.sections.push(sectionViewModel);
+                    this.sections.push(new SectionModel(subSection, configuration, this.hostname));
                 }
             );
         }
 
         if(section.monitors !== undefined) {
             section.monitors.forEach(monitor => {
-                    var monitorModel;
-                    if(monitor.type === undefined || monitor.type === JenkinsMonitorModel.TYPE) {
-                        monitorModel = new JenkinsMonitorModel(monitor, connectors[JenkinsMonitorModel.TYPE], this.hostname);
-                    } else if(monitor.type === NagiosMonitorModel.TYPE) {
-                        monitorModel = new NagiosMonitorModel(monitor, connectors[NagiosMonitorModel.TYPE], this.hostname);
-                    } else if(monitor.type === SonarMonitorModel.TYPE) {
-                        monitorModel = new SonarMonitorModel(monitor, connectors[SonarMonitorModel.TYPE], this.hostname);
-                    }
-
-                    this.monitorModels.push(monitorModel);
+                    this.monitorModels.push(MonitorModels.createModel(monitor, configuration, this.hostname));
                 }
             );
         }
