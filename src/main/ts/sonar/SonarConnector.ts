@@ -25,20 +25,31 @@ class SonarConnector extends ConnectorBase implements Connector {
         moduleNames.forEach(moduleName => {
             var baseUrl = this.getUrl(model.hostname);
 
-            var moduleUrl:string = baseUrl + SonarConnector.SONAR_DRILLDOWN_VIOLATIONS_SUFFIX + moduleName;
-            model.addUrl(moduleName, moduleUrl);
+            model.addUrl(moduleName, this.getModuleUrl(model,moduleName));
 
             var apiUrl:string = baseUrl+ SonarConnector.SONAR_RESOURCE_VIOLATIONS_API_SUFFIX + moduleName;
-            jQuery.getJSON(apiUrl,
-                function(violations: SonarResponse.Jsons) {
-                    var violationName = violations[0].name;
-                    model.addName(moduleName,violationName);
-                    model.addViolations(moduleName,violations);
+            jQuery.getJSON(this.getApiUrl(model,moduleName),
+                (violations: SonarResponse.Jsons) => {
+                    SonarConnector.updateModel(violations, model, moduleName);
                 })
-                .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR, textStatus, errorThrown, apiUrl);
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model,moduleName));
                 });
         });
+    }
+
+    public static updateModel(json:SonarResponse.Jsons, model:SonarMonitorModel, moduleName:string):void {
+        var violationName = json[0].name;
+        model.addName(moduleName,violationName);
+        model.addViolations(moduleName,json);
+    }
+
+    public getApiUrl(model:SonarMonitorModel, moduleName:string):string {
+        return this.getUrl(model.hostname) + SonarConnector.SONAR_RESOURCE_VIOLATIONS_API_SUFFIX + moduleName
+    }
+
+    public getModuleUrl(model:SonarMonitorModel, moduleName:string):string {
+        return this.getUrl(model.hostname) + SonarConnector.SONAR_DRILLDOWN_VIOLATIONS_SUFFIX + moduleName;
     }
 
 }
