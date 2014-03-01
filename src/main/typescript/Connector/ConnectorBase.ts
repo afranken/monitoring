@@ -7,6 +7,8 @@ import MonitorModel = require('../MonitorModel');
  */
 class ConnectorBase implements Connector {
 
+    public static _MESSAGE:string = 'UNSUPPORTED, IMPLEMENT THIS METHOD';
+
     private _configuration: Configuration;
 
     constructor(configuration: Configuration) {
@@ -48,7 +50,7 @@ class ConnectorBase implements Connector {
     public getRemoteData(model:MonitorModel):void {
         throw {
             name: 'Error',
-            message: 'UNSUPPORTED, IMPLEMENT THIS METHOD'
+            message: ConnectorBase._MESSAGE
         };
     }
 

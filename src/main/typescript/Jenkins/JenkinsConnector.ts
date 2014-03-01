@@ -38,17 +38,44 @@ class JenkinsConnector extends ConnectorBase implements Connector {
         'lastBuild[timestamp,actions[lastBuiltRevision[branch[SHA1,name]],failCount,skipCount,totalCount]]&depth=1';
 
     public getRemoteData(model:JenkinsMonitorModel):void {
-        var jobUrl:string = this.getUrl(model.hostname, JenkinsConnector.JOB_PREFIX + model.id);
-        model.url(jobUrl);
-        var apiUrl:string = jobUrl + JenkinsConnector.JSONP_SUFFIX + JenkinsConnector.JOB_STATUS_SUFFIX;
+        var apiUrl:string = this.getApiUrl(model);
+
         jQuery.getJSON(apiUrl,
                 (json : JenkinsJsonResponse.JenkinsJson) => {
-                    model.status(CssClasses.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
-                    model.style(JenkinsConnector.OPACITY+JenkinsConnector.calculateExpiration(json.lastBuild.timestamp, this.getExpiry()));
+                    this.updateModel(json, model);
                 })
             .fail(function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown, apiUrl);
             });
+    }
+
+    /**
+     * Update Model with data retrieved from remote
+     * @param json
+     * @param model
+     */
+    private updateModel(json : JenkinsJsonResponse.JenkinsJson, model:JenkinsMonitorModel):void{
+        model.url(this.getJobUrl(model));
+        model.status(CssClasses.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
+        model.style(JenkinsConnector.OPACITY+JenkinsConnector.calculateExpiration(json.lastBuild.timestamp, this.getExpiry()));
+    }
+
+    /**
+     * Get Job URL for given model.
+     * @param model
+     * @returns string
+     */
+    public getJobUrl(model:JenkinsMonitorModel):string {
+        return this.getUrl(model.hostname, JenkinsConnector.JOB_PREFIX + model.id);
+    }
+
+    /**
+     *
+     * @param model
+     * @returns string
+     */
+    public getApiUrl(model:JenkinsMonitorModel):string {
+        return this.getJobUrl(model) + JenkinsConnector.JSONP_SUFFIX + JenkinsConnector.JOB_STATUS_SUFFIX;
     }
 
     /**
