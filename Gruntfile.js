@@ -57,7 +57,7 @@ module.exports = function(grunt) {
             flatten: true,
             expand: true,
             filter: 'isFile',
-            cwd: '<%= dir.source_js %>/js',
+            cwd: '<%= dir.source_js %>',
             src:'*',
             dest:'<%= dir.target_js %>/js'
           },
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
             flatten: true,
             expand: true,
             filter: 'isFile',
-            cwd: '<%= dir.source_js %>/js/vendor/',
+            cwd: '<%= dir.source_js %>/vendor/',
             src:'*',
             dest:'<%= dir.target_js %>/js/vendor/'
           },
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
             flatten: true,
             expand: true,
             filter: 'isFile',
-            cwd: '<%= dir.source_js %>/js/vendor/',
+            cwd: '<%= dir.source_js %>/vendor/',
             src:['*','!bootstrap*'],
             dest:'<%= dir.target_test_js %>/main/ts/vendor/'
           },
