@@ -38,14 +38,12 @@ class JenkinsConnector extends ConnectorBase implements Connector {
         'lastBuild[timestamp,actions[lastBuiltRevision[branch[SHA1,name]],failCount,skipCount,totalCount]]&depth=1';
 
     public getRemoteData(model:JenkinsMonitorModel):void {
-        var apiUrl:string = this.getApiUrl(model);
-
-        jQuery.getJSON(apiUrl,
+        jQuery.getJSON(this.getApiUrl(model),
                 (json : JenkinsJsonResponse.JenkinsJson) => {
                     this.updateModel(json, model);
                 })
-            .fail(function (jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR, textStatus, errorThrown, apiUrl);
+            .fail((jqXHR, textStatus, errorThrown) => {
+                console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model));
             });
     }
 
