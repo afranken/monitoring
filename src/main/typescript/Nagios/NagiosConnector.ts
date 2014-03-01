@@ -25,24 +25,34 @@ class NagiosConnector extends ConnectorBase implements Connector {
     private static NAGIOS_HOSTINFO_PREFIX = '/nagios/cgi-bin/extinfo.cgi?type=1&host=';
 
     public getRemoteData(model:NagiosMonitorModel):void {
-        var hostnames: string[] = model.id.split(',');
-        var apiUrl: string = this.getUrl(model.hostname,
-            NagiosConnector.NAGIOS_PREFIX +
-            NagiosConnector.NAGIOS_HOST_SUFFIX +
-            NagiosConnector.DISPLAY_ALL_HOSTS +
-            NagiosConnector.NAGIOS_JSONP_SUFFIX);
+        jQuery.getJSON(this.getApiUrl(model),
+            (json: NagiosJsonResponse.NagiosServices)=> {
+                this.updateModel(json,model);
+            }
+        );
+    }
 
-        jQuery.getJSON(apiUrl,function(json: NagiosJsonResponse.NagiosServices) {
-
-            //--------- iterate over JSON response, save services that should be displayed
-            json.services.forEach((service:NagiosJsonResponse.NagiosService)=>{
-                if(service.service_host !== undefined && service.service_host.host_name !== undefined) {
-                    if(hostnames.indexOf(service.service_host.host_name) > -1) {
-                        model.addService(service.service_host.host_name,service);
-                    }
+    public updateModel(json : NagiosJsonResponse.NagiosServices, model:NagiosMonitorModel):void {
+        //--------- iterate over JSON response, save services that should be displayed
+        json.services.forEach((service:NagiosJsonResponse.NagiosService)=>{
+            if(service.service_host !== undefined && service.service_host.host_name !== undefined) {
+                if(~NagiosConnector.getHostnames(model).indexOf(service.service_host.host_name)) {
+                    model.addService(service.service_host.host_name,service);
                 }
-            });
+            }
         });
+    }
+
+    public getApiUrl(model:NagiosMonitorModel):string {
+        return this.getUrl(model.hostname,
+            NagiosConnector.NAGIOS_PREFIX +
+                NagiosConnector.NAGIOS_HOST_SUFFIX +
+                NagiosConnector.DISPLAY_ALL_HOSTS +
+                NagiosConnector.NAGIOS_JSONP_SUFFIX);
+    }
+
+    public static getHostnames(model:NagiosMonitorModel):Array<string> {
+        return model.id.split(',');
     }
 
     public getHostInfoUrl(nagiosHostname:string,hostname:string):string {
