@@ -6,6 +6,7 @@ import SonarConnector = require('../../../main/ts/sonar/SonarConnector');
 import SonarJsonResponse = require('../../../main/ts/jsonInterfaces/SonarResponse');
 import ConnectorBase = require('../../../main/ts/connector/ConnectorBase');
 import Config = require('../../../main/ts/jsonInterfaces/Config');
+import Types = require('../../../main/ts/Types');
 
 /**
  * Tests {@link Configuration}
@@ -33,7 +34,8 @@ describe("SonarConnector", function():void {
     var monitorJson: Config.Monitor = {
         "name": _NAME,
         "id": _ID,
-        "hostname": _HOST
+        "hostname": _HOST,
+        "type": Types.SONAR
     };
 
     var monitor:SonarMonitorModel = <SonarMonitorModel>MonitorModels.createModel(monitorJson, configuration, _HOST);

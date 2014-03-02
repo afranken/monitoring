@@ -6,6 +6,7 @@ import NagiosConnector = require('../../../main/ts/nagios/NagiosConnector');
 import NagiosJsonResponse = require('../../../main/ts/jsonInterfaces/NagiosResponse');
 import ConnectorBase = require('../../../main/ts/connector/ConnectorBase');
 import Config = require('../../../main/ts/jsonInterfaces/Config');
+import Types = require('../../../main/ts/Types');
 
 /**
  * Tests {@link Configuration}
@@ -33,12 +34,13 @@ describe("NagiosConnector", function():void {
     var monitorJson: Config.Monitor = {
         "name": _NAME,
         "id": _ID,
-        "hostname": _HOST
+        "hostname": _HOST,
+        "type": Types.NAGIOS
     };
 
     var monitor:NagiosMonitorModel = <NagiosMonitorModel>MonitorModels.createModel(monitorJson, configuration, _HOST);
 
-    var testling = new NagiosConnector(configuration);
+    var testling:NagiosConnector = new NagiosConnector(configuration);
 
     /**
      * Test all methods

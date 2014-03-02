@@ -6,6 +6,7 @@ import JenkinsConnector = require('../../../main/ts/jenkins/JenkinsConnector');
 import JenkinsJsonResponse = require('../../../main/ts/jsonInterfaces/JenkinsResponse');
 import ConnectorBase = require('../../../main/ts/connector/ConnectorBase');
 import Config = require('../../../main/ts/jsonInterfaces/Config');
+import Types = require('../../../main/ts/Types');
 
 /**
  * Tests {@link Configuration}
@@ -33,12 +34,13 @@ describe("JenkinsConnector", function():void {
     var monitorJson: Config.Monitor = {
         "name": _NAME,
         "id": _ID,
-        "hostname": _HOST
+        "hostname": _HOST,
+        "type": Types.JENKINS
     };
 
     var monitor:JenkinsMonitorModel = <JenkinsMonitorModel>MonitorModels.createModel(monitorJson, configuration, _HOST);
 
-    var testling = new JenkinsConnector(configuration);
+    var testling:JenkinsConnector = new JenkinsConnector(configuration);
 
     /**
      * Test all methods
