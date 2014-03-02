@@ -67,9 +67,9 @@
     </div>
     <!-- /ko -->
     <!-- ko if: $root.getTypes().isNagios(getType()) -->
-    <h3 data-bind="text: name"></h3>
+    <h3 data-bind="text: getName()"></h3>
     <table>
-        <tbody data-bind="template: { name: 'nagios-hostmodel-template', foreach: hostmodels }"></tbody>
+        <tbody data-bind="template: { name: 'nagios-hostmodel-template', foreach: getHostmodels() }"></tbody>
     </table>
     <!-- /ko -->
     <!-- ko if: $root.getTypes().isSonar(getType()) -->
@@ -82,7 +82,7 @@
         <td>
             <div data-bind="css: getStatus(), html: getText()"></div>
         </td>
-        <th class="nagiosHost"><a class="alert-link" data-bind="attr: { href: url, title: hostname }, text: hostname"></a></th>
+        <th class="nagiosHost"><a class="alert-link" data-bind="attr: { href: getUrl(), title: getHostname() }, text: getHostname()"></a></th>
     </tr>
 </script>
 

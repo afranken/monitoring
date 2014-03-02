@@ -46,7 +46,7 @@ class NagiosConnector extends ConnectorBase implements Connector {
     }
 
     public getApiUrl(model:NagiosMonitorModel):string {
-        return this.getUrl(model.hostname,
+        return this.getUrl(model.getHostname(),
             NagiosConnector.NAGIOS_PREFIX +
                 NagiosConnector.NAGIOS_HOST_SUFFIX +
                 NagiosConnector.DISPLAY_ALL_HOSTS +
@@ -54,7 +54,7 @@ class NagiosConnector extends ConnectorBase implements Connector {
     }
 
     public static getHostnames(model:NagiosMonitorModel):Array<string> {
-        return model.id.split(',');
+        return model.getId().split(',');
     }
 
     public getHostInfoUrl(nagiosHostname:string,hostname:string):string {

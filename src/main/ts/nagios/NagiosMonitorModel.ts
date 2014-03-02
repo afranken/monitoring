@@ -12,18 +12,17 @@ import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
  */
 class NagiosMonitorModel implements MonitorModel {
 
-    public hostmodels:Array<NagiosHostModel> = [];
-    public id:string;
-    public hostname:string;
-
-    private name:string;
-    private connector:NagiosConnector;
+    private _hostmodels:Array<NagiosHostModel> = [];
+    private _id:string;
+    private _hostname:string;
+    private _name:string;
+    private _connector:NagiosConnector;
 
     constructor(job:Config.Monitor, connector:Connector, hostname:string) {
-        this.name = job.name;
-        this.id = job.id;
-        this.connector = <NagiosConnector>connector;
-        this.hostname = job.hostname !== undefined ? job.hostname : hostname;
+        this._name = job.name;
+        this._id = job.id;
+        this._connector = <NagiosConnector>connector;
+        this._hostname = job.hostname !== undefined ? job.hostname : hostname;
 
         this.init(job.id);
     }
@@ -32,9 +31,25 @@ class NagiosMonitorModel implements MonitorModel {
         var hostnames:string[] = id.split(',');
         hostnames.forEach((hostname:string) => {
             var nagiosHostModel = new NagiosHostModel(hostname);
-            nagiosHostModel.setUrl(this.connector.getHostInfoUrl(this.hostname, hostname));
-            this.hostmodels.push(nagiosHostModel);
+            nagiosHostModel.setUrl(this._connector.getHostInfoUrl(this._hostname, hostname));
+            this._hostmodels.push(nagiosHostModel);
         });
+    }
+
+    public getId():string {
+        return this._id;
+    }
+
+    public getHostname():string {
+        return this._hostname;
+    }
+
+    public getName():string {
+        return this._name;
+    }
+
+    public getHostmodels():Array<NagiosHostModel> {
+        return this._hostmodels;
     }
 
     public getType():string {
@@ -42,15 +57,15 @@ class NagiosMonitorModel implements MonitorModel {
     }
 
     public addService(hostname:string, service:NagiosJsonResponse.NagiosService):void {
-        this.hostmodels.forEach(hostmodel => {
-            if (hostmodel.hostname === hostname) {
+        this._hostmodels.forEach(hostmodel => {
+            if (hostmodel.getHostname() === hostname) {
                 hostmodel.addService(service);
             }
         });
     }
 
     public updateStatus():void {
-        this.connector.getRemoteData(this);
+        this._connector.getRemoteData(this);
     }
 
 

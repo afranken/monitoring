@@ -16,54 +16,60 @@ class NagiosHostModel {
     public static SERVICES_WARNING: string = 'There were WARNINGs.';
     public static SERVICES_CRITICAL: string = 'There were CRITICALs.';
 
-    private status:KnockoutObservable<string> = ko.observable<string>();
-    private text:KnockoutObservable<string> = ko.observable<string>();
-    private url:KnockoutObservable<string> = ko.observable<string>();
-    private services:KnockoutObservableArray<NagiosJsonResponse.NagiosService> = ko.observableArray<NagiosJsonResponse.NagiosService>();
+    private _hostname:string;
+    private _status:KnockoutObservable<string> = ko.observable<string>();
+    private _text:KnockoutObservable<string> = ko.observable<string>();
+    private _url:KnockoutObservable<string> = ko.observable<string>();
+    private _services:KnockoutObservableArray<NagiosJsonResponse.NagiosService> = ko.observableArray<NagiosJsonResponse.NagiosService>();
 
-    constructor(public hostname:string) {
-        this.status(CssClasses.BASIC_CLASSES);
-        this.text('');
-        this.url('');
+    constructor(hostname:string) {
+        this._status(CssClasses.BASIC_CLASSES);
+        this._text('');
+        this._url('');
+        this._hostname = hostname;
+    }
+
+    public getHostname():string {
+        return this._hostname;
     }
 
     public getUrl(): string {
-        return this.url();
+        return this._url();
     }
 
     public setUrl(url:string) {
-        this.url(url);
+        this._url(url);
     }
 
     public getText(): string {
-        return this.text() === '' ? NagiosHostModel.SERVICES_OK : this.text();
+        return this._text() === '' ? NagiosHostModel.SERVICES_OK : this._text();
     }
 
     private setText(text: string): void {
-        if(this.text() === '') {
-            this.text(text);
+        if(this._text() === '') {
+            this._text(text);
         } else {
-            this.text(this.text() + '<br/>' + text);
+            this._text(this._text() + '<br/>' + text);
         }
     }
 
     public getStatus(): string {
-        return this.status() === CssClasses.BASIC_CLASSES ? CssClasses.BASIC_CLASSES + CssClasses.SUCCESS : this.status() + CssClasses.BASIC_CLASSES;
+        return this._status() === CssClasses.BASIC_CLASSES ? this._status() : this._status() + CssClasses.BASIC_CLASSES;
     }
 
     private setStatus(status: string): void {
         if(status === CssClasses.FAILURE) {
             //always overwrite status with FAILURE
-            this.status(status);
-        } else if(status === CssClasses.WARNING && this.status() !== CssClasses.FAILURE) {
-            this.status(status);
-        } else if(status === CssClasses.SUCCESS && this.status() !== CssClasses.FAILURE && this.status() !== CssClasses.WARNING) {
-            this.status(status);
+            this._status(status);
+        } else if(status === CssClasses.WARNING && this._status() !== CssClasses.FAILURE) {
+            this._status(status);
+        } else if(status === CssClasses.SUCCESS && this._status() !== CssClasses.FAILURE && this._status() !== CssClasses.WARNING) {
+            this._status(status);
         }
     }
 
     public addService(service: NagiosJsonResponse.NagiosService){
-        this.services.push(service);
+        this._services.push(service);
         var status = service.service_status;
         if (status === NagiosHostModel.STATUS_OK) {
             this.setStatus(CssClasses.SUCCESS);
