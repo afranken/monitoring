@@ -53,9 +53,9 @@ class JenkinsConnector extends ConnectorBase implements Connector {
      * @param model
      */
     private updateModel(json : JenkinsJsonResponse.JenkinsJson, model:JenkinsMonitorModel):void{
-        model.url(this.getJobUrl(model));
-        model.status(CssClasses.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
-        model.style(JenkinsConnector.OPACITY+JenkinsConnector.calculateExpiration(json.lastBuild.timestamp, this.getExpiry()));
+        model._url(this.getJobUrl(model));
+        model._status(CssClasses.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
+        model._style(JenkinsConnector.OPACITY+JenkinsConnector.calculateExpiration(json.lastBuild.timestamp, this.getExpiry()));
     }
 
     /**
@@ -64,7 +64,7 @@ class JenkinsConnector extends ConnectorBase implements Connector {
      * @returns string
      */
     public getJobUrl(model:JenkinsMonitorModel):string {
-        return this.getUrl(model.hostname, JenkinsConnector.JOB_PREFIX + model.id);
+        return this.getUrl(model.getHostname(), JenkinsConnector.JOB_PREFIX + model.getId());
     }
 
     /**

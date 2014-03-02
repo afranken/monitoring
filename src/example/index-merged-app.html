@@ -48,8 +48,8 @@
 <script type="text/html" id="monitor-template">
     <!-- ko if: $root.getTypes().isJenkins(getType()) -->
     <div class="panel panel-default">
-        <div data-bind="attr: {style: style}, css: status, pulsate: status"><a class="alert-link" data-bind="attr: { href: url, title: name }, text: name"></a></div>
-        <div class="panel-collapse collapse">asdf</div>
+        <div data-bind="attr: {style: getStyle()}, css: getStatus(), pulsate: getStatus()"><a class="alert-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a></div>
+        <div class="panel-collapse collapse">render more information here.</div>
     </div>
     <!-- /ko -->
     <!-- ko if: $root.getTypes().isNagios(getType()) -->

@@ -13,30 +13,53 @@ import Config = require('../jsonInterfaces/Config');
  */
 class JenkinsMonitorModel implements MonitorModel {
 
-    public name:string;
-    public id:string;
-    public hostname:string;
-    public status:KnockoutObservable<string> = ko.observable<string>();
-    public style:KnockoutObservable<string> = ko.observable<string>();
-    public url:KnockoutObservable<string> = ko.observable<string>();
+    private _name:string;
+    private _id:string;
+    private _hostname:string;
+    public _status:KnockoutObservable<string> = ko.observable<string>();
+    public _style:KnockoutObservable<string> = ko.observable<string>();
+    public _url:KnockoutObservable<string> = ko.observable<string>();
 
     constructor(private job:Config.Monitor, private connector:Connector, hostname:string) {
-        this.name = job.name;
-        this.id = job.id;
-        this.hostname = job.hostname !== undefined ? job.hostname : hostname;
-        this.status(CssClasses.BASIC_CLASSES);
-        this.style(JenkinsConnector.BASIC_STYLE);
-        this.url('');
+        this._name = job.name;
+        this._id = job.id;
+        this._hostname = job.hostname !== undefined ? job.hostname : hostname;
+        this._status(CssClasses.BASIC_CLASSES);
+        this._style(JenkinsConnector.BASIC_STYLE);
+        this._url('');
     }
 
     public updateStatus():void {
         this.connector.getRemoteData(this);
     }
 
+    public getName():string {
+        return this._name;
+    }
+
+    public getId():string {
+        return this._id;
+    }
+
+    public getHostname():string {
+        return this._hostname;
+    }
+
+    public getStatus():string {
+        return this._status();
+    }
+
+    public getStyle():string {
+        return this._style();
+    }
+
+    public getUrl():string {
+        return this._url();
+    }
+
     public getType():string {
         return Types.JENKINS;
     }
-
 
 }
 
