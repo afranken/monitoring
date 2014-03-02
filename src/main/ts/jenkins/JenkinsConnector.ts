@@ -12,12 +12,6 @@ import JenkinsJsonResponse = require('../jsonInterfaces/JenkinsResponse');
  */
 class JenkinsConnector extends ConnectorBase implements Connector {
 
-    private static OPACITY:string = 'opacity: ';
-    /**
-     * Default: completely visible
-     */
-    public static BASIC_STYLE:string = JenkinsConnector.OPACITY +'1.0';
-
     private static JOB_PREFIX: string = '/job/';
 
     /**
@@ -40,22 +34,13 @@ class JenkinsConnector extends ConnectorBase implements Connector {
     public getRemoteData(model:JenkinsMonitorModel):void {
         jQuery.getJSON(this.getApiUrl(model),
                 (json : JenkinsJsonResponse.JenkinsJson) => {
-                    this.updateModel(json, model);
+                    JenkinsConnector.updateModel(json,model);
                 })
             .fail((jqXHR, textStatus, errorThrown) => {
-                console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model));
+                if(console) {
+                    console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model));
+                }
             });
-    }
-
-    /**
-     * Update Model with data retrieved from remote
-     * @param json
-     * @param model
-     */
-    private updateModel(json : JenkinsJsonResponse.JenkinsJson, model:JenkinsMonitorModel):void{
-        model._url(this.getJobUrl(model));
-        model._status(CssClasses.BASIC_CLASSES + JenkinsConnector.translateColor(json.color));
-        model._style(JenkinsConnector.OPACITY+JenkinsConnector.calculateExpiration(json.lastBuild.timestamp, this.getExpiry()));
     }
 
     /**
@@ -76,66 +61,15 @@ class JenkinsConnector extends ConnectorBase implements Connector {
         return this.getJobUrl(model) + JenkinsConnector.JSONP_SUFFIX + JenkinsConnector.JOB_STATUS_SUFFIX;
     }
 
-    /**
-     * Get expiration based on the amount of time that passed between the {@link JenkinsJsonResponse.LastBuild.timestamp} and now.
-     *
-     * @param expiry time in hours
-     * @param buildTimestamp
-     *
-     * @returns number between 0.25 (=expired) and 1.0 (job ran recently)
-     */
-    private static calculateExpiration(buildTimestamp: number, expiry: number):number {
-
-        var expireStyle:number;
-
-        //calculate timestamp and expiration
-        var nowTimestamp:number = new Date().getTime();
-        var ageMinutes:number = Math.round(nowTimestamp - buildTimestamp) / (1000 * 60);
-        var expiredPercent = 1 - (ageMinutes / (expiry * 60));  // 0=expired, 1=fresh
-
-        if (expiredPercent < 0) {
-
-            // age has exceeded ttl
-            expireStyle = 0.25;
-        }
-        else {
-
-            // age is within ttl
-            expireStyle = 0.5 + (expiredPercent * 0.5);
-        }
-
-        return expireStyle;
-    }
+    //==================================================================================================================
 
     /**
-     * Translate colors from Jenkins to twitter bootstrap styles
-     * @param color
-     * @returns string
+     * Update Model with data retrieved from remote
+     * @param json
+     * @param model
      */
-    private static translateColor(color:string):string {
-        var colorTranslation:string;
-        if (color === 'blue') {
-            colorTranslation = CssClasses.SUCCESS;
-        }
-        else if (color === 'red') {
-            colorTranslation = CssClasses.FAILURE;
-        }
-        else if (color === 'yellow') {
-            colorTranslation = CssClasses.WARNING;
-        }
-        else if (color === 'yellow_anime') {
-            colorTranslation = CssClasses.BUILDING+CssClasses.WARNING;
-        }
-        else if (color === 'red_anime') {
-            colorTranslation = CssClasses.BUILDING+CssClasses.FAILURE;
-        }
-        else if (color === 'blue_anime') {
-            colorTranslation = CssClasses.BUILDING+CssClasses.SUCCESS;
-        }
-        else {
-            colorTranslation = CssClasses.DISABLED;
-        }
-        return colorTranslation;
+    private static updateModel(json : JenkinsJsonResponse.JenkinsJson, model:JenkinsMonitorModel):void{
+        model.setJsonResponse(json);
     }
 
 }
