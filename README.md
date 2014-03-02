@@ -1,6 +1,8 @@
 Monitor Page
 ============
 
+[![Build Status](https://travis-ci.org/afranken/monitoring.png?branch=master)](https://travis-ci.org/afranken/monitoring)
+
 An easy to use Single Page Application to monitor your build infrastructure.
 
 Currently supported:
