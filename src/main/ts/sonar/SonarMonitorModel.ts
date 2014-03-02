@@ -17,6 +17,7 @@ class SonarMonitorModel implements MonitorModel {
     private _name:string;
     private _hostname:string;
     private _id:string;
+    private _jsonResponse:KnockoutObservable<SonarResponse.Jsons> = ko.observable<SonarResponse.Jsons>();
 
     constructor(private monitor:Config.Monitor, public connector:Connector, hostname:string) {
         this._name = monitor.name;
@@ -36,6 +37,10 @@ class SonarMonitorModel implements MonitorModel {
 
     public updateStatus():void {
         this.connector.getRemoteData(this);
+    }
+
+    public setData(json:SonarResponse.Jsons):void {
+        this._jsonResponse(json);
     }
 
     public getUrl():string {

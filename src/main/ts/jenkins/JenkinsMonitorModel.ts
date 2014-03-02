@@ -78,7 +78,7 @@ class JenkinsMonitorModel implements MonitorModel {
         return Types.JENKINS;
     }
 
-    public setJsonResponse(json:JenkinsJsonResponse.JenkinsJson):void {
+    public setData(json:JenkinsJsonResponse.JenkinsJson):void {
         this._jsonResponse(json);
     }
 

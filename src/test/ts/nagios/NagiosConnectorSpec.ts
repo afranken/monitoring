@@ -49,8 +49,8 @@ describe("NagiosConnector", function():void {
         expect(testling.getExpiry()).toBe(_EXPIRY);
         expect(NagiosConnector.getHostnames(monitor)[0]).toBe('myid');
         expect(NagiosConnector.getHostnames(monitor)[1]).toBe('myid2');
-        expect(testling.getApiUrl(monitor)).toBe('https://myhost:8080/myprefix/nagios/cgi-bin/status-json.cgi?host=all&callback=?');
-        expect(testling.getHostInfoUrl(NagiosConnector.getHostnames(monitor)[0],monitor.getHostname())).toBe('http://myid/nagios/cgi-bin/extinfo.cgi?type=1&host=myhost');
+        expect(testling.getApiUrl(monitor)).toBe('https://myhost:8080/myprefix/cgi-bin/status-json.cgi?host=all&callback=?');
+        expect(testling.getHostInfoUrl(NagiosConnector.getHostnames(monitor)[0],monitor.getHostname())).toBe('http://myid/cgi-bin/extinfo.cgi?type=1&host=myhost');
     });
 
 });

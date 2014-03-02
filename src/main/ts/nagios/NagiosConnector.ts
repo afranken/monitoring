@@ -10,7 +10,7 @@ import NagiosMonitorModel = require('./NagiosMonitorModel');
 class NagiosConnector extends ConnectorBase implements Connector {
 
     //the nagios host
-    public static NAGIOS_PREFIX: string = '/nagios/cgi-bin/status-json.cgi?';
+    public static NAGIOS_PREFIX: string = '/cgi-bin/status-json.cgi?';
     //suffix used to access json output by host
     public static NAGIOS_HOST_SUFFIX: string = 'host=';
     //suffix used to access JSON output by host group
@@ -22,7 +22,7 @@ class NagiosConnector extends ConnectorBase implements Connector {
     //suffix to add to a JSON call to make jQuery automatically use JSONP
     public static NAGIOS_JSONP_SUFFIX: string = '&callback=?';
 
-    private static NAGIOS_HOSTINFO_PREFIX = '/nagios/cgi-bin/extinfo.cgi?type=1&host=';
+    private static NAGIOS_HOSTINFO_PREFIX = '/cgi-bin/extinfo.cgi?type=1&host=';
 
     public getRemoteData(model:NagiosMonitorModel):void {
         jQuery.getJSON(this.getApiUrl(model),
@@ -30,7 +30,9 @@ class NagiosConnector extends ConnectorBase implements Connector {
                 this.updateModel(json,model);
             }
         ).fail((jqXHR, textStatus, errorThrown) => {
-            console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model));
+            if(console) {
+                console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model));
+            }
         });
     }
 

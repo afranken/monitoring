@@ -19,6 +19,15 @@ interface MonitorModel {
      */
     updateStatus(): void;
 
+    /**
+     * Update model with data.
+     * This method is expected to be used by {@link Connector} implementations after downloading data from a
+     * remote system.
+     *
+     * @param data
+     */
+    setData(data):void;
+
 }
 
 export = MonitorModel;

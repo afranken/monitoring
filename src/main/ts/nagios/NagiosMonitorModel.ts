@@ -1,3 +1,5 @@
+/// <reference path="../vendor/knockout.d.ts" />
+import ko = require('knockout');
 import Types = require('../Types');
 import Config = require('../jsonInterfaces/Config');
 import MonitorModel = require('../MonitorModel');
@@ -17,6 +19,7 @@ class NagiosMonitorModel implements MonitorModel {
     private _hostname:string;
     private _name:string;
     private _connector:NagiosConnector;
+    private _jsonResponse:KnockoutObservable<NagiosJsonResponse.NagiosServices> = ko.observable<NagiosJsonResponse.NagiosServices>();
 
     constructor(job:Config.Monitor, connector:Connector, hostname:string) {
         this._name = job.name;
@@ -66,6 +69,10 @@ class NagiosMonitorModel implements MonitorModel {
 
     public updateStatus():void {
         this._connector.getRemoteData(this);
+    }
+
+    public setData(json:NagiosJsonResponse.NagiosServices):void {
+        this._jsonResponse(json);
     }
 
 

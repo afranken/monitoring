@@ -24,7 +24,9 @@ class SonarConnector extends ConnectorBase implements Connector {
                     this.updateModel(violations, model, moduleName);
                 })
                 .fail((jqXHR, textStatus, errorThrown) => {
-                    console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model,moduleName));
+                    if(console) {
+                        console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model,moduleName));
+                    }
                 });
         });
     }

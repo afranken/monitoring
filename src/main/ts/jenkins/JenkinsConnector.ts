@@ -69,7 +69,7 @@ class JenkinsConnector extends ConnectorBase implements Connector {
      * @param model
      */
     private static updateModel(json : JenkinsJsonResponse.JenkinsJson, model:JenkinsMonitorModel):void{
-        model.setJsonResponse(json);
+        model.setData(json);
     }
 
 }
