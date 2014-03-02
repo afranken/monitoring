@@ -53,13 +53,13 @@
     </div>
     <!-- /ko -->
     <!-- ko if: $root.getTypes().isNagios(getType()) -->
-    <h3 data-bind="text: name"></h3>
+    <h3 data-bind="text: getName()"></h3>
     <table>
-        <tbody data-bind="template: { name: 'nagios-hostmodel-template', foreach: hostmodels }"></tbody>
+        <tbody data-bind="template: { name: 'nagios-hostmodel-template', foreach: getHostmodels() }"></tbody>
     </table>
     <!-- /ko -->
     <!-- ko if: $root.getTypes().isSonar(getType()) -->
-    <div data-bind="template: { name: 'sonar-violationmodel-template' }"></div>
+    <div data-bind="template: { name: 'sonar-monitormodel-template' }"></div>
     <!-- /ko -->
 </script>
 
@@ -68,12 +68,12 @@
         <td>
             <div data-bind="css: getStatus(), html: getText()"></div>
         </td>
-        <th class="nagiosHost"><a class="alert-link" data-bind="attr: { href: url, title: hostname }, text: hostname"></a></th>
+        <th class="nagiosHost"><a class="alert-link" data-bind="attr: { href: getUrl(), title: getHostname() }, text: getHostname()"></a></th>
     </tr>
 </script>
 
-<script type="text/html" id="sonar-violationmodel-template">
-    <h3><a class="alert-link" data-bind="attr: { href: url, title: name }, text: name"></a></h3>
+<script type="text/html" id="sonar-monitormodel-template">
+    <h3><a class="alert-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a></h3>
     <table class="codeviolations">
         <thead>
         <tr>
@@ -85,14 +85,14 @@
             <th></th>
         </tr>
         </thead>
-        <tbody data-bind="foreach: violationModels"><tr data-bind="template: {name: 'sonar-violation-template', foreach: violations}"></tr></tbody>
+        <tbody data-bind="foreach: getViolationModels()"><tr data-bind="template: {name: 'sonar-violation-template', foreach: getViolations()}"></tr></tbody>
     </table>
 </script>
 
 <script type="text/html" id="sonar-violation-template">
-    <td><div data-bind="css: status, text: count"></div></td>
-    <!-- ko if: ($index() === ($parent.violations.length - 1)) -->
-    <th><a data-bind="attr: { href: $parent.url, title: $parent.name }, text: $parent.name"></a></th>
+    <td><div data-bind="css: getStatus(), text: getCount()"></div></td>
+    <!-- ko if: ($index() === ($parent.getViolations().length - 1)) -->
+    <th><a data-bind="attr: { href: $parent.getUrl(), title: $parent.getName() }, text: $parent.getName()"></a></th>
     <!-- /ko -->
 </script>
 

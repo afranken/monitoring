@@ -14,24 +14,32 @@ class SonarViolation {
     public static MINOR:string = 'minor_violations';
     public static INFO:string = 'info_violations';
 
-    public status:KnockoutObservable<string> = ko.observable<string>();
-    public count:KnockoutObservable<number> = ko.observable<number>();
+    private _status:KnockoutObservable<string> = ko.observable<string>();
+    private _count:KnockoutObservable<number> = ko.observable<number>();
 
     constructor(public type:string) {
-        this.count(0);
-        this.status(SonarViolation.BASIC_CLASSES);
+        this._count(0);
+        this._status(SonarViolation.BASIC_CLASSES);
+    }
+
+    public getStatus():string {
+        return this._status();
     }
 
     public setStatus(count:number): void{
         if(count > 0) {
             if(this.type === SonarViolation.BLOCKER || this.type === SonarViolation.CRITICAL) {
-                this.status(SonarViolation.BASIC_CLASSES + CssClasses.FAILURE);
+                this._status(SonarViolation.BASIC_CLASSES + CssClasses.FAILURE);
             } else {
-                this.status(SonarViolation.BASIC_CLASSES + CssClasses.WARNING);
+                this._status(SonarViolation.BASIC_CLASSES + CssClasses.WARNING);
             }
         } else {
-            this.status(SonarViolation.BASIC_CLASSES + CssClasses.SUCCESS);
+            this._status(SonarViolation.BASIC_CLASSES + CssClasses.SUCCESS);
         }
+    }
+
+    public getCount():number {
+        return this._count();
     }
 
     public setCount(violations: SonarResponse.Jsons):void {
@@ -39,9 +47,9 @@ class SonarViolation {
             if(this.type === violation.key) {
                 //in some versions of Sonar, values will be formatted '789.0' instead of '789'
                 if(violation.val.toString().indexOf('.')>0) {
-                    this.count(parseInt(violation.val.toString().substring(0,violation.val.toString().indexOf('.'))));
+                    this._count(parseInt(violation.val.toString().substring(0,violation.val.toString().indexOf('.'))));
                 } else {
-                    this.count(violation.val);
+                    this._count(violation.val);
                 }
             }
         });

@@ -12,17 +12,17 @@ import SonarViolationModel = require('./SonarViolationModel');
  */
 class SonarMonitorModel implements MonitorModel {
 
-    public url:KnockoutObservable<string> = ko.observable<string>();
-    public violationModels: Array<SonarViolationModel> = [];
-    public name:string;
-    public hostname:string;
-    public id:string;
+    private _url:KnockoutObservable<string> = ko.observable<string>();
+    private _violationModels: Array<SonarViolationModel> = [];
+    private _name:string;
+    private _hostname:string;
+    private _id:string;
 
     constructor(private monitor:Config.Monitor, public connector:Connector, hostname:string) {
-        this.name = monitor.name;
-        this.hostname = monitor.hostname !== undefined ? monitor.hostname : hostname;
-        this.id = monitor.id;
-        this.url('');
+        this._name = monitor.name;
+        this._hostname = monitor.hostname !== undefined ? monitor.hostname : hostname;
+        this._id = monitor.id;
+        this._url('');
 
         this.init(monitor.id);
     }
@@ -30,7 +30,7 @@ class SonarMonitorModel implements MonitorModel {
     private init(id:string) {
         var sonarModules:string[] = id.split(',');
         sonarModules.forEach(moduleName => {
-            this.violationModels.push(new SonarViolationModel(moduleName));
+            this._violationModels.push(new SonarViolationModel(moduleName));
         });
     }
 
@@ -38,33 +38,53 @@ class SonarMonitorModel implements MonitorModel {
         this.connector.getRemoteData(this);
     }
 
+    public getUrl():string {
+        return this._url();
+    }
+
+    public getId():string {
+        return this._id;
+    }
+
+    public getName():string {
+        return this._name;
+    }
+
+    public getHostname():string {
+        return this._hostname;
+    }
+
+    public getViolationModels():Array<SonarViolationModel> {
+        return this._violationModels;
+    }
+
     public getType():string {
         return Types.SONAR;
     }
 
     public addViolations(moduleName:string, violations:SonarResponse.Jsons):void {
-        this.violationModels.forEach(violationModel => {
-            if(violationModel.moduleName === moduleName) {
-                violationModel.violations.forEach(violation => {
+        this._violationModels.forEach(violationModel => {
+            if(violationModel.getModuleName() === moduleName) {
+                violationModel.getViolations().forEach(violation => {
                     violation.setCount(violations);
-                    violation.setStatus(violation.count());
+                    violation.setStatus(violation.getCount());
                 });
             }
         });
     }
 
     public addUrl(moduleName:string, url:string):void {
-        this.violationModels.forEach(violationModel => {
-            if(violationModel.moduleName === moduleName) {
-                violationModel.url(url);
+        this._violationModels.forEach(violationModel => {
+            if(violationModel.getModuleName() === moduleName) {
+                violationModel.setUrl(url);
             }
         });
     }
 
     public addName(moduleName:string, name:string):void {
-        this.violationModels.forEach(violationModel => {
-            if(violationModel.moduleName === moduleName) {
-                violationModel.name(name);
+        this._violationModels.forEach(violationModel => {
+            if(violationModel.getModuleName() === moduleName) {
+                violationModel.setName(name);
             }
         });
     }
