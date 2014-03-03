@@ -4,7 +4,7 @@
 
 declare module JenkinsJsonResponse {
 
-    interface JenkinsJson {
+    interface Json {
         displayName:string;
         name: string;
         url: string;

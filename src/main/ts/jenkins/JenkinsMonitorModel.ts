@@ -24,7 +24,7 @@ class JenkinsMonitorModel implements MonitorModel {
     private _status:KnockoutComputed<string>;
     private _style:KnockoutComputed<string>;
     private _url:string;
-    private _jsonResponse:KnockoutObservable<JenkinsJsonResponse.JenkinsJson> = ko.observable<JenkinsJsonResponse.JenkinsJson>();
+    private _jsonResponse:KnockoutObservable<JenkinsJsonResponse.Json> = ko.observable<JenkinsJsonResponse.Json>();
 
     constructor(job:Config.Monitor, connector:Connector, hostname:string) {
         this._connector = connector;
@@ -78,7 +78,7 @@ class JenkinsMonitorModel implements MonitorModel {
         return Types.JENKINS;
     }
 
-    public setData(json:JenkinsJsonResponse.JenkinsJson):void {
+    public setData(json:JenkinsJsonResponse.Json):void {
         this._jsonResponse(json);
     }
 
@@ -150,7 +150,7 @@ class JenkinsMonitorModel implements MonitorModel {
                 colorTranslation = CssClasses.DISABLED;
                 break;
             default:
-                colorTranslation = CssClasses.BASIC;
+                colorTranslation = "";
         }
 
         return colorTranslation;

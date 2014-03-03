@@ -33,7 +33,7 @@ class JenkinsConnector extends ConnectorBase implements Connector {
 
     public getRemoteData(model:JenkinsMonitorModel):void {
         jQuery.getJSON(this.getApiUrl(model),
-                (json : JenkinsJsonResponse.JenkinsJson) => {
+                (json : JenkinsJsonResponse.Json) => {
                     JenkinsConnector.updateModel(json,model);
                 })
             .fail((jqXHR, textStatus, errorThrown) => {
@@ -68,7 +68,7 @@ class JenkinsConnector extends ConnectorBase implements Connector {
      * @param json
      * @param model
      */
-    private static updateModel(json : JenkinsJsonResponse.JenkinsJson, model:JenkinsMonitorModel):void{
+    private static updateModel(json : JenkinsJsonResponse.Json, model:JenkinsMonitorModel):void{
         model.setData(json);
     }
 
