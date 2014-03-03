@@ -43,6 +43,7 @@ table.jobmatrix * th a {
 .codeviolation {
   padding: 0;
   margin: 0;
+  text-align: center;
 }
 
 .jobstatus {
@@ -53,7 +54,9 @@ table.jobmatrix * th a {
 }
 
 th {
-  text-align: left;
+  font-size: smaller;
+  font-weight: normal;
+  text-align: center;
 }
 
 table * th a {
