@@ -27,14 +27,6 @@ h1, h2, h3, p {
   clear: both;
 }
 
-.codeviolation {
-  margin: 1px;
-  min-width: 50px;
-  padding: 0 10px 0 0;
-  text-align: right;
-  background-color: #EEEEFF;
-}
-
 table.jobmatrix * th a {
   color: #a9a9a9;
   font-size: 12px;
@@ -42,8 +34,10 @@ table.jobmatrix * th a {
 
 .codeviolation {
   padding: 0;
-  margin: 0;
+  margin: 2px;
+  min-width: 55px;
   text-align: center;
+  background-color: #EEEEFF;
 }
 
 .jobstatus {
