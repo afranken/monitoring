@@ -51,7 +51,7 @@ class JenkinsMonitorModel implements MonitorModel {
     }
 
     public getName():string {
-        return this._name;
+        return this._name !== undefined ? this._name : this._id;
     }
 
     public getId():string {

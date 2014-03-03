@@ -58,7 +58,7 @@ declare module Config {
                 /**
                  * depending on the monitor type, this may be used as a display name, description or a heading
                  */
-                name: string;
+                name?: string;
                 /**
                  * unique id that is used to retrieve information from a backend. (e.g. a Jenkins Job name or a Nagios Host name)
                  */
