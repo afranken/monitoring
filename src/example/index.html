@@ -2,16 +2,17 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" data-main="./app/Application" src="js/vendor/require.js"></script>
-    <script type="text/javascript" src="config.js"></script>
-    <script type="text/javascript" src="js/vendor/jquery-2.0.3.js"></script>
+    <script type="text/javascript" data-main="Application" src="js/vendor/require.js"></script>
+    <script type="text/javascript" src="js/monitoring.min.js"></script>
     <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
+    <script type="text/javascript" src="config.js"></script>
     <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap-theme.min.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme-monitor.css" media="all" />
-    <!--<link rel="stylesheet" type="text/css" href="css/bootstrap-theme-monitor-dark.css" media="all" />-->
 </head>
 <body>
+
+<link data-bind="attr: {href: $root.getCss()}" rel="stylesheet" type="text/css" media="all" />
 
 <script type="text/javascript">
     requirejs.config({

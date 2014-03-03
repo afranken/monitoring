@@ -8,11 +8,11 @@
     <script type="text/javascript" src="js/init.js"></script>
     <script type="text/javascript" src="config.js"></script>
     <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap-theme.min.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme-monitor.css" media="all" />
-    <!--<link rel="stylesheet" type="text/css" href="css/bootstrap-theme-monitor-dark.css" media="all" />-->
 </head>
 <body>
+
+<link data-bind="attr: {href: $root.getCss()}" rel="stylesheet" type="text/css" media="all" />
 
 <!-- ko if: getTitle() -->
 <h1 id="mainTitle" class="alert alert-info" data-bind="text: getTitle()"></h1>
@@ -95,10 +95,5 @@
     <th><a data-bind="attr: { href: $parent.getUrl(), title: $parent.getName() }, text: $parent.getName()"></a></th>
     <!-- /ko -->
 </script>
-
-
-
-
-
 </body>
 </html>

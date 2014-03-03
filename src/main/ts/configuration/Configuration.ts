@@ -8,12 +8,15 @@ class Configuration {
     private static _PORT_PREFIX: string = ':';
     private static _SLASH: string = '/';
 
+    private static _DEFAULT_CSS:string = 'css/vendor/bootstrap-theme.min.css';
+
     private _expiry: number;
+    private _css: string;
     private _hostConfigurations: { [name: string]: HostConfiguration; } = { };
 
     constructor(private json: Config.Configuration) {
         this._expiry = json.expiry;
-
+        this._css = json.css;
         this.init(json);
     }
 
@@ -30,6 +33,10 @@ class Configuration {
      */
     public getExpiry(): number {
         return this._expiry !== undefined ? this._expiry : Configuration._DEFAULT_EXPIRY;
+    }
+
+    public getCss():string {
+        return this._css !== undefined ? this._css : Configuration._DEFAULT_CSS;
     }
 
     /**

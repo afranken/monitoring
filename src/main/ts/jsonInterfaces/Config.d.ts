@@ -85,6 +85,10 @@ declare module Config {
          * time in hours after which (Jenkins-)monitors are completely faded out
          */
         expiry?: number;
+        /**
+         * Add relative link to css file here. Default: "css/vendor/bootstrap-theme.min.css"
+         */
+        css?:string;
     }
 
         /**

@@ -78,6 +78,15 @@ class ApplicationViewModel {
         return Types;
     }
 
+    /**
+     * This method is only needed for Knockout view layer.
+     *
+     * @returns string a relative URI to a CSS file.
+     */
+    public getCss():string {
+        return this._configuration.getCss();
+    }
+
     //==================================================================================================================
 
     /**
