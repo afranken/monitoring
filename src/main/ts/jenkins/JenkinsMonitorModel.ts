@@ -1,6 +1,8 @@
 /// <reference path="../vendor/jquery.d.ts" />
 /// <reference path="../vendor/knockout.d.ts" />
+/// <reference path="../vendor/moment.d.ts" />
 import ko = require('knockout');
+import moment = require('moment');
 import Types = require('../Types');
 import MonitorModel = require('../MonitorModel');
 import Connector = require('../connector/Connector');
@@ -21,8 +23,9 @@ class JenkinsMonitorModel implements MonitorModel {
     private _name:string;
     private _id:string;
     private _hostname:string;
-    private _status:KnockoutComputed<string>;
+    private _css:KnockoutComputed<string>;
     private _style:KnockoutComputed<string>;
+    private _startDate:KnockoutComputed<string>;
     private _url:string;
     private _jsonResponse:KnockoutObservable<JenkinsJsonResponse.Json> = ko.observable<JenkinsJsonResponse.Json>();
 
@@ -31,7 +34,7 @@ class JenkinsMonitorModel implements MonitorModel {
         this._name = job.name;
         this._id = job.id;
         this._hostname = job.hostname !== undefined ? job.hostname : hostname;
-        this._status = ko.computed<string>({
+        this._css = ko.computed<string>({
                 owner: this,
                 read: ()=>{
                     return CssClasses.BASIC_CLASSES + JenkinsMonitorModel.translateColor(this.getResponseColor());
@@ -41,6 +44,13 @@ class JenkinsMonitorModel implements MonitorModel {
             owner: this,
             read: ()=>{
                 return JenkinsMonitorModel.OPACITY+JenkinsMonitorModel.calculateExpiration(this.getResponseTimestamp(), (<JenkinsConnector>this._connector).getExpiry());
+            }
+        });
+
+        this._startDate = ko.computed<string>({
+            owner: this,
+            read: ()=>{
+                return JenkinsMonitorModel.calculateStartDate(this.getResponseTimestamp());
             }
         });
         this._url = (<JenkinsConnector>connector).getJobUrl(this);
@@ -62,8 +72,8 @@ class JenkinsMonitorModel implements MonitorModel {
         return this._hostname;
     }
 
-    public getStatus():string {
-        return this._status();
+    public getCss():string {
+        return this._css();
     }
 
     public getStyle():string {
@@ -72,6 +82,10 @@ class JenkinsMonitorModel implements MonitorModel {
 
     public getUrl():string {
         return this._url;
+    }
+
+    public getStartDate():string {
+        return this._startDate();
     }
 
     public getType():string {
@@ -83,6 +97,17 @@ class JenkinsMonitorModel implements MonitorModel {
     }
 
     //==================================================================================================================
+
+    private static calculateStartDate(buildTimestamp: number):string {
+        var startTime:string;
+        if(buildTimestamp === undefined) {
+            return undefined;
+        }
+
+        startTime = moment(buildTimestamp).fromNow();
+
+        return startTime;
+    }
 
     /**
      * Get expiration based on the amount of time that passed between the {@link JenkinsJsonResponse.LastBuild.timestamp} and now.

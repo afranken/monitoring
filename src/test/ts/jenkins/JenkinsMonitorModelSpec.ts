@@ -77,7 +77,7 @@ describe("JenkinsMonitorModel", function():void {
         expect(testling.getHostname()).toBe(_HOST);
         expect(testling.getName()).toBe(_NAME);
         expect(testling.getId()).toBe(_ID);
-        expect(testling.getStatus()).toBe(CssClasses.BASIC_CLASSES);
+        expect(testling.getCss()).toBe(CssClasses.BASIC_CLASSES);
         expect(testling.getStyle()).toBe("opacity: 1");
         expect(testling.getType()).toBe(Types.JENKINS);
         expect(testling.getUrl()).toBe("https://myhost:8080/myprefix/job/myid");
@@ -85,8 +85,8 @@ describe("JenkinsMonitorModel", function():void {
 
     it("TestMethodsAfterResponse", function():void {
         testling.setData(jsonResponse);
-        expect(testling.getStatus()).toBe(CssClasses.BASIC_CLASSES+CssClasses.SUCCESS);
-        expect(testling.getStyle()).toMatch("opacity: 0.66\\d+");
+        expect(testling.getCss()).toBe(CssClasses.BASIC_CLASSES+CssClasses.SUCCESS);
+        expect(testling.getStyle()).toMatch("opacity: 0.\\d+");
     });
 
 });

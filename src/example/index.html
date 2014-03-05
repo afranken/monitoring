@@ -15,7 +15,8 @@
     requirejs.config({
         paths: {
             'jquery': '../js/vendor/jquery-2.0.3',
-            'knockout': '../js/vendor/knockout-3.0.0'
+            'knockout': '../js/vendor/knockout-3.0.0',
+            'moment': '../js/vendor/moment-with-langs.min'
         }
     });
 
@@ -62,7 +63,10 @@
 <script type="text/html" id="monitor-template">
     <!-- ko if: $root.getTypes().isJenkins(getType()) -->
     <div class="panel panel-default">
-        <div data-bind="attr: {style: getStyle()}, css: getStatus(), pulsate: getStatus()"><a class="alert-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a></div>
+        <div data-bind="attr: {style: getStyle()}, css: getCss(), pulsate: getCss()">
+            <a class="alert-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a><br/>
+            <span data-bind="text: getStartDate()"></span>
+        </div>
         <div class="panel-collapse collapse">render more information here.</div>
     </div>
     <!-- /ko -->
