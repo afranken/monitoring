@@ -19,7 +19,6 @@ class NagiosMonitorModel implements MonitorModel {
     private _hostname:string;
     private _name:string;
     private _connector:NagiosConnector;
-    private _jsonResponse:KnockoutObservable<NagiosJsonResponse.NagiosServices> = ko.observable<NagiosJsonResponse.NagiosServices>();
 
     constructor(job:Config.Monitor, connector:Connector, hostname:string) {
         this._name = job.name;
@@ -32,8 +31,7 @@ class NagiosMonitorModel implements MonitorModel {
 
     private init() {
         this.getHostnames().forEach((hostname:string) => {
-            var nagiosHostModel = new NagiosHostModel(hostname);
-            nagiosHostModel.setUrl(this._connector.getHostInfoUrl(this._hostname, hostname));
+            var nagiosHostModel = new NagiosHostModel(hostname, this._connector.getHostInfoUrl(this._hostname, hostname));
             this._hostmodels.push(nagiosHostModel);
         });
     }
