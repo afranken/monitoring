@@ -27,7 +27,8 @@
     });
 </script>
 
-<link data-bind="attr: {href: $root.getCss()}" rel="stylesheet" type="text/css" media="all" />
+<link data-bind="attr: {href: $root.getThemeCss()}" rel="stylesheet" type="text/css" media="all" />
+<link data-bind="attr: {href: $root.getCustomCss()}" rel="stylesheet" type="text/css" media="all" />
 
 <!-- ko if: getTitle() -->
 <h1 id="mainTitle" class="alert alert-info" data-bind="text: getTitle()"></h1>

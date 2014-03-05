@@ -86,10 +86,21 @@ declare module Config {
          */
         expiry?: number;
         /**
-         * Add relative link to css file here. Default: "css/vendor/bootstrap-theme.min.css"
+         * Customize the layout of the page.
          */
-        css?:string;
+        theme?: Theme;
     }
+
+        interface Theme {
+            /**
+             * Add relative link to a custom css file here. This file will be loaded in addition to and after all existing CSS files.
+             */
+            css?:string;
+            /**
+             * Possible values: light / dark. Default: light.
+             */
+            style?:string;
+        }
 
         /**
          * Configuration for one Host. {@see HostConfiguration}

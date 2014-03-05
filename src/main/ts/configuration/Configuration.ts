@@ -8,15 +8,19 @@ class Configuration {
     private static _PORT_PREFIX: string = ':';
     private static _SLASH: string = '/';
 
-    private static _DEFAULT_CSS:string = 'css/vendor/bootstrap-theme.min.css';
+    private static _LIGHT:string = 'light';
+    private static _DARK:string = 'dark';
+    private static _THEME_LIGHT:string = 'css/vendor/bootstrap-theme.min.css';
+    private static _THEME_DARK:string = 'css/bootstrap-theme-monitor-dark.css';
 
     private _expiry: number;
-    private _css: string;
+    private _themeCss: string;
+    private _customCss: string;
     private _hostConfigurations: { [name: string]: HostConfiguration; } = { };
 
     constructor(private json: Config.Configuration) {
         this._expiry = json.expiry;
-        this._css = json.css;
+        this._themeCss = Configuration._THEME_LIGHT;
         this.init(json);
     }
 
@@ -24,6 +28,14 @@ class Configuration {
         json.hosts.forEach(host => {
             this._hostConfigurations[host.hostname] = new HostConfiguration(host);
         });
+        if(json.theme !== undefined) {
+            if(json.theme.css !== undefined) {
+                this._customCss = json.theme.css;
+            }
+            if(Configuration._DARK.match(json.theme.style)) {
+                this._themeCss = Configuration._THEME_DARK;
+            }
+        }
     }
 
     /**
@@ -35,8 +47,12 @@ class Configuration {
         return this._expiry !== undefined ? this._expiry : Configuration._DEFAULT_EXPIRY;
     }
 
-    public getCss():string {
-        return this._css !== undefined ? this._css : Configuration._DEFAULT_CSS;
+    public getCustomCss():string {
+        return this._customCss;
+    }
+
+    public getThemeCss():string {
+        return this._themeCss;
     }
 
     /**
