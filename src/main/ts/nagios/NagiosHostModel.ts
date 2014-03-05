@@ -21,6 +21,7 @@ class NagiosHostModel {
     private _text:KnockoutObservable<string> = ko.observable<string>();
     private _url:KnockoutObservable<string> = ko.observable<string>();
     private _services:KnockoutObservableArray<NagiosJsonResponse.NagiosService> = ko.observableArray<NagiosJsonResponse.NagiosService>();
+    private _jsonResponse:KnockoutObservable<NagiosJsonResponse.NagiosServices> = ko.observable<NagiosJsonResponse.NagiosServices>();
 
     constructor(hostname:string) {
         this._status(CssClasses.BASIC_CLASSES);

@@ -27,12 +27,11 @@ class NagiosMonitorModel implements MonitorModel {
         this._connector = <NagiosConnector>connector;
         this._hostname = job.hostname !== undefined ? job.hostname : hostname;
 
-        this.init(job.id);
+        this.init();
     }
 
-    private init(id:string) {
-        var hostnames:string[] = id.split(',');
-        hostnames.forEach((hostname:string) => {
+    private init() {
+        this.getHostnames().forEach((hostname:string) => {
             var nagiosHostModel = new NagiosHostModel(hostname);
             nagiosHostModel.setUrl(this._connector.getHostInfoUrl(this._hostname, hostname));
             this._hostmodels.push(nagiosHostModel);
@@ -72,7 +71,18 @@ class NagiosMonitorModel implements MonitorModel {
     }
 
     public setData(json:NagiosJsonResponse.NagiosServices):void {
-        this._jsonResponse(json);
+        //--------- iterate over JSON response, save services that should be displayed
+        json.services.forEach((service:NagiosJsonResponse.NagiosService)=>{
+            if(service.service_host !== undefined && service.service_host.host_name !== undefined) {
+                if(~this.getHostnames().indexOf(service.service_host.host_name)) {
+                    this.addService(service.service_host.host_name,service);
+                }
+            }
+        });
+    }
+
+    public getHostnames():Array<string> {
+        return this.getId().split(',');
     }
 
 

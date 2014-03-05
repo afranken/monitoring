@@ -27,7 +27,7 @@ class NagiosConnector extends ConnectorBase implements Connector {
     public getRemoteData(model:NagiosMonitorModel):void {
         jQuery.getJSON(this.getApiUrl(model),
             (json: NagiosJsonResponse.NagiosServices)=> {
-                this.updateModel(json,model);
+                NagiosConnector.updateModel(json,model);
             }
         ).fail((jqXHR, textStatus, errorThrown) => {
             if(console) {
@@ -36,15 +36,8 @@ class NagiosConnector extends ConnectorBase implements Connector {
         });
     }
 
-    public updateModel(json : NagiosJsonResponse.NagiosServices, model:NagiosMonitorModel):void {
-        //--------- iterate over JSON response, save services that should be displayed
-        json.services.forEach((service:NagiosJsonResponse.NagiosService)=>{
-            if(service.service_host !== undefined && service.service_host.host_name !== undefined) {
-                if(~NagiosConnector.getHostnames(model).indexOf(service.service_host.host_name)) {
-                    model.addService(service.service_host.host_name,service);
-                }
-            }
-        });
+    public static updateModel(json : NagiosJsonResponse.NagiosServices, model:NagiosMonitorModel):void {
+        model.setData(json);
     }
 
     public getApiUrl(model:NagiosMonitorModel):string {
@@ -53,10 +46,6 @@ class NagiosConnector extends ConnectorBase implements Connector {
                 NagiosConnector.NAGIOS_HOST_SUFFIX +
                 NagiosConnector.DISPLAY_ALL_HOSTS +
                 NagiosConnector.NAGIOS_JSONP_SUFFIX);
-    }
-
-    public static getHostnames(model:NagiosMonitorModel):Array<string> {
-        return model.getId().split(',');
     }
 
     public getHostInfoUrl(nagiosHostname:string,hostname:string):string {
