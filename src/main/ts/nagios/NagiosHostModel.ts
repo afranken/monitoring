@@ -11,10 +11,6 @@ class NagiosHostModel {
     public static STATUS_OK: string = 'OK';
     public static STATUS_WARNING: string = 'WARNING';
     public static STATUS_CRITICAL: string = 'CRITICAL';
-    //string used for the "all ok" box
-    public static SERVICES_OK: string = 'All Services OK.';
-    public static SERVICES_WARNING: string = 'There were WARNINGs.';
-    public static SERVICES_CRITICAL: string = 'There were CRITICALs.';
 
     private _hostname:string;
     private _url:string;
@@ -47,7 +43,7 @@ class NagiosHostModel {
     }
 
     private getText(): string {
-        return this._text() === '' ? NagiosHostModel.SERVICES_OK : this._text();
+        return this._text();
     }
 
     private setText(text: string): void {
