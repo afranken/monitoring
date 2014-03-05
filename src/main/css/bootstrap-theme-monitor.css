@@ -47,6 +47,10 @@ table.jobmatrix * th a {
   width: 100%;
 }
 
+.jobstatus a {
+  font-size: 14px;
+}
+
 th {
   font-size: smaller;
   font-weight: normal;
