@@ -51,6 +51,11 @@ table.jobmatrix * th a {
   font-size: 14px;
 }
 
+.jenkins-start-date {
+  font-size: 12px;
+  /*display: none;*/
+}
+
 th {
   font-size: smaller;
   font-weight: normal;
