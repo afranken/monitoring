@@ -36,8 +36,15 @@ table.jobmatrix * th a {
   padding: 0;
   margin: 2px;
   min-width: 55px;
-  text-align: center;
   background-color: #EEEEFF;
+}
+
+.sonar-violation-count {
+  text-align: center;
+}
+
+.sonar-module-name {
+  text-align: left;
 }
 
 .jobstatus {
