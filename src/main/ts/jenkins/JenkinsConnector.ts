@@ -22,8 +22,8 @@ class JenkinsConnector extends ConnectorBase implements Connector {
     /**
      * suffix that tells Jenkins to only include certain properties in response
      */
-    private static JOB_STATUS_SUFFIX:string = '&tree=name,url,displayName,color,lastBuild[timestamp,building,duration,url,result,number,id,failCount,skipCount,totalCount,' +
-        'actions[lastBuiltRevision[branch[SHA1,name]]]]&depth=1';
+    private static JOB_STATUS_SUFFIX:string = '&tree=name,url,displayName,color,lastBuild[timestamp,building,duration,estimatedDuration,url,result,number,id,failCount,skipCount,totalCount,' +
+        'actions[lastBuiltRevision[branch[SHA1,name]],failCount,skipCount,totalCount]]&depth=1';
 
     /**
      * suffix that tells Jenkins to only include certain properties of modules in response

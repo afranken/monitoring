@@ -93,3 +93,9 @@ table * th a {
 .alert-disabled .alert-link {
   color: #666666;
 }
+
+a.jenkins-collapse {
+  font-size: 16px;
+  color: #000000;
+}
+

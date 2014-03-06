@@ -48,7 +48,7 @@ describe("JenkinsConnector", function():void {
     it("TestMethods", function():void {
         expect(testling.getExpiry()).toBe(_EXPIRY);
         expect(testling.getJobUrl(monitor)).toBe('https://myhost:8080/myprefix/job/myid');
-        expect(testling.getApiUrl(monitor)).toBe('https://myhost:8080/myprefix/job/myid/api/json?jsonp=?&tree=name,url,displayName,color,lastBuild[timestamp,building,duration,url,result,number,id,failCount,skipCount,totalCount,actions[lastBuiltRevision[branch[SHA1,name]]]]&depth=1');
+        expect(testling.getApiUrl(monitor)).toBe('https://myhost:8080/myprefix/job/myid/api/json?jsonp=?&tree=name,url,displayName,color,lastBuild[timestamp,building,duration,estimatedDuration,url,result,number,id,failCount,skipCount,totalCount,actions[lastBuiltRevision[branch[SHA1,name]],failCount,skipCount,totalCount]]&depth=1');
     });
 
 });

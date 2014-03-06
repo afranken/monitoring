@@ -59,6 +59,7 @@ describe("JenkinsMonitorModel", function():void {
             ],
             "building": false,
             "duration": 2923735,
+            "estimatedDuration": 2923735,
             "id":"2014-02-07_01-29-34",
             "number":209,
             "result": "SUCCESS",

@@ -17,6 +17,7 @@ declare module JenkinsJsonResponse {
         timestamp: number;
         building: boolean;
         duration: number;
+        estimatedDuration: number;
         id: string;
         number: number;
         result: string;

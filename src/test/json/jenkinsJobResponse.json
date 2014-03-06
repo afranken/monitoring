@@ -14,6 +14,12 @@
             }
           ]
         }
+      },
+      {
+        "failCount": 2,
+        "skipCount": 7,
+        "totalCount": 246,
+        "urlName": "testReport"
       }
     ],
     "building": false,

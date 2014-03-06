@@ -26,6 +26,11 @@ class JenkinsMonitorModel implements MonitorModel {
     private _css:KnockoutComputed<string>;
     private _style:KnockoutComputed<string>;
     private _startDate:KnockoutComputed<string>;
+    private _commitHash:KnockoutComputed<string>;
+    private _branchName:KnockoutComputed<string>;
+    private _runTime:KnockoutComputed<string>;
+    private _buildNumber:KnockoutComputed<number>;
+    private _buildNumberUrl:KnockoutComputed<string>;
     private _url:string;
     private _jsonResponse:KnockoutObservable<JenkinsJsonResponse.Json> = ko.observable<JenkinsJsonResponse.Json>();
 
@@ -44,6 +49,77 @@ class JenkinsMonitorModel implements MonitorModel {
             owner: this,
             read: ()=>{
                 return JenkinsMonitorModel.OPACITY+JenkinsMonitorModel.calculateExpiration(this.getResponseTimestamp(), (<JenkinsConnector>this._connector).getExpiry());
+            }
+        });
+        this._commitHash = ko.computed<string>({
+            owner: this,
+            read: ()=>{
+                var commit:string = undefined;
+                if(this._jsonResponse() !== undefined) {
+                    var revision:JenkinsJsonResponse.Revision = this.getLastBuiltRevision(this._jsonResponse());
+                    if(revision !== undefined) {
+                        revision.branch.forEach((singleBranch)=>{
+                            if(singleBranch.SHA1) {
+                                commit = singleBranch.SHA1;
+                            }
+                        });
+                    }
+                }
+                return commit;
+            }
+        });
+
+        this._branchName = ko.computed<string>({
+            owner: this,
+            read: ()=>{
+                var name:string = undefined;
+                if(this._jsonResponse() !== undefined) {
+                    var revision:JenkinsJsonResponse.Revision = this.getLastBuiltRevision(this._jsonResponse());
+                    if(revision !== undefined) {
+                        revision.branch.forEach((singleBranch)=>{
+                            if(singleBranch.name) {
+                                name = singleBranch.name;
+                            }
+                        });
+                    }
+                }
+                return name;
+            }
+        });
+
+        this._runTime = ko.computed<string>({
+            owner: this,
+            read: ()=>{
+                var duration:string = undefined;
+                if(this._jsonResponse() !== undefined) {
+                    var buildDuration = (this._jsonResponse().lastBuild.duration);
+                    if(buildDuration !== undefined) {
+                        duration = moment.duration(buildDuration).humanize();
+                    }
+                }
+                return duration;
+            }
+        });
+
+        this._buildNumber = ko.computed<number>({
+            owner: this,
+            read: ()=>{
+                var buildNumber:number = undefined;
+                if(this._jsonResponse() !== undefined) {
+                    buildNumber = (this._jsonResponse().lastBuild.number);
+                }
+                return buildNumber;
+            }
+        });
+
+        this._buildNumberUrl = ko.computed<string>({
+            owner: this,
+            read: ()=>{
+                var buildNumberUrl:string = undefined;
+                if(this._jsonResponse() !== undefined) {
+                    buildNumberUrl = (this._jsonResponse().lastBuild.url);
+                }
+                return buildNumberUrl;
             }
         });
 
@@ -66,6 +142,26 @@ class JenkinsMonitorModel implements MonitorModel {
 
     public getId():string {
         return this._id;
+    }
+
+    public getCommitHash():string {
+        return this._commitHash();
+    }
+
+    public getBranchName():string {
+        return this._branchName();
+    }
+
+    public getRunTime():string {
+        return this._runTime();
+    }
+
+    public getBuildNumber():number {
+        return this._buildNumber();
+    }
+
+    public getBuildNumberUrl():string {
+        return this._buildNumberUrl();
     }
 
     public getHostname():string {
@@ -179,6 +275,17 @@ class JenkinsMonitorModel implements MonitorModel {
         }
 
         return colorTranslation;
+    }
+
+    private getLastBuiltRevision(json:JenkinsJsonResponse.Json):JenkinsJsonResponse.Revision {
+        var revision:JenkinsJsonResponse.Revision = undefined;
+        var lastBuild:JenkinsJsonResponse.LastBuild = json.lastBuild;
+        lastBuild.actions.forEach((action) => {
+            if(action.lastBuiltRevision) {
+                revision = action.lastBuiltRevision;
+            }
+        });
+        return revision;
     }
 
     private getResponseTimestamp():number {

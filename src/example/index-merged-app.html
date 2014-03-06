@@ -50,10 +50,36 @@
     <!-- ko if: $root.getTypes().isJenkins(getType()) -->
     <div class="panel panel-default">
         <div data-bind="attr: {style: getStyle()}, css: getCss(), pulsate: getCss()">
+            <a class="jenkins-collapse" data-toggle="collapse" data-bind="attr: { href: '#' + getId() + $index() }"><span class="glyphicon glyphicon-expand"></span></a>
             <a class="alert-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a><br/>
             <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
         </div>
-        <div class="panel-collapse collapse">render more information here.</div>
+        <div class="panel-collapse collapse" data-bind="attr: { id: getId() + $index() }">
+            <!-- ko if: getCommitHash() !== undefined -->
+            <dl class="jenkins-details-commit-hash">
+                <dt>Commit Hash</dt>
+                <dd data-bind="text: getCommitHash()"></dd>
+            </dl>
+            <!-- /ko -->
+            <!-- ko if: getBranchName() !== undefined -->
+            <dl class="jenkins-details-branch">
+                <dt>Branch</dt>
+                <dd data-bind="text: getBranchName()"></dd>
+            </dl>
+            <!-- /ko -->
+            <dl class="jenkins-details-start-time">
+                <dt>Start Time</dt>
+                <dd data-bind="text: getStartDate()"></dd>
+            </dl>
+            <dl class="jenkins-details-run-time">
+                <dt>Run Time</dt>
+                <dd data-bind="text: getRunTime()"></dd>
+            </dl>
+            <dl class="jenkins-details-build-number">
+                <dt>Build number</dt>
+                <dd><a data-bind="attr: { href: getBuildNumberUrl() }, text: 'Build #' + getBuildNumber()"></a></dd>
+            </dl>
+        </div>
     </div>
     <!-- /ko -->
     <!-- ko if: $root.getTypes().isNagios(getType()) -->
