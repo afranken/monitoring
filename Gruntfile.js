@@ -183,7 +183,7 @@ module.exports = function(grunt) {
                                   'Application': './target/js-test/main/ts/Application',
                                   'jquery': './target/js-test/main/ts/vendor/jquery-2.0.3',
                                   'moment': './target/js-test/main/ts/vendor/moment-with-langs.min',
-                                  'knockout': './target/js-test/main/ts/vendor/knockout-3.0.0'
+                                  'knockout': './target/js-test/main/ts/vendor/knockout-3.1.0'
                                 }
                             }
                         }
@@ -247,7 +247,7 @@ module.exports = function(grunt) {
             paths: {
               'Application': './Application',
               'jquery': '../js/vendor/jquery-2.0.3',
-              'knockout': '../js/vendor/knockout-3.0.0',
+              'knockout': '../js/vendor/knockout-3.1.0',
               'moment': '../js/vendor/moment-with-langs.min'
             }
           },
