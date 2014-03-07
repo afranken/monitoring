@@ -65,9 +65,14 @@
     <!-- ko if: $root.getTypes().isJenkins(getType()) -->
     <div class="panel panel-default">
         <div data-bind="attr: {style: getStyle()}, css: getCss(), pulsate: getCss()">
-            <a class="jenkins-collapse" data-toggle="collapse" data-bind="attr: { href: '#' + getId() + $index() }"><span class="glyphicon glyphicon-expand"></span></a>
-            <a class="alert-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a><br/>
-            <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
+            <div class="pull-left">
+                <a class="jenkins-collapse" data-toggle="collapse" data-bind="attr: { href: '#' + getId() + $index() }"><span class="glyphicon glyphicon-expand"></span></a>
+            </div>
+            <div class="pull-left">
+                <a class="alert-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a><br/>
+                <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
+            </div>
+            <div class="floatKiller"></div>
         </div>
         <div class="panel-collapse collapse" data-bind="attr: { id: getId() + $index() }">
             <!-- ko if: getCommitHash() !== undefined -->
