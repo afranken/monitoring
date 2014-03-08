@@ -2,6 +2,7 @@ Monitor Page
 ============
 
 [![Build Status](https://travis-ci.org/afranken/monitoring.png?branch=master)](https://travis-ci.org/afranken/monitoring)
+[ ![Codeship Status](https://www.codeship.io/projects/64c9cad0-8936-0131-4e0b-4a78b72f738d/status)](https://www.codeship.io/projects/15549)
 
 An easy to use Single Page Application to monitor your build infrastructure.
 
