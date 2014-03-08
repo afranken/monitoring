@@ -27,13 +27,17 @@
     });
 </script>
 
-<link data-bind="attr: {href: $root.getThemeCss()}" rel="stylesheet" type="text/css" media="all" />
-<link data-bind="attr: {href: $root.getCustomCss()}" rel="stylesheet" type="text/css" media="all" />
+<div id="wrapper" data-bind="template : {name: 'application-template'}"></div>
 
-<!-- ko if: getTitle() -->
-<h1 id="mainTitle" class="alert alert-info" data-bind="text: getTitle()"></h1>
-<!-- /ko -->
-<div id="content" data-bind="template: { name: 'section-template', foreach: getSections() }" ></div>
+<script type="text/html" id="application-template">
+    <link data-bind="attr: {href: $root.getThemeCss()}" rel="stylesheet" type="text/css" media="all" />
+    <link data-bind="attr: {href: $root.getCustomCss()}" rel="stylesheet" type="text/css" media="all" />
+
+    <!-- ko if: getTitle() -->
+    <h1 id="mainTitle" class="alert alert-info" data-bind="text: getTitle()"></h1>
+    <!-- /ko -->
+    <div id="container" data-bind="template: { name: 'section-template', foreach: getSections() }" ></div>
+</script>
 
 <script type="text/html" id="section-template">
     <div class="block">
