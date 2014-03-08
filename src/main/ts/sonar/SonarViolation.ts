@@ -14,16 +14,22 @@ class SonarViolation {
     public static MINOR:string = 'minor_violations';
     public static INFO:string = 'info_violations';
 
+    private _css:KnockoutComputed<string>;
     private _status:KnockoutObservable<string> = ko.observable<string>();
     private _count:KnockoutObservable<number> = ko.observable<number>();
 
     constructor(public type:string) {
         this._count(0);
-        this._status(SonarViolation.BASIC_CLASSES);
+        this._css =  ko.computed<string>({
+            owner: this,
+            read: ()=>{
+                return SonarViolation.BASIC_CLASSES + this._status();
+            }
+        });
     }
 
-    public getStatus():string {
-        return this._status();
+    public getCss():string {
+        return this._css();
     }
 
     public setStatus(count:number): void{
