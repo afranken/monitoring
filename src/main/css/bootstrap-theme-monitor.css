@@ -14,12 +14,10 @@ h1, h2, h3, p {
 
 .block {
   float: left;
-  margin: 0 10px 15px 10px;
+  margin: 10px;
 }
 
 .small-block {
-  float: left;
-  margin: 0 15px 15px 15px;
   min-width: 150px;
 }
 
@@ -48,7 +46,7 @@ table.jobmatrix * th a {
 }
 
 .jobstatus {
-  padding: 10px 15px;
+  padding: 10px;
   margin-bottom: 0;
   background-color: #EEEEFF;
   width: 100%;
@@ -74,7 +72,7 @@ table * th a {
   font-size: 12px;
 }
 
-.section-header {
+.monitor-header {
   padding: 5px;
   margin: 5px;
 }
@@ -102,5 +100,6 @@ table * th a {
 a.jenkins-collapse {
   font-size: 16px;
   color: #000000;
+  margin-right: 5px;
 }
 

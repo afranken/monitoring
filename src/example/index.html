@@ -35,35 +35,38 @@
     <link data-bind="attr: {href: $root.getCustomCss()}" rel="stylesheet" type="text/css" media="all" />
 
     <!-- ko if: getTitle() -->
-    <h1 id="mainTitle" class="alert alert-info section-header" data-bind="text: getTitle()"></h1>
+    <h1 id="mainTitle" class="alert alert-info monitor-header" data-bind="text: getTitle()"></h1>
     <!-- /ko -->
     <div id="container" data-bind="template: { name: 'section-template', foreach: getSections() }" ></div>
 </script>
 
 <script type="text/html" id="section-template">
     <div class="block">
-        <div data-bind="attr: { id: title}">
-            <!-- ko if: title -->
-            <h2 class="alert alert-none section-header">
-                <!-- ko if: url -->
-                <a class="alert-link" data-bind="attr: { href: url, title: title }, text: title"></a>
+        <div data-bind="attr: { id: getTitle()}">
+            <!-- ko if: getTitle() -->
+            <h2 class="alert alert-none monitor-header">
+                <!-- ko if: getUrl() -->
+                <a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getTitle() }, text: getTitle()"></a>
                 <!-- /ko -->
-                <!-- ko ifnot: url -->
-                <span data-bind="text: title"></span>
+                <!-- ko ifnot: getUrl() -->
+                <span data-bind="text: getTitle()"></span>
                 <!-- /ko -->
             </h2>
             <!-- /ko -->
-            <!-- ko if: description -->
-            <p data-bind="html: description"></p>
+            <!-- ko if: getDescription() -->
+            <p class="section-description" data-bind="html: getDescription()"></p>
             <!-- /ko -->
-            <!-- ko if: monitorModels -->
-            <div class="panel-group" data-bind="template: { name: 'monitor-template', foreach: monitorModels, afterRender: $root.getData }"></div>
+            <!-- ko if: getMonitorModels().length > 0 -->
+            <div class="panel-group small-block" data-bind="template: { name: 'monitor-template', foreach: getMonitorModels(), afterRender: $root.getData }"></div>
             <!-- /ko -->
-            <!-- ko if: sections -->
-            <div data-bind="template: { name: 'section-template', foreach: sections }"></div>
+            <!-- ko if: getSections().length > 0 -->
+            <div data-bind="template: { name: 'section-template', foreach: getSections() }"></div>
             <!-- /ko -->
         </div>
     </div>
+    <!-- ko if: ($index() === ($parent.getSections().length - 1)) -->
+    <div class="floatKiller"></div>
+    <!-- /ko -->
 </script>
 
 <script type="text/html" id="monitor-template">
@@ -71,10 +74,10 @@
     <div class="panel panel-default">
         <div data-bind="attr: {style: getStyle()}, css: getCss(), pulsate: getCss()">
             <div class="pull-left">
-                <a class="jenkins-collapse" data-toggle="collapse" data-bind="attr: { href: '#' + getId() + $index() }"><span class="glyphicon glyphicon-expand"></span></a>
+                <a class="jenkins-collapse monitor-link" data-toggle="collapse" data-bind="attr: { href: '#' + getId() + $index() }"><span class="glyphicon glyphicon-expand"></span></a>
             </div>
             <div class="pull-left">
-                <a class="alert-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a><br/>
+                <a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a><br/>
                 <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
             </div>
             <div class="floatKiller"></div>
@@ -102,13 +105,13 @@
             </dl>
             <dl class="jenkins-details-build-number">
                 <dt>Build number</dt>
-                <dd><a data-bind="attr: { href: getBuildNumberUrl() }, text: 'Build #' + getBuildNumber()"></a></dd>
+                <dd><a class="monitor-link" data-bind="attr: { href: getBuildNumberUrl() }, text: 'Build #' + getBuildNumber()"></a></dd>
             </dl>
         </div>
     </div>
     <!-- /ko -->
     <!-- ko if: $root.getTypes().isNagios(getType()) -->
-    <h3 data-bind="text: getName()"></h3>
+    <h3 class="monitor-header" data-bind="text: getName()"></h3>
     <div data-bind="template: { name: 'nagios-hostmodel-template', foreach: getHostmodels() }"></div>
     <!-- /ko -->
     <!-- ko if: $root.getTypes().isSonar(getType()) -->
@@ -119,14 +122,14 @@
 <script type="text/html" id="nagios-hostmodel-template">
     <div class="panel panel-default">
         <div data-bind="css: getCss()">
-            <a class="alert-link" data-bind="attr: { href: getUrl(), title: getHostname() }, text: getHostname()"></a><br/>
+            <a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getHostname() }, text: getHostname()"></a><br/>
             <span data-bind="html: getText()"></span>
         </div>
     </div>
 </script>
 
 <script type="text/html" id="sonar-monitormodel-template">
-    <h3><a class="alert-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a></h3>
+    <h3 class="monitor-header"><a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a></h3>
     <table class="codeviolations">
         <thead>
         <tr>

@@ -9,17 +9,18 @@ import Config = require('./jsonInterfaces/Config');
 
 class SectionModel {
 
-    public title:string;
-    public url:string;
-    public description:string;
-    public monitorModels: Array<MonitorModel> = [];
-    public sections: Array<SectionModel> = [];
+    private _title:string;
+    private _hostname:string;
+    private _url:string;
+    private _description:string;
+    private _monitorModels: Array<MonitorModel> = [];
+    private _sectionModels: Array<SectionModel> = [];
 
-    constructor(private section:Config.Section, private configuration:Configuration, private hostname: string) {
-        this.title = section.title;
-        this.url = section.url;
-        this.description = section.description;
-        this.hostname = section.hostname !== undefined ? section.hostname : hostname;
+    constructor(section:Config.Section, configuration:Configuration, hostname: string) {
+        this._title = section.title;
+        this._url = section.url;
+        this._description = section.description;
+        this._hostname = section.hostname !== undefined ? section.hostname : hostname;
 
         this.init(section, configuration);
     }
@@ -27,17 +28,37 @@ class SectionModel {
     private init(section: Config.Section, configuration:Configuration) {
         if(section.sections !== undefined) {
             section.sections.forEach(subSection => {
-                    this.sections.push(new SectionModel(subSection, configuration, this.hostname));
+                    this._sectionModels.push(new SectionModel(subSection, configuration, this._hostname));
                 }
             );
         }
 
         if(section.monitors !== undefined) {
             section.monitors.forEach(monitor => {
-                    this.monitorModels.push(MonitorModels.createModel(monitor, configuration, this.hostname));
+                    this._monitorModels.push(MonitorModels.createModel(monitor, configuration, this._hostname));
                 }
             );
         }
+    }
+
+    public getTitle():string {
+        return this._title;
+    }
+
+    public getUrl():string {
+        return this._url;
+    }
+
+    public getDescription():string {
+        return this._description;
+    }
+
+    public getMonitorModels():Array<MonitorModel> {
+        return this._monitorModels;
+    }
+
+    public getSections():Array<SectionModel> {
+        return this._sectionModels;
     }
 
 }
