@@ -74,6 +74,11 @@ table * th a {
   font-size: 12px;
 }
 
+.section-header {
+  padding: 5px;
+  margin: 5px;
+}
+
 .alert-none {
   color: #bbb;
   background-color: #f7f7f9;

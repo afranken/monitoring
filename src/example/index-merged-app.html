@@ -19,7 +19,7 @@
     <link data-bind="attr: {href: $root.getCustomCss()}" rel="stylesheet" type="text/css" media="all" />
 
     <!-- ko if: getTitle() -->
-    <h1 id="mainTitle" class="alert alert-info" data-bind="text: getTitle()"></h1>
+    <h1 id="mainTitle" class="alert alert-info section-header" data-bind="text: getTitle()"></h1>
     <!-- /ko -->
     <div id="container" data-bind="template: { name: 'section-template', foreach: getSections() }" ></div>
 </script>
@@ -28,7 +28,7 @@
     <div class="block">
         <div data-bind="attr: { id: title}">
             <!-- ko if: title -->
-            <h2 class="alert alert-none">
+            <h2 class="alert alert-none section-header">
                 <!-- ko if: url -->
                 <a class="alert-link" data-bind="attr: { href: url, title: title }, text: title"></a>
                 <!-- /ko -->
@@ -41,7 +41,7 @@
             <p data-bind="html: description"></p>
             <!-- /ko -->
             <!-- ko if: monitorModels -->
-                <div class="panel-group" data-bind="template: { name: 'monitor-template', foreach: monitorModels, afterRender: $root.getData }"></div>
+            <div class="panel-group" data-bind="template: { name: 'monitor-template', foreach: monitorModels, afterRender: $root.getData }"></div>
             <!-- /ko -->
             <!-- ko if: sections -->
             <div data-bind="template: { name: 'section-template', foreach: sections }"></div>
