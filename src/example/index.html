@@ -8,6 +8,7 @@
     <script type="text/javascript" src="config.js"></script>
     <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.min.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme-monitor.css" media="all" />
+    <meta http-equiv="refresh" content="600">
 </head>
 <body>
 
@@ -37,12 +38,12 @@
     <!-- ko if: getTitle() -->
     <h1 id="mainTitle" class="alert alert-info monitor-header" data-bind="text: getTitle()"></h1>
     <!-- /ko -->
-    <div id="container" data-bind="template: { name: 'section-template', foreach: getSections() }" ></div>
+    <div id="container-fluid" data-bind="template: { name: 'section-row-template', foreach: getSections() }" ></div>
 </script>
 
-<script type="text/html" id="section-template">
-    <div class="block">
-        <div data-bind="attr: { id: getTitle()}">
+<script type="text/html" id="section-row-template">
+    <div class="row">
+        <div class="col-lg-12">
             <!-- ko if: getTitle() -->
             <h2 class="alert alert-none monitor-header">
                 <!-- ko if: getUrl() -->
@@ -56,33 +57,49 @@
             <!-- ko if: getDescription() -->
             <p class="section-description" data-bind="html: getDescription()"></p>
             <!-- /ko -->
-            <!-- ko if: getMonitorModels().length > 0 -->
-            <div class="panel-group small-block" data-bind="template: { name: 'monitor-template', foreach: getMonitorModels(), afterRender: $root.getData }"></div>
-            <!-- /ko -->
-            <!-- ko if: getSections().length > 0 -->
-            <div data-bind="template: { name: 'section-template', foreach: getSections() }"></div>
-            <!-- /ko -->
         </div>
     </div>
-    <!-- ko if: ($index() === ($parent.getSections().length - 1)) -->
-    <div class="floatKiller"></div>
-    <!-- /ko -->
+    <div class="row">
+        <!-- ko if: getSections().length > 0 -->
+        <!-- ko template: { name: 'section-template', foreach: getSections() } -->
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</script>
+
+<script type="text/html" id="section-template">
+    <div data-bind="css: 'col-lg-'+$parent.getColumnWidth()">
+        <!-- ko if: getTitle() -->
+        <h2 class="alert alert-none monitor-header">
+            <!-- ko if: getUrl() -->
+            <a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getTitle() }, text: getTitle()"></a>
+            <!-- /ko -->
+            <!-- ko ifnot: getUrl() -->
+            <span data-bind="text: getTitle()"></span>
+            <!-- /ko -->
+        </h2>
+        <!-- /ko -->
+        <!-- ko if: getDescription() -->
+        <p class="section-description" data-bind="html: getDescription()"></p>
+        <!-- /ko -->
+        <!-- ko if: getMonitorModels().length > 0 -->
+        <div class="panel-group small-block" data-bind="template: { name: 'monitor-template', foreach: getMonitorModels(), afterRender: $root.getData }"></div>
+        <!-- /ko -->
+    </div>
 </script>
 
 <script type="text/html" id="monitor-template">
     <!-- ko if: $root.getTypes().isJenkins(getType()) -->
     <div class="panel panel-default">
         <div data-bind="attr: {style: getStyle()}, css: getCss(), pulsate: getCss()">
-            <div class="pull-left">
-                <a class="jenkins-collapse monitor-link" data-toggle="collapse" data-bind="attr: { href: '#' + getId() + $index() }"><span class="glyphicon glyphicon-expand"></span></a>
-            </div>
-            <div class="pull-left">
-                <a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a><br/>
-                <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
-            </div>
-            <div class="floatKiller"></div>
+            <a class="alert-link monitor-link" data-toggle="collapse" data-bind="attr: { href: '#' + getId() + $index(), title: getName() }, text: getName()"></a><br/>
+            <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
         </div>
         <div class="panel-collapse collapse" data-bind="attr: { id: getId() + $index() }">
+            <dl class="jenkins-details-build-number">
+                <dt>Build number</dt>
+                <dd><a class="monitor-link" data-bind="attr: { href: getBuildNumberUrl() }, text: 'Build #' + getBuildNumber()"></a></dd>
+            </dl>
             <!-- ko if: getCommitHash() !== undefined -->
             <dl class="jenkins-details-commit-hash">
                 <dt>Commit Hash</dt>
@@ -102,10 +119,6 @@
             <dl class="jenkins-details-run-time">
                 <dt>Run Time</dt>
                 <dd data-bind="text: getRunTime()"></dd>
-            </dl>
-            <dl class="jenkins-details-build-number">
-                <dt>Build number</dt>
-                <dd><a class="monitor-link" data-bind="attr: { href: getBuildNumberUrl() }, text: 'Build #' + getBuildNumber()"></a></dd>
             </dl>
         </div>
     </div>
