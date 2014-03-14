@@ -60,7 +60,7 @@ class JenkinsMonitorModel implements MonitorModel {
                     if(revision !== undefined) {
                         revision.branch.forEach((singleBranch)=>{
                             if(singleBranch.SHA1) {
-                                commit = singleBranch.SHA1;
+                                commit = singleBranch.SHA1.slice(0,12);
                             }
                         });
                     }
