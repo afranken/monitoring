@@ -28,7 +28,7 @@ declare module Config {
             /**
              * the section title
              */
-            title: string;
+            title?: string;
             /**
              * section title will use link if configured. (e.g. a Jenkins View)
              */
@@ -36,7 +36,7 @@ declare module Config {
             /**
              * will be used for all Monitors. May be overwritten by Monitor.
              */
-            hostname: string;
+            hostname?: string;
             /**
              * will be displayed below the title
              */
