@@ -9,6 +9,8 @@ import Config = require('./jsonInterfaces/Config');
 
 class SectionModel {
 
+    private static MAX_WIDTH:number = 12;
+
     private _title:string;
     private _hostname:string;
     private _url:string;
@@ -39,6 +41,13 @@ class SectionModel {
                 }
             );
         }
+    }
+
+    /**
+     * @returns number the width of a column based on the number of sections
+     */
+    public getColumnWidth() {
+        return this._sectionModels.length > 0 ? Math.floor(SectionModel.MAX_WIDTH / this._sectionModels.length) : SectionModel.MAX_WIDTH;
     }
 
     public getTitle():string {
