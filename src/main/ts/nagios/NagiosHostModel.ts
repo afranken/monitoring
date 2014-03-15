@@ -14,18 +14,26 @@ class NagiosHostModel {
 
     private _hostname:string;
     private _url:string;
-    private _serviceNames:KnockoutComputed<string>;
+    private _allServices:KnockoutObservable<string> = ko.observable<string>();
+    private _brokenServices:KnockoutObservable<string> = ko.observable<string>();
     private _css:KnockoutObservable<string> = ko.observable<string>();
-    private _text:KnockoutObservable<string> = ko.observable<string>();
+    private _text:KnockoutComputed<string>;
+    private _detailText:KnockoutComputed<string>;
 
     constructor(hostname:string, url:string) {
         this._css(CssClasses.BASIC_CLASSES);
         this._url = url;
         this._hostname = hostname;
-        this._serviceNames = ko.computed<string>({
+        this._text = ko.computed<string>({
             owner: this,
             read: ()=>{
-                return this.getText();
+                return this.getBrokenServices();
+            }
+        });
+        this._detailText = ko.computed<string>({
+            owner: this,
+            read: ()=>{
+                return this.getAllServices();
             }
         });
     }
@@ -42,15 +50,35 @@ class NagiosHostModel {
         return this._css() === CssClasses.BASIC_CLASSES ? this._css() : this._css() + CssClasses.BASIC_CLASSES;
     }
 
-    private getText(): string {
+    private getBrokenServices(): string {
+        return this._brokenServices();
+    }
+
+    public getText(): string {
         return this._text();
     }
 
-    private setText(text: string): void {
-        if(this._text() === undefined || this._text() === '') {
-            this._text(text);
+    public getDetailText(): string {
+        return this._detailText();
+    }
+
+    private setBrokenServices(service: string): void {
+        if(this._brokenServices() === undefined || this._brokenServices() === '') {
+            this._brokenServices(service);
         } else {
-            this._text(this._text() + '<br/>' + text);
+            this._brokenServices(this._brokenServices() + '<br/>' + service);
+        }
+    }
+
+    private getAllServices(): string {
+        return this._allServices();
+    }
+
+    private setAllServices(service: string): void {
+        if(this._allServices() === undefined || this._allServices() === '') {
+            this._allServices(service);
+        } else {
+            this._allServices(this._allServices() + '<br/>' + service);
         }
     }
 
@@ -67,16 +95,17 @@ class NagiosHostModel {
 
     public addService(service: NagiosJsonResponse.NagiosService){
         var status = service.service_status;
+        this.setAllServices(service.service_description)
         if (status === NagiosHostModel.STATUS_OK) {
             this.setCss(CssClasses.SUCCESS);
         }
         else if (status === NagiosHostModel.STATUS_CRITICAL) {
             this.setCss(CssClasses.FAILURE);
-            this.setText(service.service_description);
+            this.setBrokenServices(service.service_description);
         }
         else if (status === NagiosHostModel.STATUS_WARNING) {
             this.setCss(CssClasses.WARNING);
-            this.setText(service.service_description);
+            this.setBrokenServices(service.service_description);
         }
         else {
             this.setCss(CssClasses.DISABLED);

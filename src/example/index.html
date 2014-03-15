@@ -135,8 +135,18 @@
 <script type="text/html" id="nagios-hostmodel-template">
     <div class="panel panel-default">
         <div data-bind="css: getCss()">
-            <a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getHostname() }, text: getHostname()"></a><br/>
-            <span data-bind="html: getText()"></span>
+            <a class="alert-link monitor-link" data-toggle="collapse" data-bind="attr: { href: '#' + getHostname() + $index(), title: getHostname() }, text: getHostname()"></a><br/>
+            <span class="nagios-broken-services" data-bind="html: getText()"></span>
+        </div>
+        <div class="panel-collapse collapse" data-bind="attr: { id: getHostname() + $index() }">
+            <dl class="nagios-link">
+                <dt>Nagios:</dt>
+                <dd><a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getHostname() }, text: getHostname()"></a></dd>
+            </dl>
+            <dl class="nagios-all-services">
+                <dt>All services:</dt>
+                <dd><span data-bind="html: getDetailText()"></span></dd>
+            </dl>
         </div>
     </div>
 </script>
