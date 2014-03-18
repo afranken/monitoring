@@ -114,3 +114,8 @@ h2, .h2 {
 h3, .h3 {
   font-size: 20px;
 }
+
+.progress {
+  margin: 2px;
+  height: 15px;
+}

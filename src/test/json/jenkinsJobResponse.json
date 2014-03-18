@@ -23,7 +23,8 @@
       }
     ],
     "building": false,
-    "duration": 2923735,
+    "duration": 2,
+    "estimatedDuration":4602498,
     "id":"2014-02-07_01-29-34",
     "number":209,
     "result": "SUCCESS",

@@ -24,6 +24,11 @@ class CssClasses {
      */
     public static BUILDING: string = ' status-building ';
 
+
+    public static SUCCESS_PROGRESS_BUILDING = ' progress-bar progress-bar-success ';
+    public static WARNING_PROGRESS_BUILDING = ' progress-bar progress-bar-warning ';
+    public static FAILURE_PROGRESS_BUILDING = ' progress-bar progress-bar-danger ';
+
 }
 
 export = CssClasses;

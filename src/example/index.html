@@ -91,9 +91,16 @@
 <script type="text/html" id="monitor-template">
     <!-- ko if: $root.getTypes().isJenkins(getType()) -->
     <div class="panel panel-default">
-        <div data-bind="attr: {style: getStyle()}, css: getCss(), pulsate: getCss()">
-            <a class="alert-link monitor-link" data-toggle="collapse" data-bind="attr: { href: '#' + getId() + $index(), title: getName() }, text: getName()"></a><br/>
-            <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
+        <div class="alert-none">
+            <div data-bind='css: getCss()'>
+                <a class="alert-link monitor-link" data-toggle="collapse" data-bind="attr: { href: '#' + getId() + $index(), title: getName() }, text: getName()"></a><br/>
+                <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
+                <!-- ko if: getBuildingStyle() -->
+                <div class="progress progress-striped "> <!-- add class "active" for animated bars. CPU usage is very high then! -->
+                    <div data-bind='attr: {style: "width: "+getCompletedPercent()+"%", "aria-valuenow": getCompletedPercent() }, css: getBuildingStyle()' role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <!-- /ko -->
+            </div>
         </div>
         <div class="panel-collapse collapse" data-bind="attr: { id: getId() + $index() }">
             <dl class="jenkins-details-build-number">

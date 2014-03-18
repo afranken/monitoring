@@ -31,6 +31,8 @@ class JenkinsMonitorModel implements MonitorModel {
     private _runTime:KnockoutComputed<string>;
     private _buildNumber:KnockoutComputed<number>;
     private _buildNumberUrl:KnockoutComputed<string>;
+    private _completedPercent:KnockoutComputed<number>;
+    private _buildingStyle:KnockoutComputed<string>;
     private _url:string;
     private _jsonResponse:KnockoutObservable<JenkinsJsonResponse.Json> = ko.observable<JenkinsJsonResponse.Json>();
 
@@ -45,10 +47,22 @@ class JenkinsMonitorModel implements MonitorModel {
                     return CssClasses.BASIC_CLASSES + JenkinsMonitorModel.translateColor(this.getResponseColor());
                 }
         });
+        this._buildingStyle = ko.computed<string>({
+                owner: this,
+                read: ()=>{
+                    return JenkinsMonitorModel.translateBuildingStyle(this.getResponseColor());
+                }
+        });
         this._style = ko.computed<string>({
             owner: this,
             read: ()=>{
                 return JenkinsMonitorModel.OPACITY+JenkinsMonitorModel.calculateExpiration(this.getResponseTimestamp(), (<JenkinsConnector>this._connector).getExpiry());
+            }
+        });
+        this._completedPercent = ko.computed<number>({
+            owner: this,
+            read: ()=>{
+                return JenkinsMonitorModel.calculateCompletedPercent(this.getResponseTimestamp(), this.getEstimatedDuration());
             }
         });
         this._commitHash = ko.computed<string>({
@@ -164,12 +178,20 @@ class JenkinsMonitorModel implements MonitorModel {
         return this._buildNumberUrl();
     }
 
+    public getCompletedPercent():number {
+        return this._completedPercent();
+    }
+
     public getHostname():string {
         return this._hostname;
     }
 
     public getCss():string {
         return this._css();
+    }
+
+    public getBuildingStyle():string {
+        return this._buildingStyle();
     }
 
     public getStyle():string {
@@ -193,6 +215,20 @@ class JenkinsMonitorModel implements MonitorModel {
     }
 
     //==================================================================================================================
+
+    private static calculateCompletedPercent(buildTimestamp: number, estimatedDuration:number):number {
+        var completedPercent:number;
+
+        var nowTimestamp:number = new Date().getTime();
+
+        if(buildTimestamp === undefined || estimatedDuration === undefined) {
+            return undefined;
+        }
+
+        completedPercent = Math.round((nowTimestamp - buildTimestamp) * 100 / estimatedDuration);
+
+        return completedPercent;
+    }
 
     private static calculateStartDate(buildTimestamp: number):string {
         var startTime:string;
@@ -277,6 +313,26 @@ class JenkinsMonitorModel implements MonitorModel {
         return colorTranslation;
     }
 
+    private static translateBuildingStyle(color:string):string {
+        var colorTranslation:string;
+
+        switch(color){
+            case 'yellow_anime':
+                colorTranslation = CssClasses.WARNING_PROGRESS_BUILDING;
+                break;
+            case 'red_anime':
+                colorTranslation = CssClasses.FAILURE_PROGRESS_BUILDING;
+                break;
+            case 'blue_anime':
+                colorTranslation = CssClasses.SUCCESS_PROGRESS_BUILDING;
+                break;
+            default:
+                colorTranslation = undefined;
+        }
+
+        return colorTranslation;
+    }
+
     private getLastBuiltRevision(json:JenkinsJsonResponse.Json):JenkinsJsonResponse.Revision {
         var revision:JenkinsJsonResponse.Revision = undefined;
         var lastBuild:JenkinsJsonResponse.LastBuild = json.lastBuild;
@@ -294,6 +350,14 @@ class JenkinsMonitorModel implements MonitorModel {
             timestamp = this._jsonResponse().lastBuild.timestamp;
         }
         return timestamp;
+    }
+
+    private getEstimatedDuration():number {
+        var estimatedDuration:number = undefined;
+        if(this._jsonResponse() !== undefined) {
+            estimatedDuration = this._jsonResponse().lastBuild.estimatedDuration;
+        }
+        return estimatedDuration;
     }
 
     private getResponseColor():string {
