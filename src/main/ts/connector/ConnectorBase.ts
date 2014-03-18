@@ -9,6 +9,8 @@ class ConnectorBase implements Connector {
 
     public static _MESSAGE:string = 'UNSUPPORTED, IMPLEMENT THIS METHOD';
 
+    private static TIMEOUT_BASE = 60;
+
     private _configuration: Configuration;
 
     constructor(configuration: Configuration) {
@@ -52,6 +54,14 @@ class ConnectorBase implements Connector {
             name: 'Error',
             message: ConnectorBase._MESSAGE
         };
+    }
+
+    /**
+     * @returns number between 60 and 120 seconds, in milliseconds.
+     */
+    public static getRandomTimeout() {
+
+        return (ConnectorBase.TIMEOUT_BASE + (Math.random() * 60)) * 1000;
     }
 
 }
