@@ -75,7 +75,7 @@
     <!-- ko if: $root.getTypes().isJenkins(getType()) -->
     <div class="panel panel-default">
         <div class="alert-none">
-            <div data-bind='css: getCss()'>
+            <div data-bind='attr: {style: getStyle()}, css: getCss()'>
                 <a class="alert-link monitor-link" data-toggle="collapse" data-bind="attr: { href: '#' + getId() + $index(), title: getName() }, text: getName()"></a><br/>
                 <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
                 <!-- ko if: getBuildingStyle() -->
