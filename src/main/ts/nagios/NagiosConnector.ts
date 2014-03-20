@@ -34,6 +34,9 @@ class NagiosConnector extends ConnectorBase implements Connector {
                 console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model));
             }
         });
+
+        //reload data periodically.
+        setTimeout(() => this.getRemoteData(model), ConnectorBase.getRandomTimeout());
     }
 
     public static updateModel(json : NagiosJsonResponse.NagiosServices, model:NagiosMonitorModel):void {

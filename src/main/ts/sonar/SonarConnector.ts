@@ -29,6 +29,9 @@ class SonarConnector extends ConnectorBase implements Connector {
                     }
                 });
         });
+
+        //reload data periodically.
+        setTimeout(() => this.getRemoteData(model), ConnectorBase.getRandomTimeout());
     }
 
     public updateModel(json:SonarResponse.Jsons, model:SonarMonitorModel, moduleName:string):void {
