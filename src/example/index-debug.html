@@ -95,7 +95,7 @@
                 <a class="alert-link monitor-link" data-toggle="collapse" data-bind="attr: { href: '#' + getId() + $index(), title: getName() }, text: getName()"></a><br/>
                 <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
                 <!-- ko if: getBuildingStyle() -->
-                <div class="progress progress-striped "> <!-- add class "active" for animated bars. CPU usage is very high then! -->
+                <div class="progress progress-striped active">
                     <div data-bind='attr: {style: "width: "+getCompletedPercent()+"%", "aria-valuenow": getCompletedPercent() }, css: getBuildingStyle()' role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <!-- /ko -->
