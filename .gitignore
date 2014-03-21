@@ -5,6 +5,7 @@
 *.iws
 
 src/main/typescript/**/*.js*
+_SpecRunner.html
 
 # Maven
 target

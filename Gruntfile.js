@@ -143,7 +143,7 @@ module.exports = function(grunt) {
 
                     // the tests
                     specs: '<%= dir.target_test_js %>/test/ts/**/*Spec.js',
-                    keepRunner: true, // useful for debugging
+                    keepRunner: false, // useful for debugging
 
                     // -- additional JUnit compliant test reports that Jenkins is able to analyze
                     junit: {
