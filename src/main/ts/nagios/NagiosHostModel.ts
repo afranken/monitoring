@@ -1,4 +1,6 @@
 /// <reference path="../vendor/knockout.d.ts" />
+/// <reference path="../vendor/jquery.d.ts" />
+import jQuery = require('jquery');
 import ko = require('knockout');
 import CssClasses = require('../CssClasses');
 import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
@@ -14,28 +16,14 @@ class NagiosHostModel {
 
     private _hostname:string;
     private _url:string;
-    private _allServices:KnockoutObservable<string> = ko.observable<string>();
-    private _brokenServices:KnockoutObservable<string> = ko.observable<string>();
+    private _allServices:KnockoutObservableArray<string> = ko.observableArray<string>();
+    private _brokenServices:KnockoutObservableArray<string> = ko.observableArray<string>();
     private _css:KnockoutObservable<string> = ko.observable<string>();
-    private _text:KnockoutComputed<string>;
-    private _detailText:KnockoutComputed<string>;
 
     constructor(hostname:string, url:string) {
         this._css(CssClasses.BASIC_CLASSES);
         this._url = url;
         this._hostname = hostname;
-        this._text = ko.computed<string>({
-            owner: this,
-            read: ()=>{
-                return this.getBrokenServices();
-            }
-        });
-        this._detailText = ko.computed<string>({
-            owner: this,
-            read: ()=>{
-                return this.getAllServices();
-            }
-        });
     }
 
     public getHostname():string {
@@ -50,35 +38,23 @@ class NagiosHostModel {
         return this._css() === CssClasses.BASIC_CLASSES ? this._css() : this._css() + CssClasses.BASIC_CLASSES;
     }
 
-    private getBrokenServices(): string {
+    public getBrokenServices(): Array<string> {
         return this._brokenServices();
     }
 
-    public getText(): string {
-        return this._text();
-    }
-
-    public getDetailText(): string {
-        return this._detailText();
-    }
-
     private setBrokenServices(service: string): void {
-        if(this._brokenServices() === undefined || this._brokenServices() === '') {
-            this._brokenServices(service);
-        } else {
-            this._brokenServices(this._brokenServices() + '<br/>' + service);
+        if(!~jQuery.inArray(service,this._brokenServices())) {
+            this._brokenServices.push(service);
         }
     }
 
-    private getAllServices(): string {
+    public getAllServices(): Array<string> {
         return this._allServices();
     }
 
     private setAllServices(service: string): void {
-        if(this._allServices() === undefined || this._allServices() === '') {
-            this._allServices(service);
-        } else {
-            this._allServices(this._allServices() + '<br/>' + service);
+        if(!~jQuery.inArray(service,this._allServices())) {
+            this._allServices.push(service);
         }
     }
 
@@ -95,7 +71,7 @@ class NagiosHostModel {
 
     public addService(service: NagiosJsonResponse.NagiosService){
         var status = service.service_status;
-        this.setAllServices(service.service_description)
+        this.setAllServices(service.service_description);
         if (status === NagiosHostModel.STATUS_OK) {
             this.setCss(CssClasses.SUCCESS);
         }
