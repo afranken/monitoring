@@ -1,17 +1,24 @@
-import Types = require('./Types');
+import Types = require('../Types');
 import MonitorModel = require('./MonitorModel');
-import Config = require('./jsonInterfaces/Config');
-import Configuration = require('./configuration/Configuration');
-import Connector = require('./connector/Connector');
-import Connectors = require('./connector/Connectors');
-import SonarMonitorModel = require('./sonar/SonarMonitorModel');
-import NagiosMonitorModel = require('./nagios/NagiosMonitorModel');
-import JenkinsMonitorModel = require('./jenkins/JenkinsMonitorModel');
+import Config = require('../jsonInterfaces/Config.d');
+import Configuration = require('../configuration/Configuration');
+import Connector = require('../connector/Connector');
+import Connectors = require('../connector/Connectors');
+import SonarMonitorModel = require('../sonar/SonarMonitorModel');
+import NagiosMonitorModel = require('../nagios/NagiosMonitorModel');
+import JenkinsMonitorModel = require('../jenkins/JenkinsMonitorModel');
 
 /**
  * This class contains static methods that help with MonitorModels.
  */
 class MonitorModels {
+
+    private static _PATTERN:RegExp = new RegExp('\\W','g');
+    private static _REPLACEMENT_CHAR = '-';
+
+    public static getHtmlsafeId(id:string):string {
+        return id.replace(MonitorModels._PATTERN,MonitorModels._REPLACEMENT_CHAR);
+    }
 
     /**
      * Create a {@link MonitorModel} implementation matching the type of the {@link Config.Monitor}

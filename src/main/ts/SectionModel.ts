@@ -1,5 +1,5 @@
-import MonitorModel = require('./MonitorModel');
-import MonitorModels = require('./MonitorModels');
+import MonitorModel = require('./monitorModel/MonitorModel');
+import MonitorModels = require('./monitorModel/MonitorModels');
 import Connector = require('./connector/Connector');
 import Configuration = require('./configuration/Configuration');
 import JenkinsMonitorModel = require('./jenkins/JenkinsMonitorModel');

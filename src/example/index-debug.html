@@ -92,7 +92,7 @@
     <div class="panel panel-default">
         <div class="alert-none">
             <div data-bind='attr: {style: getStyle()}, css: getCss()'>
-                <a class="alert-link monitor-link" data-toggle="collapse" data-bind="attr: { href: '#' + getId() + $index(), title: getName() }, text: getName()"></a><br/>
+                <a class="alert-link monitor-link" data-toggle="collapse" data-bind="attr: { href: '#' + getHtmlsafeId() + $index(), title: getName() }, text: getName()"></a><br/>
                 <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
                 <!-- ko if: getBuildingStyle() -->
                 <div class="progress progress-striped active">
@@ -101,7 +101,7 @@
                 <!-- /ko -->
             </div>
         </div>
-        <div class="panel-collapse collapse" data-bind="attr: { id: getId() + $index() }">
+        <div class="panel-collapse collapse" data-bind="attr: { id: getHtmlsafeId() + $index() }">
             <dl class="jenkins-details-build-number">
                 <dt>Build number</dt>
                 <dd><a class="monitor-link" data-bind="attr: { href: getBuildNumberUrl() }, text: 'Build #' + getBuildNumber()"></a></dd>

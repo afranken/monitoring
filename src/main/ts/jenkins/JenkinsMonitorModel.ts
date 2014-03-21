@@ -4,7 +4,7 @@
 import ko = require('knockout');
 import moment = require('moment');
 import Types = require('../Types');
-import MonitorModel = require('../MonitorModel');
+import MonitorModel = require('../monitorModel/MonitorModel');
 import Connector = require('../connector/Connector');
 import CssClasses = require('../CssClasses');
 import JenkinsConnector = require('./JenkinsConnector');
@@ -156,6 +156,10 @@ class JenkinsMonitorModel implements MonitorModel {
 
     public getId():string {
         return this._id;
+    }
+
+    public getHtmlsafeId():string {
+        return MonitorModels.getHtmlsafeId(this._id);
     }
 
     public getCommitHash():string {

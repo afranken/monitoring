@@ -86,6 +86,12 @@
         '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/jenkins/JenkinsMonitorModel' ,
       
         
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/monitorModel/MonitorModel' ,
+      
+        
+        '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/monitorModel/MonitorModels' ,
+      
+        
         '.grunt/grunt-contrib-jasmine/target/js-test/main/ts/nagios/NagiosConnector' ,
       
         
@@ -108,7 +114,7 @@
       
     ],
     function(){
-      require(['target/js-test/test/ts/SectionModelSpec.js','target/js-test/test/ts/configuration/ConfigurationSpec.js','target/js-test/test/ts/connector/ConnectorBaseSpec.js','target/js-test/test/ts/jenkins/JenkinsConnectorSpec.js','target/js-test/test/ts/jenkins/JenkinsMonitorModelSpec.js','target/js-test/test/ts/nagios/NagiosConnectorSpec.js','target/js-test/test/ts/sonar/SonarConnectorSpec.js','.grunt/grunt-contrib-jasmine/grunt-template-jasmine-istanbul/reporter.js','.grunt/grunt-contrib-jasmine/reporter.js'], function(){
+      require(['target/js-test/test/ts/SectionModelSpec.js','target/js-test/test/ts/configuration/ConfigurationSpec.js','target/js-test/test/ts/connector/ConnectorBaseSpec.js','target/js-test/test/ts/jenkins/JenkinsConnectorSpec.js','target/js-test/test/ts/jenkins/JenkinsMonitorModelSpec.js','target/js-test/test/ts/monitorModel/MonitorModelsSpec.js','target/js-test/test/ts/nagios/NagiosConnectorSpec.js','target/js-test/test/ts/sonar/SonarConnectorSpec.js','.grunt/grunt-contrib-jasmine/grunt-template-jasmine-istanbul/reporter.js','.grunt/grunt-contrib-jasmine/reporter.js'], function(){
         require(['.grunt/grunt-contrib-jasmine/jasmine-helper.js'], function(){
           // good to go! Our tests should already be running.
         })
