@@ -1,6 +1,6 @@
 {
   "name": "monitoring",
-  "version": "0.9.0",
+  "version": "0.9.1-SNAPSHOT",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.2",
