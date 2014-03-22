@@ -111,10 +111,10 @@ module.exports = function(grunt) {
                 src: ['<%= dir.source_ts %>/**/*.ts'],
                 dest: '<%= dir.target_js %>/app',
                 options: {
-                    base_path: '<%= dir.source_ts %>',
+                    basePath: '<%= dir.source_ts %>',
                     target: 'es5',
                     declaration: true,
-                    sourcemap: true,
+                    sourceMap: true,
                     comments: true,
                     module: 'amd'
                 }
@@ -125,7 +125,7 @@ module.exports = function(grunt) {
                 src: ['<%= dir.source %>/**/*.ts'],
                 dest: '<%= dir.target_test_js %>',
                 options: {
-                    base_path: '<%= dir.source %>',
+                    basePath: '<%= dir.source %>',
                     target: 'es5',
                     module: 'amd'
                 }
