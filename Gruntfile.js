@@ -248,8 +248,15 @@ module.exports = function(grunt) {
               'Application': './Application',
               'jquery': '../js/vendor/jquery-2.1.0.min',
               'knockout': '../js/vendor/knockout-3.1.0',
-              'moment': '../js/vendor/moment-with-langs.min'
-            }
+              'moment': '../js/vendor/moment-with-langs.min',
+              'requireLib': "../js/vendor/require"
+            },
+
+            include : [
+              "requireLib"
+            ],
+
+            findNestedDependencies: true
           },
 
           debug: {
