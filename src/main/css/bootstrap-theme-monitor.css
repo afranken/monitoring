@@ -1,6 +1,7 @@
 body {
   padding: 0 10px;
 }
+
 body, table {
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 10pt;
@@ -8,43 +9,33 @@ body, table {
   background: #ffffff;
 }
 
+/**
+ * Heading styles
+ */
 h1, h2, h3, p {
   text-align: center;
 }
 
-.block {
-  float: left;
-  margin: 10px;
+h1, .h1 {
+  font-size: 30px;
 }
 
-.small-block {
-  min-width: 150px;
+h2, .h2 {
+  font-size: 24px;
 }
 
-.floatKiller {
-  clear: both;
+h3, .h3 {
+  font-size: 20px;
 }
 
-table.jobmatrix * th a {
-  color: #a9a9a9;
-  font-size: 12px;
+.monitor-heading {
+  padding: 5px;
+  margin: 5px;
 }
 
-.codeviolation {
-  padding: 0;
-  margin: 2px;
-  min-width: 55px;
-  background-color: #EEEEFF;
-}
-
-.sonar-violation-count {
-  text-align: center;
-}
-
-.sonar-module-name {
-  text-align: left;
-}
-
+/**
+ * Basic styles for all boxes
+ */
 .jobstatus {
   padding: 10px;
   margin-bottom: 0;
@@ -56,9 +47,15 @@ table.jobmatrix * th a {
   font-size: 14px;
 }
 
-.jenkins-start-date {
-  font-size: 12px;
-  /*display: none;*/
+
+/**
+ * Sonar styles
+ */
+.codeviolation {
+  padding: 0;
+  margin: 2px;
+  min-width: 55px;
+  background-color: #EEEEFF;
 }
 
 th {
@@ -72,11 +69,37 @@ table * th a {
   font-size: 12px;
 }
 
-.monitor-header {
-  padding: 5px;
-  margin: 5px;
+.sonar-violation-count {
+  text-align: center;
 }
 
+.sonar-module-name {
+  text-align: left;
+}
+
+
+/**
+ * Jenkins styles
+ */
+.jenkins-start-date {
+  font-size: 12px;
+}
+
+a.jenkins-collapse {
+  font-size: 16px;
+  color: #000000;
+  margin-right: 5px;
+}
+
+.progress {
+  margin: 2px;
+  height: 15px;
+}
+
+
+/**
+ * define box colors
+ */
 .alert-none {
   color: #bbb;
   background-color: #f7f7f9;
@@ -97,25 +120,51 @@ table * th a {
   color: #666666;
 }
 
-a.jenkins-collapse {
-  font-size: 16px;
-  color: #000000;
-  margin-right: 5px;
+.alert-info {
+  color: #0c2e38;
+  background-color: #2ba6cb;
+  border-color: #2284a1;
 }
 
-h1, .h1 {
-  font-size: 30px;
+.alert-info .alert-link {
+  color: #0c2e38;
 }
 
-h2, .h2 {
-  font-size: 24px;
+.alert-success {
+  color: #0a1104;
+  background-color: #47a447;
+  border-color: #398439;
+  outline: 5px auto -webkit-focus-ring-color;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
 }
 
-h3, .h3 {
-  font-size: 20px;
+.alert-success .alert-link {
+  color: #0a1104;
 }
 
-.progress {
-  margin: 2px;
-  height: 15px;
+.alert-warning {
+  color: #200203;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+  outline: 5px auto -webkit-focus-ring-color;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.alert-warning .alert-link {
+  color: #200203;
+}
+
+.alert-danger {
+  color: #200203;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  outline: 5px auto -webkit-focus-ring-color;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.alert-danger .alert-link {
+  color: #200203;
 }

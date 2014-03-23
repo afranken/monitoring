@@ -4,9 +4,11 @@
     <title></title>
     <script type="text/javascript" data-main="./app/Application" src="js/vendor/require.js"></script>
     <script type="text/javascript" src="js/vendor/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+    <!--<script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>-->
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="config.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.min.css" media="all" />
+    <!--<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.min.css" media="all" />-->
+    <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme-monitor.css" media="all" />
 </head>
 <body>
@@ -31,11 +33,13 @@
 <div id="wrapper" data-bind="template : {name: 'application-template'}"></div>
 
 <script type="text/html" id="application-template">
-    <link data-bind="attr: {href: $root.getThemeCss()}" rel="stylesheet" type="text/css" media="all" />
-    <link data-bind="attr: {href: $root.getCustomCss()}" rel="stylesheet" type="text/css" media="all" />
+    <!-- CSS files should not be linked in the body, but Knockout doesn't support bindings in the HTML head out-of-the-box. -->
+    <!-- ko if: $root.getCustomCss() -->
+    <!--<link data-bind="attr: {href: $root.getCustomCss()}" rel="stylesheet" type="text/css" media="all" />-->
+    <!-- /ko -->
 
     <!-- ko if: getTitle() -->
-    <h1 id="mainTitle" class="alert alert-info monitor-header" data-bind="text: getTitle()"></h1>
+    <h1 id="mainTitle" class="alert alert-info monitor-heading" data-bind="text: getTitle()"></h1>
     <!-- /ko -->
     <div id="container-fluid" data-bind="template: { name: 'section-row-template', foreach: getSections() }" ></div>
 </script>
@@ -44,7 +48,7 @@
     <div class="row">
         <div class="col-lg-12">
             <!-- ko if: getTitle() -->
-            <h2 class="alert alert-none monitor-header">
+            <h2 class="alert alert-none monitor-heading">
                 <!-- ko if: getUrl() -->
                 <a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getTitle() }, text: getTitle()"></a>
                 <!-- /ko -->
@@ -69,7 +73,7 @@
 <script type="text/html" id="section-template">
     <div data-bind="css: 'col-lg-'+$parent.getColumnWidth()">
         <!-- ko if: getTitle() -->
-        <h2 class="alert alert-none monitor-header">
+        <h2 class="alert alert-none monitor-heading">
             <!-- ko if: getUrl() -->
             <a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getTitle() }, text: getTitle()"></a>
             <!-- /ko -->
@@ -82,7 +86,7 @@
         <p class="section-description" data-bind="html: getDescription()"></p>
         <!-- /ko -->
         <!-- ko if: getMonitorModels().length > 0 -->
-        <div class="panel-group small-block" data-bind="template: { name: 'monitor-template', foreach: getMonitorModels(), afterRender: $root.getData }"></div>
+        <div class="panel-group" data-bind="template: { name: 'monitor-template', foreach: getMonitorModels(), afterRender: $root.getData }"></div>
         <!-- /ko -->
     </div>
 </script>
@@ -130,7 +134,7 @@
     </div>
     <!-- /ko -->
     <!-- ko if: $root.getTypes().isNagios(getType()) -->
-    <h3 class="monitor-header" data-bind="text: getName()"></h3>
+    <h3 class="monitor-heading" data-bind="text: getName()"></h3>
     <div data-bind="template: { name: 'nagios-hostmodel-template', foreach: getHostmodels() }"></div>
     <!-- /ko -->
     <!-- ko if: $root.getTypes().isSonar(getType()) -->
@@ -164,7 +168,7 @@
 </script>
 
 <script type="text/html" id="sonar-monitormodel-template">
-    <h3 class="monitor-header"><a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a></h3>
+    <h3 class="monitor-heading"><a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a></h3>
     <table class="codeviolations">
         <thead>
         <tr>

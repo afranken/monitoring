@@ -84,15 +84,6 @@ class ApplicationViewModel {
     public getCustomCss():string {
         return this._configuration.getCustomCss();
     }
-
-    /**
-     * This method is only needed for Knockout view layer.
-     *
-     * @returns string a relative URI to a CSS theme file.
-     */
-    public getThemeCss():string {
-        return this._configuration.getThemeCss();
-    }
 }
 
 export = ApplicationViewModel;

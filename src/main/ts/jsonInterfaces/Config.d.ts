@@ -93,13 +93,9 @@ declare module Config {
 
         interface Theme {
             /**
-             * Add relative link to a custom css file here. This file will be loaded in addition to and after all existing CSS files.
+             * Add link to a custom css file here. This file will be loaded in addition to and after all existing CSS files.
              */
-            css?:string;
-            /**
-             * Possible values: light / dark. Default: light.
-             */
-            style?:string;
+            customCss?:string;
         }
 
         /**
