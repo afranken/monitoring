@@ -36,8 +36,6 @@ class ApplicationViewModel {
                 this._sections.push(new SectionModel(section, this._configuration, undefined))
             }
         );
-
-        this.registerPulsateBindingHandler();
     }
 
     /**
@@ -94,34 +92,6 @@ class ApplicationViewModel {
      */
     public getThemeCss():string {
         return this._configuration.getThemeCss();
-    }
-
-    //==================================================================================================================
-
-    /**
-     * Register custom handler "pulsate".
-     * Usage: data-bind="pulsate: <observable property>"
-     * If observable property contains {@link CssClasses.BUILDING}, DOM Element will start to pulsate.
-     */
-    private registerPulsateBindingHandler(): void {
-        ko.bindingHandlers.pulsate = {
-            update: function(element: Node, valueAccessor, allBindings) {
-                // First get the latest data that we're bound to
-                var value = valueAccessor();
-
-                // Next, whether or not the supplied model property is observable, get its current value
-                var valueUnwrapped: string = ko.unwrap(value);
-
-                // Now manipulate the DOM element
-                if (~valueUnwrapped.indexOf(CssClasses.BUILDING)) {
-                    //add pulsating effect for jobs that are currently running
-                    for(var i = 0; i < 500; i++) {
-                        jQuery(element).animate({opacity: "toggle"}, {duration: 1500})
-                                       .animate({opacity: "toggle"}, {duration: 1500});
-                    }
-                }
-            }
-        }
     }
 }
 
