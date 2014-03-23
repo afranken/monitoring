@@ -302,13 +302,13 @@ class JenkinsMonitorModel implements MonitorModel {
                 colorTranslation = CssClasses.WARNING;
                 break;
             case 'yellow_anime':
-                colorTranslation = CssClasses.BUILDING+CssClasses.WARNING;
+                colorTranslation = CssClasses.WARNING;
                 break;
             case 'red_anime':
-                colorTranslation = CssClasses.BUILDING+CssClasses.FAILURE;
+                colorTranslation = CssClasses.FAILURE;
                 break;
             case 'blue_anime':
-                colorTranslation = CssClasses.BUILDING+CssClasses.SUCCESS;
+                colorTranslation = CssClasses.SUCCESS;
                 break;
             case 'notbuilt':
                 colorTranslation = CssClasses.DISABLED;
