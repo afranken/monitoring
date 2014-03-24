@@ -36,7 +36,7 @@
 <script type="text/html" id="application-template">
     <!-- CSS files should not be linked in the body, but Knockout doesn't support bindings in the HTML head out-of-the-box. -->
     <!-- ko if: $root.getCustomCss() -->
-    <!--<link data-bind="attr: {href: $root.getCustomCss()}" rel="stylesheet" type="text/css" media="all" />-->
+    <link data-bind="attr: {href: $root.getCustomCss()}" rel="stylesheet" type="text/css" media="all" />
     <!-- /ko -->
 
     <!-- ko if: getTitle() -->
