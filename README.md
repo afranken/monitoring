@@ -45,3 +45,7 @@ Testing only:
 
 * [Jasmine](http://jasmine.github.io/)
 * [Jasmine Istanbul](https://github.com/gotwarlost/istanbul)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/afranken/monitoring/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
