@@ -45,8 +45,3 @@ Testing only:
 
 * [Jasmine](http://jasmine.github.io/)
 * [Jasmine Istanbul](https://github.com/gotwarlost/istanbul)
-
-
-//    "grunt-contrib-jasmine": "~0.6.1",
-
-//    "grunt-template-jasmine-istanbul": "~0.3.1",
