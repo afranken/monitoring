@@ -298,13 +298,30 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     // Default task(s).
-    grunt.registerTask('default', [/*'clean',*/ 'copy', 'typescript:compile','typescript:compile_test','jasmine','requirejs:debug']);
+    grunt.registerTask('default', [
+    /*'clean',*/
+      'copy',
+      'typescript:compile',
+//      'typescript:compile_test',
+//      'jasmine',
+//      'requirejs:debug'
+    ]);
 
     // Task for running compilation/assembling stuff (corresponds to Maven's "compile" or "resources" lifecycle phase)
-    grunt.registerTask('compile', ['copy', 'typescript:compile']);
+    grunt.registerTask('compile', [
+      'copy',
+      'typescript:compile'
+    ]);
     // Task for running testing stuff (corresponds to Maven's "test" lifecycle phase)
-    grunt.registerTask('test', ['copy', 'typescript:compile_test', 'jasmine']);
+    grunt.registerTask('test', [
+      'copy',
+      'typescript:compile_test',
+      'jasmine'
+    ]);
     // Task for running testing stuff (corresponds to Maven's "prepare-package" lifecycle phase)
-    grunt.registerTask('package', ['uglify', 'requirejs:debug']);
+    grunt.registerTask('package', [
+//      'uglify',
+      'requirejs:debug'
+    ]);
 
 };
