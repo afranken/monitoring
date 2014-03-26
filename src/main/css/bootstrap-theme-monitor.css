@@ -96,6 +96,15 @@ a.jenkins-collapse {
   height: 15px;
 }
 
+dl {
+  margin-bottom: 3px;
+  margin-top: 0;
+}
+
+.panel-collapse {
+  padding-left: 10px;
+}
+
 
 /**
  * define box colors
