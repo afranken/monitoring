@@ -3,7 +3,7 @@
 <head>
     <title></title>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <!--<script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>-->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="config.js"></script>
@@ -111,6 +111,10 @@
             </div>
         </div>
         <div class="panel-collapse collapse" data-bind="attr: { id: getHtmlsafeId() + $index() }">
+            <dl class="jenkins-details-link">
+                <dt>Job on Jenkins</dt>
+                <dd><a class="monitor-link" data-bind="attr: { href: getUrl() }, text: getName()"></a></dd>
+            </dl>
             <dl class="jenkins-details-build-number">
                 <dt>Build number</dt>
                 <dd><a class="monitor-link" data-bind="attr: { href: getBuildNumberUrl() }, text: 'Build #' + getBuildNumber()"></a></dd>
