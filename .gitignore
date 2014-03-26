@@ -16,3 +16,5 @@ target
 .grunt/
 bower_components/
 node_modules/
+
+.coveralls.yml
