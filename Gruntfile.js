@@ -171,6 +171,10 @@ module.exports = function(grunt) {
                             },
                             {
                                 type: 'text-summary'
+                            },
+                            {
+                                type: 'lcov',
+                                options: { dir: '<%= dir.target_report %>/coverage/lcov' }
                             }
                         ],
 
@@ -190,6 +194,19 @@ module.exports = function(grunt) {
                     }
                 }
             }
+        },
+
+        coveralls: {
+          options: {
+            // When true, grunt-coveralls will only print a warning rather than
+            // an error, to prevent CI builds from failing unnecessarily (e.g. if
+            // coveralls.io is down). Optional, defaults to false.
+            force: false
+          },
+          main_target: {
+            // Target-specific LCOV coverage file
+            src: '<%= dir.target_report %>/coverage/lcov/*.info'
+          }
         },
 
         // ------ Optional: make javascript small (and unreadable)
@@ -296,12 +313,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-coveralls');
 
     // Default task(s).
     grunt.registerTask('default', [
     /*'clean',*/
       'copy',
-      'typescript:compile',
+      'typescript:compile'
 //      'typescript:compile_test',
 //      'jasmine',
 //      'requirejs:debug'
@@ -316,7 +334,8 @@ module.exports = function(grunt) {
     grunt.registerTask('test', [
       'copy',
       'typescript:compile_test',
-      'jasmine'
+      'jasmine',
+      'coveralls'
     ]);
     // Task for running testing stuff (corresponds to Maven's "prepare-package" lifecycle phase)
     grunt.registerTask('package', [
