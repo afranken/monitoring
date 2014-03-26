@@ -81,14 +81,19 @@ table * th a {
 /**
  * Jenkins styles
  */
+.jenkins-job-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .jenkins-start-date {
   font-size: 12px;
 }
 
-a.jenkins-collapse {
-  font-size: 16px;
-  color: #000000;
-  margin-right: 5px;
+a.jenkins-detail-link, a.jenkins-detail-link:visited, a.jenkins-detail-link:hover, a.jenkins-detail-link:focus {
+  color: #0A1104;
+  text-decoration: none;
+  outline: none;
 }
 
 .progress {

@@ -100,15 +100,17 @@
     <!-- ko if: $root.getTypes().isJenkins(getType()) -->
     <div class="panel panel-default">
         <div class="alert-none">
-            <div data-bind='attr: {style: getStyle()}, css: getCss()'>
-                <a class="alert-link monitor-link" data-toggle="collapse" data-bind="attr: { href: '#' + getHtmlsafeId() + $index(), title: getName() }, text: getName()"></a><br/>
-                <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
-                <!-- ko if: getBuildingStyle() -->
-                <div class="progress progress-striped active">
-                    <div data-bind='attr: {style: "width: "+getCompletedPercent()+"%", "aria-valuenow": getCompletedPercent() }, css: getBuildingStyle()' role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+            <a class="jenkins-detail-link" data-toggle="collapse" data-bind="attr: { href: '#' + getHtmlsafeId() + $index(), title: getName() }">
+                <div data-bind='attr: {style: getStyle()}, css: getCss()'>
+                    <span class="jenkins-job-name" data-bind="text: getName()"></span><br/>
+                    <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
+                    <!-- ko if: getBuildingStyle() -->
+                    <div class="progress progress-striped active">
+                        <div data-bind='attr: {style: "width: "+getCompletedPercent()+"%", "aria-valuenow": getCompletedPercent() }, css: getBuildingStyle()' role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <!-- /ko -->
                 </div>
-                <!-- /ko -->
-            </div>
+            </a>
         </div>
         <div class="panel-collapse collapse" data-bind="attr: { id: getHtmlsafeId() + $index() }">
             <dl class="jenkins-details-link">
