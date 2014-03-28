@@ -37,7 +37,7 @@ h3, .h3 {
  * Basic styles for all boxes
  */
 .jobstatus {
-  padding: 10px;
+  padding: 5px;
   margin-bottom: 0;
   background-color: #EEEEFF;
   width: 100%;
@@ -107,7 +107,7 @@ dl {
 }
 
 .panel-collapse {
-  padding-left: 10px;
+  padding-left: 5px;
 }
 
 
