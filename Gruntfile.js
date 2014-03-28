@@ -334,8 +334,7 @@ module.exports = function(grunt) {
     grunt.registerTask('test', [
       'copy',
       'typescript:compile_test',
-      'jasmine',
-      'coveralls'
+      'jasmine'
     ]);
     // Task for running testing stuff (corresponds to Maven's "prepare-package" lifecycle phase)
     grunt.registerTask('package', [
