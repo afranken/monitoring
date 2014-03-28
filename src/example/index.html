@@ -34,6 +34,7 @@
 </script>
 
 <script type="text/html" id="section-row-template">
+    <!-- ko if: getTitle() -->
     <div class="row">
         <div class="col-lg-12">
             <!-- ko if: getTitle() -->
@@ -51,15 +52,16 @@
             <!-- /ko -->
         </div>
     </div>
+    <!-- /ko -->
+    <!-- ko if: getSections().length > 0 -->
     <div class="row">
-        <!-- ko if: getSections().length > 0 -->
-        <!-- ko template: { name: 'section-template', foreach: getSections() } -->
-        <!-- /ko -->
+        <!-- ko template: { name: 'section-column-template', foreach: getSections() } -->
         <!-- /ko -->
     </div>
+    <!-- /ko -->
 </script>
 
-<script type="text/html" id="section-template">
+<script type="text/html" id="section-column-template">
     <div data-bind="css: 'col-lg-'+$parent.getColumnWidth()">
         <!-- ko if: getTitle() -->
         <h2 class="alert alert-none monitor-heading">
@@ -76,6 +78,10 @@
         <!-- /ko -->
         <!-- ko if: getMonitorModels().length > 0 -->
         <div class="panel-group" data-bind="template: { name: 'monitor-template', foreach: getMonitorModels(), afterRender: $root.getData }"></div>
+        <!-- /ko -->
+        <!-- ko if: getSections().length > 0 -->
+            <!-- ko template: { name: 'section-row-template', foreach: getSections() } -->
+            <!-- /ko -->
         <!-- /ko -->
     </div>
 </script>
