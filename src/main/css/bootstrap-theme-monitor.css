@@ -77,23 +77,25 @@ table * th a {
   text-align: left;
 }
 
-
 /**
- * Jenkins styles
+ * Box styles
  */
-.jenkins-job-name {
+.detail-name {
   font-size: 14px;
   font-weight: 700;
 }
 
-.jenkins-start-date {
-  font-size: 12px;
-}
-
-a.jenkins-detail-link, a.jenkins-detail-link:visited, a.jenkins-detail-link:hover, a.jenkins-detail-link:focus {
+a.detail-link, a.detail-link:visited, a.detail-link:hover, a.detail-link:focus {
   color: #0A1104;
   text-decoration: none;
   outline: none;
+}
+
+/**
+ * Jenkins styles
+ */
+.jenkins-start-date {
+  font-size: 12px;
 }
 
 .progress {
