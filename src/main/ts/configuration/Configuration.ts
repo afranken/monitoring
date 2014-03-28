@@ -14,9 +14,11 @@ class Configuration {
 
     constructor(private json: Config.Configuration) {
         this._expiry = json.expiry;
-        json.hosts.forEach(host => {
-            this._hostConfigurations[host.hostname] = new HostConfiguration(host);
-        });
+        if(json.hosts !== undefined) {
+            json.hosts.forEach(host => {
+                this._hostConfigurations[host.hostname] = new HostConfiguration(host);
+            });
+        }
         if(json.theme !== undefined && json.theme.customCss !== undefined) {
             this._customCss = json.theme.customCss;
         }
