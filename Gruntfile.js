@@ -338,7 +338,7 @@ module.exports = function(grunt) {
     ]);
     // Task for running testing stuff (corresponds to Maven's "prepare-package" lifecycle phase)
     grunt.registerTask('package', [
-//      'uglify',
+      'uglify',
       'requirejs:debug'
     ]);
 
