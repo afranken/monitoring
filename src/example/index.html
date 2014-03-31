@@ -28,7 +28,7 @@
     <!-- /ko -->
 
     <!-- ko if: getTitle() -->
-    <h1 id="mainTitle" class="alert alert-info monitor-heading" data-bind="text: getTitle()"></h1>
+    <h1 id="mainTitle" class="alert alert-none monitor-heading" data-bind="text: getTitle()"></h1>
     <!-- /ko -->
     <div id="container-fluid" data-bind="template: { name: 'section-row-template', foreach: getSections() }" ></div>
 </script>
@@ -64,14 +64,14 @@
 <script type="text/html" id="section-column-template">
     <div data-bind="css: 'col-lg-'+$parent.getColumnWidth()">
         <!-- ko if: getTitle() -->
-        <h2 class="alert alert-none monitor-heading">
+        <h3 class="alert alert-none monitor-heading">
             <!-- ko if: getUrl() -->
             <a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getTitle() }, text: getTitle()"></a>
             <!-- /ko -->
             <!-- ko ifnot: getUrl() -->
             <span data-bind="text: getTitle()"></span>
             <!-- /ko -->
-        </h2>
+        </h3>
         <!-- /ko -->
         <!-- ko if: getDescription() -->
         <p class="section-description" data-bind="html: getDescription()"></p>
@@ -93,7 +93,6 @@
             <a class="detail-link" data-toggle="collapse" data-bind="attr: { href: '#' + getHtmlsafeId() + $index(), title: getName() }">
                 <div data-bind='attr: {style: getStyle()}, css: getCss()'>
                     <span class="detail-name" data-bind="text: getName()"></span><br/>
-                    <span class="jenkins-start-date" data-bind="text: getStartDate()"></span>
                     <!-- ko if: getBuildingStyle() -->
                     <div class="progress progress-striped active">
                         <div data-bind='attr: {style: "width: "+getCompletedPercent()+"%", "aria-valuenow": getCompletedPercent() }, css: getBuildingStyle()' role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
@@ -171,7 +170,7 @@
 </script>
 
 <script type="text/html" id="sonar-monitormodel-template">
-    <h3 class="monitor-heading"><a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a></h3>
+    <h4 class="monitor-heading"><a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a></h4>
     <table class="codeviolations">
         <thead>
         <tr>

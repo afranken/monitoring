@@ -17,15 +17,19 @@ h1, h2, h3, p {
 }
 
 h1, .h1 {
-  font-size: 26px;
+  font-size: 30px;
 }
 
 h2, .h2 {
-  font-size: 18px;
+  font-size: 24px;
 }
 
 h3, .h3 {
-  font-size: 14px;
+  font-size: 20px;
+}
+
+h4, .h4 {
+  font-size: 16px;
 }
 
 .monitor-heading {
@@ -48,7 +52,7 @@ p.section-description {
 }
 
 .jobstatus a {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 
@@ -85,7 +89,7 @@ table * th a {
  * Box styles
  */
 .detail-name {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -131,9 +135,9 @@ dl {
 }
 
 .alert-disabled {
-  color: #999999;
+  /*color: #999999;*/
   background-color: #cccccc;
-  border-color: #333333;
+  /*border-color: #333333;*/
 }
 
 .alert-disabled .alert-link {
