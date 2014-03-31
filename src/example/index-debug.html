@@ -118,34 +118,8 @@
             </a>
         </div>
         <div class="panel-collapse collapse" data-bind="attr: { id: getHtmlsafeId() + $index() }">
-            <dl class="jenkins-details-link">
-                <dt>Job on Jenkins</dt>
-                <dd><a class="monitor-link" data-bind="attr: { href: getUrl() }, text: getName()"></a></dd>
-            </dl>
-            <dl class="jenkins-details-build-number">
-                <dt>Build number</dt>
-                <dd><a class="monitor-link" data-bind="attr: { href: getBuildNumberUrl() }, text: 'Build #' + getBuildNumber()"></a></dd>
-            </dl>
-            <!-- ko if: getCommitHash() !== undefined -->
-            <dl class="jenkins-details-commit-hash">
-                <dt>Commit Hash</dt>
-                <dd data-bind="text: getCommitHash()"></dd>
-            </dl>
+            <!-- ko template: { name: 'jenkins-details-model', data: getDetails() } -->
             <!-- /ko -->
-            <!-- ko if: getBranchName() !== undefined -->
-            <dl class="jenkins-details-branch">
-                <dt>Branch</dt>
-                <dd data-bind="text: getBranchName()"></dd>
-            </dl>
-            <!-- /ko -->
-            <dl class="jenkins-details-start-time">
-                <dt>Start Time</dt>
-                <dd data-bind="text: getStartDate()"></dd>
-            </dl>
-            <dl class="jenkins-details-run-time">
-                <dt>Run Time</dt>
-                <dd data-bind="text: getRunTime()"></dd>
-            </dl>
         </div>
     </div>
     <!-- /ko -->
@@ -156,6 +130,37 @@
     <!-- ko if: $root.getTypes().isSonar(getType()) -->
     <div data-bind="template: { name: 'sonar-monitormodel-template' }"></div>
     <!-- /ko -->
+</script>
+
+<script type="text/html" id="jenkins-details-model">
+    <dl class="jenkins-details-link">
+        <dt>Job on Jenkins</dt>
+        <dd><a class="monitor-link" data-bind="attr: { href: getUrl() }, text: getName()"></a></dd>
+    </dl>
+    <dl class="jenkins-details-build-number">
+        <dt>Build number</dt>
+        <dd><a class="monitor-link" data-bind="attr: { href: getBuildNumberUrl() }, text: 'Build #' + getBuildNumber()"></a></dd>
+    </dl>
+    <!-- ko if: getCommitHash() !== undefined -->
+    <dl class="jenkins-details-commit-hash">
+        <dt>Commit Hash</dt>
+        <dd data-bind="text: getCommitHash()"></dd>
+    </dl>
+    <!-- /ko -->
+    <!-- ko if: getBranchName() !== undefined -->
+    <dl class="jenkins-details-branch">
+        <dt>Branch</dt>
+        <dd data-bind="text: getBranchName()"></dd>
+    </dl>
+    <!-- /ko -->
+    <dl class="jenkins-details-start-time">
+        <dt>Start Time</dt>
+        <dd data-bind="text: getStartDate()"></dd>
+    </dl>
+    <dl class="jenkins-details-run-time">
+        <dt>Run Time</dt>
+        <dd data-bind="text: getRunTime()"></dd>
+    </dl>
 </script>
 
 <script type="text/html" id="nagios-hostmodel-template">

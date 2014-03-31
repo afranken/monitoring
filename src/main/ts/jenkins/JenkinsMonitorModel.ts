@@ -9,6 +9,7 @@ import MonitorModels = require('../monitorModel/MonitorModels');
 import Connector = require('../connector/Connector');
 import CssClasses = require('../CssClasses');
 import JenkinsConnector = require('./JenkinsConnector');
+import JenkinsDetailsModel = require('./JenkinsDetailsModel');
 import Config = require('../jsonInterfaces/Config');
 import JenkinsJsonResponse = require('../jsonInterfaces/JenkinsResponse');
 
@@ -26,22 +27,17 @@ class JenkinsMonitorModel implements MonitorModel {
     private _hostname:string;
     private _css:KnockoutComputed<string>;
     private _style:KnockoutComputed<string>;
-    private _startDate:KnockoutComputed<string>;
-    private _commitHash:KnockoutComputed<string>;
-    private _branchName:KnockoutComputed<string>;
-    private _runTime:KnockoutComputed<string>;
-    private _buildNumber:KnockoutComputed<number>;
-    private _buildNumberUrl:KnockoutComputed<string>;
     private _completedPercent:KnockoutComputed<number>;
     private _buildingStyle:KnockoutComputed<string>;
-    private _url:string;
+    private _details:JenkinsDetailsModel;
     private _jsonResponse:KnockoutObservable<JenkinsJsonResponse.Json> = ko.observable<JenkinsJsonResponse.Json>();
 
     constructor(job:Config.Monitor, connector:Connector, hostname:string) {
         this._connector = connector;
-        this._name = job.name;
+        this._name = job.name !== undefined ? job.name : job.id;
         this._id = job.id;
         this._hostname = job.hostname !== undefined ? job.hostname : hostname;
+        this._details = new JenkinsDetailsModel((<JenkinsConnector>connector).getJobUrl(this), this._name);
         this._css = ko.computed<string>({
                 owner: this,
                 read: ()=>{
@@ -66,85 +62,6 @@ class JenkinsMonitorModel implements MonitorModel {
                 return JenkinsMonitorModel.calculateCompletedPercent(this.getResponseTimestamp(), this.getEstimatedDuration());
             }
         });
-        this._commitHash = ko.computed<string>({
-            owner: this,
-            read: ()=>{
-                var commit:string = undefined;
-                if(this._jsonResponse() !== undefined) {
-                    var revision:JenkinsJsonResponse.Revision = this.getLastBuiltRevision(this._jsonResponse());
-                    if(revision !== undefined) {
-                        revision.branch.forEach((singleBranch)=>{
-                            if(singleBranch.SHA1) {
-                                commit = singleBranch.SHA1.slice(0,12);
-                            }
-                        });
-                    }
-                }
-                return commit;
-            }
-        });
-
-        this._branchName = ko.computed<string>({
-            owner: this,
-            read: ()=>{
-                var name:string = undefined;
-                if(this._jsonResponse() !== undefined) {
-                    var revision:JenkinsJsonResponse.Revision = this.getLastBuiltRevision(this._jsonResponse());
-                    if(revision !== undefined) {
-                        revision.branch.forEach((singleBranch)=>{
-                            if(singleBranch.name) {
-                                name = singleBranch.name;
-                            }
-                        });
-                    }
-                }
-                return name;
-            }
-        });
-
-        this._runTime = ko.computed<string>({
-            owner: this,
-            read: ()=>{
-                var duration:string = undefined;
-                if(this._jsonResponse() !== undefined) {
-                    var buildDuration = (this._jsonResponse().lastBuild.duration);
-                    if(buildDuration !== undefined) {
-                        duration = moment.duration(buildDuration).humanize();
-                    }
-                }
-                return duration;
-            }
-        });
-
-        this._buildNumber = ko.computed<number>({
-            owner: this,
-            read: ()=>{
-                var buildNumber:number = undefined;
-                if(this._jsonResponse() !== undefined) {
-                    buildNumber = (this._jsonResponse().lastBuild.number);
-                }
-                return buildNumber;
-            }
-        });
-
-        this._buildNumberUrl = ko.computed<string>({
-            owner: this,
-            read: ()=>{
-                var buildNumberUrl:string = undefined;
-                if(this._jsonResponse() !== undefined) {
-                    buildNumberUrl = (this._jsonResponse().lastBuild.url);
-                }
-                return buildNumberUrl;
-            }
-        });
-
-        this._startDate = ko.computed<string>({
-            owner: this,
-            read: ()=>{
-                return JenkinsMonitorModel.calculateStartDate(this.getResponseTimestamp());
-            }
-        });
-        this._url = (<JenkinsConnector>connector).getJobUrl(this);
     }
 
     public updateStatus():void {
@@ -152,7 +69,7 @@ class JenkinsMonitorModel implements MonitorModel {
     }
 
     public getName():string {
-        return this._name !== undefined ? this._name : this._id;
+        return this._name;
     }
 
     public getId():string {
@@ -163,26 +80,6 @@ class JenkinsMonitorModel implements MonitorModel {
         var _PATTERN:RegExp = new RegExp('\\W','g');
         var _REPLACEMENT_CHAR = '-';
         return this._id.replace(_PATTERN,_REPLACEMENT_CHAR);
-    }
-
-    public getCommitHash():string {
-        return this._commitHash();
-    }
-
-    public getBranchName():string {
-        return this._branchName();
-    }
-
-    public getRunTime():string {
-        return this._runTime();
-    }
-
-    public getBuildNumber():number {
-        return this._buildNumber();
-    }
-
-    public getBuildNumberUrl():string {
-        return this._buildNumberUrl();
     }
 
     public getCompletedPercent():number {
@@ -205,12 +102,8 @@ class JenkinsMonitorModel implements MonitorModel {
         return this._style();
     }
 
-    public getUrl():string {
-        return this._url;
-    }
-
-    public getStartDate():string {
-        return this._startDate();
+    public getDetails():JenkinsDetailsModel {
+        return this._details;
     }
 
     public getType():string {
@@ -219,6 +112,7 @@ class JenkinsMonitorModel implements MonitorModel {
 
     public setData(json:JenkinsJsonResponse.Json):void {
         this._jsonResponse(json);
+        this._details.setData(json);
     }
 
     //==================================================================================================================
@@ -235,17 +129,6 @@ class JenkinsMonitorModel implements MonitorModel {
         completedPercent = Math.round((nowTimestamp - buildTimestamp) * 100 / estimatedDuration);
 
         return completedPercent;
-    }
-
-    private static calculateStartDate(buildTimestamp: number):string {
-        var startTime:string;
-        if(buildTimestamp === undefined) {
-            return undefined;
-        }
-
-        startTime = moment(buildTimestamp).fromNow();
-
-        return startTime;
     }
 
     /**
@@ -352,15 +235,12 @@ class JenkinsMonitorModel implements MonitorModel {
         return colorTranslation;
     }
 
-    private getLastBuiltRevision(json:JenkinsJsonResponse.Json):JenkinsJsonResponse.Revision {
-        var revision:JenkinsJsonResponse.Revision = undefined;
-        var lastBuild:JenkinsJsonResponse.LastBuild = json.lastBuild;
-        lastBuild.actions.forEach((action) => {
-            if(action.lastBuiltRevision) {
-                revision = action.lastBuiltRevision;
-            }
-        });
-        return revision;
+    private getResponseColor():string {
+        var color:string = undefined;
+        if(this._jsonResponse() !== undefined) {
+            color = this._jsonResponse().color;
+        }
+        return color;
     }
 
     private getResponseTimestamp():number {
@@ -377,14 +257,6 @@ class JenkinsMonitorModel implements MonitorModel {
             estimatedDuration = this._jsonResponse().lastBuild.estimatedDuration;
         }
         return estimatedDuration;
-    }
-
-    private getResponseColor():string {
-        var color:string = undefined;
-        if(this._jsonResponse() !== undefined) {
-            color = this._jsonResponse().color;
-        }
-        return color;
     }
 }
 
