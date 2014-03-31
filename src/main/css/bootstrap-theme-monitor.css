@@ -17,20 +17,24 @@ h1, h2, h3, p {
 }
 
 h1, .h1 {
-  font-size: 30px;
+  font-size: 26px;
 }
 
 h2, .h2 {
-  font-size: 24px;
+  font-size: 18px;
 }
 
 h3, .h3 {
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .monitor-heading {
   padding: 5px;
   margin: 5px;
+}
+
+p.section-description {
+  font-size: 8pt;
 }
 
 /**
@@ -95,7 +99,7 @@ a.detail-link, a.detail-link:visited, a.detail-link:hover, a.detail-link:focus {
  * Jenkins styles
  */
 .jenkins-start-date {
-  font-size: 12px;
+  font-size: 8pt;
 }
 
 .progress {
