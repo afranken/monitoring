@@ -122,8 +122,20 @@ dl {
 
 
 /**
+ * Sonar styles
+ */
+.sonar-violation-count {
+  border-radius: 4px;
+}
+
+
+/**
  * define box colors
  */
+.alert {
+  border-radius: inherit;
+}
+
 .alert-none {
   color: #bbb;
   background-color: #f7f7f9;
