@@ -16,7 +16,8 @@ class CssClasses {
     public static SUCCESS: string = ' alert-success ';
     public static WARNING: string = ' alert-warning ';
     public static FAILURE: string = ' alert-danger ';
-    public static DISABLED: string = ' alert-disabled ';
+    public static DISABLED: string = ' alert-info ';
+    public static ABORTED: string = CssClasses.DISABLED;
 
     /**
      * Classes used for progress bars
@@ -24,6 +25,8 @@ class CssClasses {
     public static SUCCESS_PROGRESS_BUILDING = ' progress-bar progress-bar-success ';
     public static WARNING_PROGRESS_BUILDING = ' progress-bar progress-bar-warning ';
     public static FAILURE_PROGRESS_BUILDING = ' progress-bar progress-bar-danger ';
+    public static DISABLED_PROGRESS_BUILDING = ' progress-bar progress-bar-info ';
+    public static ABORTED_PROGRESS_BUILDING = CssClasses.DISABLED_PROGRESS_BUILDING;
 
 }
 

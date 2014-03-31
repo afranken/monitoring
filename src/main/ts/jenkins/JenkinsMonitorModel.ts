@@ -301,6 +301,9 @@ class JenkinsMonitorModel implements MonitorModel {
             case 'yellow':
                 colorTranslation = CssClasses.WARNING;
                 break;
+            case 'aborted':
+                colorTranslation = CssClasses.ABORTED;
+                break;
             case 'yellow_anime':
                 colorTranslation = CssClasses.WARNING;
                 break;
@@ -309,6 +312,9 @@ class JenkinsMonitorModel implements MonitorModel {
                 break;
             case 'blue_anime':
                 colorTranslation = CssClasses.SUCCESS;
+                break;
+            case 'aborted_anime':
+                colorTranslation = CssClasses.ABORTED;
                 break;
             case 'notbuilt':
                 colorTranslation = CssClasses.DISABLED;
@@ -332,6 +338,12 @@ class JenkinsMonitorModel implements MonitorModel {
                 break;
             case 'blue_anime':
                 colorTranslation = CssClasses.SUCCESS_PROGRESS_BUILDING;
+                break;
+            case 'aborted_anime':
+                colorTranslation = CssClasses.ABORTED_PROGRESS_BUILDING;
+                break;
+            case 'notbuilt_anime':
+                colorTranslation = CssClasses.DISABLED_PROGRESS_BUILDING;
                 break;
             default:
                 colorTranslation = undefined;
