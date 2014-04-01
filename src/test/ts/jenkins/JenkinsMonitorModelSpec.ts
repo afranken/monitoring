@@ -81,7 +81,6 @@ describe("JenkinsMonitorModel", function():void {
         expect(testling.getCss()).toBe(CssClasses.BASIC_CLASSES);
         expect(testling.getStyle()).toBe("opacity: 1");
         expect(testling.getType()).toBe(Types.JENKINS);
-        expect(testling.getUrl()).toBe("https://myhost:8080/myprefix/job/myid");
     });
 
     it("TestMethodsAfterResponse", function():void {
