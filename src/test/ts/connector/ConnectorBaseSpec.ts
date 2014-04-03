@@ -30,7 +30,7 @@ describe("ConnectorBase", function():void {
     it("TestMethods", function():void {
         expect(testling.getExpiry()).toBe(_EXPIRY);
         expect(testling.getUrl(_HOST)).toBe('https://myhost:8080/myprefix');
-        expect(()=>testling.getRemoteData(undefined)).toThrow(ConnectorBase._MESSAGE);
+        expect(()=>testling.getRemoteData(undefined)).toThrow(ConnectorBase.MESSAGE);
     });
 
 });

@@ -7,15 +7,23 @@ import MonitorModel = require('../monitorModel/MonitorModel');
  */
 class ConnectorBase implements Connector {
 
-    public static _MESSAGE:string = 'UNSUPPORTED, IMPLEMENT THIS METHOD';
+    public static MESSAGE:string = 'UNSUPPORTED, IMPLEMENT THIS METHOD';
 
-    private static TIMEOUT_BASE = 60;
+    private static _TIMEOUT_BASE = 60;
 
     private _configuration: Configuration;
+
+    //==================================================================================================================
+    // Construct
+    //==================================================================================================================
 
     constructor(configuration: Configuration) {
         this._configuration = configuration;
     }
+
+    //==================================================================================================================
+    // Functionality
+    //==================================================================================================================
 
     /**
      * Get an absolute URL for the given hostname, including configured
@@ -52,16 +60,15 @@ class ConnectorBase implements Connector {
     public getRemoteData(model:MonitorModel):void {
         throw {
             name: 'Error',
-            message: ConnectorBase._MESSAGE
+            message: ConnectorBase.MESSAGE
         };
     }
 
     /**
      * @returns number between 60 and 120 seconds, in milliseconds.
      */
-    public static getRandomTimeout() {
-
-        return (ConnectorBase.TIMEOUT_BASE + (Math.random() * 60)) * 1000;
+    public static getRandomTimeout():number {
+        return (ConnectorBase._TIMEOUT_BASE + (Math.random() * 60)) * 1000;
     }
 
 }
