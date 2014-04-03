@@ -20,7 +20,7 @@ Errormessage:
 
 `Exception: jsonp forbidden; can use -Dhudson.model.Api.INSECURE=true if you run without security`
 
-From Jenkins Release notes ~1.4:
+From [Jenkins Security Advisory 2013-02-16](https://wiki.jenkins-ci.org/display/SECURITY/Jenkins+Security+Advisory+2013-02-16):
 
 JSONP support in Remote access API is removed. If you have other programs that depend on this behavior,
 you can set the hudson.model.Api.INSECURE system property to true, to resurrect behaviour.
