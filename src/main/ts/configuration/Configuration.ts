@@ -12,6 +12,10 @@ class Configuration {
     private _customCss: string;
     private _hostConfigurations: { [name: string]: HostConfiguration; } = { };
 
+    //==================================================================================================================
+    // Construct
+    //==================================================================================================================
+
     constructor(private json: Config.Configuration) {
         this._expiry = json.expiry;
         if(json.hosts !== undefined) {
@@ -23,6 +27,10 @@ class Configuration {
             this._customCss = json.theme.customCss;
         }
     }
+
+    //==================================================================================================================
+    // Functionality
+    //==================================================================================================================
 
     /**
      * Get the expiry.
@@ -48,8 +56,8 @@ class Configuration {
         var prefix:string = '';
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
         if(hostConfiguration !== undefined) {
-            if(hostConfiguration.prefix !== undefined) {
-                prefix = Configuration._SLASH + hostConfiguration.prefix;
+            if(hostConfiguration.getPrefix() !== undefined) {
+                prefix = Configuration._SLASH + hostConfiguration.getPrefix();
             }
         }
 
@@ -67,8 +75,8 @@ class Configuration {
         var port:string = '';
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
         if(hostConfiguration !== undefined) {
-            if(hostConfiguration.port !== undefined) {
-                port = Configuration._PORT_PREFIX + hostConfiguration.port;
+            if(hostConfiguration.getPort() !== undefined) {
+                port = Configuration._PORT_PREFIX + hostConfiguration.getPort();
             }
         }
 
@@ -86,7 +94,7 @@ class Configuration {
         var username: string = undefined;
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
         if(hostConfiguration !== undefined) {
-            username = hostConfiguration.username;
+            username = hostConfiguration.getUsername();
         }
 
         return username;
@@ -103,7 +111,7 @@ class Configuration {
         var password: string = undefined;
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
         if(hostConfiguration !== undefined) {
-            password = hostConfiguration.password;
+            password = hostConfiguration.getPassword();
         }
 
         return password;
@@ -120,7 +128,7 @@ class Configuration {
         var protocol: string = undefined;
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
         if(hostConfiguration !== undefined) {
-            protocol = hostConfiguration.protocol;
+            protocol = hostConfiguration.getProtocol();
         }
         if(protocol === undefined) {
             protocol = Configuration._DEFAULT_PROTOCOL;
@@ -128,6 +136,10 @@ class Configuration {
 
         return protocol+Configuration._PROTOCOL_SUFFIX;
     }
+
+    //==================================================================================================================
+    // Private
+    //==================================================================================================================
 
     private getHostConfiguration(hostname: string): HostConfiguration {
         return this._hostConfigurations[hostname];
@@ -140,20 +152,39 @@ class Configuration {
  */
 class HostConfiguration {
 
-    public hostname: string;
-    public protocol: string;
-    public port: string;
-    public prefix: string;
-    public username: string;
-    public password: string;
+    private _hostname: string;
+    private _protocol: string;
+    private _port: string;
+    private _prefix: string;
+    private _username: string;
+    private _password: string;
 
     constructor(json: Config.Host) {
-        this.hostname = json.hostname;
-        this.protocol = json.protocol;
-        this.port = json.port;
-        this.prefix = json.prefix;
-        this.username = json.username;
-        this.password = json.password;
+        this._hostname = json.hostname;
+        this._protocol = json.protocol;
+        this._port = json.port;
+        this._prefix = json.prefix;
+        this._username = json.username;
+        this._password = json.password;
+    }
+
+    public getPassword():string {
+        return this._password;
+    }
+    public getUsername():string {
+        return this._username;
+    }
+    public getPrefix():string {
+        return this._prefix;
+    }
+    public getPort():string {
+        return this._port;
+    }
+    public getProtocol():string {
+        return this._protocol;
+    }
+    public getHostname():string {
+        return this._hostname;
     }
 
 }
