@@ -26,6 +26,10 @@ class ApplicationViewModel {
     private _configuration: Configuration;
     private _sections: Array<SectionModel> = [];
 
+    //==================================================================================================================
+    // Construct
+    //==================================================================================================================
+
     constructor(private json:Config.Application) {
         this._title = json.title;
         if(json.configuration !== undefined) {
@@ -37,6 +41,10 @@ class ApplicationViewModel {
             }
         );
     }
+
+    //==================================================================================================================
+    // View Layer
+    //==================================================================================================================
 
     /**
      * This method is only needed for Knockout view layer.
