@@ -12,24 +12,28 @@ import JenkinsJsonResponse = require('../jsonInterfaces/JenkinsResponse');
  */
 class JenkinsConnector extends ConnectorBase implements Connector {
 
-    private static JOB_PREFIX: string = '/job/';
+    private static _JOB_PREFIX: string = '/job/';
 
     /**
      * suffix that ensures that Jenkins returns JSONP
      */
-    private static JSONP_SUFFIX:string = '/api/json?jsonp=?';
+    private static _JSONP_SUFFIX:string = '/api/json?jsonp=?';
 
     /**
      * suffix that tells Jenkins to only include certain properties in response
      */
-    private static JOB_STATUS_SUFFIX:string = '&tree=name,url,displayName,color,lastBuild[timestamp,building,duration,estimatedDuration,url,result,number,id,failCount,skipCount,totalCount,' +
+    private static _JOB_STATUS_SUFFIX:string = '&tree=name,url,displayName,color,lastBuild[timestamp,building,duration,estimatedDuration,url,result,number,id,failCount,skipCount,totalCount,' +
         'actions[lastBuiltRevision[branch[SHA1,name]],failCount,skipCount,totalCount]]&depth=1';
 
     /**
      * suffix that tells Jenkins to only include certain properties of modules in response
      */
-    private static MODULES_STATUS_SUFFIX:string = '&tree=modules[name,url,displayName,color,' +
+    private static _MODULES_STATUS_SUFFIX:string = '&tree=modules[name,url,displayName,color,' +
         'lastBuild[timestamp,actions[lastBuiltRevision[branch[SHA1,name]],failCount,skipCount,totalCount]]&depth=1';
+
+    //==================================================================================================================
+    // Functionality
+    //==================================================================================================================
 
     public getRemoteData(model:JenkinsMonitorModel):void {
         jQuery.getJSON(this.getApiUrl(model),
@@ -52,7 +56,7 @@ class JenkinsConnector extends ConnectorBase implements Connector {
      * @returns string
      */
     public getJobUrl(model:JenkinsMonitorModel):string {
-        return this.getUrl(model.getHostname(), JenkinsConnector.JOB_PREFIX + model.getId());
+        return this.getUrl(model.getHostname(), JenkinsConnector._JOB_PREFIX + model.getId());
     }
 
     /**
@@ -61,9 +65,11 @@ class JenkinsConnector extends ConnectorBase implements Connector {
      * @returns string
      */
     public getApiUrl(model:JenkinsMonitorModel):string {
-        return this.getJobUrl(model) + JenkinsConnector.JSONP_SUFFIX + JenkinsConnector.JOB_STATUS_SUFFIX;
+        return this.getJobUrl(model) + JenkinsConnector._JSONP_SUFFIX + JenkinsConnector._JOB_STATUS_SUFFIX;
     }
 
+    //==================================================================================================================
+    // Private
     //==================================================================================================================
 
     /**
