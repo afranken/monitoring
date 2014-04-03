@@ -41,18 +41,18 @@ class ApplicationViewModel {
     /**
      * This method is only needed for Knockout view layer.
      *
-     * @returns string
+     * @returns string the application's title
      */
-    public getTitle() {
+    public getTitle():string {
         return this._title;
     }
 
     /**
      * This method is only needed for Knockout view layer.
      *
-     * @returns Array<SectionModel>
+     * @returns Array<SectionModel> the root sections
      */
-    public getSections() {
+    public getSections():Array<SectionModel> {
         return this._sections;
     }
 
@@ -72,7 +72,7 @@ class ApplicationViewModel {
      *
      * @returns Types
      */
-    public getTypes(): Types {
+    public getTypes():Types {
         return Types;
     }
 
