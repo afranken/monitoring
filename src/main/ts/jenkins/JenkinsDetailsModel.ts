@@ -4,6 +4,9 @@ import ko = require('knockout');
 import moment = require('moment');
 import JenkinsJsonResponse = require('../jsonInterfaces/JenkinsResponse');
 
+/**
+ * This model is used to store and retrieve detailed data about one Jenkins job.
+ */
 class JenkinsDetailsModel {
 
     private _name:string;
@@ -16,23 +19,28 @@ class JenkinsDetailsModel {
     private _buildNumberUrl:KnockoutComputed<string>;
     private _jsonResponse:KnockoutObservable<JenkinsJsonResponse.Json> = ko.observable<JenkinsJsonResponse.Json>();
 
-    constructor(url:string, name:string) {
+    //==================================================================================================================
+    // Construct
+    //==================================================================================================================
 
+    constructor(url:string, name:string) {
         this._url = url;
         this._name = name;
+
+        this.init();
+    }
+
+    private init():void {
         this._commitHash = ko.computed<string>({
             owner: this,
             read: ()=>{
                 var commit:string = undefined;
-                if(this._jsonResponse() !== undefined) {
-                    var revision:JenkinsJsonResponse.Revision = this.getLastBuiltRevision(this._jsonResponse());
-                    if(revision !== undefined) {
-                        revision.branch.forEach((singleBranch)=>{
-                            if(singleBranch.SHA1) {
-                                commit = singleBranch.SHA1.slice(0,12);
-                            }
-                        });
-                    }
+                if(this.getLastBuiltRevision()) {
+                    this.getLastBuiltRevision().branch.forEach((singleBranch)=>{
+                        if(singleBranch.SHA1) {
+                            commit = singleBranch.SHA1.slice(0,12);
+                        }
+                    });
                 }
                 return commit;
             }
@@ -42,15 +50,12 @@ class JenkinsDetailsModel {
             owner: this,
             read: ()=>{
                 var name:string = undefined;
-                if(this._jsonResponse() !== undefined) {
-                    var revision:JenkinsJsonResponse.Revision = this.getLastBuiltRevision(this._jsonResponse());
-                    if(revision !== undefined) {
-                        revision.branch.forEach((singleBranch)=>{
-                            if(singleBranch.name) {
-                                name = singleBranch.name;
-                            }
-                        });
-                    }
+                if(this.getLastBuiltRevision()) {
+                    this.getLastBuiltRevision().branch.forEach((singleBranch)=>{
+                        if(singleBranch.name) {
+                            name = singleBranch.name;
+                        }
+                    });
                 }
                 return name;
             }
@@ -59,14 +64,7 @@ class JenkinsDetailsModel {
         this._runTime = ko.computed<string>({
             owner: this,
             read: ()=>{
-                var duration:string = undefined;
-                if(this._jsonResponse() !== undefined) {
-                    var buildDuration = (this._jsonResponse().lastBuild.duration);
-                    if(buildDuration !== undefined) {
-                        duration = moment.duration(buildDuration).humanize();
-                    }
-                }
-                return duration;
+                return this.calculateDuration();
             }
         });
 
@@ -74,8 +72,8 @@ class JenkinsDetailsModel {
             owner: this,
             read: ()=>{
                 var buildNumber:number = undefined;
-                if(this._jsonResponse() !== undefined) {
-                    buildNumber = (this._jsonResponse().lastBuild.number);
+                if(this.getLastBuild()) {
+                    buildNumber = this.getLastBuild().number;
                 }
                 return buildNumber;
             }
@@ -85,8 +83,8 @@ class JenkinsDetailsModel {
             owner: this,
             read: ()=>{
                 var buildNumberUrl:string = undefined;
-                if(this._jsonResponse() !== undefined) {
-                    buildNumberUrl = (this._jsonResponse().lastBuild.url);
+                if(this.getLastBuild()) {
+                    buildNumberUrl = this.getLastBuild().url;
                 }
                 return buildNumberUrl;
             }
@@ -95,10 +93,14 @@ class JenkinsDetailsModel {
         this._startDate = ko.computed<string>({
             owner: this,
             read: ()=>{
-                return JenkinsDetailsModel.calculateStartDate(this.getResponseTimestamp());
+                return this.calculateStartDate();
             }
         });
     }
+
+    //==================================================================================================================
+    // View Layer
+    //==================================================================================================================
 
     public getUrl():string {
         return this._url;
@@ -132,40 +134,67 @@ class JenkinsDetailsModel {
         return this._startDate();
     }
 
+    //==================================================================================================================
+    // Functionality
+    //==================================================================================================================
+
     public setData(json:JenkinsJsonResponse.Json):void {
         this._jsonResponse(json);
     }
 
     //==================================================================================================================
+    // Private
+    //==================================================================================================================
 
-    private static calculateStartDate(buildTimestamp: number):string {
-        var startTime:string;
-        if(buildTimestamp === undefined) {
-            return undefined;
+    /**
+     * Calculate a human readable start date based on a timestamp.
+     *
+     * @returns string a human readable start date like "a day ago" or {@link undefined}
+     */
+    private calculateStartDate():string {
+        var startTime:string = undefined;
+        if(this.getLastBuild()) {
+            startTime = moment(this.getLastBuild().timestamp).fromNow();
         }
-
-        startTime = moment(buildTimestamp).fromNow();
 
         return startTime;
     }
 
-    private getLastBuiltRevision(json:JenkinsJsonResponse.Json):JenkinsJsonResponse.Revision {
+    /**
+     * Calculate a human readable duration based on a timestamp.
+     *
+     * @returns string a human readable start date like "a day ago" or {@link undefined}
+     */
+    private calculateDuration():string {
+        var duration:string = undefined;
+        if(this.getLastBuild()) {
+            duration = moment.duration(this.getLastBuild().duration).humanize();
+        }
+
+        return duration;
+    }
+
+    /**
+     * @returns {JenkinsJsonResponse.Revision} lastBuildRevision if it's available, or {@link undefined}
+     */
+    private getLastBuiltRevision():JenkinsJsonResponse.Revision {
         var revision:JenkinsJsonResponse.Revision = undefined;
-        var lastBuild:JenkinsJsonResponse.LastBuild = json.lastBuild;
-        lastBuild.actions.forEach((action) => {
-            if(action.lastBuiltRevision) {
-                revision = action.lastBuiltRevision;
-            }
-        });
+        if(this.getLastBuild()) {
+            this.getLastBuild().actions.forEach((action) => {
+                if(action.lastBuiltRevision) {
+                    revision = action.lastBuiltRevision;
+                }
+            });
+        }
         return revision;
     }
 
-    private getResponseTimestamp():number {
-        var timestamp:number = undefined;
-        if(this._jsonResponse() !== undefined) {
-            timestamp = this._jsonResponse().lastBuild.timestamp;
+    private getLastBuild():JenkinsJsonResponse.LastBuild {
+        var lastBuild:JenkinsJsonResponse.LastBuild = undefined;
+        if(this._jsonResponse()) {
+            lastBuild = this._jsonResponse().lastBuild;
         }
-        return timestamp;
+        return lastBuild;
     }
 }
 
