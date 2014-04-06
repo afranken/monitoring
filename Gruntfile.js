@@ -259,7 +259,7 @@ module.exports = function(grunt) {
             baseUrl: '<%= dir.target_js %>/app',
 
             // where we want the compilation result to go
-            out: '<%= dir.target_js %>/js/monitoring.min.js',
+            out: '<%= dir.target_js %>/js/simon.min.js',
 
             paths: {
               'Application': './Application',
