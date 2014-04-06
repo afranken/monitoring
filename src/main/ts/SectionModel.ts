@@ -7,9 +7,16 @@ import NagiosMonitorModel = require('./nagios/NagiosMonitorModel');
 import SonarMonitorModel = require('./sonar/SonarMonitorModel');
 import Config = require('./jsonInterfaces/Config');
 
+/**
+ * This class represents a section.
+ * Sections are used to structure the layout into rows and columns.
+ */
 class SectionModel {
 
-    private static MAX_WIDTH:number = 12;
+    /*
+     * 12 is the maximum width of a column/row in the Twitter Bootstrap grid layout.
+     */
+    private static _MAX_WIDTH:number = 12;
 
     private _title:string;
     private _hostname:string;
@@ -17,6 +24,10 @@ class SectionModel {
     private _description:string;
     private _monitorModels: Array<MonitorModel> = [];
     private _sectionModels: Array<SectionModel> = [];
+
+    //==================================================================================================================
+    // Construct
+    //==================================================================================================================
 
     constructor(section:Config.Section, configuration:Configuration, hostname: string) {
         this._title = section.title;
@@ -43,11 +54,15 @@ class SectionModel {
         }
     }
 
+    //==================================================================================================================
+    // View Layer
+    //==================================================================================================================
+
     /**
      * @returns number the width of a column based on the number of sections
      */
-    public getColumnWidth() {
-        return this._sectionModels.length > 0 ? Math.floor(SectionModel.MAX_WIDTH / this._sectionModels.length) : SectionModel.MAX_WIDTH;
+    public getColumnWidth():number {
+        return this._sectionModels.length > 0 ? Math.floor(SectionModel._MAX_WIDTH / this._sectionModels.length) : SectionModel._MAX_WIDTH;
     }
 
     public getTitle():string {
