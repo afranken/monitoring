@@ -39,25 +39,21 @@ class JenkinsMonitorModel implements MonitorModel {
         this._hostname = job.hostname !== undefined ? job.hostname : hostname;
         this._details = new JenkinsDetailsModel((<JenkinsConnector>connector).getJobUrl(this), this._name);
         this._css = ko.computed<string>({
-                owner: this,
                 read: ()=>{
                     return CssClasses.BASIC_CLASSES + JenkinsMonitorModel.translateColor(this.getResponseColor());
                 }
         });
         this._buildingStyle = ko.computed<string>({
-                owner: this,
                 read: ()=>{
                     return JenkinsMonitorModel.translateBuildingStyle(this.getResponseColor());
                 }
         });
         this._style = ko.computed<string>({
-            owner: this,
             read: ()=>{
                 return JenkinsMonitorModel.OPACITY+JenkinsMonitorModel.calculateExpiration(this.getResponseTimestamp(), (<JenkinsConnector>this._connector).getExpiry());
             }
         });
         this._completedPercent = ko.computed<number>({
-            owner: this,
             read: ()=>{
                 return JenkinsMonitorModel.calculateCompletedPercent(this.getResponseTimestamp(), this.getEstimatedDuration());
             }

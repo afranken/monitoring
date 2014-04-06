@@ -32,7 +32,6 @@ class JenkinsDetailsModel {
 
     private init():void {
         this._commitHash = ko.computed<string>({
-            owner: this,
             read: ()=>{
                 var commit:string = undefined;
                 if(this.getLastBuiltRevision()) {
@@ -47,7 +46,6 @@ class JenkinsDetailsModel {
         });
 
         this._branchName = ko.computed<string>({
-            owner: this,
             read: ()=>{
                 var name:string = undefined;
                 if(this.getLastBuiltRevision()) {
@@ -62,14 +60,12 @@ class JenkinsDetailsModel {
         });
 
         this._runTime = ko.computed<string>({
-            owner: this,
             read: ()=>{
                 return this.calculateDuration();
             }
         });
 
         this._buildNumber = ko.computed<number>({
-            owner: this,
             read: ()=>{
                 var buildNumber:number = undefined;
                 if(this.getLastBuild()) {
@@ -80,7 +76,6 @@ class JenkinsDetailsModel {
         });
 
         this._buildNumberUrl = ko.computed<string>({
-            owner: this,
             read: ()=>{
                 var buildNumberUrl:string = undefined;
                 if(this.getLastBuild()) {
@@ -91,7 +86,6 @@ class JenkinsDetailsModel {
         });
 
         this._startDate = ko.computed<string>({
-            owner: this,
             read: ()=>{
                 return this.calculateStartDate();
             }

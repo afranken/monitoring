@@ -21,7 +21,6 @@ class SonarViolation {
     constructor(public type:string) {
         this._count(0);
         this._css =  ko.computed<string>({
-            owner: this,
             read: ()=>{
                 return SonarViolation.BASIC_CLASSES + this._status();
             }
