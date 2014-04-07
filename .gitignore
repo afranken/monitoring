@@ -1,0 +1,20 @@
+# IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+src/main/typescript/**/*.js*
+_SpecRunner.html
+
+# Maven
+target
+*/target/
+*/*/target/
+
+# Grunt
+.grunt/
+bower_components/
+node_modules/
+
+.coveralls.yml
