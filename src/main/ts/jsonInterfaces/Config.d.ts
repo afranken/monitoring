@@ -52,7 +52,7 @@ declare module Config {
         }
 
             /**
-             * A backend unit to monitor
+             * A backend service to monitor
              */
             interface Monitor {
                 /**
@@ -60,9 +60,9 @@ declare module Config {
                  */
                 name?: string;
                 /**
-                 * unique id that is used to retrieve information from a backend. (e.g. a Jenkins Job name or a Nagios Host name)
+                 * id that is used to retrieve information from a backend.
                  */
-                id: string;
+                id: any;
                 /**
                  * host of the backend to retrieve data from. Overwrites Section#hostname
                  */
@@ -72,6 +72,34 @@ declare module Config {
                  */
                 type?: string;
             }
+
+            /**
+             * Monitor that maps to one external service
+             */
+            interface SimpleMonitor extends Monitor {
+                id: string;
+            }
+
+            /**
+             * Monitor that maps to several external services
+             */
+            interface ExtendedMonitor extends Monitor {
+                id: MonitorId[];
+            }
+
+                /**
+                 *
+                 */
+                interface MonitorId {
+                    /**
+                     * depending on the monitor type, this may be used as a display name, description or a heading
+                     */
+                    name?: string;
+                    /**
+                     * unique id that is used to retrieve information from a backend. (e.g. a Jenkins Job name or a Nagios Host name)
+                     */
+                    externalId: string;
+                }
 
     /**
      * Application-wide config. {@see Configuration}
