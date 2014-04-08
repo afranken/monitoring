@@ -8,24 +8,26 @@ import SonarMonitorModel = require('./SonarMonitorModel');
 import SonarViolation = require('./SonarViolation');
 
 /**
- *
+ * Get data from Sonar {@link http://www.sonarqube.org/}
  */
 class SonarConnector extends ConnectorBase implements Connector {
 
     private static SONAR_DRILLDOWN_VIOLATIONS_SUFFIX:string = '/drilldown/violations/';
     private static SONAR_RESOURCE_VIOLATIONS_API_SUFFIX:string = '/api/resources?callback=?&format=json&metrics=blocker_violations,critical_violations,major_violations,minor_violations,info_violations&resource=';
 
-    public getRemoteData(model:SonarMonitorModel):void {
-        var moduleNames:string[] = model.getId().split(',');
+    //==================================================================================================================
+    // Functionality
+    //==================================================================================================================
 
-        moduleNames.forEach(moduleName => {
-            jQuery.getJSON(this.getApiUrl(model,moduleName),
+    public getRemoteData(model:SonarMonitorModel):void {
+        model.getId().forEach(monitorId => {
+            jQuery.getJSON(this.getApiUrl(model,monitorId.externalId),
                 (violations: SonarResponse.Jsons) => {
-                    this.updateModel(violations, model, moduleName);
+                    this.updateModel(violations, model, monitorId.externalId);
                 })
                 .fail((jqXHR, textStatus, errorThrown) => {
                     if(console) {
-                        console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model,moduleName));
+                        console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model,monitorId.externalId));
                     }
                 });
         });
@@ -37,7 +39,6 @@ class SonarConnector extends ConnectorBase implements Connector {
     public updateModel(json:SonarResponse.Jsons, model:SonarMonitorModel, moduleName:string):void {
         var violationName = json[0].name;
         model.addUrl(moduleName, this.getModuleUrl(model,moduleName));
-        model.addName(moduleName,violationName);
         model.addViolations(moduleName,json);
     }
 

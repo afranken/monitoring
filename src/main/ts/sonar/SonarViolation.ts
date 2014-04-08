@@ -4,6 +4,9 @@ import Config = require('../jsonInterfaces/Config');
 import SonarResponse = require('../jsonInterfaces/SonarResponse');
 import CssClasses = require('../CssClasses');
 
+/**
+ * Model that represents one violation type
+ */
 class SonarViolation {
 
     public static BASIC_CLASSES:string = ' codeviolation ' + CssClasses.BASIC;
@@ -18,6 +21,10 @@ class SonarViolation {
     private _status:KnockoutObservable<string> = ko.observable<string>();
     private _count:KnockoutObservable<number> = ko.observable<number>();
 
+    //==================================================================================================================
+    // Construct
+    //==================================================================================================================
+
     constructor(public type:string) {
         this._count(0);
         this._css =  ko.computed<string>({
@@ -27,9 +34,21 @@ class SonarViolation {
         });
     }
 
+    //==================================================================================================================
+    // View Layer
+    //==================================================================================================================
+
     public getCss():string {
         return this._css();
     }
+
+    public getCount():number {
+        return this._count();
+    }
+
+    //==================================================================================================================
+    // Functionality
+    //==================================================================================================================
 
     public setStatus(count:number): void{
         if(count > 0) {
@@ -41,10 +60,6 @@ class SonarViolation {
         } else {
             this._status(SonarViolation.BASIC_CLASSES + CssClasses.SUCCESS);
         }
-    }
-
-    public getCount():number {
-        return this._count();
     }
 
     public setCount(violations: SonarResponse.Jsons):void {

@@ -16,10 +16,14 @@ class SonarMonitorModel implements MonitorModel {
     private _violationModels: Array<SonarViolationModel> = [];
     private _name:string;
     private _hostname:string;
-    private _id:string;
+    private _id:Config.MonitorId[];
     private _jsonResponse:KnockoutObservable<SonarResponse.Jsons> = ko.observable<SonarResponse.Jsons>();
 
-    constructor(private monitor:Config.Monitor, public connector:Connector, hostname:string) {
+    //==================================================================================================================
+    // Construct
+    //==================================================================================================================
+
+    constructor(private monitor:Config.ExtendedMonitor, public connector:Connector, hostname:string) {
         this._name = monitor.name;
         this._hostname = monitor.hostname !== undefined ? monitor.hostname : hostname;
         this._id = monitor.id;
@@ -28,27 +32,18 @@ class SonarMonitorModel implements MonitorModel {
         this.init(monitor.id);
     }
 
-    private init(id:string) {
-        var sonarModules:string[] = id.split(',');
-        sonarModules.forEach(moduleName => {
-            this._violationModels.push(new SonarViolationModel(moduleName));
+    private init(monitorId:Config.MonitorId[]) {
+        monitorId.forEach(id => {
+            this._violationModels.push(new SonarViolationModel(id.externalId, id.name));
         });
     }
 
-    public updateStatus():void {
-        this.connector.getRemoteData(this);
-    }
-
-    public setData(json:SonarResponse.Jsons):void {
-        this._jsonResponse(json);
-    }
+    //==================================================================================================================
+    // View Layer
+    //==================================================================================================================
 
     public getUrl():string {
         return this._url();
-    }
-
-    public getId():string {
-        return this._id;
     }
 
     public getName():string {
@@ -67,6 +62,22 @@ class SonarMonitorModel implements MonitorModel {
         return Types.SONAR;
     }
 
+    //==================================================================================================================
+    // Functionality
+    //==================================================================================================================
+
+    public getId():Config.MonitorId[] {
+        return this._id;
+    }
+
+    public updateStatus():void {
+        this.connector.getRemoteData(this);
+    }
+
+    public setData(json:SonarResponse.Jsons):void {
+        this._jsonResponse(json);
+    }
+
     public addViolations(moduleName:string, violations:SonarResponse.Jsons):void {
         this._violationModels.forEach(violationModel => {
             if(violationModel.getModuleName() === moduleName) {
@@ -82,14 +93,6 @@ class SonarMonitorModel implements MonitorModel {
         this._violationModels.forEach(violationModel => {
             if(violationModel.getModuleName() === moduleName) {
                 violationModel.setUrl(url);
-            }
-        });
-    }
-
-    public addName(moduleName:string, name:string):void {
-        this._violationModels.forEach(violationModel => {
-            if(violationModel.getModuleName() === moduleName) {
-                violationModel.setName(name);
             }
         });
     }

@@ -2,18 +2,24 @@
 import ko = require('knockout');
 import SonarViolation = require("./SonarViolation");
 
-
+/**
+ * Model that represents one Sonar module
+ */
 class SonarViolationModel {
 
     private _moduleName:string;
-    private _name:KnockoutObservable<string> = ko.observable<string>();
+    private _name:string;
     private _url:KnockoutObservable<string> = ko.observable<string>();
     private _violations: Array<SonarViolation> = [];
 
-    constructor(moduleName:string) {
+    //==================================================================================================================
+    // Construct
+    //==================================================================================================================
+
+    constructor(moduleName:string, name:string) {
         this._moduleName = moduleName;
+        this._name = name;
         this._url('');
-        this._name('');
 
         this.init();
     }
@@ -26,6 +32,10 @@ class SonarViolationModel {
         this._violations.push(new SonarViolation(SonarViolation.INFO));
     }
 
+    //==================================================================================================================
+    // View Layer
+    //==================================================================================================================
+
     public getViolations():Array<SonarViolation> {
         return this._violations;
     }
@@ -35,16 +45,16 @@ class SonarViolationModel {
     }
 
     public getName():string {
-        return this._name();
-    }
-
-    public setName(name:string):void {
-        this._name(name);
+        return this._name;
     }
 
     public getUrl():string {
         return this._url();
     }
+
+    //==================================================================================================================
+    // Functionality
+    //==================================================================================================================
 
     public setUrl(url:string):void {
         this._url(url);
