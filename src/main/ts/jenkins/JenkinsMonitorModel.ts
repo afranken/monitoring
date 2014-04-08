@@ -32,7 +32,11 @@ class JenkinsMonitorModel implements MonitorModel {
     private _details:JenkinsDetailsModel;
     private _jsonResponse:KnockoutObservable<JenkinsJsonResponse.Json> = ko.observable<JenkinsJsonResponse.Json>();
 
-    constructor(job:Config.Monitor, connector:Connector, hostname:string) {
+    //==================================================================================================================
+    // Construct
+    //==================================================================================================================
+
+    constructor(job:Config.SimpleMonitor, connector:Connector, hostname:string) {
         this._connector = connector;
         this._name = job.name !== undefined ? job.name : job.id;
         this._id = job.id;
@@ -60,9 +64,9 @@ class JenkinsMonitorModel implements MonitorModel {
         });
     }
 
-    public updateStatus():void {
-        this._connector.getRemoteData(this);
-    }
+    //==================================================================================================================
+    // View Layer
+    //==================================================================================================================
 
     public getName():string {
         return this._name;
@@ -106,11 +110,21 @@ class JenkinsMonitorModel implements MonitorModel {
         return Types.JENKINS;
     }
 
+    //==================================================================================================================
+    // Functionality
+    //==================================================================================================================
+
+    public updateStatus():void {
+        this._connector.getRemoteData(this);
+    }
+
     public setData(json:JenkinsJsonResponse.Json):void {
         this._jsonResponse(json);
         this._details.setData(json);
     }
 
+    //==================================================================================================================
+    // Private
     //==================================================================================================================
 
     private static calculateCompletedPercent(buildTimestamp: number, estimatedDuration:number):number {
