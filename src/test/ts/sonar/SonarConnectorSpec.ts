@@ -15,7 +15,6 @@ describe("SonarConnector", function():void {
 
     var _HOST:string = "myhost";
     var _NAME:string = "mymonitor";
-    var _ID:string = "myid,myid2";
     var _EXPIRY:number = 888;
 
     var configuration: Configuration = new Configuration({
@@ -31,9 +30,18 @@ describe("SonarConnector", function():void {
     });
 
 
-    var monitorJson: Config.Monitor = {
+    var monitorJson: Config.ExtendedMonitor = {
         "name": _NAME,
-        "id": _ID,
+        "id": [
+            {
+                "name": "myname",
+                "externalId": "myid"
+            },
+            {
+                "name": "myname2",
+                "externalId": "myid2"
+            }
+        ],
         "hostname": _HOST,
         "type": Types.SONAR
     };

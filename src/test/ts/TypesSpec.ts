@@ -25,7 +25,11 @@ describe("Types", function():void {
     var nagiosModel:MonitorModel = MonitorModels.createModel(nagiosConfig, configuration, "hostname");
 
     var sonarConfig:Config.Monitor = {
-        "id": "123",
+        "id": [
+            {
+                "externalId": "123"
+            }
+        ],
         "type": "sonar"
     };
     var sonarModel:MonitorModel = MonitorModels.createModel(sonarConfig, configuration, "hostname");
