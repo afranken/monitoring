@@ -7,6 +7,9 @@ import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
 import Configuration = require('../configuration/Configuration');
 import NagiosMonitorModel = require('./NagiosMonitorModel');
 
+/**
+ * Get data from Nagios {@link http://www.nagios.org/}
+ */
 class NagiosConnector extends ConnectorBase implements Connector {
 
     //the nagios host
@@ -23,6 +26,10 @@ class NagiosConnector extends ConnectorBase implements Connector {
     public static NAGIOS_JSONP_SUFFIX: string = '&callback=?';
 
     private static NAGIOS_HOSTINFO_PREFIX = '/cgi-bin/extinfo.cgi?type=1&host=';
+
+    //==================================================================================================================
+    // Functionality
+    //==================================================================================================================
 
     public getRemoteData(model:NagiosMonitorModel):void {
         jQuery.getJSON(this.getApiUrl(model),

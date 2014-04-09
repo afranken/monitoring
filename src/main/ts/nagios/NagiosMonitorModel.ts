@@ -10,7 +10,9 @@ import NagiosHostModel = require('./NagiosHostModel');
 import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
 
 /**
- * Model that represents a list of Nagios hosts
+ * Model that represents a list of Nagios hosts.
+ * This is necessary because the Nagios API can only answer with a list of all hosts with all services.
+ * In order to save bandwidth and CPU time on the Nagios server, data is retrieved once and update all {@link NagiosHostModel}s.
  */
 class NagiosMonitorModel implements MonitorModel {
 
@@ -19,6 +21,10 @@ class NagiosMonitorModel implements MonitorModel {
     private _hostname:string;
     private _name:string;
     private _connector:NagiosConnector;
+
+    //==================================================================================================================
+    // Construct
+    //==================================================================================================================
 
     constructor(job:Config.Monitor, connector:Connector, hostname:string) {
         this._name = job.name;
@@ -36,9 +42,9 @@ class NagiosMonitorModel implements MonitorModel {
         });
     }
 
-    public getId():string {
-        return this._id;
-    }
+    //==================================================================================================================
+    // View Layer
+    //==================================================================================================================
 
     public getHostname():string {
         return this._hostname;
@@ -54,6 +60,14 @@ class NagiosMonitorModel implements MonitorModel {
 
     public getType():string {
         return Types.NAGIOS;
+    }
+
+    //==================================================================================================================
+    // Functionality
+    //==================================================================================================================
+
+    public getId():string {
+        return this._id;
     }
 
     public addService(hostname:string, service:NagiosJsonResponse.NagiosService):void {

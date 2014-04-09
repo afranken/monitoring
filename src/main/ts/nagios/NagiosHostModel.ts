@@ -5,6 +5,9 @@ import ko = require('knockout');
 import CssClasses = require('../CssClasses');
 import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
 
+/**
+ * Model that represents one Nagios host with all services
+ */
 class NagiosHostModel {
 
     /**
@@ -20,11 +23,19 @@ class NagiosHostModel {
     private _brokenServices:KnockoutObservableArray<string> = ko.observableArray<string>();
     private _css:KnockoutObservable<string> = ko.observable<string>();
 
+    //==================================================================================================================
+    // Construct
+    //==================================================================================================================
+
     constructor(hostname:string, url:string) {
         this._css(CssClasses.BASIC_CLASSES);
         this._url = url;
         this._hostname = hostname;
     }
+
+    //==================================================================================================================
+    // View Layer
+    //==================================================================================================================
 
     public getHostname():string {
         return this._hostname;
@@ -42,32 +53,13 @@ class NagiosHostModel {
         return this._brokenServices();
     }
 
-    private setBrokenServices(service: string): void {
-        if(!~jQuery.inArray(service,this._brokenServices())) {
-            this._brokenServices.push(service);
-        }
-    }
-
     public getAllServices(): Array<string> {
         return this._allServices();
     }
 
-    private setAllServices(service: string): void {
-        if(!~jQuery.inArray(service,this._allServices())) {
-            this._allServices.push(service);
-        }
-    }
-
-    private setCss(css: string): void {
-        if(css === CssClasses.FAILURE) {
-            //always overwrite status with FAILURE
-            this._css(css);
-        } else if(css === CssClasses.WARNING && this._css() !== CssClasses.FAILURE) {
-            this._css(css);
-        } else if(css === CssClasses.SUCCESS && this._css() !== CssClasses.FAILURE && this._css() !== CssClasses.WARNING) {
-            this._css(css);
-        }
-    }
+    //==================================================================================================================
+    // Functionality
+    //==================================================================================================================
 
     public addService(service: NagiosJsonResponse.NagiosService){
         var status = service.service_status;
@@ -85,6 +77,33 @@ class NagiosHostModel {
         }
         else {
             this.setCss(CssClasses.DISABLED);
+        }
+    }
+
+    //==================================================================================================================
+    // Private
+    //==================================================================================================================
+
+    private setBrokenServices(service: string): void {
+        if(!~jQuery.inArray(service,this._brokenServices())) {
+            this._brokenServices.push(service);
+        }
+    }
+
+    private setAllServices(service: string): void {
+        if(!~jQuery.inArray(service,this._allServices())) {
+            this._allServices.push(service);
+        }
+    }
+
+    private setCss(css: string): void {
+        if(css === CssClasses.FAILURE) {
+            //always overwrite status with FAILURE
+            this._css(css);
+        } else if(css === CssClasses.WARNING && this._css() !== CssClasses.FAILURE) {
+            this._css(css);
+        } else if(css === CssClasses.SUCCESS && this._css() !== CssClasses.FAILURE && this._css() !== CssClasses.WARNING) {
+            this._css(css);
         }
     }
 
