@@ -4,6 +4,7 @@ import jQuery = require('jquery');
 import ko = require('knockout');
 import CssClasses = require('../CssClasses');
 import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
+import MonitorModels = require('../monitorModel/MonitorModels');
 
 /**
  * Model that represents one Nagios host with all services
@@ -17,6 +18,7 @@ class NagiosHostModel {
     public static STATUS_WARNING: string = 'WARNING';
     public static STATUS_CRITICAL: string = 'CRITICAL';
 
+    private _name:string;
     private _hostname:string;
     private _url:string;
     private _allServices:KnockoutObservableArray<string> = ko.observableArray<string>();
@@ -27,7 +29,8 @@ class NagiosHostModel {
     // Construct
     //==================================================================================================================
 
-    constructor(hostname:string, url:string) {
+    constructor(name:string,hostname:string, url:string) {
+        this._name = name;
         this._css(CssClasses.BASIC_CLASSES);
         this._url = url;
         this._hostname = hostname;
@@ -36,6 +39,10 @@ class NagiosHostModel {
     //==================================================================================================================
     // View Layer
     //==================================================================================================================
+
+    public getName():string {
+        return this._name;
+    }
 
     public getHostname():string {
         return this._hostname;

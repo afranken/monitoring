@@ -17,7 +17,6 @@ import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
 class NagiosMonitorModel implements MonitorModel {
 
     private _hostmodels:Array<NagiosHostModel> = [];
-    private _id:string;
     private _hostname:string;
     private _name:string;
     private _connector:NagiosConnector;
@@ -26,18 +25,18 @@ class NagiosMonitorModel implements MonitorModel {
     // Construct
     //==================================================================================================================
 
-    constructor(job:Config.Monitor, connector:Connector, hostname:string) {
+    constructor(job:Config.ExtendedMonitor, connector:Connector, hostname:string) {
         this._name = job.name;
-        this._id = job.id;
         this._connector = <NagiosConnector>connector;
         this._hostname = job.hostname !== undefined ? job.hostname : hostname;
 
-        this.init();
+        this.init(job.id);
     }
 
-    private init() {
-        this.getHostnames().forEach((hostname:string) => {
-            var nagiosHostModel = new NagiosHostModel(hostname, this._connector.getHostInfoUrl(this._hostname, hostname));
+    private init(monitorId:Config.MonitorId[]) {
+        monitorId.forEach((id) => {
+            var name = id.name !== undefined ? id.name : id.externalId;
+            var nagiosHostModel = new NagiosHostModel(name, id.externalId, this._connector.getHostInfoUrl(this._hostname, id.externalId));
             this._hostmodels.push(nagiosHostModel);
         });
     }
@@ -66,10 +65,6 @@ class NagiosMonitorModel implements MonitorModel {
     // Functionality
     //==================================================================================================================
 
-    public getId():string {
-        return this._id;
-    }
-
     public addService(hostname:string, service:NagiosJsonResponse.NagiosService):void {
         this._hostmodels.forEach(hostmodel => {
             if (hostmodel.getHostname() === hostname) {
@@ -89,15 +84,9 @@ class NagiosMonitorModel implements MonitorModel {
         //--------- iterate over JSON response, save services that should be displayed
         json.services.forEach((service:NagiosJsonResponse.NagiosService)=>{
             if(service.service_host !== undefined && service.service_host.host_name !== undefined) {
-                if(~this.getHostnames().indexOf(service.service_host.host_name)) {
-                    this.addService(service.service_host.host_name,service);
-                }
+                this.addService(service.service_host.host_name,service);
             }
         });
-    }
-
-    public getHostnames():Array<string> {
-        return this.getId().split(',');
     }
 
     //==================================================================================================================

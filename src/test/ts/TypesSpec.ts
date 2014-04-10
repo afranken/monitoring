@@ -19,7 +19,12 @@ describe("Types", function():void {
     var jenkinsModel:MonitorModel = MonitorModels.createModel(jenkinsConfig, configuration, "hostname");
 
     var nagiosConfig:Config.Monitor = {
-        "id": "123",
+        "id": [
+            {
+                "name": "myname",
+                "externalId": "123"
+            }
+        ],
         "type": "nagios"
     };
     var nagiosModel:MonitorModel = MonitorModels.createModel(nagiosConfig, configuration, "hostname");

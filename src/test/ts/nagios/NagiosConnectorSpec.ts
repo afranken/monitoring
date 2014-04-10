@@ -33,7 +33,16 @@ describe("NagiosConnector", function():void {
 
     var monitorJson: Config.Monitor = {
         "name": _NAME,
-        "id": _ID,
+        "id": [
+            {
+                "name": "myname",
+                "externalId": "myid"
+            },
+            {
+                "name": "myname2",
+                "externalId": "myid2"
+            }
+        ],
         "hostname": _HOST,
         "type": Types.NAGIOS
     };
@@ -48,7 +57,7 @@ describe("NagiosConnector", function():void {
     it("TestMethods", function():void {
         expect(testling.getExpiry()).toBe(_EXPIRY);
         expect(testling.getApiUrl(monitor)).toBe('https://myhost:8080/myprefix/cgi-bin/status-json.cgi?host=all&callback=?');
-        expect(testling.getHostInfoUrl(monitor.getHostnames()[0],monitor.getHostname())).toBe('http://myid/cgi-bin/extinfo.cgi?type=1&host=myhost');
+        expect(testling.getHostInfoUrl(monitor.getHostname(),"myid")).toBe('https://myhost:8080/myprefix/cgi-bin/extinfo.cgi?type=1&host=myid');
     });
 
 });

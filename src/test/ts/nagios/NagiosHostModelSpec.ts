@@ -43,9 +43,10 @@ describe("NagiosHostModel", function():void {
     };
 
 
-    var testling:NagiosHostModel = new NagiosHostModel("hostname","url");
+    var testling:NagiosHostModel = new NagiosHostModel("name","hostname","url");
 
     it("TestBase", function():void {
+        expect(testling.getName()).toEqual("name");
         expect(testling.getHostname()).toEqual("hostname");
         expect(testling.getUrl()).toEqual("url");
     });
