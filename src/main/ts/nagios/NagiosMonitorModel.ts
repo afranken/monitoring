@@ -83,6 +83,9 @@ class NagiosMonitorModel implements MonitorModel {
     }
 
     public setData(json:NagiosJsonResponse.NagiosServices):void {
+        //reset hostmodel data before adding services from nagios response.
+        this.resetHostModels();
+
         //--------- iterate over JSON response, save services that should be displayed
         json.services.forEach((service:NagiosJsonResponse.NagiosService)=>{
             if(service.service_host !== undefined && service.service_host.host_name !== undefined) {
@@ -97,7 +100,18 @@ class NagiosMonitorModel implements MonitorModel {
         return this.getId().split(',');
     }
 
+    //==================================================================================================================
+    // Private
+    //==================================================================================================================
 
+    /**
+     * Reset all hostmodel data.
+     */
+    private resetHostModels():void {
+        this._hostmodels.forEach(hostmodel => {
+            hostmodel.resetData();
+        });
+    }
 
 }
 

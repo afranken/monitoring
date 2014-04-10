@@ -61,6 +61,15 @@ class NagiosHostModel {
     // Functionality
     //==================================================================================================================
 
+    /**
+     * Reset current host/service status.
+     */
+    public resetData():void {
+        this._css(CssClasses.BASIC_CLASSES);
+        this._allServices.removeAll();
+        this._brokenServices.removeAll();
+    }
+
     public addService(service: NagiosJsonResponse.NagiosService){
         var status = service.service_status;
         this.setAllServices(service.service_description);
