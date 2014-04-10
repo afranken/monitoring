@@ -13,13 +13,6 @@ import JenkinsMonitorModel = require('../jenkins/JenkinsMonitorModel');
  */
 class MonitorModels {
 
-    private static _PATTERN:RegExp = new RegExp('\\W','g');
-    private static _REPLACEMENT_CHAR = '-';
-
-    public static getHtmlsafeId(id:string):string {
-        return id.replace(MonitorModels._PATTERN,MonitorModels._REPLACEMENT_CHAR);
-    }
-
     /**
      * Create a {@link MonitorModel} implementation matching the type of the {@link Config.Monitor}
      *
