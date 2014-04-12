@@ -32,7 +32,7 @@ describe("SonarConnector", function():void {
 
     var monitorJson: Config.ExtendedMonitor = {
         "name": _NAME,
-        "id": [
+        "externalRef": [
             {
                 "name": "myname",
                 "externalId": "myid"

@@ -23,7 +23,7 @@ class JenkinsMonitorModel implements MonitorModel {
 
     private _connector:Connector;
     private _name:string;
-    private _id:string;
+    private _externalRef:string;
     private _hostname:string;
     private _css:KnockoutComputed<string>;
     private _style:KnockoutComputed<string>;
@@ -38,8 +38,8 @@ class JenkinsMonitorModel implements MonitorModel {
 
     constructor(job:Config.SimpleMonitor, connector:Connector, hostname:string) {
         this._connector = connector;
-        this._name = job.name !== undefined ? job.name : job.id;
-        this._id = job.id;
+        this._name = job.name !== undefined ? job.name : job.externalRef;
+        this._externalRef = job.externalRef;
         this._hostname = job.hostname !== undefined ? job.hostname : hostname;
         this._details = new JenkinsDetailsModel((<JenkinsConnector>connector).getJobUrl(this), this._name);
         this._css = ko.computed<string>({
@@ -72,14 +72,10 @@ class JenkinsMonitorModel implements MonitorModel {
         return this._name;
     }
 
-    public getId():string {
-        return this._id;
-    }
-
     public getHtmlsafeId():string {
         var _PATTERN:RegExp = new RegExp('\\W','g');
         var _REPLACEMENT_CHAR = '-';
-        return this._id.replace(_PATTERN,_REPLACEMENT_CHAR);
+        return this._externalRef.replace(_PATTERN,_REPLACEMENT_CHAR);
     }
 
     public getCompletedPercent():number {
@@ -113,6 +109,10 @@ class JenkinsMonitorModel implements MonitorModel {
     //==================================================================================================================
     // Functionality
     //==================================================================================================================
+
+    public getExternalRef():string {
+        return this._externalRef;
+    }
 
     public updateStatus():void {
         this._connector.getRemoteData(this);

@@ -20,14 +20,14 @@ class SonarConnector extends ConnectorBase implements Connector {
     //==================================================================================================================
 
     public getRemoteData(model:SonarMonitorModel):void {
-        model.getId().forEach(monitorId => {
-            jQuery.getJSON(this.getApiUrl(model,monitorId.externalId),
+        model.getExternalRef().forEach(externalRef => {
+            jQuery.getJSON(this.getApiUrl(model,externalRef.externalId),
                 (violations: SonarResponse.Jsons) => {
-                    this.updateModel(violations, model, monitorId.externalId);
+                    this.updateModel(violations, model, externalRef.externalId);
                 })
                 .fail((jqXHR, textStatus, errorThrown) => {
                     if(console) {
-                        console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model,monitorId.externalId));
+                        console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model,externalRef.externalId));
                     }
                 });
         });

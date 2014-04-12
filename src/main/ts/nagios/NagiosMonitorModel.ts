@@ -30,13 +30,13 @@ class NagiosMonitorModel implements MonitorModel {
         this._connector = <NagiosConnector>connector;
         this._hostname = job.hostname !== undefined ? job.hostname : hostname;
 
-        this.init(job.id);
+        this.init(job.externalRef);
     }
 
-    private init(monitorId:Config.MonitorId[]) {
-        monitorId.forEach((id) => {
-            var name = id.name !== undefined ? id.name : id.externalId;
-            var nagiosHostModel = new NagiosHostModel(name, id.externalId, this._connector.getHostInfoUrl(this._hostname, id.externalId));
+    private init(externalRef:Config.MonitorId[]) {
+        externalRef.forEach((ref) => {
+            var name = ref.name !== undefined ? ref.name : ref.externalId;
+            var nagiosHostModel = new NagiosHostModel(name, ref.externalId, this._connector.getHostInfoUrl(this._hostname, ref.externalId));
             this._hostmodels.push(nagiosHostModel);
         });
     }

@@ -60,9 +60,9 @@ declare module Config {
                  */
                 name?: string;
                 /**
-                 * id that is used to retrieve information from a backend.
+                 * reference that is used to retrieve information from a backend.
                  */
-                id: any;
+                externalRef: any;
                 /**
                  * host of the backend to retrieve data from. Overwrites Section#hostname
                  */
@@ -77,14 +77,14 @@ declare module Config {
              * Monitor that maps to one external service
              */
             interface SimpleMonitor extends Monitor {
-                id: string;
+                externalRef: string;
             }
 
             /**
              * Monitor that maps to several external services
              */
             interface ExtendedMonitor extends Monitor {
-                id: MonitorId[];
+                externalRef: MonitorId[];
             }
 
                 /**

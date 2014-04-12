@@ -16,7 +16,7 @@ describe("JenkinsMonitorModel", function():void {
 
     var _HOST:string = "myhost";
     var _NAME:string = "mymonitor";
-    var _ID:string = "myid";
+    var _REF:string = "myid";
     var _EXPIRY:number = 888;
 
     var configuration: Configuration = new Configuration({
@@ -34,7 +34,7 @@ describe("JenkinsMonitorModel", function():void {
 
     var monitorJson: Config.Monitor = {
         "name": _NAME,
-        "id": _ID,
+        "externalRef": _REF,
         "hostname": _HOST,
         "type": Types.JENKINS
     };
@@ -77,7 +77,7 @@ describe("JenkinsMonitorModel", function():void {
     it("TestMethods", function():void {
         expect(testling.getHostname()).toBe(_HOST);
         expect(testling.getName()).toBe(_NAME);
-        expect(testling.getId()).toBe(_ID);
+        expect(testling.getExternalRef()).toBe(_REF);
         expect(testling.getCss()).toBe(CssClasses.BASIC_CLASSES);
         expect(testling.getStyle()).toBe("opacity: 1");
         expect(testling.getType()).toBe(Types.JENKINS);

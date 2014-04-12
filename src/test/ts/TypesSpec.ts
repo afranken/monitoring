@@ -13,13 +13,13 @@ describe("Types", function():void {
     var configuration:Configuration = new Configuration({});
 
     var jenkinsConfig:Config.Monitor = {
-        "id": "123",
+        "externalRef": "123",
         "type": "jenkins"
     };
     var jenkinsModel:MonitorModel = MonitorModels.createModel(jenkinsConfig, configuration, "hostname");
 
     var nagiosConfig:Config.Monitor = {
-        "id": [
+        "externalRef": [
             {
                 "name": "myname",
                 "externalId": "123"
@@ -30,7 +30,7 @@ describe("Types", function():void {
     var nagiosModel:MonitorModel = MonitorModels.createModel(nagiosConfig, configuration, "hostname");
 
     var sonarConfig:Config.Monitor = {
-        "id": [
+        "externalRef": [
             {
                 "externalId": "123"
             }

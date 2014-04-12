@@ -56,7 +56,7 @@ class JenkinsConnector extends ConnectorBase implements Connector {
      * @returns string
      */
     public getJobUrl(model:JenkinsMonitorModel):string {
-        return this.getUrl(model.getHostname(), JenkinsConnector._JOB_PREFIX + model.getId());
+        return this.getUrl(model.getHostname(), JenkinsConnector._JOB_PREFIX + model.getExternalRef());
     }
 
     /**

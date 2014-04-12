@@ -16,7 +16,7 @@ class SonarMonitorModel implements MonitorModel {
     private _violationModels: Array<SonarViolationModel> = [];
     private _name:string;
     private _hostname:string;
-    private _id:Config.MonitorId[];
+    private _externalRef:Config.MonitorId[];
     private _jsonResponse:KnockoutObservable<SonarResponse.Jsons> = ko.observable<SonarResponse.Jsons>();
 
     //==================================================================================================================
@@ -26,15 +26,15 @@ class SonarMonitorModel implements MonitorModel {
     constructor(private monitor:Config.ExtendedMonitor, public connector:Connector, hostname:string) {
         this._name = monitor.name;
         this._hostname = monitor.hostname !== undefined ? monitor.hostname : hostname;
-        this._id = monitor.id;
+        this._externalRef = monitor.externalRef;
         this._url('');
 
-        this.init(monitor.id);
+        this.init(monitor.externalRef);
     }
 
-    private init(monitorId:Config.MonitorId[]) {
-        monitorId.forEach(id => {
-            this._violationModels.push(new SonarViolationModel(id.externalId, id.name));
+    private init(externalRef:Config.MonitorId[]) {
+        externalRef.forEach(ref => {
+            this._violationModels.push(new SonarViolationModel(ref.externalId, ref.name));
         });
     }
 
@@ -66,8 +66,8 @@ class SonarMonitorModel implements MonitorModel {
     // Functionality
     //==================================================================================================================
 
-    public getId():Config.MonitorId[] {
-        return this._id;
+    public getExternalRef():Config.MonitorId[] {
+        return this._externalRef;
     }
 
     public updateStatus():void {

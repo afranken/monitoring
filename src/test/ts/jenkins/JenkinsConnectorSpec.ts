@@ -33,7 +33,7 @@ describe("JenkinsConnector", function():void {
 
     var monitorJson: Config.Monitor = {
         "name": _NAME,
-        "id": _ID,
+        "externalRef": _ID,
         "hostname": _HOST,
         "type": Types.JENKINS
     };

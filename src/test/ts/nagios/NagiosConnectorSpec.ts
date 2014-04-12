@@ -33,7 +33,7 @@ describe("NagiosConnector", function():void {
 
     var monitorJson: Config.Monitor = {
         "name": _NAME,
-        "id": [
+        "externalRef": [
             {
                 "name": "myname",
                 "externalId": "myid"
