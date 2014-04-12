@@ -84,13 +84,13 @@ declare module Config {
              * Monitor that maps to several external services
              */
             interface ExtendedMonitor extends Monitor {
-                externalRef: MonitorId[];
+                externalRef: ExternalRef[];
             }
 
                 /**
-                 *
+                 * Reference to an External service.
                  */
-                interface MonitorId {
+                interface ExternalRef {
                     /**
                      * depending on the monitor type, this may be used as a display name, description or a heading
                      */
@@ -98,7 +98,7 @@ declare module Config {
                     /**
                      * unique id that is used to retrieve information from a backend. (e.g. a Jenkins Job name or a Nagios Host name)
                      */
-                    externalId: string;
+                    id: string;
                 }
 
     /**

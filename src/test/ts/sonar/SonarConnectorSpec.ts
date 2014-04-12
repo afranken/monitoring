@@ -35,11 +35,11 @@ describe("SonarConnector", function():void {
         "externalRef": [
             {
                 "name": "myname",
-                "externalId": "myid"
+                "id": "myid"
             },
             {
                 "name": "myname2",
-                "externalId": "myid2"
+                "id": "myid2"
             }
         ],
         "hostname": _HOST,
