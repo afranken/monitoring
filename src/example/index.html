@@ -7,11 +7,26 @@
     <script type="text/javascript" src="config.js"></script>
 
     <script type="text/javascript">
+
+        /**
+         * Best answer from http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+         */
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                    results = regex.exec(location.search);
+            return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
         //initialize application
         require(['Application', 'knockout', 'jquery'], function(ApplicationViewModel, ko) {
-            var applicationViewModel = new ApplicationViewModel(json);
-            ko.applyBindings(applicationViewModel);
             jQuery.fx.interval = 40;
+            //Try to load configuration from url parameter.
+            jQuery.getScript(getParameterByName('config')).always(function() {
+                        var applicationViewModel = new ApplicationViewModel(configJson);
+                        ko.applyBindings(applicationViewModel);
+                    }
+            );
         });
     </script>
     <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" media="all" />

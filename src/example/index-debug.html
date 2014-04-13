@@ -21,11 +21,25 @@
             findNestedDependencies: true
         });
 
+        /**
+         * Best answer from http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+         */
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                    results = regex.exec(location.search);
+            return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
         //initialize application
         require(['Application', 'knockout', 'jquery'], function(ApplicationViewModel, ko) {
-            var applicationViewModel = new ApplicationViewModel(json);
-            ko.applyBindings(applicationViewModel);
             jQuery.fx.interval = 40;
+            //Try to load configuration from url parameter.
+            jQuery.getScript(getParameterByName('config')).always(function() {
+                    var applicationViewModel = new ApplicationViewModel(configJson);
+                    ko.applyBindings(applicationViewModel);
+                }
+            );
         });
     </script>
 
@@ -165,9 +179,9 @@
 
 <script type="text/html" id="nagios-hostmodel-template">
     <div class="panel panel-default">
-        <a class="detail-link" data-toggle="collapse" data-bind="attr: { href: '#' + getHostname() + $index(), title: getHostname() }">
+        <a class="detail-link" data-toggle="collapse" data-bind="attr: { href: '#' + getHostname() + $index(), title: getName() }">
             <div data-bind="css: getCss()">
-                <span class="detail-name" data-bind="text: getHostname()"></span><br/>
+                <span class="detail-name" data-bind="text: getName()"></span><br/>
                 <ul data-bind="foreach: getBrokenServices()" style="list-style-type: none; padding:0; margin:0;" class="nagios-broken-services">
                     <li><span data-bind="text: $data"></span></li>
                 </ul>
