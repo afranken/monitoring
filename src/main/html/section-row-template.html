@@ -1,0 +1,25 @@
+<!-- ko if: getTitle() -->
+<div class="row">
+    <div class="col-lg-12">
+        <!-- ko if: getTitle() -->
+        <h2 class="alert alert-none monitor-heading">
+            <!-- ko if: getUrl() -->
+            <a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getTitle() }, text: getTitle()"></a>
+            <!-- /ko -->
+            <!-- ko ifnot: getUrl() -->
+            <span data-bind="text: getTitle()"></span>
+            <!-- /ko -->
+        </h2>
+        <!-- /ko -->
+        <!-- ko if: getDescription() -->
+        <p class="section-description" data-bind="html: getDescription()"></p>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if: getSections().length > 0 -->
+<div class="row">
+    <!-- ko template: { name: 'section-column-template', foreach: getSections() } -->
+    <!-- /ko -->
+</div>
+<!-- /ko -->

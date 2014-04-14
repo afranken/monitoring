@@ -1,0 +1,14 @@
+<h4 class="monitor-heading"><a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a></h4>
+<table class="codeviolations">
+    <thead>
+    <tr>
+        <th>Blocker</th>
+        <th>Critical</th>
+        <th>Major</th>
+        <th>Minor</th>
+        <th>Info</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody data-bind="foreach: getViolationModels()"><tr data-bind="template: {name: 'sonar-violation-template', foreach: getViolations()}"></tr></tbody>
+</table>

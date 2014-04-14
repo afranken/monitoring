@@ -1,0 +1,22 @@
+<div data-bind="css: 'col-lg-'+$parent.getColumnWidth()">
+    <!-- ko if: getTitle() -->
+    <h3 class="alert alert-none monitor-heading">
+        <!-- ko if: getUrl() -->
+        <a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getTitle() }, text: getTitle()"></a>
+        <!-- /ko -->
+        <!-- ko ifnot: getUrl() -->
+        <span data-bind="text: getTitle()"></span>
+        <!-- /ko -->
+    </h3>
+    <!-- /ko -->
+    <!-- ko if: getDescription() -->
+    <p class="section-description" data-bind="html: getDescription()"></p>
+    <!-- /ko -->
+    <!-- ko if: getMonitorModels().length > 0 -->
+    <div class="panel-group" data-bind="template: { name: 'monitor-template', foreach: getMonitorModels(), afterRender: $root.getData }"></div>
+    <!-- /ko -->
+    <!-- ko if: getSections().length > 0 -->
+    <!-- ko template: { name: 'section-row-template', foreach: getSections() } -->
+    <!-- /ko -->
+    <!-- /ko -->
+</div>

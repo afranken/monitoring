@@ -1,0 +1,4 @@
+<td class="sonar-violation-count"><div data-bind="css: getCss(), text: getCount()"></div></td>
+<!-- ko if: ($index() === ($parent.getViolations().length - 1)) -->
+<th class="sonar-module-name"><a data-bind="attr: { href: $parent.getUrl(), title: $parent.getName() }, text: $parent.getName()"></a></th>
+<!-- /ko -->
