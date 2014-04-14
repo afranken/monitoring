@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Title can't be set via Knockout, at least not out-of-the-box -->
     <title></title>
+
+    <!-- Load dependencies -->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <!--<script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>-->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <!-- load configuration -->
     <script type="text/javascript" src="config.js"></script>
 
     <script type="text/javascript">
@@ -21,16 +24,6 @@
             findNestedDependencies: true
         });
 
-        /**
-         * Best answer from http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-         */
-        function getParameterByName(name) {
-            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                    results = regex.exec(location.search);
-            return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-        }
-
         //initialize application
         require(['Application', 'knockout', 'jquery'], function(ApplicationViewModel, ko) {
             jQuery.fx.interval = 40;
@@ -40,6 +33,16 @@
                     ko.applyBindings(applicationViewModel);
                 }
             );
+
+            /**
+             * Best answer from http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+             */
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                        results = regex.exec(location.search);
+                return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
         });
     </script>
 
@@ -51,6 +54,7 @@
 
 <div id="wrapper" data-bind="template : {name: 'application-template'}"></div>
 
+<!-- template definitions -->
 <script type="text/html" id="application-template">
     <!-- CSS files should not be linked in the body, but Knockout doesn't support bindings in the HTML head out-of-the-box. -->
     <!-- ko if: $root.getCustomCss() -->
