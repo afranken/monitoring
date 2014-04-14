@@ -269,8 +269,11 @@ module.exports = function(grunt) {
               'requireLib': "../js/vendor/require"
             },
 
-            include : [
-              "requireLib"
+            // don't merge dependencies into library artifact.
+            exclude : [
+              'jquery',
+              'knockout',
+              'moment'
             ],
 
             findNestedDependencies: true
@@ -339,7 +342,7 @@ module.exports = function(grunt) {
     // Task for running testing stuff (corresponds to Maven's "prepare-package" lifecycle phase)
     grunt.registerTask('package', [
       'uglify',
-      'requirejs:debug'
+      'requirejs:release'
     ]);
 
 };

@@ -6,8 +6,6 @@
 
     <!-- Load dependencies -->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <!-- load configuration -->
     <script type="text/javascript" src="config.js"></script>
 
@@ -19,13 +17,14 @@
             paths: {
                 'jquery': 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min',
                 'knockout': 'http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min',
-                'moment': 'http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min'
+                'moment': 'http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min',
+                'bootstrap': 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min'
             },
             findNestedDependencies: true
         });
 
         //initialize application
-        require(['Application', 'knockout', 'jquery'], function(ApplicationViewModel, ko) {
+        require(['Application', 'knockout', 'jquery', 'bootstrap'], function(ApplicationViewModel, ko) {
             jQuery.fx.interval = 40;
             //Try to load configuration from url parameter.
             jQuery.getScript(getParameterByName('config')).always(function() {
