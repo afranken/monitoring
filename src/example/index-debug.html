@@ -132,7 +132,7 @@
             </a>
         </div>
         <div class="panel-collapse collapse" data-bind="attr: { id: getHtmlsafeId() + $index() }">
-            <!-- ko template: { name: 'jenkins-details-model', data: getDetails() } -->
+            <!-- ko template: { name: 'jenkins-detail-model-template', data: getDetails() } -->
             <!-- /ko -->
         </div>
     </div>
@@ -146,7 +146,7 @@
     <!-- /ko -->
 </script>
 
-<script type="text/html" id="jenkins-details-model">
+<script type="text/html" id="jenkins-detail-model-template">
     <dl class="jenkins-details-link">
         <dt>Job on Jenkins</dt>
         <dd><a class="monitor-link" data-bind="attr: { href: getUrl() }, text: getName()"></a></dd>
