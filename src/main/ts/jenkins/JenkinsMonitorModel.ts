@@ -212,6 +212,9 @@ class JenkinsMonitorModel implements MonitorModel {
             case 'notbuilt':
                 colorTranslation = CssClasses.DISABLED;
                 break;
+            case 'disabled':
+                colorTranslation = CssClasses.DISABLED;
+                break;
             default:
                 colorTranslation = "";
         }
@@ -236,6 +239,9 @@ class JenkinsMonitorModel implements MonitorModel {
                 colorTranslation = CssClasses.ABORTED_PROGRESS_BUILDING;
                 break;
             case 'notbuilt_anime':
+                colorTranslation = CssClasses.DISABLED_PROGRESS_BUILDING;
+                break;
+            case 'disabled_anime':
                 colorTranslation = CssClasses.DISABLED_PROGRESS_BUILDING;
                 break;
             default:
