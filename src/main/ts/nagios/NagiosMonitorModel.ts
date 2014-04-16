@@ -1,13 +1,13 @@
 /// <reference path="../vendor/knockout.d.ts" />
 import ko = require('knockout');
-import Types = require('../Types');
-import Config = require('../jsonInterfaces/Config');
-import MonitorModel = require('../monitorModel/MonitorModel');
-import Connector = require('../connector/Connector');
-import CssClasses = require('../CssClasses');
-import NagiosConnector = require('./NagiosConnector');
-import NagiosHostModel = require('./NagiosHostModel');
-import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
+import Types = require('Types');
+import Config = require('jsonInterfaces/Config');
+import MonitorModel = require('monitorModel/MonitorModel');
+import Connector = require('connector/Connector');
+import CssClasses = require('CssClasses');
+import NagiosConnector = require('nagios/NagiosConnector');
+import NagiosHostModel = require('nagios/NagiosHostModel');
+import NagiosJsonResponse = require('jsonInterfaces/NagiosResponse');
 
 /**
  * Model that represents a list of Nagios hosts.

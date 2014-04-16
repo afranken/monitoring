@@ -1,6 +1,6 @@
-import Connector = require('./Connector');
-import Configuration = require('../configuration/Configuration');
-import MonitorModel = require('../monitorModel/MonitorModel');
+import Connector = require('connector/Connector');
+import Configuration = require('configuration/Configuration');
+import MonitorModel = require('monitorModel/MonitorModel');
 
 /**
  * Basic, abstract {@link Connector} aggregating methods used by all {@link Connector} implementations.

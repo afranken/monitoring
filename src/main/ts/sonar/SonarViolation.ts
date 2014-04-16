@@ -1,8 +1,8 @@
 /// <reference path="../vendor/knockout.d.ts" />
 import ko = require('knockout');
-import Config = require('../jsonInterfaces/Config');
-import SonarResponse = require('../jsonInterfaces/SonarResponse');
-import CssClasses = require('../CssClasses');
+import Config = require('jsonInterfaces/Config');
+import SonarResponse = require('jsonInterfaces/SonarResponse');
+import CssClasses = require('CssClasses');
 
 /**
  * Model that represents one violation type
