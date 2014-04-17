@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Simon by afranken</title>
+    <title>Simon JS by afranken</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -17,7 +17,7 @@
   <body>
 
       <header>
-        <h1>Simon</h1>
+        <h1>Simon JS</h1>
         <p>A Simple Monitor Single Page Application</p>
       </header>
 
@@ -42,9 +42,50 @@
         <h3>
 <a name="welcome-to-simon-js" class="anchor" href="#welcome-to-simon-js"><span class="octicon octicon-link"></span></a>Welcome to Simon JS.</h3>
 
-<p>Simon JS is a library that helps you monitor the status of your development infrastructure.</p>
+<p>Simon JS is a Single Page Application that helps you monitor the status of your development infrastructure. </p>
 
-<p>You can easily monitor build jobs on applications like <a href="http://jenkins-ci.org/">Jenkins</a>, software quality projects on tools like <a href="http://www.sonarqube.org/">Sonarqube</a> and services on infrastructure monitoring tools like <a href="http://www.nagios.org/">Nagios</a>.</p>
+<p>It is meant as a tool to help developers gain a quick overview and easy access to build jobs on applications like <a href="http://jenkins-ci.org/">Jenkins</a>, software quality projects on tools like <a href="http://www.sonarqube.org/">Sonarqube</a> and services on infrastructure monitoring tools like <a href="http://www.nagios.org/">Nagios</a>.</p>
+
+<h3>
+<a name="how-does-simon-js-work" class="anchor" href="#how-does-simon-js-work"><span class="octicon octicon-link"></span></a>How does Simon JS work?</h3>
+
+<p>Simon JS is a Single Page Application using JavaScript to get remote data and display it on the page. It's based on AMD/<a href="http://requirejs.org/">Require JS</a> uses <a href="http://knockoutjs.com/">Knockout</a> for view rendering, <a href="http://jquery.com/">jQuery</a>, <a href="http://momentjs.com/">Moment.js</a> and <a href="http://getbootstrap.com/">Twitter Bootstrap</a> for layout and frontent effects. While Simon JS is written in <a href="http://www.typescriptlang.org/">Typescript</a>, the Simon JS library is distributed in JavaScript.</p>
+
+<p>Data from backend servers is loaded as JSON, applied to JavaScript models which are in turn displayed on the page using Knockout.
+The data is reloaded periodically (currently every 60-120 seconds). Thanks to Knockout's two way data binding, the page is seamlessly updated with new data.</p>
+
+<h3>
+<a name="how-does-simon-js-look-like" class="anchor" href="#how-does-simon-js-look-like"><span class="octicon octicon-link"></span></a>How does Simon JS look like?</h3>
+
+<p>A fully configured page for a development team consisting of Jenkins jobs, Sonar projects and Nagios hosts looks like this:
+<code>&lt;insert full page picture here&gt;</code></p>
+
+<p>Jenkins Job
+<code>&lt;insert job pictures with different status here (ok, unstable, disabled, building, show details, ...)&gt;</code></p>
+
+<p>Sonar
+<code>&lt;insert sonar table pictures here&gt;</code></p>
+
+<p>Nagios
+<code>&lt;insert host pictures with different status here (ok, warning, broken, show details)&gt;</code></p>
+
+<h3>
+<a name="how-do-use-simon-js" class="anchor" href="#how-do-use-simon-js"><span class="octicon octicon-link"></span></a>How do use Simon JS?</h3>
+
+<p><code>&lt;insert full description here&gt;</code></p>
+
+<ul>
+<li>open page from <code>http://www.simonjs.org/.../index.html</code>
+</li>
+<li><p>supply your own configuration using URL parameter "config":
+<code>http://www.simonjs.org/.../index.html?config=http://your-server/config.js</code></p></li>
+<li><p>Simon JS is configured using a JSON object stored in a global variable "configJson":
+<code>configJson={}</code></p></li>
+<li>The configuration object must be compatible to the Typescript interface <code>https://github.com/afranken/simon/blob/master/src/main/ts/jsonInterfaces/Config.d.ts</code>
+</li>
+<li>When you open <code>http://www.simonjs.org/.../index.html</code>, a sample configuration is used that can be found here: <code>http://www.simonjs.org/.../config.js</code>
+</li>
+</ul>
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/afranken">afranken</a></p>
