@@ -2,9 +2,9 @@
 /// <reference path="../vendor/jquery.d.ts" />
 import jQuery = require('jquery');
 import ko = require('knockout');
-import CssClasses = require('CssClasses');
-import NagiosJsonResponse = require('jsonInterfaces/NagiosResponse');
-import MonitorModels = require('monitorModel/MonitorModels');
+import CssClasses = require('../CssClasses');
+import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
+import MonitorModels = require('../monitorModel/MonitorModels');
 
 /**
  * Model that represents one Nagios host with all services

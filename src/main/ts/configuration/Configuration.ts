@@ -1,4 +1,4 @@
-import Config = require('jsonInterfaces/Config');
+import Config = require('../jsonInterfaces/Config');
 
 class Configuration {
 

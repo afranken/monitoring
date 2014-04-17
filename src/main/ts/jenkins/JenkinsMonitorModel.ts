@@ -3,15 +3,15 @@
 /// <reference path="../vendor/moment.d.ts" />
 import ko = require('knockout');
 import moment = require('moment');
-import Types = require('Types');
-import MonitorModel = require('monitorModel/MonitorModel');
-import MonitorModels = require('monitorModel/MonitorModels');
-import Connector = require('connector/Connector');
-import CssClasses = require('CssClasses');
+import Types = require('../Types');
+import MonitorModel = require('../monitorModel/MonitorModel');
+import MonitorModels = require('../monitorModel/MonitorModels');
+import Connector = require('../connector/Connector');
+import CssClasses = require('../CssClasses');
 import JenkinsConnector = require('./JenkinsConnector');
 import JenkinsDetailsModel = require('./JenkinsDetailsModel');
-import Config = require('jsonInterfaces/Config');
-import JenkinsJsonResponse = require('jsonInterfaces/JenkinsResponse');
+import Config = require('../jsonInterfaces/Config');
+import JenkinsJsonResponse = require('../jsonInterfaces/JenkinsResponse');
 
 /**
  * Model that represents a Jenkins Job

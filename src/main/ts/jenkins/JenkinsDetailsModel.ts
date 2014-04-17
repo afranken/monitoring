@@ -2,7 +2,7 @@
 /// <reference path="../vendor/moment.d.ts" />
 import ko = require('knockout');
 import moment = require('moment');
-import JenkinsJsonResponse = require('jsonInterfaces/JenkinsResponse');
+import JenkinsJsonResponse = require('../jsonInterfaces/JenkinsResponse');
 
 /**
  * This model is used to store and retrieve detailed data about one Jenkins job.

@@ -1,6 +1,6 @@
 /// <reference path="../vendor/knockout.d.ts" />
 import ko = require('knockout');
-import SonarViolation = require("sonar/SonarViolation");
+import SonarViolation = require("./SonarViolation");
 
 /**
  * Model that represents one Sonar module
