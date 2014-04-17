@@ -2,19 +2,19 @@
 /// <reference path="./vendor/knockout.d.ts" />
 import ko = require('knockout');
 import jQuery = require('jquery');
-import Types = require('./Types');
-import MonitorModel = require('./monitorModel/MonitorModel');
-import SectionModel = require('./SectionModel');
-import Config = require('./jsonInterfaces/Config');
-import Connector = require('./connector/Connector');
-import CssClasses = require('./CssClasses');
-import Configuration = require('./configuration/Configuration');
-import JenkinsConnector = require('./jenkins/JenkinsConnector');
-import JenkinsMonitorModel = require('./jenkins/JenkinsMonitorModel');
-import SonarMonitorModel = require('./sonar/SonarMonitorModel');
-import SonarConnector = require('./sonar/SonarConnector');
-import NagiosConnector = require('./nagios/NagiosConnector');
-import NagiosMonitorModel = require('./nagios/NagiosMonitorModel');
+import Types = require('Types');
+import MonitorModel = require('monitorModel/MonitorModel');
+import SectionModel = require('SectionModel');
+import Config = require('jsonInterfaces/Config');
+import Connector = require('connector/Connector');
+import CssClasses = require('CssClasses');
+import Configuration = require('configuration/Configuration');
+import JenkinsConnector = require('jenkins/JenkinsConnector');
+import JenkinsMonitorModel = require('jenkins/JenkinsMonitorModel');
+import SonarMonitorModel = require('sonar/SonarMonitorModel');
+import SonarConnector = require('sonar/SonarConnector');
+import NagiosConnector = require('nagios/NagiosConnector');
+import NagiosMonitorModel = require('nagios/NagiosMonitorModel');
 
 /**
  * Main application class and Knockout ViewModel.

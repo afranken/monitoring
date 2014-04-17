@@ -1,11 +1,11 @@
-import MonitorModel = require('./monitorModel/MonitorModel');
-import MonitorModels = require('./monitorModel/MonitorModels');
-import Connector = require('./connector/Connector');
-import Configuration = require('./configuration/Configuration');
-import JenkinsMonitorModel = require('./jenkins/JenkinsMonitorModel');
-import NagiosMonitorModel = require('./nagios/NagiosMonitorModel');
-import SonarMonitorModel = require('./sonar/SonarMonitorModel');
-import Config = require('./jsonInterfaces/Config');
+import MonitorModel = require('monitorModel/MonitorModel');
+import MonitorModels = require('monitorModel/MonitorModels');
+import Connector = require('connector/Connector');
+import Configuration = require('configuration/Configuration');
+import JenkinsMonitorModel = require('jenkins/JenkinsMonitorModel');
+import NagiosMonitorModel = require('nagios/NagiosMonitorModel');
+import SonarMonitorModel = require('sonar/SonarMonitorModel');
+import Config = require('jsonInterfaces/Config');
 
 /**
  * This class represents a section.
