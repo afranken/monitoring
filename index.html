@@ -57,17 +57,25 @@ The data is reloaded periodically (currently every 60-120 seconds). Thanks to Kn
 <h3>
 <a name="how-does-simon-js-look-like" class="anchor" href="#how-does-simon-js-look-like"><span class="octicon octicon-link"></span></a>How does Simon JS look like?</h3>
 
-<p>A fully configured page for a development team consisting of Jenkins jobs, Sonar projects and Nagios hosts looks like this:
-<code>&lt;insert full page picture here&gt;</code></p>
+<p>A fully configured page for a development team consisting of Jenkins jobs, Sonar projects and Nagios hosts looks like this:</p>
+<p>
+    <code>&lt;insert full page picture here&gt;</code>
+</p>
 
-<p>Jenkins Job
-<code>&lt;insert job pictures with different status here (ok, unstable, disabled, building, show details, ...)&gt;</code></p>
+<p>Jenkins Job</p>
+<p>
+    <code>&lt;insert job pictures with different status here (ok, unstable, disabled, building, show details, ...)&gt;</code>
+</p>
 
-<p>Sonar
-<code>&lt;insert sonar table pictures here&gt;</code></p>
+<p>Sonar</p>
+<p>
+    <code>&lt;insert sonar table pictures here&gt;</code>
+</p>
 
-<p>Nagios
-<code>&lt;insert host pictures with different status here (ok, warning, broken, show details)&gt;</code></p>
+<p>Nagios</p>
+<p>
+    <code>&lt;insert host pictures with different status here (ok, warning, broken, show details)&gt;</code>
+</p>
 
 <h3>
 <a name="how-do-use-simon-js" class="anchor" href="#how-do-use-simon-js"><span class="octicon octicon-link"></span></a>How do use Simon JS?</h3>
@@ -77,10 +85,16 @@ The data is reloaded periodically (currently every 60-120 seconds). Thanks to Kn
 <ul>
 <li>open page from <code>http://www.simonjs.org/.../index.html</code>
 </li>
-<li><p>supply your own configuration using URL parameter "config":
-<code>http://www.simonjs.org/.../index.html?config=http://your-server/config.js</code></p></li>
-<li><p>Simon JS is configured using a JSON object stored in a global variable "configJson":
-<code>configJson={}</code></p></li>
+<li><p>supply your own configuration using URL parameter "config":</p>
+    <p>
+        <code>http://www.simonjs.org/.../index.html?config=http://your-server/config.js</code>
+    </p>
+</li>
+<li><p>Simon JS is configured using a JSON object stored in a global variable "configJson":</p>
+    <p>
+        <code>configJson={}</code>
+    </p>
+</li>
 <li>The configuration object must be compatible to the Typescript interface <code>https://github.com/afranken/simon/blob/master/src/main/ts/jsonInterfaces/Config.d.ts</code>
 </li>
 <li>When you open <code>http://www.simonjs.org/.../index.html</code>, a sample configuration is used that can be found here: <code>http://www.simonjs.org/.../config.js</code>
