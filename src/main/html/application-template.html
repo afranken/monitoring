@@ -1,9 +1,0 @@
-<!-- CSS files should not be linked in the body, but Knockout doesn't support bindings in the HTML head out-of-the-box. -->
-<!-- ko if: $root.getCustomCss() -->
-<link data-bind="attr: {href: $root.getCustomCss()}" rel="stylesheet" type="text/css" media="all" />
-<!-- /ko -->
-
-<!-- ko if: getTitle() -->
-<h1 id="mainTitle" class="alert alert-none monitor-heading" data-bind="text: getTitle()"></h1>
-<!-- /ko -->
-<div id="container-fluid" data-bind="template: { name: 'section-row-template', foreach: getSections() }" ></div>
