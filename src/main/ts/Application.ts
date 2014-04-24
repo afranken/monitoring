@@ -8,6 +8,9 @@ import SectionModel = require('./SectionModel');
 import Config = require('./jsonInterfaces/Config');
 import Configuration = require('./configuration/Configuration');
 
+//this global variable is set by the configuration JS.
+declare var configJson:Config.Application;
+
 /**
  * Main application class and Knockout ViewModel.
  * Accessible in View Layer as "$root"
@@ -33,24 +36,24 @@ class ApplicationViewModel {
 
         var configParameter = ApplicationViewModel.getParameterByName('config');
 
-        if(configParameter === undefined) {
+        if(configParameter === '') {
             configParameter = configName;
         }
 
         //load configuration
-        jQuery.get(configParameter)
+        jQuery.getScript(configParameter)
             .always(()=>{
                 //done loading
                 this._isLoading(false);
             })
-            .done((json:Config.Application) => {
-                this._title(json.title);
+            .done(() => {
+                this._title(configJson.title);
 
-                if(json.configuration !== undefined) {
-                    this._configuration(new Configuration(json.configuration));
+                if(configJson.configuration !== undefined) {
+                    this._configuration(new Configuration(configJson.configuration));
                 }
 
-                json.sections.forEach((section:Config.Section) => {
+                configJson.sections.forEach((section:Config.Section) => {
                         this._sections.push(new SectionModel(section, this._configuration(), undefined))
                     }
                 );

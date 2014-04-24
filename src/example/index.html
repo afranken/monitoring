@@ -8,8 +8,6 @@
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js"></script>
     <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/simon.css" media="all" />
-    <!-- load configuration -->
-    <script type="text/javascript" src="config.js"></script>
 
     <!-- bootstrap application -->
     <script type="text/javascript">
@@ -37,7 +35,7 @@
 
         //initialize application
         require(['Application', 'knockout', 'jquery', 'bootstrap'], function(ApplicationViewModel, ko) {
-            ko.applyBindings(new ApplicationViewModel('config.json'));
+            ko.applyBindings(new ApplicationViewModel('config.js'));
         });
     </script>
 
