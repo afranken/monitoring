@@ -39,22 +39,32 @@ class ApplicationViewModel {
 
         //load configuration
         jQuery.get(configParameter)
-            .always(//done loading
-            this._isLoading(false))
-            .fail(this._failureText('Failure loading configuration from '+configParameter))
+            .always(()=>{
+                //done loading
+                this._isLoading(false);
+            })
             .done((json:Config.Application) => {
+                this._title(json.title);
 
-            this._title(json.title);
-
-            if(json.configuration !== undefined) {
-                this._configuration(new Configuration(json.configuration));
-            }
-
-            json.sections.forEach((section:Config.Section) => {
-                    this._sections.push(new SectionModel(section, this._configuration(), undefined))
+                if(json.configuration !== undefined) {
+                    this._configuration(new Configuration(json.configuration));
                 }
-            );
-        });
+
+                json.sections.forEach((section:Config.Section) => {
+                        this._sections.push(new SectionModel(section, this._configuration(), undefined))
+                    }
+                );
+            })
+            .fail((jqXHR, textStatus, errorThrown) => {
+                this._failureText('Failure loading configuration from '+configParameter+'.\n'
+                    +'jqXHR: '+ jqXHR+'\n'
+                    +'textStatus: '+textStatus+'\n'
+                    +'errorThrown: '+errorThrown);
+                if(console) {
+                    console.log(jqXHR, textStatus, errorThrown, 'Failure loading configuration from '+configParameter);
+                }
+            }
+        );
     }
 
     //==================================================================================================================
