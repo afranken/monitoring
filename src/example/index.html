@@ -35,32 +35,25 @@
             findNestedDependencies: true
         });
 
+        //initialize application
         require(['Application', 'knockout', 'jquery', 'bootstrap'], function(ApplicationViewModel, ko) {
-            jQuery.fx.interval = 40;
-
-            //Try to load configuration from url parameter.
-            jQuery.getScript(getParameterByName('config'))
-                    .always(function() {
-                        // instantiate application
-                        var applicationViewModel = new ApplicationViewModel(configJson);
-                        ko.applyBindings(applicationViewModel);
-                    }
-            );
-
-            /**
-             * Best answer from http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-             */
-            function getParameterByName(name) {
-                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                        results = regex.exec(location.search);
-                return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-            }
+            ko.applyBindings(new ApplicationViewModel('config.json'));
         });
     </script>
 
     <!-- template definitions -->
     <script type="text/html" id="application-template">
+        <!-- ko if: isLoading() -->
+        <div>
+            <p>loading configuration...</p>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: getFailureText() -->
+        <div>
+            <p data-bind="text: getFailureText()"></p>
+        </div>
+        <!-- /ko -->
+
         <!-- CSS files should not be linked in the body, but Knockout doesn't support bindings in the HTML head out-of-the-box. -->
         <!-- ko if: $root.getCustomCss() -->
         <link data-bind="attr: {href: $root.getCustomCss()}" rel="stylesheet" type="text/css" media="all" />

@@ -6,15 +6,7 @@ import Types = require('./Types');
 import MonitorModel = require('./monitorModel/MonitorModel');
 import SectionModel = require('./SectionModel');
 import Config = require('./jsonInterfaces/Config');
-import Connector = require('./connector/Connector');
-import CssClasses = require('./CssClasses');
 import Configuration = require('./configuration/Configuration');
-import JenkinsConnector = require('./jenkins/JenkinsConnector');
-import JenkinsMonitorModel = require('./jenkins/JenkinsMonitorModel');
-import SonarMonitorModel = require('./sonar/SonarMonitorModel');
-import SonarConnector = require('./sonar/SonarConnector');
-import NagiosConnector = require('./nagios/NagiosConnector');
-import NagiosMonitorModel = require('./nagios/NagiosMonitorModel');
 
 /**
  * Main application class and Knockout ViewModel.
@@ -22,24 +14,47 @@ import NagiosMonitorModel = require('./nagios/NagiosMonitorModel');
  */
 class ApplicationViewModel {
 
-    private _title:string;
-    private _configuration: Configuration;
-    private _sections: Array<SectionModel> = [];
+    private _title:KnockoutObservable<string> = ko.observable<string>();
+    private _failureText:KnockoutObservable<string> = ko.observable<string>();
+    private _isLoading:KnockoutObservable<boolean> = ko.observable<boolean>();
+    private _configuration:KnockoutObservable<Configuration> = ko.observable<Configuration>();
+    private _sections:KnockoutObservableArray<SectionModel> = ko.observableArray<SectionModel>();
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(private json:Config.Application) {
-        this._title = json.title;
-        if(json.configuration !== undefined) {
-            this._configuration = new Configuration(json.configuration);
+    constructor(configName:string) {
+        //slower jQuery effects to save CPU power
+        jQuery.fx.interval = 40;
+
+        //we're still loading
+        this._isLoading(true);
+
+        var configParameter = ApplicationViewModel.getParameterByName('config');
+
+        if(configParameter === undefined) {
+            configParameter = configName;
         }
 
-        json.sections.forEach(section => {
-                this._sections.push(new SectionModel(section, this._configuration, undefined))
+        //load configuration
+        jQuery.get(configParameter)
+            .always(//done loading
+            this._isLoading(false))
+            .fail(this._failureText('Failure loading configuration from '+configParameter))
+            .done((json:Config.Application) => {
+
+            this._title(json.title);
+
+            if(json.configuration !== undefined) {
+                this._configuration(new Configuration(json.configuration));
             }
-        );
+
+            json.sections.forEach((section:Config.Section) => {
+                    this._sections.push(new SectionModel(section, this._configuration(), undefined))
+                }
+            );
+        });
     }
 
     //==================================================================================================================
@@ -52,7 +67,7 @@ class ApplicationViewModel {
      * @returns string the application's title
      */
     public getTitle():string {
-        return this._title;
+        return this._title();
     }
 
     /**
@@ -61,7 +76,21 @@ class ApplicationViewModel {
      * @returns Array<SectionModel> the root sections
      */
     public getSections():Array<SectionModel> {
-        return this._sections;
+        return this._sections();
+    }
+
+    /**
+     * @returns boolean true if external resources (e.g. the config.json) are still loading
+     */
+    public isLoading():boolean {
+        return this._isLoading();
+    }
+
+    /**
+     * @returns boolean true if external resources (e.g. the config.json) are still loading
+     */
+    public getFailureText():string {
+        return this._failureText();
     }
 
     /**
@@ -90,7 +119,25 @@ class ApplicationViewModel {
      * @returns string a relative URI to a CSS file.
      */
     public getCustomCss():string {
-        return this._configuration.getCustomCss();
+        if(this._configuration() !== undefined) {
+            return this._configuration().getCustomCss();
+        } else {
+            return undefined;
+        }
+    }
+
+    //==================================================================================================================
+    // Functionality
+    //==================================================================================================================
+
+    /**
+     * Best answer from http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+     */
+    private static getParameterByName(name):string {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 }
 
