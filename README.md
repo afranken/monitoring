@@ -14,8 +14,9 @@ Currently supported:
 * Sonar Modules
 * Nagios Hosts
 
+#Visit [SimonJS.org](http://www.simonjs.org) for a description on how to use this library.
 
-##Jenkins returns 403 to JSONP Get requests by default.
+###Jenkins returns 403 to JSONP Get requests by default.
 Errormessage:
 
 `Exception: jsonp forbidden; can use -Dhudson.model.Api.INSECURE=true if you run without security`
@@ -26,12 +27,12 @@ JSONP support in Remote access API is removed. If you have other programs that d
 you can set the hudson.model.Api.INSECURE system property to true, to resurrect behaviour.
 However, this is highly discouraged.
 
-##Nagios JSON Responses
-Nagios does not support JSON but responds with XML only.
+###Nagios JSON Responses
+Nagios does not support JSON but gives XML responses.
 
 Use [this simple JSON cgi controller](https://github.com/afranken/status-json) to get Nagios to work with this application.
 
-##Used Third Party Libraries / Software:
+###Used Third Party Libraries / Software:
 
 Software:
 
