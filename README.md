@@ -14,7 +14,20 @@ Currently supported:
 * Sonar Modules
 * Nagios Hosts
 
-#Visit [SimonJS.org](http://www.simonjs.org) for a description on how to use this library.
+##Attention
+
+This is the development repository for Simon JS.
+
+The Releases are located in another [Github Repository](https://github.com/afranken/simon-releases/tree/gh-pages/release)
+
+**Visit [SimonJS.org](http://www.simonjs.org) for a description on how to use this library.**
+
+##Development
+
+Simon JS is built using [Typescript](http://www.typescriptlang.org/) that is compiled using [Grunt](http://gruntjs.com/).
+
+The software can be compiled to JavaScript by running `grunt compile`, unit tests can be executed with `grunt test`.
+Running `grunt package` will minify and merge the compiled JavaScript.
 
 ###Jenkins returns 403 to JSONP Get requests by default.
 Errormessage:
