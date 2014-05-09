@@ -43,7 +43,7 @@ module.exports = function(grunt) {
             tasks: ['typescript:compile']
           },
           html: {
-            files: ['<%= dir.source %>/example/*.*'],
+            files: ['<%= dir.source %>/main/html/*.*'],
             tasks: ['copy:html']
           },
           js: {
@@ -81,7 +81,7 @@ module.exports = function(grunt) {
             flatten: true,
             expand: true,
             filter: 'isFile',
-            cwd: '<%= dir.source %>/example/',
+            cwd: '<%= dir.source %>/main/html/',
             src:'*',
             dest:'<%= dir.target_js %>/'
           },
