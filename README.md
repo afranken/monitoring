@@ -14,7 +14,7 @@ Currently supported:
 * Sonar Modules
 * Nagios Hosts
 
-##Attention
+#Attention
 
 This is the development repository for Simon JS.
 
@@ -22,12 +22,41 @@ The Releases are located in another [Github Repository](https://github.com/afran
 
 **Visit [SimonJS.org](http://www.simonjs.org) for a description on how to use this library.**
 
-##Development
+#Development
 
 Simon JS is built using [Typescript](http://www.typescriptlang.org/) that is compiled using [Grunt](http://gruntjs.com/).
 
 The software can be compiled to JavaScript by running `grunt compile`, unit tests can be executed with `grunt test`.
 Running `grunt package` will minify and merge the compiled JavaScript.
+
+## Using Grunt
+
+### grunt compile
+When running `grunt compile`, the TypeScript classes will be compiled to JavaScript and written to `<project-root>/target-<version>/app`.
+
+HTML files, vendor JavaScript libraries and CSS files will also be copied to the target directory.
+
+Running `index-debug.html` will use the JavaScript files.
+
+### grunt test
+When running `grunt test`, the TypeScript classes will be compiled again (since a Jasmine template is used that tracks test coverage).
+These files and the compiled tests will be written to  `<project-root>/target/js-test/`.
+
+### grunt package
+When running `grunt package`, the files already compiled using `grunt compile` will be merged and uglified.
+
+Running `index.html` will use the resulting `simon.min.js`.
+
+### grunt clean
+When running `grunt clean`, the target directory will be deleted.
+
+### grunt watch
+When running `grunt watch`, grunt will watch TypeScript, HTML and CSS files and compile / copy them to the appropriate folders.
+(Functionality is similar to `grunt compile`)
+
+
+
+#Other
 
 ###Jenkins returns 403 to JSONP Get requests by default.
 Errormessage:
