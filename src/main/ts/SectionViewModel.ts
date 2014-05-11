@@ -11,7 +11,7 @@ import Config = require('./jsonInterfaces/Config');
  * This class represents a section.
  * Sections are used to structure the layout into rows and columns.
  */
-class SectionModel {
+class SectionViewModel {
 
     /*
      * 12 is the maximum width of a column/row in the Twitter Bootstrap grid layout.
@@ -23,7 +23,7 @@ class SectionModel {
     private _url:string;
     private _description:string;
     private _monitorModels: Array<MonitorModel> = [];
-    private _sectionModels: Array<SectionModel> = [];
+    private _sectionModels: Array<SectionViewModel> = [];
 
     //==================================================================================================================
     // Construct
@@ -41,7 +41,7 @@ class SectionModel {
     private init(section: Config.Section, configuration:Configuration) {
         if(section.sections !== undefined) {
             section.sections.forEach(subSection => {
-                    this._sectionModels.push(new SectionModel(subSection, configuration, this._hostname));
+                    this._sectionModels.push(new SectionViewModel(subSection, configuration, this._hostname));
                 }
             );
         }
@@ -62,7 +62,7 @@ class SectionModel {
      * @returns number the width of a column based on the number of sections
      */
     public getColumnWidth():number {
-        return this._sectionModels.length > 0 ? Math.floor(SectionModel._MAX_WIDTH / this._sectionModels.length) : SectionModel._MAX_WIDTH;
+        return this._sectionModels.length > 0 ? Math.floor(SectionViewModel._MAX_WIDTH / this._sectionModels.length) : SectionViewModel._MAX_WIDTH;
     }
 
     public getTitle():string {
@@ -81,10 +81,10 @@ class SectionModel {
         return this._monitorModels;
     }
 
-    public getSections():Array<SectionModel> {
+    public getSections():Array<SectionViewModel> {
         return this._sectionModels;
     }
 
 }
 
-export = SectionModel;
+export = SectionViewModel;

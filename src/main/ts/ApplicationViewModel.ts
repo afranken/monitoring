@@ -4,7 +4,7 @@ import ko = require('knockout');
 import jQuery = require('jquery');
 import Types = require('./Types');
 import MonitorModel = require('./monitorModel/MonitorModel');
-import SectionModel = require('./SectionModel');
+import SectionViewModel = require('./SectionViewModel');
 import Config = require('./jsonInterfaces/Config');
 import Configuration = require('./configuration/Configuration');
 
@@ -21,7 +21,7 @@ class ApplicationViewModel {
     private _failureText:KnockoutObservable<string> = ko.observable<string>();
     private _isLoading:KnockoutObservable<boolean> = ko.observable<boolean>();
     private _configuration:KnockoutObservable<Configuration> = ko.observable<Configuration>();
-    private _sections:KnockoutObservableArray<SectionModel> = ko.observableArray<SectionModel>();
+    private _sections:KnockoutObservableArray<SectionViewModel> = ko.observableArray<SectionViewModel>();
 
     //==================================================================================================================
     // Construct
@@ -54,7 +54,7 @@ class ApplicationViewModel {
                 }
 
                 configJson.sections.forEach((section:Config.Section) => {
-                        this._sections.push(new SectionModel(section, this._configuration(), undefined))
+                        this._sections.push(new SectionViewModel(section, this._configuration(), undefined))
                     }
                 );
             })
@@ -86,9 +86,9 @@ class ApplicationViewModel {
     /**
      * This method is only needed for Knockout view layer.
      *
-     * @returns Array<SectionModel> the root sections
+     * @returns Array<SectionViewModel> the root sections
      */
-    public getSections():Array<SectionModel> {
+    public getSections():Array<SectionViewModel> {
         return this._sections();
     }
 

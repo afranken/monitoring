@@ -1,14 +1,14 @@
 /// <reference path="jasmine"/>
 import Configuration = require('../../main/ts/configuration/Configuration');
 import MonitorModels = require('../../main/ts/monitorModel/MonitorModels');
-import SectionModel = require('../../main/ts/SectionModel');
+import SectionViewModel = require('../../main/ts/SectionViewModel');
 import Config = require('../../main/ts/jsonInterfaces/Config');
 import Types = require('../../main/ts/Types');
 
 /**
  * Tests {@link Configuration}
  */
-describe("SectionModel", function():void {
+describe("SectionViewModel", function():void {
 
     var sectionJson1: Config.Section = {
         "sections": [
@@ -58,9 +58,9 @@ describe("SectionModel", function():void {
         ]
     };
 
-    var testling1:SectionModel = new SectionModel(sectionJson1,undefined,"");
-    var testling2:SectionModel = new SectionModel(sectionJson3,undefined,"");
-    var testling3:SectionModel = new SectionModel(sectionJson7,undefined,"");
+    var testling1:SectionViewModel = new SectionViewModel(sectionJson1,undefined,"");
+    var testling2:SectionViewModel = new SectionViewModel(sectionJson3,undefined,"");
+    var testling3:SectionViewModel = new SectionViewModel(sectionJson7,undefined,"");
 
     /**
      * Test all methods
