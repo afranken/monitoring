@@ -5,14 +5,20 @@
     <title></title>
 
     <!-- Load dependencies -->
+    <!--<script type="text/javascript" src="js/vendor/require.js"></script>-->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js"></script>
 
     <script type="text/javascript">
         requirejs.config({
             waitSeconds: 0,
-            baseUrl : "./app",
-            name: './app/Application',
+            baseUrl : "app",
+            name: 'app/ApplicationViewModel',
             paths: {
+//                'jquery': '../js/vendor/jquery-2.1.0.min',
+//                'knockout': '../js/vendor/knockout-3.1.0',
+//                'moment': '../js/vendor/moment-with-langs.min',
+//                'bootstrap': '../js/vendor/bootstrap.min'
+
                 'jquery': 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min',
                 'knockout': 'http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min',
                 'moment': 'http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min',
@@ -30,7 +36,7 @@
         });
 
         //initialize application
-        require(['Application', 'knockout', 'jquery', 'bootstrap'], function(ApplicationViewModel, ko) {
+        require(['ApplicationViewModel', 'knockout', 'jquery', 'bootstrap'], function(ApplicationViewModel, ko) {
             ko.applyBindings(new ApplicationViewModel('config.js'));
         });
     </script>
