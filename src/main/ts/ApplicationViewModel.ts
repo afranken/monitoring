@@ -4,7 +4,8 @@ import ko = require('knockout');
 import jQuery = require('jquery');
 import Types = require('./Types');
 import MonitorModel = require('./monitorModel/MonitorModel');
-import SectionViewModel = require('./SectionViewModel');
+import SectionModels = require('./sections/SectionModels');
+import SectionViewModel = require('./sections/SectionViewModel');
 import Config = require('./jsonInterfaces/Config');
 import Configuration = require('./configuration/Configuration');
 
@@ -53,10 +54,10 @@ class ApplicationViewModel {
                     this._configuration(new Configuration(configJson.configuration));
                 }
 
-                configJson.sections.forEach((section:Config.Section) => {
-                        this._sections.push(new SectionViewModel(section, this._configuration(), undefined))
-                    }
-                );
+                //TODO: add array at once to observableArray?
+                SectionModels.createViewModels(configJson.sections, this._configuration(), undefined).forEach((section:SectionViewModel)=>{
+                    this._sections.push(section);
+                });
             })
             .fail((jqXHR, textStatus, errorThrown) => {
                 this._failureText('Failure loading configuration from '+configParameter+'.\n'

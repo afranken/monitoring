@@ -54,8 +54,6 @@ When running `grunt clean`, the target directory will be deleted.
 When running `grunt watch`, grunt will watch TypeScript, HTML and CSS files and compile / copy them to the appropriate folders.
 (Functionality is similar to `grunt compile`)
 
-
-
 #Other
 
 ###Jenkins returns 403 to JSONP Get requests by default.
