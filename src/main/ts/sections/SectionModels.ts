@@ -1,4 +1,4 @@
-import Types = require('../Types');
+import Types = require('../util/Types');
 import Config = require('../jsonInterfaces/Config.d');
 import Configuration = require('../configuration/Configuration');
 import SectionModel = require('./SectionModel');

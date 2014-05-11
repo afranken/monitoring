@@ -2,7 +2,7 @@
 /// <reference path="../vendor/jquery.d.ts" />
 import jQuery = require('jquery');
 import ko = require('knockout');
-import CssClasses = require('../CssClasses');
+import CssClasses = require('../util/CssClasses');
 import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
 import MonitorModels = require('../monitorModel/MonitorModels');
 

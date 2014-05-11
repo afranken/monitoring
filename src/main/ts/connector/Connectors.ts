@@ -1,5 +1,5 @@
 import Connector = require('./Connector');
-import Types = require('../Types');
+import Types = require('../util/Types');
 import Configuration = require('../configuration/Configuration');
 import SonarConnector = require('../sonar/SonarConnector');
 import NagiosConnector = require('../nagios/NagiosConnector');

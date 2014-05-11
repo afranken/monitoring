@@ -6,8 +6,8 @@ import JenkinsConnector = require('../../../main/ts/jenkins/JenkinsConnector');
 import JenkinsJsonResponse = require('../../../main/ts/jsonInterfaces/JenkinsResponse');
 import ConnectorBase = require('../../../main/ts/connector/ConnectorBase');
 import Config = require('../../../main/ts/jsonInterfaces/Config');
-import Types = require('../../../main/ts/Types');
-import CssClasses = require('../../../main/ts/CssClasses');
+import Types = require('../../../main/ts/util/Types');
+import CssClasses = require('../../../main/ts/util/CssClasses');
 
 /**
  * Tests {@link Configuration}

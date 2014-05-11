@@ -2,7 +2,7 @@
 import ko = require('knockout');
 import Config = require('../jsonInterfaces/Config');
 import SonarResponse = require('../jsonInterfaces/SonarResponse');
-import CssClasses = require('../CssClasses');
+import CssClasses = require('../util/CssClasses');
 
 /**
  * Model that represents one violation type

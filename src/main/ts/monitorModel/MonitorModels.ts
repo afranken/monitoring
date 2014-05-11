@@ -1,4 +1,4 @@
-import Types = require('../Types');
+import Types = require('../util/Types');
 import MonitorModel = require('./MonitorModel');
 import Config = require('../jsonInterfaces/Config.d');
 import Configuration = require('../configuration/Configuration');
