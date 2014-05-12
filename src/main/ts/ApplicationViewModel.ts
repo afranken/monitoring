@@ -115,7 +115,7 @@ class ApplicationViewModel {
      * @param monitor the MonitorModel that is rendered
      */
     public getData(node: Node, monitor: MonitorModel):void {
-        monitor.updateStatus();
+//        monitor.updateStatus();
     }
 
     /**

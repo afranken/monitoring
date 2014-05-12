@@ -1,31 +1,30 @@
-/// <reference path="../vendor/knockout.d.ts" />
-/// <reference path="../vendor/moment.d.ts" />
+/// <reference path="../../vendor/knockout.d.ts" />
+/// <reference path="../../vendor/moment.d.ts" />
 import ko = require('knockout');
 import moment = require('moment');
-import JenkinsJsonResponse = require('../jsonInterfaces/JenkinsResponse');
+import JenkinsMonitorModel = require('../model/JenkinsMonitorModel');
+import JenkinsJsonResponse = require('../../jsonInterfaces/JenkinsResponse');
 
 /**
  * This model is used to store and retrieve detailed data about one Jenkins job.
  */
-class JenkinsDetailsModel {
+class JenkinsDetailsViewModel {
 
-    private _name:string;
-    private _url:string;
+    private _model:JenkinsMonitorModel;
+
     private _startDate:KnockoutComputed<string>;
     private _commitHash:KnockoutComputed<string>;
     private _branchName:KnockoutComputed<string>;
     private _runTime:KnockoutComputed<string>;
     private _buildNumber:KnockoutComputed<number>;
     private _buildNumberUrl:KnockoutComputed<string>;
-    private _jsonResponse:KnockoutObservable<JenkinsJsonResponse.Json> = ko.observable<JenkinsJsonResponse.Json>();
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(url:string, name:string) {
-        this._url = url;
-        this._name = name;
+    constructor(model:JenkinsMonitorModel) {
+        this._model = model;
 
         this.init();
     }
@@ -34,8 +33,8 @@ class JenkinsDetailsModel {
         this._commitHash = ko.computed<string>({
             read: ()=>{
                 var commit:string = undefined;
-                if(this.getLastBuiltRevision()) {
-                    this.getLastBuiltRevision().branch.forEach((singleBranch)=>{
+                if(this._model.getLastBuiltRevision()) {
+                    this._model.getLastBuiltRevision().branch.forEach((singleBranch)=>{
                         if(singleBranch.SHA1) {
                             commit = singleBranch.SHA1.slice(0,12);
                         }
@@ -48,8 +47,8 @@ class JenkinsDetailsModel {
         this._branchName = ko.computed<string>({
             read: ()=>{
                 var name:string = undefined;
-                if(this.getLastBuiltRevision()) {
-                    this.getLastBuiltRevision().branch.forEach((singleBranch)=>{
+                if(this._model.getLastBuiltRevision()) {
+                    this._model.getLastBuiltRevision().branch.forEach((singleBranch)=>{
                         if(singleBranch.name) {
                             name = singleBranch.name;
                         }
@@ -68,8 +67,8 @@ class JenkinsDetailsModel {
         this._buildNumber = ko.computed<number>({
             read: ()=>{
                 var buildNumber:number = undefined;
-                if(this.getLastBuild()) {
-                    buildNumber = this.getLastBuild().number;
+                if(this._model.getLastBuild()) {
+                    buildNumber = this._model.getLastBuild().number;
                 }
                 return buildNumber;
             }
@@ -78,8 +77,8 @@ class JenkinsDetailsModel {
         this._buildNumberUrl = ko.computed<string>({
             read: ()=>{
                 var buildNumberUrl:string = undefined;
-                if(this.getLastBuild()) {
-                    buildNumberUrl = this.getLastBuild().url;
+                if(this._model.getLastBuild()) {
+                    buildNumberUrl = this._model.getLastBuild().url;
                 }
                 return buildNumberUrl;
             }
@@ -97,11 +96,11 @@ class JenkinsDetailsModel {
     //==================================================================================================================
 
     public getUrl():string {
-        return this._url;
+        return this._model.getJobUrl();
     }
 
     public getName():string {
-        return this._name;
+        return this._model.getName();
     }
 
     public getCommitHash():string {
@@ -129,14 +128,6 @@ class JenkinsDetailsModel {
     }
 
     //==================================================================================================================
-    // Functionality
-    //==================================================================================================================
-
-    public setData(json:JenkinsJsonResponse.Json):void {
-        this._jsonResponse(json);
-    }
-
-    //==================================================================================================================
     // Private
     //==================================================================================================================
 
@@ -147,8 +138,8 @@ class JenkinsDetailsModel {
      */
     private calculateStartDate():string {
         var startTime:string = undefined;
-        if(this.getLastBuild()) {
-            startTime = moment(this.getLastBuild().timestamp).fromNow();
+        if(this._model.getLastBuild()) {
+            startTime = moment(this._model.getLastBuild().timestamp).fromNow();
         }
 
         return startTime;
@@ -161,35 +152,13 @@ class JenkinsDetailsModel {
      */
     private calculateDuration():string {
         var duration:string = undefined;
-        if(this.getLastBuild()) {
-            duration = moment.duration(this.getLastBuild().duration).humanize();
+        if(this._model.getLastBuild()) {
+            duration = moment.duration(this._model.getLastBuild().duration).humanize();
         }
 
         return duration;
     }
 
-    /**
-     * @returns {JenkinsJsonResponse.Revision} lastBuildRevision if it's available, or {@link undefined}
-     */
-    private getLastBuiltRevision():JenkinsJsonResponse.Revision {
-        var revision:JenkinsJsonResponse.Revision = undefined;
-        if(this.getLastBuild()) {
-            this.getLastBuild().actions.forEach((action) => {
-                if(action.lastBuiltRevision) {
-                    revision = action.lastBuiltRevision;
-                }
-            });
-        }
-        return revision;
-    }
-
-    private getLastBuild():JenkinsJsonResponse.LastBuild {
-        var lastBuild:JenkinsJsonResponse.LastBuild = undefined;
-        if(this._jsonResponse()) {
-            lastBuild = this._jsonResponse().lastBuild;
-        }
-        return lastBuild;
-    }
 }
 
-export = JenkinsDetailsModel;
+export = JenkinsDetailsViewModel;

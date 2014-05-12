@@ -2,8 +2,8 @@ import Types = require('../util/Types');
 import Config = require('../jsonInterfaces/Config.d');
 import Configuration = require('../configuration/Configuration');
 import SectionModel = require('./SectionModel');
-import MonitorModel = require('../monitorModel/MonitorModel');
 import MonitorModels = require('../monitorModel/MonitorModels');
+import MonitorViewModel = require('../monitorModel/MonitorViewModel');
 import SectionViewModel = require('./SectionViewModel');
 
 /**
@@ -32,18 +32,18 @@ class SectionModels {
     public static createViewModel(section:Config.Section, configuration:Configuration, hostname: string):SectionViewModel {
         var sectionModel:SectionModel = SectionModels.createModel(section,hostname);
         var subSections:Array<SectionViewModel> = [];
-        var monitorModels:Array<MonitorModel> = [];
+        var monitorModels:Array<MonitorViewModel> = [];
 
         if(section.sections !== undefined) {
             section.sections.forEach(subSection => {
-                    subSections.push(SectionModels.createViewModel(subSection, configuration, hostname));
+                    subSections.push(SectionModels.createViewModel(subSection, configuration, sectionModel.getHostname()));
                 }
             );
         }
 
         if(section.monitors !== undefined) {
             section.monitors.forEach(monitor => {
-                    monitorModels.push(MonitorModels.createModel(monitor, configuration, hostname));
+                    monitorModels.push(MonitorModels.createViewModel(monitor, configuration, sectionModel.getHostname()));
                 }
             );
         }

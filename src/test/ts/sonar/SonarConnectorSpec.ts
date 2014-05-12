@@ -6,7 +6,7 @@ import SonarConnector = require('../../../main/ts/sonar/SonarConnector');
 import SonarJsonResponse = require('../../../main/ts/jsonInterfaces/SonarResponse');
 import ConnectorBase = require('../../../main/ts/connector/ConnectorBase');
 import Config = require('../../../main/ts/jsonInterfaces/Config');
-import Types = require('../../../main/ts/Types');
+import Types = require('../../../main/ts/util/Types');
 
 /**
  * Tests {@link Configuration}

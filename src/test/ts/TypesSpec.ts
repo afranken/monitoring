@@ -1,9 +1,9 @@
 /// <reference path="jasmine"/>
 import Configuration = require('../../main/ts/configuration/Configuration');
 import MonitorModels = require('../../main/ts/monitorModel/MonitorModels');
-import MonitorModel = require('../../main/ts/monitorModel/MonitorModel');
+import MonitorViewModel = require('../../main/ts/monitorModel/MonitorViewModel');
 import Config = require('../../main/ts/jsonInterfaces/Config');
-import Types = require('../../main/ts/Types');
+import Types = require('../../main/ts/util/Types');
 
 /**
  * Tests {@link Configuration}
@@ -16,7 +16,7 @@ describe("Types", function():void {
         "externalRef": "123",
         "type": "jenkins"
     };
-    var jenkinsModel:MonitorModel = MonitorModels.createModel(jenkinsConfig, configuration, "hostname");
+    var jenkinsModel:MonitorViewModel = MonitorModels.createViewModel(jenkinsConfig, configuration, "hostname");
 
     var nagiosConfig:Config.Monitor = {
         "externalRef": [
@@ -27,7 +27,7 @@ describe("Types", function():void {
         ],
         "type": "nagios"
     };
-    var nagiosModel:MonitorModel = MonitorModels.createModel(nagiosConfig, configuration, "hostname");
+    var nagiosModel:MonitorViewModel = MonitorModels.createViewModel(nagiosConfig, configuration, "hostname");
 
     var sonarConfig:Config.Monitor = {
         "externalRef": [
@@ -37,7 +37,7 @@ describe("Types", function():void {
         ],
         "type": "sonar"
     };
-    var sonarModel:MonitorModel = MonitorModels.createModel(sonarConfig, configuration, "hostname");
+    var sonarModel:MonitorViewModel = MonitorModels.createViewModel(sonarConfig, configuration, "hostname");
 
     /**
      * Test all methods

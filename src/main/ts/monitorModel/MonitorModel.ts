@@ -4,20 +4,9 @@ import Config = require('../jsonInterfaces/Config');
 import Connector = require('../connector/Connector');
 
 /**
- * Model used for rendering {@link Config.Monitor}
+ * Model that accesses data from a backend
  */
 interface MonitorModel {
-
-    /**
-     * The type of the Monitor
-     */
-    getType() :string;
-
-    /**
-     * This method will be called after rendering the Model.
-     * The model is expected to use a {@link Connector} to update it's status from a remote system.
-     */
-    updateStatus(): void;
 
     /**
      * Update model with data.
@@ -28,6 +17,7 @@ interface MonitorModel {
      */
     setData(data):void;
 
+//    getData()
 }
 
 export = MonitorModel;

@@ -1,13 +1,5 @@
-import MonitorModel = require('./../monitorModel/MonitorModel');
-import MonitorModels = require('./../monitorModel/MonitorModels');
-import Connector = require('./../connector/Connector');
-import Configuration = require('./../configuration/Configuration');
-import JenkinsMonitorModel = require('./../jenkins/JenkinsMonitorModel');
-import NagiosMonitorModel = require('./../nagios/NagiosMonitorModel');
-import SonarMonitorModel = require('./../sonar/SonarMonitorModel');
-import Config = require('./../jsonInterfaces/Config.d');
 import SectionModel = require('./SectionModel');
-import SectionModels = require('./SectionModels');
+import MonitorViewModel = require('../monitorModel/MonitorViewModel');
 
 /**
  * This class represents a section.
@@ -22,13 +14,13 @@ class SectionViewModel {
 
     private _subSections: Array<SectionViewModel>;
     private _sectionModel: SectionModel;
-    private _monitorModels: Array<MonitorModel>;
+    private _monitorModels: Array<MonitorViewModel>;
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(subSections:Array<SectionViewModel>, monitorModels:Array<MonitorModel>, sectionModel:SectionModel) {
+    constructor(subSections:Array<SectionViewModel>, monitorModels:Array<MonitorViewModel>, sectionModel:SectionModel) {
         this._sectionModel = sectionModel;
         this._subSections = subSections;
         this._monitorModels = monitorModels;
@@ -57,7 +49,7 @@ class SectionViewModel {
         return this._sectionModel.getDescription();
     }
 
-    public getMonitorModels():Array<MonitorModel> {
+    public getMonitorModels():Array<MonitorViewModel> {
         return this._monitorModels;
     }
 

@@ -1,65 +1,44 @@
-/// <reference path="../vendor/jquery.d.ts" />
-/// <reference path="../vendor/knockout.d.ts" />
-/// <reference path="../vendor/moment.d.ts" />
+/// <reference path="../../vendor/knockout.d.ts" />
 import ko = require('knockout');
-import moment = require('moment');
-import Types = require('../util/Types');
-import MonitorModel = require('../monitorModel/MonitorModel');
-import MonitorModels = require('../monitorModel/MonitorModels');
-import Connector = require('../connector/Connector');
-import CssClasses = require('../util/CssClasses');
-import JenkinsConnector = require('./JenkinsConnector');
-import JenkinsDetailsModel = require('./JenkinsDetailsModel');
-import Config = require('../jsonInterfaces/Config');
-import JenkinsJsonResponse = require('../jsonInterfaces/JenkinsResponse');
+import CssClasses = require('../../util/CssClasses');
+import JenkinsMonitorModel = require('../model/JenkinsMonitorModel');
 
-/**
- * Model that represents a Jenkins Job
- */
-class JenkinsMonitorModel implements MonitorModel {
+class JenkinsBoxViewModel {
 
     private static OPACITY:string = 'opacity: ';
     private static DEFAULT_OPACITY:number = 1.0;
 
-    private _connector:Connector;
-    private _name:string;
-    private _externalRef:string;
-    private _hostname:string;
+    private _model:JenkinsMonitorModel;
     private _css:KnockoutComputed<string>;
     private _style:KnockoutComputed<string>;
     private _completedPercent:KnockoutComputed<number>;
     private _buildingStyle:KnockoutComputed<string>;
-    private _details:JenkinsDetailsModel;
-    private _jsonResponse:KnockoutObservable<JenkinsJsonResponse.Json> = ko.observable<JenkinsJsonResponse.Json>();
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(job:Config.SimpleMonitor, connector:Connector, hostname:string) {
-        this._connector = connector;
-        this._name = job.name !== undefined ? job.name : job.externalRef;
-        this._externalRef = job.externalRef;
-        this._hostname = job.hostname !== undefined ? job.hostname : hostname;
-        this._details = new JenkinsDetailsModel((<JenkinsConnector>connector).getJobUrl(this), this._name);
+    constructor(model:JenkinsMonitorModel) {
+        this._model = model;
+
         this._css = ko.computed<string>({
-                read: ()=>{
-                    return CssClasses.BASIC_CLASSES + JenkinsMonitorModel.translateColor(this.getResponseColor());
-                }
+            read: ()=>{
+                return CssClasses.BASIC_CLASSES + JenkinsBoxViewModel.translateColor(this._model.getResponseColor());
+            }
         });
         this._buildingStyle = ko.computed<string>({
-                read: ()=>{
-                    return JenkinsMonitorModel.translateBuildingStyle(this.getResponseColor());
-                }
+            read: ()=>{
+                return JenkinsBoxViewModel.translateBuildingStyle(this._model.getResponseColor());
+            }
         });
         this._style = ko.computed<string>({
             read: ()=>{
-                return JenkinsMonitorModel.OPACITY+JenkinsMonitorModel.calculateExpiration(this.getResponseTimestamp(), (<JenkinsConnector>this._connector).getExpiry());
+                return JenkinsBoxViewModel.OPACITY+JenkinsBoxViewModel.calculateExpiration(this._model.getResponseTimestamp(), this._model.getExpiry());
             }
         });
         this._completedPercent = ko.computed<number>({
             read: ()=>{
-                return JenkinsMonitorModel.calculateCompletedPercent(this.getResponseTimestamp(), this.getEstimatedDuration());
+                return JenkinsBoxViewModel.calculateCompletedPercent(this._model.getResponseTimestamp(), this._model.getEstimatedDuration());
             }
         });
     }
@@ -68,59 +47,30 @@ class JenkinsMonitorModel implements MonitorModel {
     // View Layer
     //==================================================================================================================
 
-    public getName():string {
-        return this._name;
-    }
-
     public getHtmlsafeId():string {
         var _PATTERN:RegExp = new RegExp('\\W','g');
         var _REPLACEMENT_CHAR = '-';
-        return this._externalRef.replace(_PATTERN,_REPLACEMENT_CHAR);
+        return this._model.getExternalRef().replace(_PATTERN,_REPLACEMENT_CHAR);
     }
 
     public getCompletedPercent():number {
         return this._completedPercent();
     }
 
-    public getHostname():string {
-        return this._hostname;
-    }
-
-    public getCss():string {
-        return this._css();
+    public getStyle():string {
+        return this._style();
     }
 
     public getBuildingStyle():string {
         return this._buildingStyle();
     }
 
-    public getStyle():string {
-        return this._style();
+    public getCss():string {
+        return this._css();
     }
 
-    public getDetails():JenkinsDetailsModel {
-        return this._details;
-    }
-
-    public getType():string {
-        return Types.JENKINS;
-    }
-
-    //==================================================================================================================
-    // Functionality
-    //==================================================================================================================
-
-    public getExternalRef():string {
-        return this._externalRef;
-    }
-
-    public updateStatus():void {
-        this._connector.getRemoteData(this);
-    }
-
-    public setData(json:JenkinsJsonResponse.Json):void {
-        this._jsonResponse(json);
-        this._details.setData(json);
+    public getName():string {
+        return this._model.getName();
     }
 
     //==================================================================================================================
@@ -152,7 +102,7 @@ class JenkinsMonitorModel implements MonitorModel {
     private static calculateExpiration(buildTimestamp: number, expiry: number):number {
 
         if(buildTimestamp === undefined) {
-            return JenkinsMonitorModel.DEFAULT_OPACITY;
+            return JenkinsBoxViewModel.DEFAULT_OPACITY;
         }
 
         var expireStyle:number;
@@ -251,29 +201,6 @@ class JenkinsMonitorModel implements MonitorModel {
         return colorTranslation;
     }
 
-    private getResponseColor():string {
-        var color:string = undefined;
-        if(this._jsonResponse() !== undefined) {
-            color = this._jsonResponse().color;
-        }
-        return color;
-    }
-
-    private getResponseTimestamp():number {
-        var timestamp:number = undefined;
-        if(this._jsonResponse() !== undefined) {
-            timestamp = this._jsonResponse().lastBuild.timestamp;
-        }
-        return timestamp;
-    }
-
-    private getEstimatedDuration():number {
-        var estimatedDuration:number = undefined;
-        if(this._jsonResponse() !== undefined) {
-            estimatedDuration = this._jsonResponse().lastBuild.estimatedDuration;
-        }
-        return estimatedDuration;
-    }
 }
 
-export = JenkinsMonitorModel;
+export = JenkinsBoxViewModel;

@@ -4,7 +4,7 @@ import MonitorModels = require('../../main/ts/monitorModel/MonitorModels');
 import SectionViewModel = require('../../main/ts/sections/SectionViewModel');
 import SectionModels = require('../../main/ts/sections/SectionModels');
 import Config = require('../../main/ts/jsonInterfaces/Config');
-import Types = require('../../main/ts/Types');
+import Types = require('../../main/ts/util/Types');
 
 /**
  * Tests {@link Configuration}

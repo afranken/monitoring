@@ -16,7 +16,7 @@
             baseUrl : "./js",
             name: './ApplicationViewModel',
             paths: {
-                'Application': 'simon.min',
+                'ApplicationViewModel': 'simon.min',
                 'jquery': 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min',
                 'knockout': 'http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min',
                 'moment': 'http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min',
@@ -62,6 +62,7 @@
         <!-- /ko -->
         <div id="container-fluid" data-bind="template: { name: 'section-row-template', foreach: getSections() }" ></div>
     </script>
+
     <script type="text/html" id="section-row-template">
         <!-- ko if: getTitle() -->
         <div class="row">
@@ -89,6 +90,7 @@
         </div>
         <!-- /ko -->
     </script>
+
     <script type="text/html" id="section-column-template">
         <div data-bind="css: 'col-lg-'+$parent.getColumnWidth()">
             <!-- ko if: getTitle() -->
@@ -113,21 +115,14 @@
             <!-- /ko -->
         </div>
     </script>
+
     <script type="text/html" id="monitor-template">
         <!-- ko if: $root.getTypes().isJenkins(getType()) -->
         <div class="panel panel-default">
             <div class="alert-none">
-                <a class="detail-link" data-toggle="collapse" data-bind="attr: { href: '#' + getHtmlsafeId() + $index(), title: getName() }">
-                    <div data-bind='attr: {style: getStyle()}, css: getCss()'>
-                        <span class="detail-name" data-bind="text: getName()"></span><br/>
-                        <!-- ko if: getBuildingStyle() -->
-                        <div class="progress progress-striped active">
-                            <div data-bind='attr: {style: "width: "+getCompletedPercent()+"%", "aria-valuenow": getCompletedPercent() }, css: getBuildingStyle()' role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <!-- /ko -->
-                    </div>
-                </a>
-            </div>
+            <!-- ko template: { name: 'jenkins-box-model-template', data: getBox() } -->
+            <!-- /ko -->
+        </div>
             <div class="panel-collapse collapse" data-bind="attr: { id: getHtmlsafeId() + $index() }">
                 <!-- ko template: { name: 'jenkins-detail-model-template', data: getDetails() } -->
                 <!-- /ko -->
@@ -142,6 +137,20 @@
         <div data-bind="template: { name: 'sonar-monitormodel-template' }"></div>
         <!-- /ko -->
     </script>
+
+<script type="text/html" id="jenkins-box-model-template">
+    <a class="detail-link" data-toggle="collapse" data-bind="attr: { href: '#' + getHtmlsafeId() + $index(), title: getName() }">
+        <div data-bind='attr: {style: getStyle()}, css: getCss()'>
+            <span class="detail-name" data-bind="text: getName()"></span><br/>
+            <!-- ko if: getBuildingStyle() -->
+            <div class="progress progress-striped active">
+                <div data-bind='attr: {style: "width: "+getCompletedPercent()+"%", "aria-valuenow": getCompletedPercent() }, css: getBuildingStyle()' role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </a>
+</script>
+
     <script type="text/html" id="jenkins-detail-model-template">
         <dl class="jenkins-details-link">
             <dt>Job on Jenkins</dt>
@@ -172,11 +181,12 @@
             <dd data-bind="text: getRunTime()"></dd>
         </dl>
     </script>
+
     <script type="text/html" id="nagios-hostmodel-template">
         <div class="panel panel-default">
-            <a class="detail-link" data-toggle="collapse" data-bind="attr: { href: '#' + getHostname() + $index(), title: getHostname() }">
+            <a class="detail-link" data-toggle="collapse" data-bind="attr: { href: '#' + getHostname() + $index(), title: getName() }">
                 <div data-bind="css: getCss()">
-                    <span class="detail-name" data-bind="text: getHostname()"></span><br/>
+                    <span class="detail-name" data-bind="text: getName()"></span><br/>
                     <ul data-bind="foreach: getBrokenServices()" style="list-style-type: none; padding:0; margin:0;" class="nagios-broken-services">
                         <li><span data-bind="text: $data"></span></li>
                     </ul>
@@ -198,6 +208,7 @@
             </div>
         </div>
     </script>
+
     <script type="text/html" id="sonar-monitormodel-template">
         <h4 class="monitor-heading"><a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a></h4>
         <table class="codeviolations">
@@ -214,6 +225,7 @@
             <tbody data-bind="foreach: getViolationModels()"><tr data-bind="template: {name: 'sonar-violation-template', foreach: getViolations()}"></tr></tbody>
         </table>
     </script>
+
     <script type="text/html" id="sonar-violation-template">
         <td class="sonar-violation-count"><div data-bind="css: getCss(), text: getCount()"></div></td>
         <!-- ko if: ($index() === ($parent.getViolations().length - 1)) -->

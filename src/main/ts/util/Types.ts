@@ -1,4 +1,4 @@
-import MonitorModel = require('../monitorModel/MonitorModel');
+import MonitorViewModel = require('../monitorModel/MonitorViewModel');
 
 /**
  * This class contains declarations of possible types used for creating and
@@ -14,7 +14,7 @@ class Types {
         return [Types.JENKINS,Types.NAGIOS,Types.SONAR];
     }
 
-    public static isJenkinsModel(monitorModel:MonitorModel):boolean {
+    public static isJenkinsModel(monitorModel:MonitorViewModel):boolean {
         return Types.isJenkins(monitorModel.getType());
     }
 
@@ -22,7 +22,7 @@ class Types {
         return type === undefined || Types.JENKINS === type;
     }
 
-    public static isNagiosModel(monitorModel:MonitorModel):boolean {
+    public static isNagiosModel(monitorModel:MonitorViewModel):boolean {
         return Types.isNagios(monitorModel.getType());
     }
 
@@ -30,7 +30,7 @@ class Types {
         return type !== undefined && Types.NAGIOS === type;
     }
 
-    public static isSonarModel(monitorModel:MonitorModel):boolean {
+    public static isSonarModel(monitorModel:MonitorViewModel):boolean {
         return Types.isSonar(monitorModel.getType());
     }
 

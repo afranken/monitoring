@@ -1,8 +1,10 @@
 /// <reference path="../jasmine"/>
 import Configuration = require('../../../main/ts/configuration/Configuration');
+import MonitorModel = require('../../../main/ts/monitorModel/MonitorModel');
 import MonitorModels = require('../../../main/ts/monitorModel/MonitorModels');
-import JenkinsDetailsModel = require('../../../main/ts/jenkins/JenkinsDetailsModel');
-import JenkinsConnector = require('../../../main/ts/jenkins/JenkinsConnector');
+import JenkinsMonitorModel = require('../../../main/ts/jenkins/model/JenkinsMonitorModel');
+import JenkinsDetailsModel = require('../../../main/ts/jenkins/viewModel/JenkinsDetailsViewModel');
+import JenkinsConnector = require('../../../main/ts/jenkins/connector/JenkinsConnector');
 import JenkinsJsonResponse = require('../../../main/ts/jsonInterfaces/JenkinsResponse');
 import ConnectorBase = require('../../../main/ts/connector/ConnectorBase');
 import Config = require('../../../main/ts/jsonInterfaces/Config');
@@ -12,11 +14,11 @@ import CssClasses = require('../../../main/ts/util/CssClasses');
 /**
  * Tests {@link Configuration}
  */
-describe("JenkinsDetailsModel", function():void {
+describe("JenkinsDetailsViewModel", function():void {
 
     var _HOST:string = "myhost";
     var _NAME:string = "mymonitor";
-    var _URL:string = "http://myurl/";
+    var _URL:string = "https://myhost:8080/myprefix/job/myid";
     var _ID:string = "myid";
     var _EXPIRY:number = 888;
     var _DATE:number = new Date().getTime();
@@ -70,7 +72,9 @@ describe("JenkinsDetailsModel", function():void {
         }
     };
 
-    var testling:JenkinsDetailsModel = new JenkinsDetailsModel(_URL,_NAME);
+    var model:JenkinsMonitorModel = <JenkinsMonitorModel>MonitorModels.createModel(monitorJson, configuration, _HOST);
+
+    var testling:JenkinsDetailsModel = new JenkinsDetailsModel(model);
 
 
     /**
@@ -88,7 +92,7 @@ describe("JenkinsDetailsModel", function():void {
     });
 
     it("TestMethodsAfterResponse", function():void {
-        testling.setData(jsonResponse);
+        model.setData(jsonResponse);
         expect(testling.getName()).toBe(_NAME);
         expect(testling.getUrl()).toBe(_URL);
         expect(testling.getCommitHash()).toEqual("00AAEEFF");
