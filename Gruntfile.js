@@ -184,7 +184,7 @@ module.exports = function(grunt) {
                         templateOptions: {
                             requireConfig: {
                                 paths: {
-                                  'Application': './target/js-test/main/ts/Application',
+                                  'ApplicationViewModel': './target/js-test/main/ts/ApplicationViewModel',
                                   'jquery': './target/js-test/main/ts/vendor/jquery-2.1.0.min',
                                   'moment': './target/js-test/main/ts/vendor/moment-with-langs.min',
                                   'knockout': './target/js-test/main/ts/vendor/knockout-3.1.0'
@@ -252,7 +252,7 @@ module.exports = function(grunt) {
           // these defaults will be used as a base for every target we define
           options: {
             // the name is used to find js/amd/app.js, basically
-            name: 'Application',
+            name: 'ApplicationViewModel',
 
             // this should be set to the path from your project root to the
             // root of your AMD JavaScript files.
@@ -262,7 +262,7 @@ module.exports = function(grunt) {
             out: '<%= dir.target_js %>/js/simon.min.js',
 
             paths: {
-              'Application': './Application',
+              'ApplicationViewModel': './ApplicationViewModel',
               'jquery': '../js/vendor/jquery-2.1.0.min',
               'knockout': '../js/vendor/knockout-3.1.0',
               'moment': '../js/vendor/moment-with-langs.min',
