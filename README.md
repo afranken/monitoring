@@ -54,6 +54,42 @@ When running `grunt clean`, the target directory will be deleted.
 When running `grunt watch`, grunt will watch TypeScript, HTML and CSS files and compile / copy them to the appropriate folders.
 (Functionality is similar to `grunt compile`)
 
+## Understanding / Writing Simon JS code
+
+The Simon JS library is written in Typescript](http://www.typescriptlang.org/).
+
+### General structure
+
+Simon JS uses [Knockout](http://knockoutjs.com/). Knockout implements the MVVM pattern, which in turn is implemented by Simon JS.
+
+The root ViewModel is the `ApplicationViewModel` that reads the configuration provided by the user.
+The `ApplicationViewModel` then creates all ViewModels and Models that are needed to display the application.
+
+### Backend implementations
+
+Simon JS can retrieve data from a number of backends, for example Nagios, Jenkins and Sonar.
+
+The implementations follow this pattern:
+
+  * A `MonitorViewModel` implementation that is used to display the backend information, accessed from it's model
+  * A `MonitorModel` implementation that stores the data retrieved from a backend
+  * A `Connector` implementation that retrieves the data from a backend
+
+In cases where the data returned from the backend is too complex to display with just one ViewModel / Model combination,
+more than one ViewModel is used.
+
+### Tests
+
+Tests for the Simon JS TypeScript classes are also written in TypeScript and executed using Jasmine (after compiling both
+the libraries and the tests to JavaScriot).
+
+### Views
+
+Views are written in HTML using [Knockout](http://knockoutjs.com/) template constructs.
+
+Since Knockout does not provide an out-of-the-box solution to externalize templates, all templates are stored (and therefore
+duplicated) in the HTML files `index.html` and `index-debug.html`.
+
 #Other
 
 ###Jenkins returns 403 to JSONP Get requests by default.
@@ -72,7 +108,7 @@ Nagios does not support JSON but gives XML responses.
 
 Use [this simple JSON cgi controller](https://github.com/afranken/status-json) to get Nagios to work with this application.
 
-###Used Third Party Libraries / Software:
+#Used Third Party Libraries / Software:
 
 Software:
 
