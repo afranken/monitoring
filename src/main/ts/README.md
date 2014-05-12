@@ -1,2 +1,2 @@
-#package info
-this package contains the root ViewModel, `ApplicationViewModel`
+#folder info
+this folder contains the root ViewModel, `ApplicationViewModel`
