@@ -5,6 +5,7 @@ import Connector = require('../connector/Connector');
 
 /**
  * Model that accesses data from a backend
+ * It's responsibility is to provide access to the underlying data for {@link MonitorViewModel} instances.dd commen
  */
 interface MonitorModel {
 
@@ -17,7 +18,6 @@ interface MonitorModel {
      */
     setData(data):void;
 
-//    getData()
 }
 
 export = MonitorModel;

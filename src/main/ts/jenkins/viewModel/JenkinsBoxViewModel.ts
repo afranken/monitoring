@@ -3,6 +3,9 @@ import ko = require('knockout');
 import CssClasses = require('../../util/CssClasses');
 import JenkinsMonitorModel = require('../model/JenkinsMonitorModel');
 
+/**
+ * ViewModel that is used to display the Jenkins overview box.
+ */
 class JenkinsBoxViewModel {
 
     private static OPACITY:string = 'opacity: ';
@@ -21,6 +24,13 @@ class JenkinsBoxViewModel {
     constructor(model:JenkinsMonitorModel) {
         this._model = model;
 
+        this.init();
+    }
+
+    /**
+     * Initialize computed properties.
+     */
+    private init():void {
         this._css = ko.computed<string>({
             read: ()=>{
                 return CssClasses.BASIC_CLASSES + JenkinsBoxViewModel.translateColor(this._model.getResponseColor());

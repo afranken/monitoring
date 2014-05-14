@@ -4,7 +4,8 @@ import Config = require('../jsonInterfaces/Config');
 import Connector = require('../connector/Connector');
 
 /**
- * ViewModel used for rendering {@link Config.Monitor}
+ * ViewModel used for rendering {@link Config.Monitor} elements.
+ * It's responsibility is to transform properties of the underlying {@link MonitorModel} for display.
  */
 interface MonitorViewModel {
 
@@ -14,8 +15,7 @@ interface MonitorViewModel {
     getType() :string;
 
     /**
-     * This method will be called after rendering the Model.
-     * The model is expected to use a {@link Connector} to update it's status from a remote system.
+     * TODO: this method shouldn't be used any more, MonitorModels update themselves.
      */
     updateStatus(): void;
 
