@@ -37,7 +37,7 @@ class JenkinsMonitorModel implements MonitorModel {
     }
 
     //==================================================================================================================
-    // View Layer
+    // Functionality
     //==================================================================================================================
 
     public getExternalRef():string {
@@ -60,9 +60,11 @@ class JenkinsMonitorModel implements MonitorModel {
         return this._hostname;
     }
 
-    //==================================================================================================================
-    // Functionality
-    //==================================================================================================================
+    public getHtmlsafeId():string {
+        var _PATTERN:RegExp = new RegExp('\\W','g');
+        var _REPLACEMENT_CHAR = '-';
+        return this.getExternalRef().replace(_PATTERN,_REPLACEMENT_CHAR);
+    }
 
     public updateStatus():void {
         this._connector.getRemoteData(this);

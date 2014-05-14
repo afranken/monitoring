@@ -48,9 +48,7 @@ class JenkinsBoxViewModel {
     //==================================================================================================================
 
     public getHtmlsafeId():string {
-        var _PATTERN:RegExp = new RegExp('\\W','g');
-        var _REPLACEMENT_CHAR = '-';
-        return this._model.getExternalRef().replace(_PATTERN,_REPLACEMENT_CHAR);
+        return this._model.getHtmlsafeId();
     }
 
     public getCompletedPercent():number {
