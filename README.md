@@ -65,18 +65,20 @@ Simon JS uses [Knockout](http://knockoutjs.com/). Knockout implements the MVVM p
 The root ViewModel is the `ApplicationViewModel` that reads the configuration provided by the user.
 The `ApplicationViewModel` then creates all ViewModels and Models that are needed to display the application.
 
-### Backend implementations
+### Backend implementation
 
 Simon JS can retrieve data from a number of backends, for example Nagios, Jenkins and Sonar.
 
 The implementations follow this pattern:
 
-  * A `MonitorViewModel` implementation that is used to display the backend information, accessed from it's model
-  * A `MonitorModel` implementation that stores the data retrieved from a backend
-  * A `Connector` implementation that retrieves the data from a backend
+  * A `MonitorViewModel` implementation that is used to display the backend information, accessed from its model. 
+  `MonitorViewModel` instances are responsible to expose data to a view and transform that data if necessary.
+  * A `MonitorModel` implementation that stores the data retrieved from a backend. `MonitorModel` instances are responsible to 
+  abstract from the (JSON) data returned from the backend and expose that data to a `MonitorViewModel`.
+  * A `Connector` implementation that retrieves the data from a backend and saves that data in a `MonitorModel`
 
-In cases where the data returned from the backend is too complex to display with just one ViewModel / Model combination,
-more than one ViewModel is used.
+In cases where the data returned from the backend is too complex to display with just one `MonitorViewModel` / `MonitorModel` combination,
+more than one `MonitorViewModel` is used.
 
 ### Tests
 
