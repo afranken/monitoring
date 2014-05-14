@@ -99,7 +99,7 @@ class JenkinsMonitorModel implements MonitorModel {
 
     public getResponseColor():string {
         var color:string = undefined;
-        if(this._jsonResponse() !== undefined) {
+        if(this._jsonResponse()) {
             color = this._jsonResponse().color;
         }
         return color;
@@ -107,16 +107,64 @@ class JenkinsMonitorModel implements MonitorModel {
 
     public getResponseTimestamp():number {
         var timestamp:number = undefined;
-        if(this._jsonResponse() !== undefined) {
-            timestamp = this._jsonResponse().lastBuild.timestamp;
+        if(this.getLastBuild()) {
+            timestamp = this.getLastBuild().timestamp;
         }
         return timestamp;
     }
 
+    public getDuration():number {
+        var duration:number = undefined;
+        if(this.getLastBuild()) {
+            duration = this.getLastBuild().duration;
+        }
+        return duration;
+    }
+
+    public getBuildNumber():number {
+        var buildNumber:number = undefined;
+        if(this.getLastBuild()) {
+            buildNumber = this.getLastBuild().number;
+        }
+        return buildNumber;
+    }
+
+    public getLastBuildUrl():string {
+        var url:string = undefined;
+        if(this.getLastBuild()) {
+            url = this.getLastBuild().url;
+        }
+        return url;
+    }
+
+    public getLastBuildCommitHash():string {
+        var commit:string = undefined;
+        if(this.getLastBuiltRevision()) {
+            this.getLastBuiltRevision().branch.forEach((singleBranch)=>{
+                if(singleBranch.SHA1) {
+                    commit = singleBranch.SHA1.slice(0,12);
+                }
+            });
+        }
+        return commit;
+    }
+
+    public getLastBuildBranchName():string {
+        var name:string = undefined;
+        if(this.getLastBuiltRevision()) {
+            this.getLastBuiltRevision().branch.forEach((singleBranch)=>{
+                if(singleBranch.name) {
+                    name = singleBranch.name;
+                }
+            });
+        }
+        return name;
+    }
+
     public getEstimatedDuration():number {
         var estimatedDuration:number = undefined;
-        if(this._jsonResponse() !== undefined) {
-            estimatedDuration = this._jsonResponse().lastBuild.estimatedDuration;
+        if(this.getLastBuild()) {
+            estimatedDuration = this.getLastBuild().estimatedDuration;
         }
         return estimatedDuration;
     }

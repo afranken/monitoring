@@ -6,7 +6,7 @@ import JenkinsMonitorModel = require('../model/JenkinsMonitorModel');
 import JenkinsJsonResponse = require('../../jsonInterfaces/JenkinsResponse');
 
 /**
- * This model is used to store and retrieve detailed data about one Jenkins job.
+ * ViewModel that is used to display Jenkins Details.
  */
 class JenkinsDetailsViewModel {
 
@@ -29,32 +29,19 @@ class JenkinsDetailsViewModel {
         this.init();
     }
 
+    /**
+     * Initialize computed properties.
+     */
     private init():void {
         this._commitHash = ko.computed<string>({
             read: ()=>{
-                var commit:string = undefined;
-                if(this._model.getLastBuiltRevision()) {
-                    this._model.getLastBuiltRevision().branch.forEach((singleBranch)=>{
-                        if(singleBranch.SHA1) {
-                            commit = singleBranch.SHA1.slice(0,12);
-                        }
-                    });
-                }
-                return commit;
+                return this._model.getLastBuildCommitHash();
             }
         });
 
         this._branchName = ko.computed<string>({
             read: ()=>{
-                var name:string = undefined;
-                if(this._model.getLastBuiltRevision()) {
-                    this._model.getLastBuiltRevision().branch.forEach((singleBranch)=>{
-                        if(singleBranch.name) {
-                            name = singleBranch.name;
-                        }
-                    });
-                }
-                return name;
+                return this._model.getLastBuildBranchName();
             }
         });
 
@@ -66,21 +53,13 @@ class JenkinsDetailsViewModel {
 
         this._buildNumber = ko.computed<number>({
             read: ()=>{
-                var buildNumber:number = undefined;
-                if(this._model.getLastBuild()) {
-                    buildNumber = this._model.getLastBuild().number;
-                }
-                return buildNumber;
+                return this._model.getBuildNumber();
             }
         });
 
         this._buildNumberUrl = ko.computed<string>({
             read: ()=>{
-                var buildNumberUrl:string = undefined;
-                if(this._model.getLastBuild()) {
-                    buildNumberUrl = this._model.getLastBuild().url;
-                }
-                return buildNumberUrl;
+                return this._model.getLastBuildUrl();
             }
         });
 
@@ -138,8 +117,8 @@ class JenkinsDetailsViewModel {
      */
     private calculateStartDate():string {
         var startTime:string = undefined;
-        if(this._model.getLastBuild()) {
-            startTime = moment(this._model.getLastBuild().timestamp).fromNow();
+        if(this._model.getResponseTimestamp()) {
+            startTime = moment(this._model.getResponseTimestamp()).fromNow();
         }
 
         return startTime;
@@ -152,8 +131,8 @@ class JenkinsDetailsViewModel {
      */
     private calculateDuration():string {
         var duration:string = undefined;
-        if(this._model.getLastBuild()) {
-            duration = moment.duration(this._model.getLastBuild().duration).humanize();
+        if(this._model.getDuration()) {
+            duration = moment.duration(this._model.getDuration()).humanize();
         }
 
         return duration;
