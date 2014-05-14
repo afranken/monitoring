@@ -6,7 +6,7 @@ import JenkinsDetailsModel = require('./JenkinsDetailsViewModel');
 import JenkinsBoxViewModel = require('./JenkinsBoxViewModel');
 
 /**
- *
+ * Main ViewModel that is used to display Jenkins data.
  */
 class JenkinsMonitorViewModel implements MonitorViewModel {
 
@@ -36,6 +36,7 @@ class JenkinsMonitorViewModel implements MonitorViewModel {
         return Types.JENKINS;
     }
 
+    //TODO: shouldn't be used any more, MonitorModel implementations should update themselves...
     public updateStatus():void {
         this._model.updateStatus();
     }
