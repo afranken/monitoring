@@ -1,6 +1,6 @@
-/// <reference path="../jasmine"/>
-import JenkinsMonitorModel = require('../../../main/ts/jenkins/model/JenkinsMonitorModel');
-import JenkinsSpecDataProvider = require('./JenkinsSpecDataProvider');
+/// <reference path="../../jasmine.d"/>
+import JenkinsMonitorModel = require('../../../../main/ts/jenkins/model/JenkinsMonitorModel');
+import JenkinsSpecDataProvider = require('../JenkinsSpecDataProvider');
 
 
 /**
