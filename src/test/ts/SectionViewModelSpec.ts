@@ -7,7 +7,7 @@ import Config = require('../../main/ts/jsonInterfaces/Config');
 import Types = require('../../main/ts/util/Types');
 
 /**
- * Tests {@link Configuration}
+ * Tests {@link SectionViewModel}
  */
 describe("SectionViewModel", function():void {
 

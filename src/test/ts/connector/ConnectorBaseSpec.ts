@@ -3,7 +3,7 @@ import Configuration = require('../../../main/ts/configuration/Configuration');
 import ConnectorBase = require('../../../main/ts/connector/ConnectorBase');
 
 /**
- * Tests {@link Configuration}
+ * Tests {@link ConnectorBase}
  */
 describe("ConnectorBase", function():void {
 

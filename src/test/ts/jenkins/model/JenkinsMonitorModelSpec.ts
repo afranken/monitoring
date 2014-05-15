@@ -4,7 +4,7 @@ import JenkinsSpecDataProvider = require('../JenkinsSpecDataProvider');
 
 
 /**
- * Tests {@link Configuration}
+ * Tests {@link JenkinsMonitorModel}
  */
 describe("JenkinsMonitorModel", function():void {
 

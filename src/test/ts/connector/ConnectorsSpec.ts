@@ -7,7 +7,7 @@ import SonarConnector = require('../../../main/ts/sonar/SonarConnector');
 import NagiosConnector = require('../../../main/ts/nagios/NagiosConnector');
 
 /**
- * Tests {@link Configuration}
+ * Tests {@link Connectors}
  */
 describe("Connectors", function():void {
 

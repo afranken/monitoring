@@ -4,7 +4,7 @@ import JenkinsDetailsViewModel = require('../../../../main/ts/jenkins/viewModel/
 import JenkinsSpecDataProvider = require('../JenkinsSpecDataProvider');
 
 /**
- * Tests {@link Configuration}
+ * Tests {@link JenkinsDetailsViewModel}
  */
 describe("JenkinsDetailsViewModel", function():void {
 

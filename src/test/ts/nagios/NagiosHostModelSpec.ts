@@ -11,7 +11,7 @@ import Types = require('../../../main/ts/util/Types');
 import CssClasses = require('../../../main/ts/util/CssClasses');
 
 /**
- * Tests {@link Configuration}
+ * Tests {@link NagiosHostModel}
  */
 describe("NagiosHostModel", function():void {
 

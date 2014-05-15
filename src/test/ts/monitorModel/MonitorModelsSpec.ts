@@ -2,7 +2,7 @@
 import MonitorModels = require('../../../main/ts/monitorModel/MonitorModels');
 
 /**
- * Tests {@link Configuration}
+ * Tests {@link MonitorModelsBase}
  */
 describe("MonitorModelsBase", function():void {
 

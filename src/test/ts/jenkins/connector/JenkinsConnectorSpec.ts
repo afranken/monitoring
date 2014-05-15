@@ -4,7 +4,7 @@ import JenkinsConnector = require('../../../../main/ts/jenkins/connector/Jenkins
 import JenkinsSpecDataProvider = require('../JenkinsSpecDataProvider');
 
 /**
- * Tests {@link Configuration}
+ * Tests {@link JenkinsConnector}
  */
 describe("JenkinsConnector", function():void {
 
