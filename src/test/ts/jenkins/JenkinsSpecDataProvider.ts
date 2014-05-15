@@ -1,6 +1,9 @@
 import Configuration = require('../../../main/ts/configuration/Configuration');
 import MonitorModels = require('../../../main/ts/monitorModel/MonitorModels');
+import Connectors = require('../../../main/ts/connector/Connectors');
 import JenkinsMonitorModel = require('../../../main/ts/jenkins/model/JenkinsMonitorModel');
+import JenkinsMonitorViewModel = require('../../../main/ts/jenkins/viewModel/JenkinsMonitorViewModel');
+import JenkinsConnector = require('../../../main/ts/jenkins/connector/JenkinsConnector');
 import JenkinsJsonResponse = require('../../../main/ts/jsonInterfaces/JenkinsResponse');
 import Config = require('../../../main/ts/jsonInterfaces/Config');
 import Types = require('../../../main/ts/util/Types');
@@ -79,6 +82,13 @@ class JenkinsSpecDataProvider {
         return <JenkinsMonitorModel>MonitorModels.createModel(JenkinsSpecDataProvider.MONITOR_JSON, this.configuration, JenkinsSpecDataProvider.HOST);
     }
 
+    public getJenkinsConnector():JenkinsConnector {
+        return <JenkinsConnector>Connectors.createConnector(this.configuration, Types.JENKINS);
+    }
+
+    public getJenkinsMonitorViewModel():JenkinsMonitorViewModel {
+        return <JenkinsMonitorViewModel>MonitorModels.createViewModel(JenkinsSpecDataProvider.MONITOR_JSON, this.configuration, JenkinsSpecDataProvider.HOST);
+    }
 
 }
 
