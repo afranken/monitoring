@@ -1,5 +1,4 @@
 import Types = require('../../util/Types');
-import MonitorModel = require('../../monitorModel/MonitorModel');
 import MonitorViewModel = require('../../monitorModel/MonitorViewModel');
 import JenkinsMonitorModel = require('../model/JenkinsMonitorModel');
 import JenkinsDetailsViewModel = require('./JenkinsDetailsViewModel');
@@ -14,8 +13,8 @@ class JenkinsMonitorViewModel implements MonitorViewModel {
     private _box:JenkinsBoxViewModel;
     private _model:JenkinsMonitorModel;
 
-    constructor(model:MonitorModel) {
-        this._model = <JenkinsMonitorModel>model;
+    constructor(model:JenkinsMonitorModel) {
+        this._model = model;
         this._box = new JenkinsBoxViewModel(this._model);
         this._details = new JenkinsDetailsViewModel(this._model);
     }

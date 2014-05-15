@@ -2,9 +2,7 @@
 import jQuery = require('jquery');
 import Connector = require('../../connector/Connector');
 import ConnectorBase = require('../../connector/ConnectorBase');
-import CssClasses = require('../../util/CssClasses');
 import JenkinsMonitorModel = require('../model/JenkinsMonitorModel');
-import Configuration = require('../../configuration/Configuration');
 import JenkinsJsonResponse = require('../../jsonInterfaces/JenkinsResponse');
 
 /**

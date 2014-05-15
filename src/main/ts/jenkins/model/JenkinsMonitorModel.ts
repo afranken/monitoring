@@ -2,14 +2,10 @@
 /// <reference path="../../vendor/knockout.d.ts" />
 /// <reference path="../../vendor/moment.d.ts" />
 import ko = require('knockout');
-import moment = require('moment');
 import Config = require('../../jsonInterfaces/Config');
-import CssClasses = require('../../util/CssClasses');
 import Connector = require('../../connector/Connector');
 import MonitorModel = require('../../monitorModel/MonitorModel');
-import MonitorModels = require('../../monitorModel/MonitorModels');
 import JenkinsConnector = require('../connector/JenkinsConnector');
-import JenkinsDetailsModel = require('../viewModel/JenkinsDetailsViewModel');
 import JenkinsJsonResponse = require('../../jsonInterfaces/JenkinsResponse');
 
 /**

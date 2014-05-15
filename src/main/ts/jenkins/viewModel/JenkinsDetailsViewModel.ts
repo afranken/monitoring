@@ -3,7 +3,6 @@
 import ko = require('knockout');
 import moment = require('moment');
 import JenkinsMonitorModel = require('../model/JenkinsMonitorModel');
-import JenkinsJsonResponse = require('../../jsonInterfaces/JenkinsResponse');
 
 /**
  * ViewModel that is used to display Jenkins Details.

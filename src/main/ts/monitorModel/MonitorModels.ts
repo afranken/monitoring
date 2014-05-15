@@ -21,7 +21,7 @@ class MonitorModels {
 
         if(Types.isJenkins(monitor.type)) {
             model = MonitorModels.createModel(monitor, configuration, hostname);
-            viewModel = new JenkinsMonitorViewModel(model);
+            viewModel = new JenkinsMonitorViewModel(<JenkinsMonitorModel>model);
         } else if(Types.isNagios(monitor.type)) {
             model = new NagiosMonitorModel(monitor, Connectors.createConnector(configuration,Types.NAGIOS), hostname);
             viewModel = new NagiosMonitorModel(monitor, Connectors.createConnector(configuration,Types.NAGIOS), hostname);
