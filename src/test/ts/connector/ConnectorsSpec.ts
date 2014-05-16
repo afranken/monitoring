@@ -4,7 +4,7 @@ import Connectors = require('../../../main/ts/connector/Connectors');
 import Connector = require('../../../main/ts/connector/Connector');
 import JenkinsConnector = require('../../../main/ts/jenkins/connector/JenkinsConnector');
 import SonarConnector = require('../../../main/ts/sonar/SonarConnector');
-import NagiosConnector = require('../../../main/ts/nagios/NagiosConnector');
+import NagiosConnector = require('../../../main/ts/nagios/connector/NagiosConnector');
 
 /**
  * Tests {@link Connectors}

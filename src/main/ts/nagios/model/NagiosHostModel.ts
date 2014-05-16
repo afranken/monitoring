@@ -1,10 +1,10 @@
-/// <reference path="../vendor/knockout.d.ts" />
-/// <reference path="../vendor/jquery.d.ts" />
+/// <reference path="../../vendor/knockout.d.ts" />
+/// <reference path="../../vendor/jquery.d.ts" />
 import jQuery = require('jquery');
 import ko = require('knockout');
-import CssClasses = require('../util/CssClasses');
-import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
-import MonitorModels = require('../monitorModel/MonitorModels');
+import CssClasses = require('../../util/CssClasses');
+import NagiosJsonResponse = require('../../jsonInterfaces/NagiosResponse');
+import MonitorModels = require('../../monitorModel/MonitorModels');
 
 /**
  * Model that represents one Nagios host with all services
@@ -37,7 +37,7 @@ class NagiosHostModel {
     }
 
     //==================================================================================================================
-    // View Layer
+    // Functionality
     //==================================================================================================================
 
     public getName():string {
@@ -64,9 +64,11 @@ class NagiosHostModel {
         return this._allServices();
     }
 
-    //==================================================================================================================
-    // Functionality
-    //==================================================================================================================
+    public getHtmlsafeId():string {
+        var _PATTERN:RegExp = new RegExp('\\W','g');
+        var _REPLACEMENT_CHAR = '-';
+        return this._name.replace(_PATTERN,_REPLACEMENT_CHAR);
+    }
 
     /**
      * Reset current host/service status.

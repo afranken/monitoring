@@ -1,80 +1,73 @@
-/// <reference path="../vendor/knockout.d.ts" />
+/// <reference path="../../vendor/knockout.d.ts" />
 import ko = require('knockout');
-import Types = require('../util/Types');
-import Config = require('../jsonInterfaces/Config');
-import MonitorModel = require('../monitorModel/MonitorModel');
-import Connector = require('../connector/Connector');
-import CssClasses = require('../util/CssClasses');
-import NagiosConnector = require('./NagiosConnector');
+import Config = require('../../jsonInterfaces/Config');
+import MonitorModel = require('../../monitorModel/MonitorModel');
+import Connector = require('../../connector/Connector');
+import CssClasses = require('../../util/CssClasses');
+import NagiosConnector = require('../connector/NagiosConnector');
 import NagiosHostModel = require('./NagiosHostModel');
-import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
+import NagiosJsonResponse = require('../../jsonInterfaces/NagiosResponse');
 
 /**
  * Model that represents a list of Nagios hosts.
  * This is necessary because the Nagios API can only answer with a list of all hosts with all services.
- * In order to save bandwidth and CPU time on the Nagios server, data is retrieved once and update all {@link NagiosHostModel}s.
+ * In order to save bandwidth and CPU time on the Nagios server, data is retrieved once and updates all {@link NagiosHostModel}s.
  */
 class NagiosMonitorModel implements MonitorModel {
 
-    private _hostmodels:Array<NagiosHostModel> = [];
     private _hostname:string;
     private _name:string;
     private _connector:NagiosConnector;
+    private _hostModelMap:{[hostName: string]: NagiosHostModel} = {};
+    private _hostnames:Array<string> = [];
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(job:Config.ExtendedMonitor, connector:Connector, hostname:string) {
+    constructor(job:Config.ExtendedMonitor, connector:NagiosConnector, hostname:string) {
         this._name = job.name;
-        this._connector = <NagiosConnector>connector;
+        this._connector = connector;
         this._hostname = job.hostname !== undefined ? job.hostname : hostname;
 
         this.init(job.externalRef);
+
+        this.updateStatus();
     }
 
     private init(externalRef:Config.ExternalRef[]) {
         externalRef.forEach((ref) => {
             var name = ref.name !== undefined ? ref.name : ref.id;
-            var nagiosHostModel = new NagiosHostModel(name, ref.id, this._connector.getHostInfoUrl(this._hostname, ref.id));
-            this._hostmodels.push(nagiosHostModel);
+            this._hostnames.push(name);
+            this._hostModelMap[name] = new NagiosHostModel(name, ref.id, this._connector.getHostInfoUrl(this._hostname, ref.id));
         });
-    }
-
-    //==================================================================================================================
-    // View Layer
-    //==================================================================================================================
-
-    public getHostname():string {
-        return this._hostname;
-    }
-
-    public getName():string {
-        return this._name;
-    }
-
-    public getHostmodels():Array<NagiosHostModel> {
-        return this._hostmodels;
-    }
-
-    public getType():string {
-        return Types.NAGIOS;
     }
 
     //==================================================================================================================
     // Functionality
     //==================================================================================================================
 
-    public addService(hostname:string, service:NagiosJsonResponse.NagiosService):void {
-        this._hostmodels.forEach(hostmodel => {
-            if (hostmodel.getHostname() === hostname) {
-                hostmodel.addService(service);
-            }
-        });
+    public getHostname():string {
+        return this._hostname;
     }
 
-    public updateStatus():void {
-        this._connector.getRemoteData(this);
+    public getHostnames():Array<string> {
+        return this._hostnames;
+    }
+
+    public getName():string {
+        return this._name;
+    }
+
+    public getHostModel(name:string):NagiosHostModel {
+        return this._hostModelMap[name];
+    }
+
+    public addService(hostname:string, service:NagiosJsonResponse.NagiosService):void {
+        var hostmodel = this._hostModelMap[hostname];
+        if(hostmodel) {
+            hostmodel.addService(service);
+        }
     }
 
     public setData(json:NagiosJsonResponse.NagiosServices):void {
@@ -93,12 +86,13 @@ class NagiosMonitorModel implements MonitorModel {
     // Private
     //==================================================================================================================
 
-    /**
-     * Reset all hostmodel data.
-     */
+    private updateStatus():void {
+        this._connector.getRemoteData(this);
+    }
+
     private resetHostModels():void {
-        this._hostmodels.forEach(hostmodel => {
-            hostmodel.resetData();
+        this._hostnames.forEach((name:string) => {
+            this._hostModelMap[name].resetData();
         });
     }
 

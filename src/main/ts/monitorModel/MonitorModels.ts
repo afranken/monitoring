@@ -6,9 +6,13 @@ import Configuration = require('../configuration/Configuration');
 import Connector = require('../connector/Connector');
 import Connectors = require('../connector/Connectors');
 import SonarMonitorModel = require('../sonar/SonarMonitorModel');
-import NagiosMonitorModel = require('../nagios/NagiosMonitorModel');
+import SonarConnector = require('../sonar/SonarConnector');
+import NagiosMonitorModel = require('../nagios/model/NagiosMonitorModel');
+import NagiosMonitorViewModel = require('../nagios/viewModel/NagiosMonitorViewModel');
+import NagiosConnector = require('../nagios/connector/NagiosConnector');
 import JenkinsMonitorModel = require('../jenkins/model/JenkinsMonitorModel');
 import JenkinsMonitorViewModel = require('../jenkins/viewModel/JenkinsMonitorViewModel');
+import JenkinsConnector = require('../jenkins/connector/JenkinsConnector');
 
 /**
  * This class contains static methods that help with MonitorModels.
@@ -16,17 +20,14 @@ import JenkinsMonitorViewModel = require('../jenkins/viewModel/JenkinsMonitorVie
 class MonitorModels {
 
     public static createViewModel(monitor:Config.Monitor, configuration:Configuration, hostname:string):MonitorViewModel {
-        var model:MonitorModel = undefined;
+        var model:MonitorModel = MonitorModels.createModel(monitor, configuration, hostname);
         var viewModel:MonitorViewModel = undefined;
 
         if(Types.isJenkins(monitor.type)) {
-            model = MonitorModels.createModel(monitor, configuration, hostname);
             viewModel = new JenkinsMonitorViewModel(<JenkinsMonitorModel>model);
         } else if(Types.isNagios(monitor.type)) {
-            model = new NagiosMonitorModel(monitor, Connectors.createConnector(configuration,Types.NAGIOS), hostname);
-            viewModel = new NagiosMonitorModel(monitor, Connectors.createConnector(configuration,Types.NAGIOS), hostname);
+            viewModel = new NagiosMonitorViewModel(<NagiosMonitorModel>model);
         } else if(Types.isSonar(monitor.type)) {
-            model = new SonarMonitorModel(monitor, Connectors.createConnector(configuration,Types.SONAR), hostname);
             viewModel = new SonarMonitorModel(monitor, Connectors.createConnector(configuration,Types.SONAR), hostname);
         }
 
@@ -45,11 +46,11 @@ class MonitorModels {
         var model:MonitorModel = undefined;
 
         if(Types.isJenkins(monitor.type)) {
-            model = new JenkinsMonitorModel(monitor, Connectors.createConnector(configuration,Types.JENKINS), hostname);
+            model = new JenkinsMonitorModel(monitor, <JenkinsConnector>Connectors.createConnector(configuration,Types.JENKINS), hostname);
         } else if(Types.isNagios(monitor.type)) {
-            model = new NagiosMonitorModel(monitor, Connectors.createConnector(configuration,Types.NAGIOS), hostname);
+            model = new NagiosMonitorModel(monitor, <NagiosConnector>Connectors.createConnector(configuration,Types.NAGIOS), hostname);
         } else if(Types.isSonar(monitor.type)) {
-            model = new SonarMonitorModel(monitor, Connectors.createConnector(configuration,Types.SONAR), hostname);
+            model = new SonarMonitorModel(monitor, <SonarConnector>Connectors.createConnector(configuration,Types.SONAR), hostname);
         }
 
         return model;

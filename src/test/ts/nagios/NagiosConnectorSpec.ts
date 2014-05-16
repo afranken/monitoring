@@ -1,8 +1,8 @@
 /// <reference path="../jasmine"/>
 import Configuration = require('../../../main/ts/configuration/Configuration');
 import MonitorModels = require('../../../main/ts/monitorModel/MonitorModels');
-import NagiosMonitorModel = require('../../../main/ts/nagios/NagiosMonitorModel');
-import NagiosConnector = require('../../../main/ts/nagios/NagiosConnector');
+import NagiosMonitorModel = require('../../../main/ts/nagios/model/NagiosMonitorModel');
+import NagiosConnector = require('../../../main/ts/nagios/connector/NagiosConnector');
 import NagiosJsonResponse = require('../../../main/ts/jsonInterfaces/NagiosResponse');
 import ConnectorBase = require('../../../main/ts/connector/ConnectorBase');
 import Config = require('../../../main/ts/jsonInterfaces/Config');

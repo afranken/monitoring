@@ -2,10 +2,10 @@ import Connector = require('./Connector');
 import Types = require('../util/Types');
 import Configuration = require('../configuration/Configuration');
 import SonarConnector = require('../sonar/SonarConnector');
-import NagiosConnector = require('../nagios/NagiosConnector');
+import NagiosConnector = require('../nagios/connector/NagiosConnector');
 import JenkinsConnector = require('../jenkins/connector/JenkinsConnector');
 import SonarMonitorModel = require('../sonar/SonarMonitorModel');
-import NagiosMonitorModel = require('../nagios/NagiosMonitorModel');
+import NagiosMonitorModel = require('../nagios/model/NagiosMonitorModel');
 import JenkinsMonitorModel = require('../jenkins/model/JenkinsMonitorModel');
 
 /**

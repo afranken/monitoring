@@ -1,11 +1,9 @@
-/// <reference path="../vendor/jquery.d.ts" />
+/// <reference path="../../vendor/jquery.d.ts" />
 import jQuery = require('jquery');
-import Connector = require('../connector/Connector');
-import ConnectorBase = require('../connector/ConnectorBase');
-import MonitorModel = require('../monitorModel/MonitorModel');
-import NagiosJsonResponse = require('../jsonInterfaces/NagiosResponse');
-import Configuration = require('../configuration/Configuration');
-import NagiosMonitorModel = require('./NagiosMonitorModel');
+import Connector = require('../../connector/Connector');
+import ConnectorBase = require('../../connector/ConnectorBase');
+import NagiosJsonResponse = require('../../jsonInterfaces/NagiosResponse');
+import NagiosMonitorModel = require('../model/NagiosMonitorModel');
 
 /**
  * Get data from Nagios {@link http://www.nagios.org/}

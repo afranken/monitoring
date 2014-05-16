@@ -14,11 +14,6 @@ interface MonitorViewModel {
      */
     getType() :string;
 
-    /**
-     * TODO: this method shouldn't be used any more, MonitorModels update themselves.
-     */
-    updateStatus(): void;
-
 }
 
 export = MonitorViewModel;
