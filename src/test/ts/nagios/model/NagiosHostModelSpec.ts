@@ -1,14 +1,7 @@
-/// <reference path="../jasmine"/>
-import Configuration = require('../../../main/ts/configuration/Configuration');
-import MonitorModels = require('../../../main/ts/monitorModel/MonitorModels');
-import NagiosHostModel = require('../../../main/ts/nagios/model/NagiosHostModel');
-import NagiosMonitorModel = require('../../../main/ts/nagios/model/NagiosMonitorModel');
-import NagiosConnector = require('../../../main/ts/nagios/connector/NagiosConnector');
-import NagiosJsonResponse = require('../../../main/ts/jsonInterfaces/NagiosResponse');
-import ConnectorBase = require('../../../main/ts/connector/ConnectorBase');
-import Config = require('../../../main/ts/jsonInterfaces/Config');
-import Types = require('../../../main/ts/util/Types');
-import CssClasses = require('../../../main/ts/util/CssClasses');
+/// <reference path="../../jasmine.d"/>
+import CssClasses = require('../../../../main/ts/util/CssClasses');
+import NagiosHostModel = require('../../../../main/ts/nagios/model/NagiosHostModel');
+import NagiosJsonResponse = require('../../../../main/ts/jsonInterfaces/NagiosResponse');
 
 /**
  * Tests {@link NagiosHostModel}
