@@ -5,9 +5,9 @@ import NagiosJsonResponse = require('../../../../main/ts/jsonInterfaces/NagiosRe
 import NagiosSpecDataProvider = require('../NagiosSpecDataProvider');
 
 /**
- * Tests {@link NagiosHostModel}
+ * Tests {@link NagiosMonitorModel}
  */
-describe("NagiosHostModel", function():void {
+describe("NagiosMonitorModel", function():void {
 
     var dataProvider:NagiosSpecDataProvider = new NagiosSpecDataProvider();
 
