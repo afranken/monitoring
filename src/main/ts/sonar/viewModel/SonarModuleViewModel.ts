@@ -7,7 +7,7 @@ import SonarViolationViewModel = require('./SonarViolationViewModel');
 class SonarModuleViewModel {
 
     private _moduleModel:SonarModuleModel;
-    private _violationViewModels:Array<SonarViolationViewModel>;
+    private _violationViewModels:Array<SonarViolationViewModel> = [];
 
     //==================================================================================================================
     // Construct

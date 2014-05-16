@@ -1,3 +1,4 @@
+import Types = require('../../util/Types');
 import MonitorViewModel = require('../../model/MonitorViewModel');
 import SonarModuleViewModel = require('./SonarModuleViewModel');
 import SonarMonitorModel = require('../model/SonarMonitorModel');
@@ -8,7 +9,7 @@ import SonarMonitorModel = require('../model/SonarMonitorModel');
 class SonarMonitorViewModel implements MonitorViewModel {
 
     private _monitorModel:SonarMonitorModel;
-    private _moduleViewModels:Array<SonarModuleViewModel>;
+    private _moduleViewModels:Array<SonarModuleViewModel> = [];
 
     //==================================================================================================================
     // Construct
