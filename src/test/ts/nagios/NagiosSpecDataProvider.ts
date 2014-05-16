@@ -4,6 +4,7 @@ import Connectors = require('../../../main/ts/connector/Connectors');
 import Configuration = require('../../../main/ts/configuration/Configuration');
 import MonitorModels = require('../../../main/ts/monitorModel/MonitorModels');
 import NagiosMonitorModel = require('../../../main/ts/nagios/model/NagiosMonitorModel');
+import NagiosMonitorViewModel = require('../../../main/ts/nagios/viewModel/NagiosMonitorViewModel');
 import NagiosConnector = require('../../../main/ts/nagios/connector/NagiosConnector');
 import NagiosJsonResponse = require('../../../main/ts/jsonInterfaces/NagiosResponse.d');
 
@@ -80,6 +81,10 @@ class NagiosSpecDataProvider {
 
     public getNagiosMonitorModel():NagiosMonitorModel {
         return <NagiosMonitorModel>MonitorModels.createModel(NagiosSpecDataProvider.MONITOR_JSON, this.configuration, NagiosSpecDataProvider.HOST);
+    }
+
+    public getNagiosMonitorViewModel():NagiosMonitorViewModel {
+        return <NagiosMonitorViewModel>MonitorModels.createViewModel(NagiosSpecDataProvider.MONITOR_JSON, this.configuration, NagiosSpecDataProvider.HOST);
     }
 
     public getNagiosConnector():NagiosConnector {
