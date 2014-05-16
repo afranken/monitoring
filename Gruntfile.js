@@ -30,7 +30,7 @@ module.exports = function(grunt) {
             "target_css": '<%= "target/"+project.name+"-"+project.version+"/css" %>',
 
             // location to place (compiled) javascript files
-            "target_js": '<%= "target/"+project.name+"-"+project.version+"/" %>',  //"target/js"
+            "target_js": '<%= "target/"+project.name+"-"+project.version %>',  //"target/js"
             // location to place (compiles) javascript test files
             "target_test_js": "target/js-test",
             // location to place documentation, etc.
@@ -109,14 +109,15 @@ module.exports = function(grunt) {
             // Compiles main code. Add declaration file files
             compile: {
                 src: ['<%= dir.source_ts %>/**/*.ts'],
-                dest: '<%= dir.target_js %>/app',
+                dest: '<%= dir.target_js %>/app/',
                 options: {
                     basePath: '<%= dir.source_ts %>',
                     target: 'es5',
                     declaration: true,
                     sourceMap: true,
                     comments: true,
-                    module: 'amd'
+//                    nolib: false,
+                    module: 'AMD'
                 }
             },
 
@@ -129,6 +130,15 @@ module.exports = function(grunt) {
                     target: 'es5',
                     module: 'amd'
                 }
+            }
+        },
+
+        tslint: {
+            options: {
+                configuration: grunt.file.readJSON("tslint.json")
+            },
+            files: {
+                src: ['<%= dir.source %>/**/*.ts']
             }
         },
 
@@ -317,11 +327,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-coveralls');
+    grunt.loadNpmTasks('grunt-tslint');
 
     // Default task(s).
     grunt.registerTask('default', [
     /*'clean',*/
       'copy',
+//      'tslint',
       'typescript:compile'
 //      'typescript:compile_test',
 //      'jasmine',
