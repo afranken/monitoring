@@ -1,5 +1,4 @@
 import SonarViolationModel = require('../model/SonarViolationModel');
-import SonarViolationViewModel = require('./SonarViolationViewModel');
 
 /**
  * Model that represents a type of sonar violation belonging to a sonar module
