@@ -4,7 +4,7 @@
 import ko = require('knockout');
 import Config = require('../../jsonInterfaces/Config');
 import Connector = require('../../connector/Connector');
-import MonitorModel = require('../../monitorModel/MonitorModel');
+import MonitorModel = require('../../model/MonitorModel');
 import JenkinsConnector = require('../connector/JenkinsConnector');
 import JenkinsJsonResponse = require('../../jsonInterfaces/JenkinsResponse');
 

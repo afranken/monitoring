@@ -1,5 +1,5 @@
 import Configuration = require('../../../main/ts/configuration/Configuration');
-import MonitorModels = require('../../../main/ts/monitorModel/MonitorModels');
+import MonitorModels = require('../../../main/ts/model/MonitorModels');
 import Connectors = require('../../../main/ts/connector/Connectors');
 import JenkinsMonitorModel = require('../../../main/ts/jenkins/model/JenkinsMonitorModel');
 import JenkinsMonitorViewModel = require('../../../main/ts/jenkins/viewModel/JenkinsMonitorViewModel');

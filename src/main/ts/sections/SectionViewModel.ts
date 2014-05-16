@@ -1,5 +1,5 @@
 import SectionModel = require('./SectionModel');
-import MonitorViewModel = require('../monitorModel/MonitorViewModel');
+import MonitorViewModel = require('../model/MonitorViewModel');
 
 /**
  * This class represents a section.

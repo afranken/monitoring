@@ -1,7 +1,7 @@
 /// <reference path="jasmine"/>
 import Configuration = require('../../main/ts/configuration/Configuration');
-import MonitorModels = require('../../main/ts/monitorModel/MonitorModels');
-import MonitorViewModel = require('../../main/ts/monitorModel/MonitorViewModel');
+import MonitorModels = require('../../main/ts/model/MonitorModels');
+import MonitorViewModel = require('../../main/ts/model/MonitorViewModel');
 import Config = require('../../main/ts/jsonInterfaces/Config');
 import Types = require('../../main/ts/util/Types');
 

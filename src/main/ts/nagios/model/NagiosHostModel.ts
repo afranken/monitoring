@@ -4,7 +4,7 @@ import jQuery = require('jquery');
 import ko = require('knockout');
 import CssClasses = require('../../util/CssClasses');
 import NagiosJsonResponse = require('../../jsonInterfaces/NagiosResponse');
-import MonitorModels = require('../../monitorModel/MonitorModels');
+import MonitorModels = require('../../model/MonitorModels');
 
 /**
  * Model that represents one Nagios host with all services

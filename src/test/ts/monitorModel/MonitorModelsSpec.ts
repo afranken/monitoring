@@ -1,5 +1,5 @@
 /// <reference path="../jasmine"/>
-import MonitorModels = require('../../../main/ts/monitorModel/MonitorModels');
+import MonitorModels = require('../../../main/ts/model/MonitorModels');
 
 /**
  * Tests {@link MonitorModelsBase}

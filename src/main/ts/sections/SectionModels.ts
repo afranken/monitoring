@@ -2,8 +2,8 @@ import Types = require('../util/Types');
 import Config = require('../jsonInterfaces/Config.d');
 import Configuration = require('../configuration/Configuration');
 import SectionModel = require('./SectionModel');
-import MonitorModels = require('../monitorModel/MonitorModels');
-import MonitorViewModel = require('../monitorModel/MonitorViewModel');
+import MonitorModels = require('../model/MonitorModels');
+import MonitorViewModel = require('../model/MonitorViewModel');
 import SectionViewModel = require('./SectionViewModel');
 
 /**

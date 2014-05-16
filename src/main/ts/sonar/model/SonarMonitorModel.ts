@@ -2,7 +2,7 @@
 import ko = require('knockout');
 import Config = require('../../jsonInterfaces/Config');
 import SonarResponse = require('../../jsonInterfaces/SonarResponse');
-import MonitorModel = require('../../monitorModel/MonitorModel');
+import MonitorModel = require('../../model/MonitorModel');
 import SonarConnector = require('../connector/SonarConnector');
 import SonarModuleModel = require('./SonarModuleModel');
 

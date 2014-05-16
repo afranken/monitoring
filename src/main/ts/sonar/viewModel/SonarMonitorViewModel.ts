@@ -1,4 +1,4 @@
-import MonitorViewModel = require('../../monitorModel/MonitorViewModel');
+import MonitorViewModel = require('../../model/MonitorViewModel');
 import SonarModuleViewModel = require('./SonarModuleViewModel');
 import SonarMonitorModel = require('../model/SonarMonitorModel');
 

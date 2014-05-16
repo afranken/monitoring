@@ -1,5 +1,5 @@
 import Types = require('../../util/Types');
-import MonitorViewModel = require('../../monitorModel/MonitorViewModel');
+import MonitorViewModel = require('../../model/MonitorViewModel');
 import NagiosMonitorModel = require('../model/NagiosMonitorModel');
 import NagiosViewModelTuple = require('./NagiosViewModelTuple');
 import NagiosBoxViewModel = require('./NagiosBoxViewModel');
