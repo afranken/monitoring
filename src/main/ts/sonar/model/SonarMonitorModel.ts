@@ -1,11 +1,10 @@
-/// <reference path="../vendor/knockout.d.ts" />
+/// <reference path="../../vendor/knockout.d.ts" />
 import ko = require('knockout');
-import Types = require('../util/Types');
-import Config = require('../jsonInterfaces/Config');
-import SonarResponse = require('../jsonInterfaces/SonarResponse');
-import MonitorModel = require('../monitorModel/MonitorModel');
-import Connector = require('../connector/Connector');
-import SonarViolationModel = require('./SonarViolationModel');
+import Config = require('../../jsonInterfaces/Config');
+import SonarResponse = require('../../jsonInterfaces/SonarResponse');
+import MonitorModel = require('../../monitorModel/MonitorModel');
+import SonarConnector = require('../connector/SonarConnector');
+import SonarModuleModel = require('./SonarModuleModel');
 
 /**
  * Model that represents a list of Sonar modules
@@ -13,33 +12,37 @@ import SonarViolationModel = require('./SonarViolationModel');
 class SonarMonitorModel implements MonitorModel {
 
     private _url:KnockoutObservable<string> = ko.observable<string>();
-    private _violationModels: Array<SonarViolationModel> = [];
+    private _moduleModels: Array<SonarModuleModel> = [];
     private _name:string;
     private _hostname:string;
     private _externalRef:Config.ExternalRef[];
+    private _connector:SonarConnector;
     private _jsonResponse:KnockoutObservable<SonarResponse.Jsons> = ko.observable<SonarResponse.Jsons>();
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(private monitor:Config.ExtendedMonitor, public connector:Connector, hostname:string) {
+    constructor(monitor:Config.ExtendedMonitor, connector:SonarConnector, hostname:string) {
         this._name = monitor.name;
         this._hostname = monitor.hostname !== undefined ? monitor.hostname : hostname;
         this._externalRef = monitor.externalRef;
+        this._connector = connector;
         this._url('');
 
         this.init(monitor.externalRef);
+
+        this.updateStatus();
     }
 
     private init(externalRef:Config.ExternalRef[]) {
         externalRef.forEach(ref => {
-            this._violationModels.push(new SonarViolationModel(ref.id, ref.name));
+            this._moduleModels.push(new SonarModuleModel(ref.id, ref.name));
         });
     }
 
     //==================================================================================================================
-    // View Layer
+    // Functionality
     //==================================================================================================================
 
     public getUrl():string {
@@ -54,24 +57,12 @@ class SonarMonitorModel implements MonitorModel {
         return this._hostname;
     }
 
-    public getViolationModels():Array<SonarViolationModel> {
-        return this._violationModels;
+    public getModuleModels():Array<SonarModuleModel> {
+        return this._moduleModels;
     }
-
-    public getType():string {
-        return Types.SONAR;
-    }
-
-    //==================================================================================================================
-    // Functionality
-    //==================================================================================================================
 
     public getExternalRef():Config.ExternalRef[] {
         return this._externalRef;
-    }
-
-    public updateStatus():void {
-        this.connector.getRemoteData(this);
     }
 
     public setData(json:SonarResponse.Jsons):void {
@@ -79,7 +70,7 @@ class SonarMonitorModel implements MonitorModel {
     }
 
     public addViolations(moduleName:string, violations:SonarResponse.Jsons):void {
-        this._violationModels.forEach(violationModel => {
+        this._moduleModels.forEach(violationModel => {
             if(violationModel.getModuleName() === moduleName) {
                 violationModel.getViolations().forEach(violation => {
                     violation.setCount(violations);
@@ -90,11 +81,19 @@ class SonarMonitorModel implements MonitorModel {
     }
 
     public addUrl(moduleName:string, url:string):void {
-        this._violationModels.forEach(violationModel => {
+        this._moduleModels.forEach(violationModel => {
             if(violationModel.getModuleName() === moduleName) {
                 violationModel.setUrl(url);
             }
         });
+    }
+
+    //==================================================================================================================
+    // Private
+    //==================================================================================================================
+
+    private updateStatus():void {
+        this._connector.getRemoteData(this);
     }
 
 }

@@ -1,11 +1,9 @@
-/// <reference path="../vendor/jquery.d.ts" />
+/// <reference path="../../vendor/jquery.d.ts" />
 import jQuery = require('jquery');
-import SonarResponse = require('../jsonInterfaces/SonarResponse');
-import Connector = require('../connector/Connector');
-import ConnectorBase = require('../connector/ConnectorBase');
-import Configuration = require('../configuration/Configuration');
-import SonarMonitorModel = require('./SonarMonitorModel');
-import SonarViolation = require('./SonarViolation');
+import SonarResponse = require('../../jsonInterfaces/SonarResponse');
+import Connector = require('../../connector/Connector');
+import ConnectorBase = require('../../connector/ConnectorBase');
+import SonarMonitorModel = require('../model/SonarMonitorModel');
 
 /**
  * Get data from Sonar {@link http://www.sonarqube.org/}
@@ -37,13 +35,12 @@ class SonarConnector extends ConnectorBase implements Connector {
     }
 
     public updateModel(json:SonarResponse.Jsons, model:SonarMonitorModel, moduleName:string):void {
-        var violationName = json[0].name;
         model.addUrl(moduleName, this.getModuleUrl(model,moduleName));
         model.addViolations(moduleName,json);
     }
 
     public getApiUrl(model:SonarMonitorModel, moduleName:string):string {
-        return this.getUrl(model.getHostname()) + SonarConnector.SONAR_RESOURCE_VIOLATIONS_API_SUFFIX + moduleName
+        return this.getUrl(model.getHostname()) + SonarConnector.SONAR_RESOURCE_VIOLATIONS_API_SUFFIX + moduleName;
     }
 
     public getModuleUrl(model:SonarMonitorModel, moduleName:string):string {

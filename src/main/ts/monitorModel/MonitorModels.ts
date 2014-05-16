@@ -3,10 +3,10 @@ import MonitorModel = require('./MonitorModel');
 import MonitorViewModel = require('./MonitorViewModel');
 import Config = require('../jsonInterfaces/Config.d');
 import Configuration = require('../configuration/Configuration');
-import Connector = require('../connector/Connector');
 import Connectors = require('../connector/Connectors');
-import SonarMonitorModel = require('../sonar/SonarMonitorModel');
-import SonarConnector = require('../sonar/SonarConnector');
+import SonarMonitorModel = require('../sonar/model/SonarMonitorModel');
+import SonarMonitorViewModel = require('../sonar/viewModel/SonarMonitorViewModel');
+import SonarConnector = require('../sonar/connector/SonarConnector');
 import NagiosMonitorModel = require('../nagios/model/NagiosMonitorModel');
 import NagiosMonitorViewModel = require('../nagios/viewModel/NagiosMonitorViewModel');
 import NagiosConnector = require('../nagios/connector/NagiosConnector');
@@ -28,7 +28,7 @@ class MonitorModels {
         } else if(Types.isNagios(monitor.type)) {
             viewModel = new NagiosMonitorViewModel(<NagiosMonitorModel>model);
         } else if(Types.isSonar(monitor.type)) {
-            viewModel = new SonarMonitorModel(monitor, Connectors.createConnector(configuration,Types.SONAR), hostname);
+            viewModel = new SonarMonitorViewModel(<SonarMonitorModel>model);
         }
 
         return viewModel;

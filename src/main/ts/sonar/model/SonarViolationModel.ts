@@ -1,13 +1,13 @@
-/// <reference path="../vendor/knockout.d.ts" />
+/// <reference path="../../vendor/knockout.d.ts" />
 import ko = require('knockout');
-import Config = require('../jsonInterfaces/Config');
-import SonarResponse = require('../jsonInterfaces/SonarResponse');
-import CssClasses = require('../util/CssClasses');
+import Config = require('../../jsonInterfaces/Config');
+import SonarResponse = require('../../jsonInterfaces/SonarResponse');
+import CssClasses = require('../../util/CssClasses');
 
 /**
  * Model that represents one violation type
  */
-class SonarViolation {
+class SonarViolationModel {
 
     public static BASIC_CLASSES:string = ' codeviolation ' + CssClasses.BASIC;
 
@@ -29,7 +29,7 @@ class SonarViolation {
         this._count(0);
         this._css =  ko.computed<string>({
             read: ()=>{
-                return SonarViolation.BASIC_CLASSES + this._status();
+                return SonarViolationModel.BASIC_CLASSES + this._status();
             }
         });
     }
@@ -52,13 +52,13 @@ class SonarViolation {
 
     public setStatus(count:number): void{
         if(count > 0) {
-            if(this.type === SonarViolation.BLOCKER || this.type === SonarViolation.CRITICAL) {
-                this._status(SonarViolation.BASIC_CLASSES + CssClasses.FAILURE);
+            if(this.type === SonarViolationModel.BLOCKER || this.type === SonarViolationModel.CRITICAL) {
+                this._status(SonarViolationModel.BASIC_CLASSES + CssClasses.FAILURE);
             } else {
-                this._status(SonarViolation.BASIC_CLASSES + CssClasses.WARNING);
+                this._status(SonarViolationModel.BASIC_CLASSES + CssClasses.WARNING);
             }
         } else {
-            this._status(SonarViolation.BASIC_CLASSES + CssClasses.SUCCESS);
+            this._status(SonarViolationModel.BASIC_CLASSES + CssClasses.SUCCESS);
         }
     }
 
@@ -77,4 +77,4 @@ class SonarViolation {
 
 }
 
-export = SonarViolation;
+export = SonarViolationModel;

@@ -1,16 +1,16 @@
-/// <reference path="../vendor/knockout.d.ts" />
+/// <reference path="../../vendor/knockout.d.ts" />
 import ko = require('knockout');
-import SonarViolation = require("./SonarViolation");
+import SonarViolationModel = require("./SonarViolationModel");
 
 /**
- * Model that represents one Sonar module
+ * Model that represents data of one Sonar module
  */
-class SonarViolationModel {
+class SonarModuleModel {
 
     private _moduleName:string;
     private _name:string;
     private _url:KnockoutObservable<string> = ko.observable<string>();
-    private _violations: Array<SonarViolation> = [];
+    private _violations: Array<SonarViolationModel> = [];
 
     //==================================================================================================================
     // Construct
@@ -25,18 +25,18 @@ class SonarViolationModel {
     }
 
     private init():void {
-        this._violations.push(new SonarViolation(SonarViolation.BLOCKER));
-        this._violations.push(new SonarViolation(SonarViolation.CRITICAL));
-        this._violations.push(new SonarViolation(SonarViolation.MAJOR));
-        this._violations.push(new SonarViolation(SonarViolation.MINOR));
-        this._violations.push(new SonarViolation(SonarViolation.INFO));
+        this._violations.push(new SonarViolationModel(SonarViolationModel.BLOCKER));
+        this._violations.push(new SonarViolationModel(SonarViolationModel.CRITICAL));
+        this._violations.push(new SonarViolationModel(SonarViolationModel.MAJOR));
+        this._violations.push(new SonarViolationModel(SonarViolationModel.MINOR));
+        this._violations.push(new SonarViolationModel(SonarViolationModel.INFO));
     }
 
     //==================================================================================================================
-    // View Layer
+    // Functionality
     //==================================================================================================================
 
-    public getViolations():Array<SonarViolation> {
+    public getViolations():Array<SonarViolationModel> {
         return this._violations;
     }
 
@@ -52,14 +52,10 @@ class SonarViolationModel {
         return this._url();
     }
 
-    //==================================================================================================================
-    // Functionality
-    //==================================================================================================================
-
     public setUrl(url:string):void {
         this._url(url);
     }
 
 }
 
-export = SonarViolationModel;
+export = SonarModuleModel;
