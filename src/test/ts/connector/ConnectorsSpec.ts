@@ -3,7 +3,7 @@ import Configuration = require('../../../main/ts/configuration/Configuration');
 import Connectors = require('../../../main/ts/connector/Connectors');
 import Connector = require('../../../main/ts/connector/Connector');
 import JenkinsConnector = require('../../../main/ts/jenkins/connector/JenkinsConnector');
-import SonarConnector = require('../../../main/ts/sonar/SonarConnector');
+import SonarConnector = require('../../../main/ts/sonar/connector/SonarConnector');
 import NagiosConnector = require('../../../main/ts/nagios/connector/NagiosConnector');
 
 /**
