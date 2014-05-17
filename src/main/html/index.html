@@ -134,7 +134,7 @@
         <div data-bind="template: { name: 'nagios-modeltuple-template', foreach: getModels() }"></div>
         <!-- /ko -->
         <!-- ko if: $root.getTypes().isSonar(getType()) -->
-        <div data-bind="template: { name: 'sonar-monitormodel-template' }"></div>
+        <div data-bind="template: { name: 'sonar-monitorviewmodel-template' }"></div>
         <!-- /ko -->
     </script>
 
@@ -218,7 +218,7 @@
         </dl>
     </script>
 
-    <script type="text/html" id="sonar-monitormodel-template">
+    <script type="text/html" id="sonar-monitorviewmodel-template">
         <h4 class="monitor-heading"><a class="alert-link monitor-link" data-bind="attr: { href: getUrl(), title: getName() }, text: getName()"></a></h4>
         <table class="codeviolations">
             <thead>
@@ -231,13 +231,13 @@
                 <th></th>
             </tr>
             </thead>
-            <tbody data-bind="foreach: getViolationModels()"><tr data-bind="template: {name: 'sonar-violation-template', foreach: getViolations()}"></tr></tbody>
+            <tbody data-bind="foreach: getModuleViewModels()"><tr data-bind="template: {name: 'sonar-violation-template', foreach: getViolationViewModels()}"></tr></tbody>
         </table>
     </script>
 
     <script type="text/html" id="sonar-violation-template">
         <td class="sonar-violation-count"><div data-bind="css: getCss(), text: getCount()"></div></td>
-        <!-- ko if: ($index() === ($parent.getViolations().length - 1)) -->
+        <!-- ko if: ($index() === ($parent.getViolationViewModels().length - 1)) -->
         <th class="sonar-module-name"><a data-bind="attr: { href: $parent.getUrl(), title: $parent.getName() }, text: $parent.getName()"></a></th>
         <!-- /ko -->
     </script>
