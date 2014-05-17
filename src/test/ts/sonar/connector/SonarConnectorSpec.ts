@@ -1,11 +1,6 @@
 /// <reference path='../../jasmine.d'/>
-import Configuration = require('../../../../main/ts/configuration/Configuration');
-import MonitorModels = require('../../../../main/ts/model/MonitorModels');
 import SonarMonitorModel = require('../../../../main/ts/sonar/model/SonarMonitorModel');
 import SonarConnector = require('../../../../main/ts/sonar/connector/SonarConnector');
-import SonarJsonResponse = require('../../../../main/ts/jsonInterfaces/SonarResponse');
-import Config = require('../../../../main/ts/jsonInterfaces/Config');
-import Types = require('../../../../main/ts/util/Types');
 import SonarSpecDataProvider = require('../SonarSpecDataProvider');
 
 /**
