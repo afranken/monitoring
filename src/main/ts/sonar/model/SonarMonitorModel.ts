@@ -17,7 +17,7 @@ class SonarMonitorModel implements MonitorModel {
     private _hostname:string;
     private _externalRef:Config.ExternalRef[];
     private _connector:SonarConnector;
-    private _jsonResponse:KnockoutObservable<SonarResponse.Jsons> = ko.observable<SonarResponse.Jsons>();
+    private _jsonResponse:KnockoutObservable<Array<SonarResponse.Json>> = ko.observable<Array<SonarResponse.Json>>();
 
     //==================================================================================================================
     // Construct
@@ -65,11 +65,11 @@ class SonarMonitorModel implements MonitorModel {
         return this._externalRef;
     }
 
-    public setData(json:SonarResponse.Jsons):void {
+    public setData(json: Array<SonarResponse.Json>):void {
         this._jsonResponse(json);
     }
 
-    public addViolations(moduleName:string, violations:SonarResponse.Jsons):void {
+    public addViolations(moduleName:string, violations: Array<SonarResponse.Json>):void {
         this._moduleModels.forEach(violationModel => {
             if(violationModel.getModuleName() === moduleName) {
                 violationModel.getViolations().forEach(violation => {

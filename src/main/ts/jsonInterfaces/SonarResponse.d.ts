@@ -1,13 +1,11 @@
 /**
  * This file contains Interfaces mapping the Sonar responses
  */
-
 declare module SonarJsonResponse {
 
-    interface Jsons {
-        responses: Array<Json>;
-    }
-
+    /**
+     * Sonar will return an Array of these objects
+     */
     interface Json {
         id: number;
         name: string;

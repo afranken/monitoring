@@ -20,7 +20,7 @@ class SonarConnector extends ConnectorBase implements Connector {
     public getRemoteData(model:SonarMonitorModel):void {
         model.getExternalRef().forEach(externalRef => {
             jQuery.getJSON(this.getApiUrl(model,externalRef.id),
-                (violations: SonarResponse.Jsons) => {
+                (violations: Array<SonarResponse.Json>) => {
                     this.updateModel(violations, model, externalRef.id);
                 })
                 .fail((jqXHR, textStatus, errorThrown) => {
@@ -34,7 +34,7 @@ class SonarConnector extends ConnectorBase implements Connector {
         setTimeout(() => this.getRemoteData(model), ConnectorBase.getRandomTimeout());
     }
 
-    public updateModel(json:SonarResponse.Jsons, model:SonarMonitorModel, moduleName:string):void {
+    public updateModel(json: Array<SonarResponse.Json>, model:SonarMonitorModel, moduleName:string):void {
         model.addUrl(moduleName, this.getModuleUrl(model,moduleName));
         model.addViolations(moduleName,json);
     }

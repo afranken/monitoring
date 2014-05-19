@@ -27,6 +27,7 @@ class SonarViolationModel {
 
     constructor(public type:string) {
         this._count(0);
+        this._status('');
         this._css =  ko.computed<string>({
             read: ()=>{
                 return SonarViolationModel.BASIC_CLASSES + this._status();
@@ -62,7 +63,7 @@ class SonarViolationModel {
         }
     }
 
-    public setCount(violations: SonarResponse.Jsons):void {
+    public setCount(violations: Array<SonarResponse.Json>):void {
         violations[0].msr.forEach(violation => {
             if(this.type === violation.key) {
                 //in some versions of Sonar, values will be formatted '789.0' instead of '789'
