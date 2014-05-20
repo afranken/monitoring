@@ -1,0 +1,34 @@
+{
+  "services": [
+    {
+    "service_status": "OK",
+    "service_host": {
+      "host_status": 2,
+      "host_address": "1.1.1.1",
+      "host_name": "myhost"
+    },
+    "service_description": "Connectivity",
+    "service_plugin_output": "PING OK &#45; Packet loss &#61; 0&#37;&#44; RTA &#61; 0&#46;42 ms"
+    },
+    {
+    "service_status": "WARNING",
+    "service_host": {
+      "host_status": 2,
+      "host_address": "1.1.1.1",
+      "host_name": "myhost"
+      },
+    "service_description": "MEMUSE",
+    "service_plugin_output": "WARNING: physical memory: Total: 16G - Used: 15.7G (98%) - Free: 321M (2%) > warning "
+    },
+    {
+    "service_status": "CRITICAL",
+    "service_host": {
+      "host_status": 2,
+      "host_address": "1.1.1.1",
+      "host_name": "myhost"
+      },
+    "service_description": "SSH",
+    "service_plugin_output": "CRITICAL - load average: 45.00, 45.00, 44.95"
+    }
+  ]
+}

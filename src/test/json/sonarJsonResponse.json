@@ -1,0 +1,42 @@
+[
+  {
+    "id": 83044,
+    "key": "some:key",
+    "name": "Project name",
+    "scope": "PRJ",
+    "qualifier": "BRC",
+    "date": "2014-05-14T23:30:41+0200",
+    "creationDate": "2014-02-13T09:33:17+0100",
+    "lname": "project name",
+    "version": "1.0",
+    "branch": "master",
+    "description": "",
+    "msr": [
+      {
+        "key": "blocker_violations",
+        "val": 0.0,
+        "frmt_val": "0"
+      },
+      {
+        "key": "critical_violations",
+        "val": 0.0,
+        "frmt_val": "0"
+      },
+      {
+        "key": "major_violations",
+        "val": 1554.0,
+        "frmt_val": "1,554"
+      },
+      {
+        "key": "minor_violations",
+        "val": 543.0,
+        "frmt_val": "543"
+      },
+      {
+        "key": "info_violations",
+        "val": 423.0,
+        "frmt_val": "423"
+      }
+    ]
+  }
+]
