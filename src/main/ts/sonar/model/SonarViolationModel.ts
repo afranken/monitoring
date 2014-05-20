@@ -54,12 +54,12 @@ class SonarViolationModel {
     public setStatus(count:number): void{
         if(count > 0) {
             if(this.type === SonarViolationModel.BLOCKER || this.type === SonarViolationModel.CRITICAL) {
-                this._status(SonarViolationModel.BASIC_CLASSES + CssClasses.FAILURE);
+                this._status(CssClasses.FAILURE);
             } else {
-                this._status(SonarViolationModel.BASIC_CLASSES + CssClasses.WARNING);
+                this._status(CssClasses.WARNING);
             }
         } else {
-            this._status(SonarViolationModel.BASIC_CLASSES + CssClasses.SUCCESS);
+            this._status(CssClasses.SUCCESS);
         }
     }
 
