@@ -113,7 +113,7 @@
             <p class="section-description" data-bind="html: getDescription()"></p>
             <!-- /ko -->
             <!-- ko if: getMonitorModels().length > 0 -->
-            <div class="panel-group" data-bind="template: { name: 'monitor-template', foreach: getMonitorModels(), afterRender: $root.getData }"></div>
+            <div class="panel-group" data-bind="template: { name: 'monitor-template', foreach: getMonitorModels() }"></div>
             <!-- /ko -->
             <!-- ko if: getSections().length > 0 -->
             <!-- ko template: { name: 'section-row-template', foreach: getSections() } -->

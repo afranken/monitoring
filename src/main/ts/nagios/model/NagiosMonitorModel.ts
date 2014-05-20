@@ -31,8 +31,6 @@ class NagiosMonitorModel implements MonitorModel {
         this._hostname = job.hostname !== undefined ? job.hostname : hostname;
 
         this.init(job.externalRef);
-
-        this.updateStatus();
     }
 
     private init(externalRef:Config.ExternalRef[]) {
@@ -82,13 +80,13 @@ class NagiosMonitorModel implements MonitorModel {
         });
     }
 
+    public updateStatus():void {
+        this._connector.getRemoteData(this);
+    }
+
     //==================================================================================================================
     // Private
     //==================================================================================================================
-
-    private updateStatus():void {
-        this._connector.getRemoteData(this);
-    }
 
     private resetHostModels():void {
         this._hostnames.forEach((name:string) => {

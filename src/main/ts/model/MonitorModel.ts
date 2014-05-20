@@ -18,6 +18,11 @@ interface MonitorModel {
      */
     setData(data):void;
 
+    /**
+     * This method should be called after creating the Model.
+     * The model is expected to use a {@link Connector} to update it's status from a remote system.
+     */
+    updateStatus(): void;
 }
 
 export = MonitorModel;

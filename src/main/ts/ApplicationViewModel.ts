@@ -109,17 +109,6 @@ class ApplicationViewModel {
 
     /**
      * This method is only needed for Knockout view layer.
-     * Used to trigger {@link MonitorModel.updateStatus()} in Knockout's "afterRender" binding.
-     *
-     * @param node the currently rendered DOM node
-     * @param monitor the MonitorModel that is rendered
-     */
-    public getData(node: Node, monitor: MonitorModel):void {
-//        monitor.updateStatus();
-    }
-
-    /**
-     * This method is only needed for Knockout view layer.
      *
      * @returns Types
      */

@@ -31,8 +31,6 @@ class SonarMonitorModel implements MonitorModel {
         this._url('');
 
         this.init(monitor.externalRef);
-
-        this.updateStatus();
     }
 
     private init(externalRef:Config.ExternalRef[]) {
@@ -69,6 +67,10 @@ class SonarMonitorModel implements MonitorModel {
         this._jsonResponse(json);
     }
 
+    public updateStatus():void {
+        this._connector.getRemoteData(this);
+    }
+
     public addViolations(moduleName:string, violations: Array<SonarResponse.Json>):void {
         this._moduleModels.forEach(violationModel => {
             if(violationModel.getModuleName() === moduleName) {
@@ -86,14 +88,6 @@ class SonarMonitorModel implements MonitorModel {
                 violationModel.setUrl(url);
             }
         });
-    }
-
-    //==================================================================================================================
-    // Private
-    //==================================================================================================================
-
-    private updateStatus():void {
-        this._connector.getRemoteData(this);
     }
 
 }

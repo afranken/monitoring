@@ -35,11 +35,6 @@ class JenkinsMonitorViewModel implements MonitorViewModel {
         return Types.JENKINS;
     }
 
-    //TODO: shouldn't be used any more, MonitorModel implementations should update themselves...
-    public updateStatus():void {
-        this._model.updateStatus();
-    }
-
     public getHtmlsafeId():string {
         return this._model.getHtmlsafeId();
     }

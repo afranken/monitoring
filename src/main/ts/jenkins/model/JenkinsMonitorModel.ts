@@ -28,8 +28,6 @@ class JenkinsMonitorModel implements MonitorModel {
         this._externalRef = job.externalRef;
         this._name = job.name !== undefined ? job.name : job.externalRef;
         this._hostname = job.hostname !== undefined ? job.hostname : hostname;
-
-        this.updateStatus();
     }
 
     //==================================================================================================================

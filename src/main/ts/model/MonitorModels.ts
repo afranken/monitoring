@@ -21,6 +21,7 @@ class MonitorModels {
 
     public static createViewModel(monitor:Config.Monitor, configuration:Configuration, hostname:string):MonitorViewModel {
         var model:MonitorModel = MonitorModels.createModel(monitor, configuration, hostname);
+        model.updateStatus();
         var viewModel:MonitorViewModel = undefined;
 
         if(Types.isJenkins(monitor.type)) {
