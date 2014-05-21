@@ -1,6 +1,6 @@
 {
   "name": "simon",
-  "version": "1.0.1-SNAPSHOT",
+  "version": "1.0.1",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.5",
