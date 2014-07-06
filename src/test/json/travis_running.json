@@ -1,0 +1,14 @@
+{
+  "id": 2387533,
+  "slug": "japa-studios/japa-eigen",
+  "description": "Node.js addon for Eigen C++ Library",
+  "public_key": "-----BEGIN RSA PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgzHIIoRrsiwvNJTY/pKAXNZ09\nfOjuWgxNjvEQwQZvx6qpOaascn2KhZCp0l9OTtrUUcMXZsAQ1b2HzR1VUtsRd3Jy\nnNqywDYrJ9tStz7iQgJVdl5unlKaGrEjfRB+jZcI+CzhdeTAQZVQvNf2R/0WQAdQ\nu2i5gIbwkObBp2xkJQIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+  "last_build_id": 25647009,
+  "last_build_number": "1",
+  "last_build_status": null,
+  "last_build_result": null,
+  "last_build_duration": null,
+  "last_build_language": null,
+  "last_build_started_at": "2014-05-20T22:29:10Z",
+  "last_build_finished_at": null
+}

@@ -1,0 +1,49 @@
+{
+  "id": 25646237,
+  "repository_id": 1982068,
+  "number": "125",
+  "config": {
+    "language": "node_js",
+    "node_js": ["0.10"],
+    "before_install": "npm install -g grunt-cli",
+    "install": "npm install",
+    "script": ["grunt compile", "grunt test", "grunt package"],
+    ".result": "configured",
+    "os": "linux"
+  },
+  "state": "finished",
+  "result": 0,
+  "status": 0,
+  "started_at": "2014-05-20T22:18:02Z",
+  "finished_at": "2014-05-20T22:19:57Z",
+  "duration": 115,
+  "commit": "4272133e673084c7ff308f36533ea0b58612195b",
+  "branch": "master",
+  "message": "add example JsonReponses",
+  "committed_at": "2014-05-20T22:16:28Z",
+  "author_name": "Arne Franken",
+  "author_email": "arne.franken@coremedia.com",
+  "committer_name": "Arne Franken",
+  "committer_email": "arne.franken@coremedia.com",
+  "compare_url": "https://github.com/afranken/simon/compare/f9c62bd29110...4272133e6730",
+  "event_type": "push",
+  "matrix": [
+    {
+      "id": 25646238,
+      "repository_id": 1982068,
+      "number": "125.1",
+      "config": {
+        "language": "node_js",
+        "node_js": "0.10",
+        "before_install": "npm install -g grunt-cli",
+        "install": "npm install",
+        "script": ["grunt compile", "grunt test", "grunt package"],
+        ".result": "configured"
+      },
+      "result": 0,
+      "started_at": "2014-05-20T22:18:02Z",
+      "finished_at": "2014-05-20T22:19:57Z",
+      "allow_failure": false
+    }
+  ]
+}
