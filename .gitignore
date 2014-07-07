@@ -17,4 +17,7 @@ target
 bower_components/
 node_modules/
 
+.tscache
+.baseDir.ts
+
 .coveralls.yml

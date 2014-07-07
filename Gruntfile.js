@@ -1,6 +1,11 @@
 module.exports = function(grunt) {
 
-    grunt.initConfig({
+  "use strict";
+
+  var tsSourceFiles = ['<%= dir.source_ts %>/**/*.ts'];
+  var tsSourceFilesAndTests = ['<%= dir.source %>/**/*.ts'];
+
+  grunt.initConfig({
 
         // ----- Environment
         // read in some metadata from project descriptor
@@ -39,8 +44,8 @@ module.exports = function(grunt) {
 
         watch: {
           ts: {
-            files: ['<%= dir.source_ts %>/**/*.ts'],
-            tasks: ['typescript:compile']
+            files: tsSourceFiles,
+            tasks: ['ts:compile']
           },
           html: {
             files: ['<%= dir.source %>/main/html/*.*'],
@@ -104,31 +109,34 @@ module.exports = function(grunt) {
 
         // ----- TypeScript compilation
         //  See https://npmjs.org/package/grunt-typescript
-        typescript: {
+        ts: {
+
+            options: {
+                sourceMap: false,
+                comments: false,               // same as !removeComments. [true | false (default)]
+                target: 'es5',                 // target javascript language. [es3 (default) | es5]
+                module: 'amd',                 // target javascript module style. [amd (default) | commonjs]
+                declaration: false,            // generate a declaration .d.ts file for every output js file. [true | false (default)]
+                fast: 'watch'
+            },
 
             // Compiles main code. Add declaration file files
             compile: {
-                src: ['<%= dir.source_ts %>/**/*.ts'],
-                dest: '<%= dir.target_js %>/app/',
+                src: tsSourceFiles,
+                outDir: '<%= dir.target_js %>/app/',
+                reference: '<%= dir.source_test_ts %>/reference.ts',
                 options: {
                     basePath: '<%= dir.source_ts %>',
-                    target: 'es5',
-                    declaration: true,
-                    sourceMap: true,
-                    comments: true,
-//                    nolib: false,
-                    module: 'AMD'
+                    sourceMap: true
                 }
             },
 
             // Compiles the tests (and the module code again so that import paths are working).
             compile_test: {
-                src: ['<%= dir.source %>/**/*.ts'],
-                dest: '<%= dir.target_test_js %>',
+                src: tsSourceFilesAndTests,
+                outDir: '<%= dir.target_test_js %>',
                 options: {
-                    basePath: '<%= dir.source %>',
-                    target: 'es5',
-                    module: 'amd'
+                    basePath: '<%= dir.source %>'
                 }
             }
         },
@@ -138,7 +146,7 @@ module.exports = function(grunt) {
                 configuration: grunt.file.readJSON("tslint.json")
             },
             files: {
-                src: ['<%= dir.source %>/**/*.ts']
+                src: tsSourceFiles
             }
         },
 
@@ -318,7 +326,7 @@ module.exports = function(grunt) {
 
     // ----- Setup tasks
 
-    grunt.loadNpmTasks('grunt-typescript');
+    grunt.loadNpmTasks('grunt-ts');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
@@ -334,8 +342,8 @@ module.exports = function(grunt) {
     /*'clean',*/
       'copy',
 //      'tslint',
-      'typescript:compile'
-//      'typescript:compile_test',
+      'ts:compile'
+//      'ts:compile_test',
 //      'jasmine',
 //      'requirejs:debug'
     ]);
@@ -343,12 +351,12 @@ module.exports = function(grunt) {
     // Task for running compilation/assembling stuff (corresponds to Maven's "compile" or "resources" lifecycle phase)
     grunt.registerTask('compile', [
       'copy',
-      'typescript:compile'
+      'ts:compile'
     ]);
     // Task for running testing stuff (corresponds to Maven's "test" lifecycle phase)
     grunt.registerTask('test', [
       'copy',
-      'typescript:compile_test',
+      'ts:compile_test',
       'jasmine'
     ]);
     // Task for running testing stuff (corresponds to Maven's "prepare-package" lifecycle phase)
