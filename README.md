@@ -56,7 +56,7 @@ When running `grunt watch`, grunt will watch TypeScript, HTML and CSS files and 
 
 ## Understanding / Writing Simon JS code
 
-The Simon JS library is written in Typescript](http://www.typescriptlang.org/).
+The Simon JS library is written in [Typescript](http://www.typescriptlang.org/).
 
 ### General structure
 
