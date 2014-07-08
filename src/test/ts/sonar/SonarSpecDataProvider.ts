@@ -1,7 +1,7 @@
-///ts:import=Types
 import SonarJsonResponse = require('SonarJsonResponse');
 /// <reference path='../reference'/>
 import Config = require('Config');
+///ts:import=Types
 import Types = require('../../../main/ts/util/Types'); ///ts:import:generated
 ///ts:import=Connectors
 import Connectors = require('../../../main/ts/connector/Connectors'); ///ts:import:generated
