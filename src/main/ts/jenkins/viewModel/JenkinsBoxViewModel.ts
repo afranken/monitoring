@@ -1,4 +1,5 @@
-/// <reference path="../../vendor/knockout.d.ts" />
+///ts:ref=knockout.d.ts
+/// <reference path="../../vendor/knockout.d.ts"/> ///ts:ref:generated
 import ko = require('knockout');
 ///ts:import=CssClasses
 import CssClasses = require('../../util/CssClasses'); ///ts:import:generated

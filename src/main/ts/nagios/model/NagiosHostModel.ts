@@ -1,6 +1,9 @@
-/// <reference path="../../vendor/knockout.d.ts" />
-/// <reference path="../../vendor/jquery.d.ts" />
-/// <reference path="../../jsonInterfaces/NagiosResponse.d.ts" />
+///ts:ref=knockout.d.ts
+/// <reference path="../../vendor/knockout.d.ts"/> ///ts:ref:generated
+///ts:ref=jquery.d.ts
+/// <reference path="../../vendor/jquery.d.ts"/> ///ts:ref:generated
+///ts:ref=NagiosResponse.d.ts
+/// <reference path="../../jsonInterfaces/NagiosResponse.d.ts"/> ///ts:ref:generated
 import NagiosJsonResponse = require('NagiosJsonResponse');
 import jQuery = require('jquery');
 import ko = require('knockout');

@@ -1,4 +1,5 @@
-/// <reference path="../jsonInterfaces/Config.d.ts" />
+///ts:ref=Config.d.ts
+/// <reference path="../jsonInterfaces/Config.d.ts"/> ///ts:ref:generated
 import Config = require('Config');
 ///ts:import=Types
 import Types = require('../util/Types'); ///ts:import:generated

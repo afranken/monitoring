@@ -1,5 +1,7 @@
-/// <reference path="../../vendor/jquery.d.ts" />
-/// <reference path="../../jsonInterfaces/NagiosResponse.d.ts" />
+///ts:ref=jquery.d.ts
+/// <reference path="../../vendor/jquery.d.ts"/> ///ts:ref:generated
+///ts:ref=NagiosResponse.d.ts
+/// <reference path="../../jsonInterfaces/NagiosResponse.d.ts"/> ///ts:ref:generated
 import jQuery = require('jquery');
 import NagiosJsonResponse = require('NagiosJsonResponse');
 ///ts:import=Connector
