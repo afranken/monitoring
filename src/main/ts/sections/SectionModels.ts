@@ -1,10 +1,17 @@
-import Types = require('../util/Types');
-import Config = require('../jsonInterfaces/Config.d');
-import Configuration = require('../configuration/Configuration');
-import SectionModel = require('./SectionModel');
-import MonitorModels = require('../model/MonitorModels');
-import MonitorViewModel = require('../model/MonitorViewModel');
-import SectionViewModel = require('./SectionViewModel');
+/// <reference path="../jsonInterfaces/Config.d.ts" />
+import Config = require('Config');
+///ts:import=Types
+import Types = require('../util/Types'); ///ts:import:generated
+///ts:import=Configuration
+import Configuration = require('../configuration/Configuration'); ///ts:import:generated
+///ts:import=SectionModel
+import SectionModel = require('./SectionModel'); ///ts:import:generated
+///ts:import=MonitorModels
+import MonitorModels = require('../model/MonitorModels'); ///ts:import:generated
+///ts:import=MonitorViewModel
+import MonitorViewModel = require('../model/MonitorViewModel'); ///ts:import:generated
+///ts:import=SectionViewModel
+import SectionViewModel = require('./SectionViewModel'); ///ts:import:generated
 
 /**
  * This class contains static methods that help with {@link SectionModel}s and {@link SectionViewModel}s.

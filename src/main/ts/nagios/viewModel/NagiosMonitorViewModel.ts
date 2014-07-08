@@ -1,9 +1,15 @@
-import Types = require('../../util/Types');
-import MonitorViewModel = require('../../model/MonitorViewModel');
-import NagiosMonitorModel = require('../model/NagiosMonitorModel');
-import NagiosViewModelTuple = require('./NagiosViewModelTuple');
-import NagiosBoxViewModel = require('./NagiosBoxViewModel');
-import NagiosDetailsViewModel = require('./NagiosDetailsViewModel');
+///ts:import=Types
+import Types = require('../../util/Types'); ///ts:import:generated
+///ts:import=MonitorViewModel
+import MonitorViewModel = require('../../model/MonitorViewModel'); ///ts:import:generated
+///ts:import=NagiosMonitorModel
+import NagiosMonitorModel = require('../model/NagiosMonitorModel'); ///ts:import:generated
+///ts:import=NagiosViewModelTuple
+import NagiosViewModelTuple = require('./NagiosViewModelTuple'); ///ts:import:generated
+///ts:import=NagiosBoxViewModel
+import NagiosBoxViewModel = require('./NagiosBoxViewModel'); ///ts:import:generated
+///ts:import=NagiosDetailsViewModel
+import NagiosDetailsViewModel = require('./NagiosDetailsViewModel'); ///ts:import:generated
 
 /**
  * ViewModel that represents a list of Nagios hosts.

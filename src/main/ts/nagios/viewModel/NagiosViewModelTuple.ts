@@ -1,5 +1,7 @@
-import NagiosBoxViewModel = require("./NagiosBoxViewModel")
-import NagiosDetailsViewModel = require("./NagiosDetailsViewModel")
+///ts:import=NagiosBoxViewModel
+import NagiosBoxViewModel = require('./NagiosBoxViewModel'); ///ts:import:generated
+///ts:import=NagiosDetailsViewModel
+import NagiosDetailsViewModel = require('./NagiosDetailsViewModel'); ///ts:import:generated
 
 /**
  * This class represents a {@link NagiosBoxViewModel} and a {@link NagiosDetailsViewModel} that

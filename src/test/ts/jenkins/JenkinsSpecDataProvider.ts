@@ -1,12 +1,20 @@
-import Configuration = require('../../../main/ts/configuration/Configuration');
-import MonitorModels = require('../../../main/ts/model/MonitorModels');
-import Connectors = require('../../../main/ts/connector/Connectors');
-import JenkinsMonitorModel = require('../../../main/ts/jenkins/model/JenkinsMonitorModel');
-import JenkinsMonitorViewModel = require('../../../main/ts/jenkins/viewModel/JenkinsMonitorViewModel');
-import JenkinsConnector = require('../../../main/ts/jenkins/connector/JenkinsConnector');
-import JenkinsJsonResponse = require('../../../main/ts/jsonInterfaces/JenkinsResponse');
-import Config = require('../../../main/ts/jsonInterfaces/Config');
-import Types = require('../../../main/ts/util/Types');
+/// <reference path='../reference'/>
+import Config = require('Config');
+import JenkinsJsonResponse = require('JenkinsJsonResponse');
+///ts:import=Configuration
+import Configuration = require('../../../main/ts/configuration/Configuration'); ///ts:import:generated
+///ts:import=MonitorModels
+import MonitorModels = require('../../../main/ts/model/MonitorModels'); ///ts:import:generated
+///ts:import=Connectors
+import Connectors = require('../../../main/ts/connector/Connectors'); ///ts:import:generated
+///ts:import=JenkinsMonitorModel
+import JenkinsMonitorModel = require('../../../main/ts/jenkins/model/JenkinsMonitorModel'); ///ts:import:generated
+///ts:import=JenkinsMonitorViewModel
+import JenkinsMonitorViewModel = require('../../../main/ts/jenkins/viewModel/JenkinsMonitorViewModel'); ///ts:import:generated
+///ts:import=JenkinsConnector
+import JenkinsConnector = require('../../../main/ts/jenkins/connector/JenkinsConnector'); ///ts:import:generated
+///ts:import=Types
+import Types = require('../../../main/ts/util/Types'); ///ts:import:generated
 
 class JenkinsSpecDataProvider {
 

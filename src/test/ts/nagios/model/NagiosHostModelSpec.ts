@@ -1,7 +1,11 @@
-/// <reference path="../../jasmine.d"/>
-import CssClasses = require('../../../../main/ts/util/CssClasses');
-import NagiosHostModel = require('../../../../main/ts/nagios/model/NagiosHostModel');
-import NagiosJsonResponse = require('../../../../main/ts/jsonInterfaces/NagiosResponse');
+/// <reference path='../../jasmine.d'/>
+/// <reference path='../../reference'/>
+///ts:import=CssClasses
+import CssClasses = require('../../../../main/ts/util/CssClasses'); ///ts:import:generated
+///ts:import=NagiosHostModel
+import NagiosHostModel = require('../../../../main/ts/nagios/model/NagiosHostModel'); ///ts:import:generated
+///ts:import=NagiosJsonResponse
+/// No glob matched name: NagiosJsonResponse ///ts:import:generated
 
 /**
  * Tests {@link NagiosHostModel}

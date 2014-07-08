@@ -1,5 +1,7 @@
-import SonarModuleModel = require('../model/SonarModuleModel');
-import SonarViolationViewModel = require('./SonarViolationViewModel');
+///ts:import=SonarModuleModel
+import SonarModuleModel = require('../model/SonarModuleModel'); ///ts:import:generated
+///ts:import=SonarViolationViewModel
+import SonarViolationViewModel = require('./SonarViolationViewModel'); ///ts:import:generated
 
 /**
  * Model that represents a list of Sonar modules

@@ -1,12 +1,15 @@
-/// <reference path="../../vendor/jquery.d.ts" />
 /// <reference path="../../vendor/knockout.d.ts" />
-/// <reference path="../../vendor/moment.d.ts" />
+/// <reference path="../../jsonInterfaces/Config.d.ts" />
+/// <reference path="../../jsonInterfaces/JenkinsResponse.d.ts" />
 import ko = require('knockout');
-import Config = require('../../jsonInterfaces/Config');
-import Connector = require('../../connector/Connector');
-import MonitorModel = require('../../model/MonitorModel');
-import JenkinsConnector = require('../connector/JenkinsConnector');
-import JenkinsJsonResponse = require('../../jsonInterfaces/JenkinsResponse');
+import Config = require('Config');
+import JenkinsJsonResponse = require('JenkinsJsonResponse');
+///ts:import=Connector
+import Connector = require('../../connector/Connector'); ///ts:import:generated
+///ts:import=MonitorModel
+import MonitorModel = require('../../model/MonitorModel'); ///ts:import:generated
+///ts:import=JenkinsConnector
+import JenkinsConnector = require('../connector/JenkinsConnector'); ///ts:import:generated
 
 /**
  * Model that is used to access and store data from the Jenkins backend.

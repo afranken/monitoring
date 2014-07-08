@@ -1,7 +1,9 @@
 /// <reference path="./../vendor/knockout.d.ts" />
+/// <reference path="../jsonInterfaces/Config.d.ts" />
 import ko = require('knockout');
-import Config = require('../jsonInterfaces/Config');
-import Connector = require('../connector/Connector');
+import Config = require('Config');
+///ts:import=Connector
+import Connector = require('../connector/Connector'); ///ts:import:generated
 
 /**
  * Model that accesses data from a backend

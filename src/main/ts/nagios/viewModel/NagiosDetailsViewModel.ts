@@ -1,4 +1,5 @@
-import NagiosHostModel = require("../model/NagiosHostModel")
+///ts:import=NagiosHostModel
+import NagiosHostModel = require('../model/NagiosHostModel'); ///ts:import:generated
 
 /**
  * ViewModel that is used to display Nagios Host Details.

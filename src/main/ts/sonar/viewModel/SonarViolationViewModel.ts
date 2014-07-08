@@ -1,4 +1,5 @@
-import SonarViolationModel = require('../model/SonarViolationModel');
+///ts:import=SonarViolationModel
+import SonarViolationModel = require('../model/SonarViolationModel'); ///ts:import:generated
 
 /**
  * Model that represents a type of sonar violation belonging to a sonar module

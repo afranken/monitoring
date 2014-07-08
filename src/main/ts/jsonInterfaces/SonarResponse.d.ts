@@ -20,4 +20,6 @@ declare module SonarJsonResponse {
     }
 }
 
-export = SonarJsonResponse;
+declare module 'SonarJsonResponse' {
+    export = SonarJsonResponse;
+}

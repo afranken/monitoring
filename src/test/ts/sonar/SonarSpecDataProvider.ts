@@ -1,14 +1,24 @@
-import Types = require('../../../main/ts/util/Types');
-import Config = require('../../../main/ts/jsonInterfaces/Config');
-import Connectors = require('../../../main/ts/connector/Connectors');
-import Configuration = require('../../../main/ts/configuration/Configuration');
-import MonitorModels = require('../../../main/ts/model/MonitorModels');
-import SonarMonitorModel = require('../../../main/ts/sonar/model/SonarMonitorModel');
-import SonarModuleModel = require('../../../main/ts/sonar/model/SonarModuleModel');
-import SonarViolationModel = require('../../../main/ts/sonar/model/SonarViolationModel');
-import SonarMonitorViewModel = require('../../../main/ts/sonar/viewModel/SonarMonitorViewModel');
-import SonarConnector = require('../../../main/ts/sonar/connector/SonarConnector');
-import SonarJsonResponse = require('../../../main/ts/jsonInterfaces/SonarResponse.d');
+///ts:import=Types
+import SonarJsonResponse = require('SonarJsonResponse');
+/// <reference path='../reference'/>
+import Config = require('Config');
+import Types = require('../../../main/ts/util/Types'); ///ts:import:generated
+///ts:import=Connectors
+import Connectors = require('../../../main/ts/connector/Connectors'); ///ts:import:generated
+///ts:import=Configuration
+import Configuration = require('../../../main/ts/configuration/Configuration'); ///ts:import:generated
+///ts:import=MonitorModels
+import MonitorModels = require('../../../main/ts/model/MonitorModels'); ///ts:import:generated
+///ts:import=SonarMonitorModel
+import SonarMonitorModel = require('../../../main/ts/sonar/model/SonarMonitorModel'); ///ts:import:generated
+///ts:import=SonarModuleModel
+import SonarModuleModel = require('../../../main/ts/sonar/model/SonarModuleModel'); ///ts:import:generated
+///ts:import=SonarViolationModel
+import SonarViolationModel = require('../../../main/ts/sonar/model/SonarViolationModel'); ///ts:import:generated
+///ts:import=SonarMonitorViewModel
+import SonarMonitorViewModel = require('../../../main/ts/sonar/viewModel/SonarMonitorViewModel'); ///ts:import:generated
+///ts:import=SonarConnector
+import SonarConnector = require('../../../main/ts/sonar/connector/SonarConnector'); ///ts:import:generated
 
 class SonarSpecDataProvider {
 

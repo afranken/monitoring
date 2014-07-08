@@ -1,4 +1,5 @@
-import MonitorModel = require('../model/MonitorModel');
+///ts:import=MonitorModel
+import MonitorModel = require('../model/MonitorModel'); ///ts:import:generated
 
 /**
  * Connectors get data from remote services

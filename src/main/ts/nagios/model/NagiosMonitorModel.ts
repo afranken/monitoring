@@ -1,12 +1,19 @@
 /// <reference path="../../vendor/knockout.d.ts" />
+/// <reference path="../../jsonInterfaces/Config.d.ts" />
+/// <reference path="../../jsonInterfaces/NagiosResponse.d.ts" />
 import ko = require('knockout');
-import Config = require('../../jsonInterfaces/Config');
-import MonitorModel = require('../../model/MonitorModel');
-import Connector = require('../../connector/Connector');
-import CssClasses = require('../../util/CssClasses');
-import NagiosConnector = require('../connector/NagiosConnector');
-import NagiosHostModel = require('./NagiosHostModel');
-import NagiosJsonResponse = require('../../jsonInterfaces/NagiosResponse');
+import Config = require('Config');
+import NagiosJsonResponse = require('NagiosJsonResponse');
+///ts:import=MonitorModel
+import MonitorModel = require('../../model/MonitorModel'); ///ts:import:generated
+///ts:import=Connector
+import Connector = require('../../connector/Connector'); ///ts:import:generated
+///ts:import=CssClasses
+import CssClasses = require('../../util/CssClasses'); ///ts:import:generated
+///ts:import=NagiosConnector
+import NagiosConnector = require('../connector/NagiosConnector'); ///ts:import:generated
+///ts:import=NagiosHostModel
+import NagiosHostModel = require('./NagiosHostModel'); ///ts:import:generated
 
 /**
  * Model that represents a list of Nagios hosts.

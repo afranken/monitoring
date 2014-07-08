@@ -1,7 +1,11 @@
-/// <reference path="../../jasmine.d"/>
-import JenkinsMonitorModel = require('../../../../main/ts/jenkins/model/JenkinsMonitorModel');
-import JenkinsConnector = require('../../../../main/ts/jenkins/connector/JenkinsConnector');
-import JenkinsSpecDataProvider = require('../JenkinsSpecDataProvider');
+/// <reference path='../../jasmine.d'/>
+/// <reference path='../../reference'/>
+///ts:import=JenkinsMonitorModel
+import JenkinsMonitorModel = require('../../../../main/ts/jenkins/model/JenkinsMonitorModel'); ///ts:import:generated
+///ts:import=JenkinsConnector
+import JenkinsConnector = require('../../../../main/ts/jenkins/connector/JenkinsConnector'); ///ts:import:generated
+///ts:import=JenkinsSpecDataProvider
+import JenkinsSpecDataProvider = require('../JenkinsSpecDataProvider'); ///ts:import:generated
 
 /**
  * Tests {@link JenkinsConnector}

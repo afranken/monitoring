@@ -1,5 +1,7 @@
-/// <reference path="../jasmine"/>
-import Configuration = require('../../../main/ts/configuration/Configuration');
+/// <reference path='../jasmine.d'/>
+/// <reference path='../reference'/>
+///ts:import=Configuration
+import Configuration = require('../../../main/ts/configuration/Configuration'); ///ts:import:generated
 
 /**
  * Tests {@link Configuration}

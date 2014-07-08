@@ -1,5 +1,7 @@
-import SectionModel = require('./SectionModel');
-import MonitorViewModel = require('../model/MonitorViewModel');
+///ts:import=SectionModel
+import SectionModel = require('./SectionModel'); ///ts:import:generated
+///ts:import=MonitorViewModel
+import MonitorViewModel = require('../model/MonitorViewModel'); ///ts:import:generated
 
 /**
  * This class represents a section.

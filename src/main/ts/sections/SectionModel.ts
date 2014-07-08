@@ -1,4 +1,5 @@
-import Config = require('../jsonInterfaces/Config');
+/// <reference path="../jsonInterfaces/Config.d.ts" />
+import Config = require('Config');
 
 /**
  * This class represents a section.

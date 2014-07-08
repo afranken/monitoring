@@ -1,9 +1,14 @@
-/// <reference path="jasmine"/>
-import Configuration = require('../../main/ts/configuration/Configuration');
-import MonitorModels = require('../../main/ts/model/MonitorModels');
-import MonitorViewModel = require('../../main/ts/model/MonitorViewModel');
-import Config = require('../../main/ts/jsonInterfaces/Config');
-import Types = require('../../main/ts/util/Types');
+/// <reference path='jasmine.d'/>
+/// <reference path='reference'/>
+import Config = require('Config');
+///ts:import=Configuration
+import Configuration = require('../../main/ts/configuration/Configuration'); ///ts:import:generated
+///ts:import=MonitorModels
+import MonitorModels = require('../../main/ts/model/MonitorModels'); ///ts:import:generated
+///ts:import=MonitorViewModel
+import MonitorViewModel = require('../../main/ts/model/MonitorViewModel'); ///ts:import:generated
+///ts:import=Types
+import Types = require('../../main/ts/util/Types'); ///ts:import:generated
 
 /**
  * Tests {@link Types}

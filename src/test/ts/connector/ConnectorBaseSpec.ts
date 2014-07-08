@@ -1,6 +1,9 @@
-/// <reference path="../jasmine"/>
-import Configuration = require('../../../main/ts/configuration/Configuration');
-import ConnectorBase = require('../../../main/ts/connector/ConnectorBase');
+/// <reference path='../jasmine.d'/>
+/// <reference path='../reference'/>
+///ts:import=Configuration
+import Configuration = require('../../../main/ts/configuration/Configuration'); ///ts:import:generated
+///ts:import=ConnectorBase
+import ConnectorBase = require('../../../main/ts/connector/ConnectorBase'); ///ts:import:generated
 
 /**
  * Tests {@link ConnectorBase}

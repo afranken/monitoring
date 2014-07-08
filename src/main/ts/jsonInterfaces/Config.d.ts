@@ -158,4 +158,6 @@ declare module Config {
 
 }
 
-export = Config;
+declare module 'Config' {
+    export = Config;
+}

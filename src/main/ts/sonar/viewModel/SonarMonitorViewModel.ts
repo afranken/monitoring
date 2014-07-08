@@ -1,7 +1,11 @@
-import Types = require('../../util/Types');
-import MonitorViewModel = require('../../model/MonitorViewModel');
-import SonarModuleViewModel = require('./SonarModuleViewModel');
-import SonarMonitorModel = require('../model/SonarMonitorModel');
+///ts:import=Types
+import Types = require('../../util/Types'); ///ts:import:generated
+///ts:import=MonitorViewModel
+import MonitorViewModel = require('../../model/MonitorViewModel'); ///ts:import:generated
+///ts:import=SonarModuleViewModel
+import SonarModuleViewModel = require('./SonarModuleViewModel'); ///ts:import:generated
+///ts:import=SonarMonitorModel
+import SonarMonitorModel = require('../model/SonarMonitorModel'); ///ts:import:generated
 
 /**
  * Model that represents a list of Sonar modules

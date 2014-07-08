@@ -1,7 +1,11 @@
-/// <reference path="../../jasmine.d"/>
-import NagiosMonitorModel = require('../../../../main/ts/nagios/model/NagiosMonitorModel');
-import NagiosConnector = require('../../../../main/ts/nagios/connector/NagiosConnector');
-import NagiosSpecDataProvider = require('../NagiosSpecDataProvider');
+/// <reference path='../../jasmine.d'/>
+/// <reference path='../../reference'/>
+///ts:import=NagiosMonitorModel
+import NagiosMonitorModel = require('../../../../main/ts/nagios/model/NagiosMonitorModel'); ///ts:import:generated
+///ts:import=NagiosConnector
+import NagiosConnector = require('../../../../main/ts/nagios/connector/NagiosConnector'); ///ts:import:generated
+///ts:import=NagiosSpecDataProvider
+import NagiosSpecDataProvider = require('../NagiosSpecDataProvider'); ///ts:import:generated
 
 /**
  * Tests {@link NagiosConnector}

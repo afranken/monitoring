@@ -1,7 +1,10 @@
 /// <reference path='../../jasmine.d'/>
-import SonarMonitorModel = require('../../../../main/ts/sonar/model/SonarMonitorModel');
-import SonarConnector = require('../../../../main/ts/sonar/connector/SonarConnector');
-import SonarSpecDataProvider = require('../SonarSpecDataProvider');
+///ts:import=SonarMonitorModel
+import SonarMonitorModel = require('../../../../main/ts/sonar/model/SonarMonitorModel'); ///ts:import:generated
+///ts:import=SonarConnector
+import SonarConnector = require('../../../../main/ts/sonar/connector/SonarConnector'); ///ts:import:generated
+///ts:import=SonarSpecDataProvider
+import SonarSpecDataProvider = require('../SonarSpecDataProvider'); ///ts:import:generated
 
 /**
  * Tests {@link SonarConnector}

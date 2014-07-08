@@ -1,4 +1,6 @@
-import Config = require('../jsonInterfaces/Config');
+///ts:ref=Config.d.ts
+/// <reference path="../jsonInterfaces/Config.d.ts"/> ///ts:ref:generated
+import Config = require('Config');
 
 class Configuration {
 

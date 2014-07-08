@@ -1,9 +1,15 @@
-/// <reference path="../../vendor/jquery.d.ts" />
+///ts:ref=jquery.d.ts
+/// <reference path="../../vendor/jquery.d.ts"/> ///ts:ref:generated
+///ts:ref=JenkinsResponse.d.ts
+/// <reference path="../../jsonInterfaces/JenkinsResponse.d.ts"/> ///ts:ref:generated
 import jQuery = require('jquery');
-import Connector = require('../../connector/Connector');
-import ConnectorBase = require('../../connector/ConnectorBase');
-import JenkinsMonitorModel = require('../model/JenkinsMonitorModel');
-import JenkinsJsonResponse = require('../../jsonInterfaces/JenkinsResponse');
+import JenkinsJsonResponse = require('JenkinsJsonResponse');
+///ts:import=Connector
+import Connector = require('../../connector/Connector'); ///ts:import:generated
+///ts:import=ConnectorBase
+import ConnectorBase = require('../../connector/ConnectorBase'); ///ts:import:generated
+///ts:import=JenkinsMonitorModel
+import JenkinsMonitorModel = require('../model/JenkinsMonitorModel'); ///ts:import:generated
 
 /**
  * Get data from Jenkins {@link http://jenkins-ci.org/}

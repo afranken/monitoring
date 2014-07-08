@@ -1,12 +1,20 @@
-import Types = require('../../../main/ts/util/Types');
-import Config = require('../../../main/ts/jsonInterfaces/Config');
-import Connectors = require('../../../main/ts/connector/Connectors');
-import Configuration = require('../../../main/ts/configuration/Configuration');
-import MonitorModels = require('../../../main/ts/model/MonitorModels');
-import NagiosMonitorModel = require('../../../main/ts/nagios/model/NagiosMonitorModel');
-import NagiosMonitorViewModel = require('../../../main/ts/nagios/viewModel/NagiosMonitorViewModel');
-import NagiosConnector = require('../../../main/ts/nagios/connector/NagiosConnector');
-import NagiosJsonResponse = require('../../../main/ts/jsonInterfaces/NagiosResponse.d');
+/// <reference path='../reference'/>
+import Config = require('Config');
+import NagiosJsonResponse = require('NagiosJsonResponse');
+///ts:import=Types
+import Types = require('../../../main/ts/util/Types'); ///ts:import:generated
+///ts:import=Connectors
+import Connectors = require('../../../main/ts/connector/Connectors'); ///ts:import:generated
+///ts:import=Configuration
+import Configuration = require('../../../main/ts/configuration/Configuration'); ///ts:import:generated
+///ts:import=MonitorModels
+import MonitorModels = require('../../../main/ts/model/MonitorModels'); ///ts:import:generated
+///ts:import=NagiosMonitorModel
+import NagiosMonitorModel = require('../../../main/ts/nagios/model/NagiosMonitorModel'); ///ts:import:generated
+///ts:import=NagiosMonitorViewModel
+import NagiosMonitorViewModel = require('../../../main/ts/nagios/viewModel/NagiosMonitorViewModel'); ///ts:import:generated
+///ts:import=NagiosConnector
+import NagiosConnector = require('../../../main/ts/nagios/connector/NagiosConnector'); ///ts:import:generated
 
 class NagiosSpecDataProvider {
 

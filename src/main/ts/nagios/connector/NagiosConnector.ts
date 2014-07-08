@@ -1,9 +1,13 @@
 /// <reference path="../../vendor/jquery.d.ts" />
+/// <reference path="../../jsonInterfaces/NagiosResponse.d.ts" />
 import jQuery = require('jquery');
-import Connector = require('../../connector/Connector');
-import ConnectorBase = require('../../connector/ConnectorBase');
-import NagiosJsonResponse = require('../../jsonInterfaces/NagiosResponse');
-import NagiosMonitorModel = require('../model/NagiosMonitorModel');
+import NagiosJsonResponse = require('NagiosJsonResponse');
+///ts:import=Connector
+import Connector = require('../../connector/Connector'); ///ts:import:generated
+///ts:import=ConnectorBase
+import ConnectorBase = require('../../connector/ConnectorBase'); ///ts:import:generated
+///ts:import=NagiosMonitorModel
+import NagiosMonitorModel = require('../model/NagiosMonitorModel'); ///ts:import:generated
 
 /**
  * Get data from Nagios {@link http://www.nagios.org/}

@@ -2,7 +2,8 @@
 /// <reference path="../../vendor/moment.d.ts" />
 import ko = require('knockout');
 import moment = require('moment');
-import JenkinsMonitorModel = require('../model/JenkinsMonitorModel');
+///ts:import=JenkinsMonitorModel
+import JenkinsMonitorModel = require('../model/JenkinsMonitorModel'); ///ts:import:generated
 
 /**
  * ViewModel that is used to display Jenkins Details.

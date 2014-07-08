@@ -1,8 +1,13 @@
-import Types = require('../../util/Types');
-import MonitorViewModel = require('../../model/MonitorViewModel');
-import JenkinsMonitorModel = require('../model/JenkinsMonitorModel');
-import JenkinsDetailsViewModel = require('./JenkinsDetailsViewModel');
-import JenkinsBoxViewModel = require('./JenkinsBoxViewModel');
+///ts:import=Types
+import Types = require('../../util/Types'); ///ts:import:generated
+///ts:import=MonitorViewModel
+import MonitorViewModel = require('../../model/MonitorViewModel'); ///ts:import:generated
+///ts:import=JenkinsMonitorModel
+import JenkinsMonitorModel = require('../model/JenkinsMonitorModel'); ///ts:import:generated
+///ts:import=JenkinsDetailsViewModel
+import JenkinsDetailsViewModel = require('./JenkinsDetailsViewModel'); ///ts:import:generated
+///ts:import=JenkinsBoxViewModel
+import JenkinsBoxViewModel = require('./JenkinsBoxViewModel'); ///ts:import:generated
 
 /**
  * Main ViewModel that is used to display Jenkins data.

@@ -19,4 +19,6 @@ declare module NagiosJsonResponse {
     }
 }
 
-export = NagiosJsonResponse;
+declare module 'NagiosJsonResponse' {
+    export = NagiosJsonResponse;
+}

@@ -1,7 +1,9 @@
 /// <reference path="../../vendor/knockout.d.ts" />
 import ko = require('knockout');
-import CssClasses = require('../../util/CssClasses');
-import JenkinsMonitorModel = require('../model/JenkinsMonitorModel');
+///ts:import=CssClasses
+import CssClasses = require('../../util/CssClasses'); ///ts:import:generated
+///ts:import=JenkinsMonitorModel
+import JenkinsMonitorModel = require('../model/JenkinsMonitorModel'); ///ts:import:generated
 
 /**
  * ViewModel that is used to display the Jenkins overview box.

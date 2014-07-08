@@ -38,4 +38,6 @@ declare module JenkinsJsonResponse {
     }
 }
 
-export = JenkinsJsonResponse;
+declare module 'JenkinsJsonResponse' {
+    export = JenkinsJsonResponse;
+}

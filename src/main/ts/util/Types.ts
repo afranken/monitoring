@@ -1,4 +1,5 @@
-import MonitorViewModel = require('../model/MonitorViewModel');
+///ts:import=MonitorViewModel
+import MonitorViewModel = require('../model/MonitorViewModel'); ///ts:import:generated
 
 /**
  * This class contains declarations of possible types used for creating and

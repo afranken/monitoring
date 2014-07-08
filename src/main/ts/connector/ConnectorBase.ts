@@ -1,6 +1,9 @@
-import Connector = require('./Connector');
-import Configuration = require('../configuration/Configuration');
-import MonitorModel = require('../model/MonitorModel');
+///ts:import=Connector
+import Connector = require('./Connector'); ///ts:import:generated
+///ts:import=Configuration
+import Configuration = require('../configuration/Configuration'); ///ts:import:generated
+///ts:import=MonitorModel
+import MonitorModel = require('../model/MonitorModel'); ///ts:import:generated
 
 /**
  * Basic, abstract {@link Connector} aggregating methods used by all {@link Connector} implementations.

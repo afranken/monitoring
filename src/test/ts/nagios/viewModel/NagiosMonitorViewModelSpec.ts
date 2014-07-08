@@ -1,8 +1,13 @@
 /// <reference path='../../jasmine.d'/>
-import Types = require('../../../../main/ts/util/Types');
-import NagiosMonitorViewModel = require('../../../../main/ts/nagios/viewModel/NagiosMonitorViewModel');
-import NagiosJsonResponse = require('../../../../main/ts/jsonInterfaces/NagiosResponse');
-import NagiosSpecDataProvider = require('../NagiosSpecDataProvider');
+/// <reference path='../../reference'/>
+///ts:import=Types
+import Types = require('../../../../main/ts/util/Types'); ///ts:import:generated
+///ts:import=NagiosMonitorViewModel
+import NagiosMonitorViewModel = require('../../../../main/ts/nagios/viewModel/NagiosMonitorViewModel'); ///ts:import:generated
+///ts:import=NagiosJsonResponse
+/// No glob matched name: NagiosJsonResponse ///ts:import:generated
+///ts:import=NagiosSpecDataProvider
+import NagiosSpecDataProvider = require('../NagiosSpecDataProvider'); ///ts:import:generated
 
 /**
  * Tests {@link NagiosMonitorViewModel}

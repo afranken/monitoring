@@ -1,10 +1,15 @@
 /// <reference path="../../vendor/knockout.d.ts" />
+/// <reference path="../../jsonInterfaces/Config.d.ts" />
+/// <reference path="../../jsonInterfaces/SonarResponse.d.ts" />
 import ko = require('knockout');
-import Config = require('../../jsonInterfaces/Config');
-import SonarResponse = require('../../jsonInterfaces/SonarResponse');
-import MonitorModel = require('../../model/MonitorModel');
-import SonarConnector = require('../connector/SonarConnector');
-import SonarModuleModel = require('./SonarModuleModel');
+import Config = require('Config');
+import SonarResponse = require('SonarJsonResponse');
+///ts:import=MonitorModel
+import MonitorModel = require('../../model/MonitorModel'); ///ts:import:generated
+///ts:import=SonarConnector
+import SonarConnector = require('../connector/SonarConnector'); ///ts:import:generated
+///ts:import=SonarModuleModel
+import SonarModuleModel = require('./SonarModuleModel'); ///ts:import:generated
 
 /**
  * Model that represents a list of Sonar modules

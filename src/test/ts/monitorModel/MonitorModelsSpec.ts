@@ -1,8 +1,10 @@
-/// <reference path="../jasmine"/>
-import MonitorModels = require('../../../main/ts/model/MonitorModels');
+/// <reference path='../jasmine.d'/>
+/// <reference path='../reference'/>
+///ts:import=MonitorModels
+import MonitorModels = require('../../../main/ts/model/MonitorModels'); ///ts:import:generated
 
 /**
- * Tests {@link MonitorModelsBase}
+ * Tests {@link MonitorModels}
  */
 describe("MonitorModelsBase", function():void {
 
