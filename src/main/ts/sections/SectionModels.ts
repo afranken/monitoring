@@ -1,6 +1,5 @@
 ///ts:ref=Config.d.ts
 /// <reference path="../jsonInterfaces/Config.d.ts"/> ///ts:ref:generated
-import Config = require('Config');
 ///ts:import=Types
 import Types = require('../util/Types'); ///ts:import:generated
 ///ts:import=Configuration
@@ -13,6 +12,8 @@ import MonitorModels = require('../model/MonitorModels'); ///ts:import:generated
 import MonitorViewModel = require('../model/MonitorViewModel'); ///ts:import:generated
 ///ts:import=SectionViewModel
 import SectionViewModel = require('./SectionViewModel'); ///ts:import:generated
+
+import Config = require('Config');
 
 /**
  * This class contains static methods that help with {@link SectionModel}s and {@link SectionViewModel}s.

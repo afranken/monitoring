@@ -4,11 +4,12 @@
 /// <reference path="../../jsonInterfaces/Config.d.ts"/> ///ts:ref:generated
 ///ts:ref=SonarResponse.d.ts
 /// <reference path="../../jsonInterfaces/SonarResponse.d.ts"/> ///ts:ref:generated
+///ts:import=CssClasses
+import CssClasses = require('../../util/CssClasses'); ///ts:import:generated
+
 import ko = require('knockout');
 import Config = require('Config');
 import SonarResponse = require('SonarJsonResponse');
-///ts:import=CssClasses
-import CssClasses = require('../../util/CssClasses'); ///ts:import:generated
 
 /**
  * Model that represents one violation type

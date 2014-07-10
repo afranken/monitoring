@@ -4,15 +4,16 @@
 /// <reference path="../../jsonInterfaces/Config.d.ts"/> ///ts:ref:generated
 ///ts:ref=SonarResponse.d.ts
 /// <reference path="../../jsonInterfaces/SonarResponse.d.ts"/> ///ts:ref:generated
-import ko = require('knockout');
-import Config = require('Config');
-import SonarResponse = require('SonarJsonResponse');
 ///ts:import=MonitorModel
 import MonitorModel = require('../../model/MonitorModel'); ///ts:import:generated
 ///ts:import=SonarConnector
 import SonarConnector = require('../connector/SonarConnector'); ///ts:import:generated
 ///ts:import=SonarModuleModel
 import SonarModuleModel = require('./SonarModuleModel'); ///ts:import:generated
+
+import ko = require('knockout');
+import Config = require('Config');
+import SonarResponse = require('SonarJsonResponse');
 
 /**
  * Model that represents a list of Sonar modules

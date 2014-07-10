@@ -2,7 +2,6 @@
 /// <reference path="../../vendor/jquery.d.ts"/> ///ts:ref:generated
 ///ts:ref=JenkinsResponse.d.ts
 /// <reference path="../../jsonInterfaces/JenkinsResponse.d.ts"/> ///ts:ref:generated
-import jQuery = require('jquery');
 import JenkinsJsonResponse = require('JenkinsJsonResponse');
 ///ts:import=Connector
 import Connector = require('../../connector/Connector'); ///ts:import:generated
@@ -10,6 +9,8 @@ import Connector = require('../../connector/Connector'); ///ts:import:generated
 import ConnectorBase = require('../../connector/ConnectorBase'); ///ts:import:generated
 ///ts:import=JenkinsMonitorModel
 import JenkinsMonitorModel = require('../model/JenkinsMonitorModel'); ///ts:import:generated
+
+import jQuery = require('jquery');
 
 /**
  * Get data from Jenkins {@link http://jenkins-ci.org/}

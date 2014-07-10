@@ -4,9 +4,6 @@
 /// <reference path="./vendor/knockout.d.ts"/> ///ts:ref:generated
 ///ts:ref=Config.d.ts
 /// <reference path="./jsonInterfaces/Config.d.ts"/> ///ts:ref:generated
-import Config = require('Config');
-import ko = require('knockout');
-import jQuery = require('jquery');
 ///ts:import=Types
 import Types = require('./util/Types'); ///ts:import:generated
 ///ts:import=MonitorModel
@@ -17,6 +14,10 @@ import SectionModels = require('./sections/SectionModels'); ///ts:import:generat
 import SectionViewModel = require('./sections/SectionViewModel'); ///ts:import:generated
 ///ts:import=Configuration
 import Configuration = require('./configuration/Configuration'); ///ts:import:generated
+
+import Config = require('Config');
+import ko = require('knockout');
+import jQuery = require('jquery');
 
 //this global variable is set by the configuration JS.
 declare var configJson:Config.Application;

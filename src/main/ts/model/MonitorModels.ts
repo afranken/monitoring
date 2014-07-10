@@ -1,6 +1,5 @@
 ///ts:ref=Config.d.ts
 /// <reference path="../jsonInterfaces/Config.d.ts"/> ///ts:ref:generated
-import Config = require('Config');
 ///ts:import=Types
 import Types = require('../util/Types'); ///ts:import:generated
 ///ts:import=MonitorModel
@@ -29,6 +28,8 @@ import JenkinsMonitorModel = require('../jenkins/model/JenkinsMonitorModel'); //
 import JenkinsMonitorViewModel = require('../jenkins/viewModel/JenkinsMonitorViewModel'); ///ts:import:generated
 ///ts:import=JenkinsConnector
 import JenkinsConnector = require('../jenkins/connector/JenkinsConnector'); ///ts:import:generated
+
+import Config = require('Config');
 
 /**
  * This class contains static methods that help with MonitorModels.

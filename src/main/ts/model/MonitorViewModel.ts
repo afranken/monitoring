@@ -2,10 +2,11 @@
 /// <reference path="../vendor/knockout.d.ts"/> ///ts:ref:generated
 ///ts:ref=Config.d.ts
 /// <reference path="../jsonInterfaces/Config.d.ts"/> ///ts:ref:generated
-import ko = require('knockout');
-import Config = require('Config');
 ///ts:import=Connector
 import Connector = require('../connector/Connector'); ///ts:import:generated
+
+import ko = require('knockout');
+import Config = require('Config');
 
 /**
  * ViewModel used for rendering {@link Config.Monitor} elements.

@@ -4,13 +4,14 @@
 /// <reference path="../../vendor/jquery.d.ts"/> ///ts:ref:generated
 ///ts:ref=NagiosResponse.d.ts
 /// <reference path="../../jsonInterfaces/NagiosResponse.d.ts"/> ///ts:ref:generated
-import NagiosJsonResponse = require('NagiosJsonResponse');
-import jQuery = require('jquery');
-import ko = require('knockout');
 ///ts:import=CssClasses
 import CssClasses = require('../../util/CssClasses'); ///ts:import:generated
 ///ts:import=MonitorModels
 import MonitorModels = require('../../model/MonitorModels'); ///ts:import:generated
+
+import NagiosJsonResponse = require('NagiosJsonResponse');
+import jQuery = require('jquery');
+import ko = require('knockout');
 
 /**
  * Model that represents one Nagios host with all services

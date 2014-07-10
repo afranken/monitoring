@@ -4,15 +4,16 @@
 /// <reference path="../../jsonInterfaces/Config.d.ts"/> ///ts:ref:generated
 ///ts:ref=JenkinsResponse.d.ts
 /// <reference path="../../jsonInterfaces/JenkinsResponse.d.ts"/> ///ts:ref:generated
-import ko = require('knockout');
-import Config = require('Config');
-import JenkinsJsonResponse = require('JenkinsJsonResponse');
 ///ts:import=Connector
 import Connector = require('../../connector/Connector'); ///ts:import:generated
 ///ts:import=MonitorModel
 import MonitorModel = require('../../model/MonitorModel'); ///ts:import:generated
 ///ts:import=JenkinsConnector
 import JenkinsConnector = require('../connector/JenkinsConnector'); ///ts:import:generated
+
+import ko = require('knockout');
+import Config = require('Config');
+import JenkinsJsonResponse = require('JenkinsJsonResponse');
 
 /**
  * Model that is used to access and store data from the Jenkins backend.

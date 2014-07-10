@@ -2,14 +2,15 @@
 /// <reference path="../../vendor/jquery.d.ts"/> ///ts:ref:generated
 ///ts:ref=SonarResponse.d.ts
 /// <reference path="../../jsonInterfaces/SonarResponse.d.ts"/> ///ts:ref:generated
-import jQuery = require('jquery');
-import SonarResponse = require('SonarJsonResponse');
 ///ts:import=Connector
 import Connector = require('../../connector/Connector'); ///ts:import:generated
 ///ts:import=ConnectorBase
 import ConnectorBase = require('../../connector/ConnectorBase'); ///ts:import:generated
 ///ts:import=SonarMonitorModel
 import SonarMonitorModel = require('../model/SonarMonitorModel'); ///ts:import:generated
+
+import jQuery = require('jquery');
+import SonarResponse = require('SonarJsonResponse');
 
 /**
  * Get data from Sonar {@link http://www.sonarqube.org/}
