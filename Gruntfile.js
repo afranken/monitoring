@@ -124,7 +124,6 @@ module.exports = function(grunt) {
             compile: {
                 src: tsSourceFiles,
                 outDir: '<%= dir.target_js %>/app/',
-                reference: '<%= dir.source_test_ts %>/reference.ts',
                 options: {
                     basePath: '<%= dir.source_ts %>',
                     sourceMap: true
