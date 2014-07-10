@@ -1,5 +1,5 @@
-/// <reference path='../jasmine.d'/>
-/// <reference path='../reference'/>
+///ts:ref=jasmine.d.ts
+/// <reference path="../jasmine.d.ts"/> ///ts:ref:generated
 ///ts:import=Configuration
 import Configuration = require('../../../main/ts/configuration/Configuration'); ///ts:import:generated
 

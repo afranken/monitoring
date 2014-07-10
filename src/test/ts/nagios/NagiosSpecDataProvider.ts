@@ -1,6 +1,7 @@
-/// <reference path='../reference'/>
-import Config = require('Config');
-import NagiosJsonResponse = require('NagiosJsonResponse');
+///ts:ref=Config.d.ts
+/// <reference path="../../../main/ts/jsonInterfaces/Config.d.ts"/> ///ts:ref:generated
+///ts:ref=NagiosResponse.d.ts
+/// <reference path="../../../main/ts/jsonInterfaces/NagiosResponse.d.ts"/> ///ts:ref:generated
 ///ts:import=Types
 import Types = require('../../../main/ts/util/Types'); ///ts:import:generated
 ///ts:import=Connectors
@@ -15,6 +16,9 @@ import NagiosMonitorModel = require('../../../main/ts/nagios/model/NagiosMonitor
 import NagiosMonitorViewModel = require('../../../main/ts/nagios/viewModel/NagiosMonitorViewModel'); ///ts:import:generated
 ///ts:import=NagiosConnector
 import NagiosConnector = require('../../../main/ts/nagios/connector/NagiosConnector'); ///ts:import:generated
+
+import Config = require('Config');
+import NagiosJsonResponse = require('NagiosJsonResponse');
 
 class NagiosSpecDataProvider {
 

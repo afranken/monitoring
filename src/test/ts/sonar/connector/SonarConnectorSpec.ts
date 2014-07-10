@@ -1,4 +1,5 @@
-/// <reference path='../../jasmine.d'/>
+///ts:ref=jasmine.d.ts
+/// <reference path="../../jasmine.d.ts"/> ///ts:ref:generated
 ///ts:import=SonarMonitorModel
 import SonarMonitorModel = require('../../../../main/ts/sonar/model/SonarMonitorModel'); ///ts:import:generated
 ///ts:import=SonarConnector

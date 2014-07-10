@@ -1,6 +1,7 @@
-import SonarJsonResponse = require('SonarJsonResponse');
-/// <reference path='../reference'/>
-import Config = require('Config');
+///ts:ref=SonarResponse.d.ts
+/// <reference path="../../../main/ts/jsonInterfaces/SonarResponse.d.ts"/> ///ts:ref:generated
+///ts:ref=Config.d.ts
+/// <reference path="../../../main/ts/jsonInterfaces/Config.d.ts"/> ///ts:ref:generated
 ///ts:import=Types
 import Types = require('../../../main/ts/util/Types'); ///ts:import:generated
 ///ts:import=Connectors
@@ -19,6 +20,9 @@ import SonarViolationModel = require('../../../main/ts/sonar/model/SonarViolatio
 import SonarMonitorViewModel = require('../../../main/ts/sonar/viewModel/SonarMonitorViewModel'); ///ts:import:generated
 ///ts:import=SonarConnector
 import SonarConnector = require('../../../main/ts/sonar/connector/SonarConnector'); ///ts:import:generated
+
+import Config = require('Config');
+import SonarJsonResponse = require('SonarJsonResponse');
 
 class SonarSpecDataProvider {
 

@@ -1,6 +1,7 @@
-/// <reference path='jasmine.d'/>
-/// <reference path='reference'/>
-import Config = require('Config');
+///ts:ref=jasmine.d.ts
+/// <reference path="./jasmine.d.ts"/> ///ts:ref:generated
+///ts:ref=Config.d.ts
+/// <reference path="../../main/ts/jsonInterfaces/Config.d.ts"/> ///ts:ref:generated
 ///ts:import=Configuration
 import Configuration = require('../../main/ts/configuration/Configuration'); ///ts:import:generated
 ///ts:import=MonitorModels
@@ -11,6 +12,8 @@ import SectionViewModel = require('../../main/ts/sections/SectionViewModel'); //
 import SectionModels = require('../../main/ts/sections/SectionModels'); ///ts:import:generated
 ///ts:import=Types
 import Types = require('../../main/ts/util/Types'); ///ts:import:generated
+
+import Config = require('Config');
 
 /**
  * Tests {@link SectionViewModel}

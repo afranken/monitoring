@@ -1,6 +1,7 @@
-/// <reference path='../reference'/>
-import Config = require('Config');
-import JenkinsJsonResponse = require('JenkinsJsonResponse');
+///ts:ref=Config.d.ts
+/// <reference path="../../../main/ts/jsonInterfaces/Config.d.ts"/> ///ts:ref:generated
+///ts:ref=JenkinsResponse.d.ts
+/// <reference path="../../../main/ts/jsonInterfaces/JenkinsResponse.d.ts"/> ///ts:ref:generated
 ///ts:import=Configuration
 import Configuration = require('../../../main/ts/configuration/Configuration'); ///ts:import:generated
 ///ts:import=MonitorModels
@@ -15,6 +16,9 @@ import JenkinsMonitorViewModel = require('../../../main/ts/jenkins/viewModel/Jen
 import JenkinsConnector = require('../../../main/ts/jenkins/connector/JenkinsConnector'); ///ts:import:generated
 ///ts:import=Types
 import Types = require('../../../main/ts/util/Types'); ///ts:import:generated
+
+import Config = require('Config');
+import JenkinsJsonResponse = require('JenkinsJsonResponse');
 
 class JenkinsSpecDataProvider {
 

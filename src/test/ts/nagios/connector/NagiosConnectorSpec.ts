@@ -1,5 +1,5 @@
-/// <reference path='../../jasmine.d'/>
-/// <reference path='../../reference'/>
+///ts:ref=jasmine.d.ts
+/// <reference path="../../jasmine.d.ts"/> ///ts:ref:generated
 ///ts:import=NagiosMonitorModel
 import NagiosMonitorModel = require('../../../../main/ts/nagios/model/NagiosMonitorModel'); ///ts:import:generated
 ///ts:import=NagiosConnector

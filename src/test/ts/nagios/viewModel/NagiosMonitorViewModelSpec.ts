@@ -1,11 +1,9 @@
-/// <reference path='../../jasmine.d'/>
-/// <reference path='../../reference'/>
+///ts:ref=jasmine.d.ts
+/// <reference path="../../jasmine.d.ts"/> ///ts:ref:generated
 ///ts:import=Types
 import Types = require('../../../../main/ts/util/Types'); ///ts:import:generated
 ///ts:import=NagiosMonitorViewModel
 import NagiosMonitorViewModel = require('../../../../main/ts/nagios/viewModel/NagiosMonitorViewModel'); ///ts:import:generated
-///ts:import=NagiosJsonResponse
-/// No glob matched name: NagiosJsonResponse ///ts:import:generated
 ///ts:import=NagiosSpecDataProvider
 import NagiosSpecDataProvider = require('../NagiosSpecDataProvider'); ///ts:import:generated
 

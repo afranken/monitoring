@@ -1,5 +1,5 @@
-/// <reference path='../../jasmine.d'/>
-/// <reference path='../../reference'/>
+///ts:ref=jasmine.d.ts
+/// <reference path="../../jasmine.d.ts"/> ///ts:ref:generated
 ///ts:import=JenkinsMonitorModel
 import JenkinsMonitorModel = require('../../../../main/ts/jenkins/model/JenkinsMonitorModel'); ///ts:import:generated
 ///ts:import=JenkinsDetailsViewModel
