@@ -1,0 +1,14 @@
+{
+  "id": 1982068,
+  "slug": "afranken/simon",
+  "description": "A Simple Monitor Single Page Application",
+  "public_key": "-----BEGIN RSA PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDoHR6EDJrj4GNWzsjYZ4DIaEa1\nCI3VTa6lJPKw4Zur1pt2kyh5x4OIlcPzIISyRSAhcCIOwI/1wGQTr+0QKGExxQ8R\nxONq0sCUc8afXOrxIKTR/rlyzJojAw2V4+v4Cd6KhP1jtd84iYr8h3JRDA++wCKC\n2WScF80F2V0cOnhyswIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+  "last_build_id": 25646237,
+  "last_build_number": "125",
+  "last_build_status": 0,
+  "last_build_result": 0,
+  "last_build_duration": 115,
+  "last_build_language": null,
+  "last_build_started_at": "2014-05-20T22:18:02Z",
+  "last_build_finished_at": "2014-05-20T22:19:57Z"
+}
