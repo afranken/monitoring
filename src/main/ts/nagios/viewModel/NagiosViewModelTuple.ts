@@ -9,23 +9,23 @@ import NagiosDetailsViewModel = require('./NagiosDetailsViewModel'); ///ts:impor
  */
 class NagiosViewModelTuple {
 
-    private _box:NagiosBoxViewModel;
-    private _details:NagiosDetailsViewModel;
+    private _box: NagiosBoxViewModel;
+    private _details: NagiosDetailsViewModel;
 
-    constructor(box:NagiosBoxViewModel, details:NagiosDetailsViewModel) {
+    constructor(box: NagiosBoxViewModel, details: NagiosDetailsViewModel) {
         this._box = box;
         this._details = details;
     }
 
-    public getBox():NagiosBoxViewModel {
+    public getBox(): NagiosBoxViewModel {
         return this._box;
     }
 
-    public getDetails():NagiosDetailsViewModel {
+    public getDetails(): NagiosDetailsViewModel {
         return this._details;
     }
 
-    public getHtmlsafeId():string {
+    public getHtmlsafeId(): string {
         return this._box.getHtmlsafeId();
     }
 

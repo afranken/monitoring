@@ -6,13 +6,13 @@ import NagiosHostModel = require('../model/NagiosHostModel'); ///ts:import:gener
  */
 class NagiosBoxViewModel {
 
-    private _model:NagiosHostModel;
+    private _model: NagiosHostModel;
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(model:NagiosHostModel) {
+    constructor(model: NagiosHostModel) {
         this._model = model;
     }
 
@@ -20,7 +20,7 @@ class NagiosBoxViewModel {
     // View Layer
     //==================================================================================================================
 
-    public getName():string {
+    public getName(): string {
         return this._model.getName();
     }
 
@@ -28,7 +28,7 @@ class NagiosBoxViewModel {
         return this._model.getCss();
     }
 
-    public getHtmlsafeId():string {
+    public getHtmlsafeId(): string {
         return this._model.getHtmlsafeId();
     }
 

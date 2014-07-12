@@ -30,19 +30,19 @@ class NagiosConnector extends ConnectorBase implements Connector {
     //suffix to add to a JSON call to make jQuery automatically use JSONP
     public static NAGIOS_JSONP_SUFFIX: string = '&callback=?';
 
-    private static NAGIOS_HOSTINFO_PREFIX = '/cgi-bin/extinfo.cgi?type=1&host=';
+    private static NAGIOS_HOSTINFO_PREFIX: string = '/cgi-bin/extinfo.cgi?type=1&host=';
 
     //==================================================================================================================
     // Functionality
     //==================================================================================================================
 
-    public getRemoteData(model:NagiosMonitorModel):void {
+    public getRemoteData(model: NagiosMonitorModel): void {
         jQuery.getJSON(this.getApiUrl(model),
-            (json: NagiosJsonResponse.NagiosServices)=> {
-                NagiosConnector.updateModel(json,model);
+            (json: NagiosJsonResponse.NagiosServices) => {
+                NagiosConnector.updateModel(json, model);
             }
         ).fail((jqXHR, textStatus, errorThrown) => {
-            if(console) {
+            if (console) {
                 console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model));
             }
         });
@@ -51,11 +51,11 @@ class NagiosConnector extends ConnectorBase implements Connector {
         setTimeout(() => this.getRemoteData(model), ConnectorBase.getRandomTimeout());
     }
 
-    public static updateModel(json : NagiosJsonResponse.NagiosServices, model:NagiosMonitorModel):void {
+    public static updateModel(json: NagiosJsonResponse.NagiosServices, model: NagiosMonitorModel): void {
         model.setData(json);
     }
 
-    public getApiUrl(model:NagiosMonitorModel):string {
+    public getApiUrl(model: NagiosMonitorModel): string {
         return this.getUrl(model.getHostname(),
             NagiosConnector.NAGIOS_PREFIX +
                 NagiosConnector.NAGIOS_HOST_SUFFIX +
@@ -63,7 +63,7 @@ class NagiosConnector extends ConnectorBase implements Connector {
                 NagiosConnector.NAGIOS_JSONP_SUFFIX);
     }
 
-    public getHostInfoUrl(nagiosHostname:string,hostname:string):string {
+    public getHostInfoUrl(nagiosHostname: string, hostname: string): string {
         return this.getUrl(nagiosHostname, NagiosConnector.NAGIOS_HOSTINFO_PREFIX + hostname);
     }
 }

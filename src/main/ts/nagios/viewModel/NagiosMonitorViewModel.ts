@@ -16,21 +16,21 @@ import NagiosDetailsViewModel = require('./NagiosDetailsViewModel'); ///ts:impor
  */
 class NagiosMonitorViewModel implements MonitorViewModel {
 
-    private _model:NagiosMonitorModel;
-    private _models:Array<NagiosViewModelTuple> = [];
+    private _model: NagiosMonitorModel;
+    private _models: Array<NagiosViewModelTuple> = [];
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(model:NagiosMonitorModel) {
+    constructor(model: NagiosMonitorModel) {
         this._model = model;
 
         this.init();
     }
 
     private init() {
-        this._model.getHostnames().forEach((name:string) => {
+        this._model.getHostnames().forEach((name: string) => {
             var boxModel = new NagiosBoxViewModel(this._model.getHostModel(name));
             var detailsModel = new NagiosDetailsViewModel(this._model.getHostModel(name));
             this._models.push(new NagiosViewModelTuple(boxModel, detailsModel));
@@ -41,15 +41,15 @@ class NagiosMonitorViewModel implements MonitorViewModel {
     // View Layer
     //==================================================================================================================
 
-    public getName():string {
+    public getName(): string {
         return this._model.getName();
     }
 
-    public getModels():Array<NagiosViewModelTuple> {
+    public getModels(): Array<NagiosViewModelTuple> {
         return this._models;
     }
 
-    public getType():string {
+    public getType(): string {
         return Types.NAGIOS;
     }
 

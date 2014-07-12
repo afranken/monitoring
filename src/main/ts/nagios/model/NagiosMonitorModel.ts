@@ -26,17 +26,17 @@ import NagiosJsonResponse = require('NagiosJsonResponse');
  */
 class NagiosMonitorModel implements MonitorModel {
 
-    private _hostname:string;
-    private _name:string;
-    private _connector:NagiosConnector;
-    private _hostModelMap:{[hostName: string]: NagiosHostModel} = {};
-    private _hostnames:Array<string> = [];
+    private _hostname: string;
+    private _name: string;
+    private _connector: NagiosConnector;
+    private _hostModelMap: {[hostName: string]: NagiosHostModel} = {};
+    private _hostnames: Array<string> = [];
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(job:Config.ExtendedMonitor, connector:NagiosConnector, hostname:string) {
+    constructor(job: Config.ExtendedMonitor, connector: NagiosConnector, hostname: string) {
         this._name = job.name;
         this._connector = connector;
         this._hostname = job.hostname !== undefined ? job.hostname : hostname;
@@ -44,7 +44,7 @@ class NagiosMonitorModel implements MonitorModel {
         this.init(job.externalRef);
     }
 
-    private init(externalRef:Config.ExternalRef[]) {
+    private init(externalRef: Config.ExternalRef[]) {
         externalRef.forEach((ref) => {
             var name = ref.name !== undefined ? ref.name : ref.id;
             this._hostnames.push(name);
@@ -56,42 +56,42 @@ class NagiosMonitorModel implements MonitorModel {
     // Functionality
     //==================================================================================================================
 
-    public getHostname():string {
+    public getHostname(): string {
         return this._hostname;
     }
 
-    public getHostnames():Array<string> {
+    public getHostnames(): Array<string> {
         return this._hostnames;
     }
 
-    public getName():string {
+    public getName(): string {
         return this._name;
     }
 
-    public getHostModel(name:string):NagiosHostModel {
+    public getHostModel(name: string): NagiosHostModel {
         return this._hostModelMap[name];
     }
 
-    public addService(hostname:string, service:NagiosJsonResponse.NagiosService):void {
+    public addService(hostname: string, service: NagiosJsonResponse.NagiosService): void {
         var hostmodel = this._hostModelMap[hostname];
-        if(hostmodel) {
+        if (hostmodel) {
             hostmodel.addService(service);
         }
     }
 
-    public setData(json:NagiosJsonResponse.NagiosServices):void {
+    public setData(json: NagiosJsonResponse.NagiosServices): void {
         //reset hostmodel data before adding services from nagios response.
         this.resetHostModels();
 
         //--------- iterate over JSON response, save services that should be displayed
-        json.services.forEach((service:NagiosJsonResponse.NagiosService)=>{
-            if(service.service_host !== undefined && service.service_host.host_name !== undefined) {
-                this.addService(service.service_host.host_name,service);
+        json.services.forEach((service: NagiosJsonResponse.NagiosService) => {
+            if (service.service_host !== undefined && service.service_host.host_name !== undefined) {
+                this.addService(service.service_host.host_name, service);
             }
         });
     }
 
-    public updateStatus():void {
+    public updateStatus(): void {
         this._connector.getRemoteData(this);
     }
 
@@ -99,8 +99,8 @@ class NagiosMonitorModel implements MonitorModel {
     // Private
     //==================================================================================================================
 
-    private resetHostModels():void {
-        this._hostnames.forEach((name:string) => {
+    private resetHostModels(): void {
+        this._hostnames.forEach((name: string) => {
             this._hostModelMap[name].resetData();
         });
     }
