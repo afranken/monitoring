@@ -8,21 +8,21 @@ import SonarViolationViewModel = require('./SonarViolationViewModel'); ///ts:imp
  */
 class SonarModuleViewModel {
 
-    private _moduleModel:SonarModuleModel;
-    private _violationViewModels:Array<SonarViolationViewModel> = [];
+    private _moduleModel: SonarModuleModel;
+    private _violationViewModels: Array<SonarViolationViewModel> = [];
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(model:SonarModuleModel) {
+    constructor(model: SonarModuleModel) {
         this._moduleModel = model;
 
         this.init();
     }
 
-    private init():void {
-        this._moduleModel.getViolations().forEach((violation)=> {
+    private init(): void {
+        this._moduleModel.getViolations().forEach((violation) => {
             this._violationViewModels.push(new SonarViolationViewModel(violation));
         });
     }
@@ -31,15 +31,15 @@ class SonarModuleViewModel {
     // View Layer
     //==================================================================================================================
 
-    public getUrl():string {
+    public getUrl(): string {
         return this._moduleModel.getUrl();
     }
 
-    public getName():string {
+    public getName(): string {
         return this._moduleModel.getName();
     }
 
-    public getViolationViewModels():Array<SonarViolationViewModel> {
+    public getViolationViewModels(): Array<SonarViolationViewModel> {
         return this._violationViewModels;
     }
 

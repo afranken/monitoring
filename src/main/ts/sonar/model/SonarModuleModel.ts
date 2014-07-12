@@ -10,16 +10,16 @@ import ko = require('knockout');
  */
 class SonarModuleModel {
 
-    private _moduleName:string;
-    private _name:string;
-    private _url:KnockoutObservable<string> = ko.observable<string>();
-    private _violations: Array<SonarViolationModel> = [];
+    private _moduleName: string;
+    private _name: string;
+    private _url: KnockoutObservable<string> = ko.observable<string>();
+    private _violations:  Array<SonarViolationModel> = [];
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(moduleName:string, name:string) {
+    constructor(moduleName: string, name: string) {
         this._moduleName = moduleName;
         this._name = name;
         this._url('');
@@ -27,7 +27,7 @@ class SonarModuleModel {
         this.init();
     }
 
-    private init():void {
+    private init(): void {
         this._violations.push(new SonarViolationModel(SonarViolationModel.BLOCKER));
         this._violations.push(new SonarViolationModel(SonarViolationModel.CRITICAL));
         this._violations.push(new SonarViolationModel(SonarViolationModel.MAJOR));
@@ -39,23 +39,23 @@ class SonarModuleModel {
     // Functionality
     //==================================================================================================================
 
-    public getViolations():Array<SonarViolationModel> {
+    public getViolations(): Array<SonarViolationModel> {
         return this._violations;
     }
 
-    public getModuleName():string {
+    public getModuleName(): string {
         return this._moduleName;
     }
 
-    public getName():string {
+    public getName(): string {
         return this._name;
     }
 
-    public getUrl():string {
+    public getUrl(): string {
         return this._url();
     }
 
-    public setUrl(url:string):void {
+    public setUrl(url: string): void {
         this._url(url);
     }
 

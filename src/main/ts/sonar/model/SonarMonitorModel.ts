@@ -20,19 +20,19 @@ import SonarResponse = require('SonarJsonResponse');
  */
 class SonarMonitorModel implements MonitorModel {
 
-    private _url:KnockoutObservable<string> = ko.observable<string>();
-    private _moduleModels: Array<SonarModuleModel> = [];
-    private _name:string;
-    private _hostname:string;
-    private _externalRef:Config.ExternalRef[];
-    private _connector:SonarConnector;
-    private _jsonResponse:KnockoutObservable<Array<SonarResponse.Json>> = ko.observable<Array<SonarResponse.Json>>();
+    private _url: KnockoutObservable<string> = ko.observable<string>();
+    private _moduleModels:  Array<SonarModuleModel> = [];
+    private _name: string;
+    private _hostname: string;
+    private _externalRef: Config.ExternalRef[];
+    private _connector: SonarConnector;
+    private _jsonResponse: KnockoutObservable<Array<SonarResponse.Json>> = ko.observable<Array<SonarResponse.Json>>();
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(monitor:Config.ExtendedMonitor, connector:SonarConnector, hostname:string) {
+    constructor(monitor: Config.ExtendedMonitor, connector: SonarConnector, hostname: string) {
         this._name = monitor.name;
         this._hostname = monitor.hostname !== undefined ? monitor.hostname : hostname;
         this._externalRef = monitor.externalRef;
@@ -42,7 +42,7 @@ class SonarMonitorModel implements MonitorModel {
         this.init(monitor.externalRef);
     }
 
-    private init(externalRef:Config.ExternalRef[]) {
+    private init(externalRef: Config.ExternalRef[]) {
         externalRef.forEach(ref => {
             this._moduleModels.push(new SonarModuleModel(ref.id, ref.name));
         });
@@ -52,37 +52,37 @@ class SonarMonitorModel implements MonitorModel {
     // Functionality
     //==================================================================================================================
 
-    public getUrl():string {
+    public getUrl(): string {
         return this._url();
     }
 
-    public getName():string {
+    public getName(): string {
         return this._name;
     }
 
-    public getHostname():string {
+    public getHostname(): string {
         return this._hostname;
     }
 
-    public getModuleModels():Array<SonarModuleModel> {
+    public getModuleModels(): Array<SonarModuleModel> {
         return this._moduleModels;
     }
 
-    public getExternalRef():Config.ExternalRef[] {
+    public getExternalRef(): Config.ExternalRef[] {
         return this._externalRef;
     }
 
-    public setData(json: Array<SonarResponse.Json>):void {
+    public setData(json:  Array<SonarResponse.Json>): void {
         this._jsonResponse(json);
     }
 
-    public updateStatus():void {
+    public updateStatus(): void {
         this._connector.getRemoteData(this);
     }
 
-    public addViolations(moduleName:string, violations: Array<SonarResponse.Json>):void {
+    public addViolations(moduleName: string, violations: Array<SonarResponse.Json>): void {
         this._moduleModels.forEach(violationModel => {
-            if(violationModel.getModuleName() === moduleName) {
+            if (violationModel.getModuleName() === moduleName) {
                 violationModel.getViolations().forEach(violation => {
                     violation.setCount(violations);
                     violation.setStatus(violation.getCount());
@@ -91,9 +91,9 @@ class SonarMonitorModel implements MonitorModel {
         });
     }
 
-    public addUrl(moduleName:string, url:string):void {
+    public addUrl(moduleName: string, url: string): void {
         this._moduleModels.forEach(violationModel => {
-            if(violationModel.getModuleName() === moduleName) {
+            if (violationModel.getModuleName() === moduleName) {
                 violationModel.setUrl(url);
             }
         });

@@ -6,13 +6,13 @@ import SonarViolationModel = require('../model/SonarViolationModel'); ///ts:impo
  */
 class SonarViolationViewModel {
 
-    private _violationModel:SonarViolationModel;
+    private _violationModel: SonarViolationModel;
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(model:SonarViolationModel) {
+    constructor(model: SonarViolationModel) {
         this._violationModel = model;
     }
 
@@ -20,11 +20,11 @@ class SonarViolationViewModel {
     // View Layer
     //==================================================================================================================
 
-    public getCss():string {
+    public getCss(): string {
         return this._violationModel.getCss();
     }
 
-    public getCount():number {
+    public getCount(): number {
         return this._violationModel.getCount();
     }
 
