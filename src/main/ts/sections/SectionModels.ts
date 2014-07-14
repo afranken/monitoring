@@ -20,10 +20,12 @@ import Config = require('Config');
  */
 class SectionModels {
 
-    public static createViewModels(sections:Array<Config.Section>, configuration:Configuration, hostname: string):Array<SectionViewModel> {
-        var sectionViewModels:Array<SectionViewModel> = [];
+    public static createViewModels(sections: Array<Config.Section>,
+                                   configuration: Configuration,
+                                   hostname:  string): Array<SectionViewModel> {
+        var sectionViewModels: Array<SectionViewModel> = [];
 
-        sections.forEach((section:Config.Section)=> {
+        sections.forEach((section: Config.Section) => {
             sectionViewModels.push(SectionModels.createViewModel(section, configuration, hostname));
         });
 
@@ -38,19 +40,19 @@ class SectionModels {
      * @param hostname
      * @returns SectionViewModel
      */
-    public static createViewModel(section:Config.Section, configuration:Configuration, hostname: string):SectionViewModel {
-        var sectionModel:SectionModel = SectionModels.createModel(section,hostname);
-        var subSections:Array<SectionViewModel> = [];
-        var monitorModels:Array<MonitorViewModel> = [];
+    public static createViewModel(section: Config.Section, configuration: Configuration, hostname: string): SectionViewModel {
+        var sectionModel: SectionModel = SectionModels.createModel(section, hostname);
+        var subSections: Array<SectionViewModel> = [];
+        var monitorModels: Array<MonitorViewModel> = [];
 
-        if(section.sections !== undefined) {
+        if (section.sections !== undefined) {
             section.sections.forEach(subSection => {
                     subSections.push(SectionModels.createViewModel(subSection, configuration, sectionModel.getHostname()));
                 }
             );
         }
 
-        if(section.monitors !== undefined) {
+        if (section.monitors !== undefined) {
             section.monitors.forEach(monitor => {
                     monitorModels.push(MonitorModels.createViewModel(monitor, configuration, sectionModel.getHostname()));
                 }
@@ -67,7 +69,7 @@ class SectionModels {
      * @param hostname
      * @returns SectionViewModel
      */
-    public static createModel(section:Config.Section, hostname: string):SectionModel {
+    public static createModel(section: Config.Section, hostname: string): SectionModel {
         return new SectionModel(section, hostname);
     }
 
