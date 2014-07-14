@@ -123,7 +123,7 @@ declare module Config {
             /**
              * Add link to a custom css file here. This file will be loaded in addition to and after all existing CSS files.
              */
-            customCss?:string;
+            customCss?: string;
         }
 
         /**
