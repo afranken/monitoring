@@ -17,7 +17,7 @@ interface MonitorViewModel {
     /**
      * The type of the Monitor
      */
-    getType() :string;
+    getType(): string;
 
 }
 

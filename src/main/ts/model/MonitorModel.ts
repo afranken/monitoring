@@ -21,7 +21,7 @@ interface MonitorModel {
      *
      * @param data
      */
-    setData(data):void;
+    setData(data): void;
 
     /**
      * This method should be called after creating the Model.
