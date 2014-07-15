@@ -14,11 +14,11 @@ import JenkinsBoxViewModel = require('./JenkinsBoxViewModel'); ///ts:import:gene
  */
 class JenkinsMonitorViewModel implements MonitorViewModel {
 
-    private _details:JenkinsDetailsViewModel;
-    private _box:JenkinsBoxViewModel;
-    private _model:JenkinsMonitorModel;
+    private _details: JenkinsDetailsViewModel;
+    private _box: JenkinsBoxViewModel;
+    private _model: JenkinsMonitorModel;
 
-    constructor(model:JenkinsMonitorModel) {
+    constructor(model: JenkinsMonitorModel) {
         this._model = model;
         this._box = new JenkinsBoxViewModel(this._model);
         this._details = new JenkinsDetailsViewModel(this._model);
@@ -28,19 +28,19 @@ class JenkinsMonitorViewModel implements MonitorViewModel {
     // View Layer
     //==================================================================================================================
 
-    public getBox():JenkinsBoxViewModel {
+    public getBox(): JenkinsBoxViewModel {
         return this._box;
     }
 
-    public getDetails():JenkinsDetailsViewModel {
+    public getDetails(): JenkinsDetailsViewModel {
         return this._details;
     }
 
-    public getType():string {
+    public getType(): string {
         return Types.JENKINS;
     }
 
-    public getHtmlsafeId():string {
+    public getHtmlsafeId(): string {
         return this._model.getHtmlsafeId();
     }
 

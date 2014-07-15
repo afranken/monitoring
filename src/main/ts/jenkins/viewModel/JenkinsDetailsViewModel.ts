@@ -13,20 +13,20 @@ import moment = require('moment');
  */
 class JenkinsDetailsViewModel {
 
-    private _model:JenkinsMonitorModel;
+    private _model: JenkinsMonitorModel;
 
-    private _startDate:KnockoutComputed<string>;
-    private _commitHash:KnockoutComputed<string>;
-    private _branchName:KnockoutComputed<string>;
-    private _runTime:KnockoutComputed<string>;
-    private _buildNumber:KnockoutComputed<number>;
-    private _buildNumberUrl:KnockoutComputed<string>;
+    private _startDate: KnockoutComputed<string>;
+    private _commitHash: KnockoutComputed<string>;
+    private _branchName: KnockoutComputed<string>;
+    private _runTime: KnockoutComputed<string>;
+    private _buildNumber: KnockoutComputed<number>;
+    private _buildNumberUrl: KnockoutComputed<string>;
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(model:JenkinsMonitorModel) {
+    constructor(model: JenkinsMonitorModel) {
         this._model = model;
 
         this.init();
@@ -35,39 +35,39 @@ class JenkinsDetailsViewModel {
     /**
      * Initialize computed properties.
      */
-    private init():void {
+    private init(): void {
         this._commitHash = ko.computed<string>({
-            read: ()=>{
+            read: () => {
                 return this._model.getLastBuildCommitHash();
             }
         });
 
         this._branchName = ko.computed<string>({
-            read: ()=>{
+            read: () => {
                 return this._model.getLastBuildBranchName();
             }
         });
 
         this._runTime = ko.computed<string>({
-            read: ()=>{
+            read: () => {
                 return this.calculateDuration();
             }
         });
 
         this._buildNumber = ko.computed<number>({
-            read: ()=>{
+            read: () => {
                 return this._model.getBuildNumber();
             }
         });
 
         this._buildNumberUrl = ko.computed<string>({
-            read: ()=>{
+            read: () => {
                 return this._model.getLastBuildUrl();
             }
         });
 
         this._startDate = ko.computed<string>({
-            read: ()=>{
+            read: () => {
                 return this.calculateStartDate();
             }
         });
@@ -77,35 +77,35 @@ class JenkinsDetailsViewModel {
     // View Layer
     //==================================================================================================================
 
-    public getUrl():string {
+    public getUrl(): string {
         return this._model.getJobUrl();
     }
 
-    public getName():string {
+    public getName(): string {
         return this._model.getName();
     }
 
-    public getCommitHash():string {
+    public getCommitHash(): string {
         return this._commitHash();
     }
 
-    public getBranchName():string {
+    public getBranchName(): string {
         return this._branchName();
     }
 
-    public getRunTime():string {
+    public getRunTime(): string {
         return this._runTime();
     }
 
-    public getBuildNumber():number {
+    public getBuildNumber(): number {
         return this._buildNumber();
     }
 
-    public getBuildNumberUrl():string {
+    public getBuildNumberUrl(): string {
         return this._buildNumberUrl();
     }
 
-    public getStartDate():string {
+    public getStartDate(): string {
         return this._startDate();
     }
 
@@ -118,9 +118,9 @@ class JenkinsDetailsViewModel {
      *
      * @returns string a human readable start date like "a day ago" or {@link undefined}
      */
-    private calculateStartDate():string {
-        var startTime:string = undefined;
-        if(this._model.getResponseTimestamp()) {
+    private calculateStartDate(): string {
+        var startTime: string = undefined;
+        if (this._model.getResponseTimestamp()) {
             startTime = moment(this._model.getResponseTimestamp()).fromNow();
         }
 
@@ -132,9 +132,9 @@ class JenkinsDetailsViewModel {
      *
      * @returns string a human readable start date like "a day ago" or {@link undefined}
      */
-    private calculateDuration():string {
-        var duration:string = undefined;
-        if(this._model.getDuration()) {
+    private calculateDuration(): string {
+        var duration: string = undefined;
+        if (this._model.getDuration()) {
             duration = moment.duration(this._model.getDuration()).humanize();
         }
 

@@ -22,31 +22,32 @@ class JenkinsConnector extends ConnectorBase implements Connector {
     /**
      * suffix that ensures that Jenkins returns JSONP
      */
-    private static _JSONP_SUFFIX:string = '/api/json?jsonp=?';
+    private static _JSONP_SUFFIX: string = '/api/json?jsonp=?';
 
     /**
      * suffix that tells Jenkins to only include certain properties in response
      */
-    private static _JOB_STATUS_SUFFIX:string = '&tree=name,url,displayName,color,lastBuild[timestamp,building,duration,estimatedDuration,url,result,number,id,failCount,skipCount,totalCount,' +
+    private static _JOB_STATUS_SUFFIX: string = '&tree=name,url,displayName,color,' +
+        'lastBuild[timestamp,building,duration,estimatedDuration,url,result,number,id,failCount,skipCount,totalCount,' +
         'actions[lastBuiltRevision[branch[SHA1,name]],failCount,skipCount,totalCount]]&depth=1';
 
     /**
      * suffix that tells Jenkins to only include certain properties of modules in response
      */
-    private static _MODULES_STATUS_SUFFIX:string = '&tree=modules[name,url,displayName,color,' +
+    private static _MODULES_STATUS_SUFFIX: string = '&tree=modules[name,url,displayName,color,' +
         'lastBuild[timestamp,actions[lastBuiltRevision[branch[SHA1,name]],failCount,skipCount,totalCount]]&depth=1';
 
     //==================================================================================================================
     // Functionality
     //==================================================================================================================
 
-    public getRemoteData(model:JenkinsMonitorModel):void {
+    public getRemoteData(model: JenkinsMonitorModel): void {
         jQuery.getJSON(this.getApiUrl(model),
-                (json : JenkinsJsonResponse.Json) => {
-                    JenkinsConnector.updateModel(json,model);
+                (json: JenkinsJsonResponse.Json) => {
+                    JenkinsConnector.updateModel(json, model);
                 })
             .fail((jqXHR, textStatus, errorThrown) => {
-                if(console) {
+                if (console) {
                     console.log(jqXHR, textStatus, errorThrown, this.getApiUrl(model));
                 }
             });
@@ -60,7 +61,7 @@ class JenkinsConnector extends ConnectorBase implements Connector {
      * @param model
      * @returns string
      */
-    public getJobUrl(model:JenkinsMonitorModel):string {
+    public getJobUrl(model: JenkinsMonitorModel): string {
         return this.getUrl(model.getHostname(), JenkinsConnector._JOB_PREFIX + model.getExternalRef());
     }
 
@@ -69,7 +70,7 @@ class JenkinsConnector extends ConnectorBase implements Connector {
      * @param model
      * @returns string
      */
-    public getApiUrl(model:JenkinsMonitorModel):string {
+    public getApiUrl(model: JenkinsMonitorModel): string {
         return this.getJobUrl(model) + JenkinsConnector._JSONP_SUFFIX + JenkinsConnector._JOB_STATUS_SUFFIX;
     }
 
@@ -82,7 +83,7 @@ class JenkinsConnector extends ConnectorBase implements Connector {
      * @param json
      * @param model
      */
-    private static updateModel(json : JenkinsJsonResponse.Json, model:JenkinsMonitorModel):void{
+    private static updateModel(json: JenkinsJsonResponse.Json, model: JenkinsMonitorModel): void{
         model.setData(json);
     }
 

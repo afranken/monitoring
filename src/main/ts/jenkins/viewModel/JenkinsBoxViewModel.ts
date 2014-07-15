@@ -12,20 +12,20 @@ import ko = require('knockout');
  */
 class JenkinsBoxViewModel {
 
-    private static OPACITY:string = 'opacity: ';
-    private static DEFAULT_OPACITY:number = 1.0;
+    private static OPACITY: string = 'opacity: ';
+    private static DEFAULT_OPACITY: number = 1.0;
 
-    private _model:JenkinsMonitorModel;
-    private _css:KnockoutComputed<string>;
-    private _style:KnockoutComputed<string>;
-    private _completedPercent:KnockoutComputed<number>;
-    private _buildingStyle:KnockoutComputed<string>;
+    private _model: JenkinsMonitorModel;
+    private _css: KnockoutComputed<string>;
+    private _style: KnockoutComputed<string>;
+    private _completedPercent: KnockoutComputed<number>;
+    private _buildingStyle: KnockoutComputed<string>;
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(model:JenkinsMonitorModel) {
+    constructor(model: JenkinsMonitorModel) {
         this._model = model;
 
         this.init();
@@ -34,25 +34,27 @@ class JenkinsBoxViewModel {
     /**
      * Initialize computed properties.
      */
-    private init():void {
+    private init(): void {
         this._css = ko.computed<string>({
-            read: ()=>{
+            read: () => {
                 return CssClasses.BASIC_CLASSES + JenkinsBoxViewModel.translateColor(this._model.getResponseColor());
             }
         });
         this._buildingStyle = ko.computed<string>({
-            read: ()=>{
+            read: () => {
                 return JenkinsBoxViewModel.translateBuildingStyle(this._model.getResponseColor());
             }
         });
         this._style = ko.computed<string>({
-            read: ()=>{
-                return JenkinsBoxViewModel.OPACITY+JenkinsBoxViewModel.calculateExpiration(this._model.getResponseTimestamp(), this._model.getExpiry());
+            read: () => {
+                return JenkinsBoxViewModel.OPACITY +
+                    JenkinsBoxViewModel.calculateExpiration(this._model.getResponseTimestamp(), this._model.getExpiry());
             }
         });
         this._completedPercent = ko.computed<number>({
-            read: ()=>{
-                return JenkinsBoxViewModel.calculateCompletedPercent(this._model.getResponseTimestamp(), this._model.getEstimatedDuration());
+            read: () => {
+                return JenkinsBoxViewModel.calculateCompletedPercent(this._model.getResponseTimestamp(),
+                    this._model.getEstimatedDuration());
             }
         });
     }
@@ -61,27 +63,27 @@ class JenkinsBoxViewModel {
     // View Layer
     //==================================================================================================================
 
-    public getHtmlsafeId():string {
+    public getHtmlsafeId(): string {
         return this._model.getHtmlsafeId();
     }
 
-    public getCompletedPercent():number {
+    public getCompletedPercent(): number {
         return this._completedPercent();
     }
 
-    public getStyle():string {
+    public getStyle(): string {
         return this._style();
     }
 
-    public getBuildingStyle():string {
+    public getBuildingStyle(): string {
         return this._buildingStyle();
     }
 
-    public getCss():string {
+    public getCss(): string {
         return this._css();
     }
 
-    public getName():string {
+    public getName(): string {
         return this._model.getName();
     }
 
@@ -89,12 +91,12 @@ class JenkinsBoxViewModel {
     // Private
     //==================================================================================================================
 
-    private static calculateCompletedPercent(buildTimestamp: number, estimatedDuration:number):number {
-        var completedPercent:number;
+    private static calculateCompletedPercent(buildTimestamp: number, estimatedDuration: number): number {
+        var completedPercent: number;
 
-        var nowTimestamp:number = new Date().getTime();
+        var nowTimestamp: number = new Date().getTime();
 
-        if(buildTimestamp === undefined || estimatedDuration === undefined) {
+        if (buildTimestamp === undefined || estimatedDuration === undefined) {
             return undefined;
         }
 
@@ -111,25 +113,24 @@ class JenkinsBoxViewModel {
      *
      * @returns number between 0.25 (=expired) and 1.0 (job ran recently)
      */
-    private static calculateExpiration(buildTimestamp: number, expiry: number):number {
+    private static calculateExpiration(buildTimestamp: number, expiry: number): number {
 
-        if(buildTimestamp === undefined) {
+        if (buildTimestamp === undefined) {
             return JenkinsBoxViewModel.DEFAULT_OPACITY;
         }
 
-        var expireStyle:number;
+        var expireStyle: number;
 
         //calculate timestamp and expiration
-        var nowTimestamp:number = new Date().getTime();
-        var ageMinutes:number = Math.round(nowTimestamp - buildTimestamp) / (1000 * 60);
+        var nowTimestamp: number = new Date().getTime();
+        var ageMinutes: number = Math.round(nowTimestamp - buildTimestamp) / (1000 * 60);
         var expiredPercent = 1 - (ageMinutes / (expiry * 60));  // 0=expired, 1=fresh
 
         if (expiredPercent < 0) {
 
             // age has exceeded ttl
             expireStyle = 0.25;
-        }
-        else {
+        } else {
 
             // age is within ttl
             expireStyle = 0.5 + (expiredPercent * 0.5);
@@ -143,10 +144,10 @@ class JenkinsBoxViewModel {
      * @param color
      * @returns string
      */
-    private static translateColor(color:string):string {
-        var colorTranslation:string;
+    private static translateColor(color: string): string {
+        var colorTranslation: string;
 
-        switch(color){
+        switch (color) {
             case 'blue':
                 colorTranslation = CssClasses.SUCCESS;
                 break;
@@ -178,16 +179,16 @@ class JenkinsBoxViewModel {
                 colorTranslation = CssClasses.DISABLED;
                 break;
             default:
-                colorTranslation = "";
+                colorTranslation = '';
         }
 
         return colorTranslation;
     }
 
-    private static translateBuildingStyle(color:string):string {
-        var colorTranslation:string;
+    private static translateBuildingStyle(color: string): string {
+        var colorTranslation: string;
 
-        switch(color){
+        switch (color) {
             case 'yellow_anime':
                 colorTranslation = CssClasses.WARNING_PROGRESS_BUILDING;
                 break;
