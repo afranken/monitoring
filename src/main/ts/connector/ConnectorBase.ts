@@ -10,7 +10,7 @@ import MonitorModel = require('../model/MonitorModel'); ///ts:import:generated
  */
 class ConnectorBase implements Connector {
 
-    public static MESSAGE:string = 'UNSUPPORTED, IMPLEMENT THIS METHOD';
+    public static MESSAGE: string = 'UNSUPPORTED, IMPLEMENT THIS METHOD';
 
     private static _TIMEOUT_BASE = 60;
 
@@ -37,14 +37,14 @@ class ConnectorBase implements Connector {
      * @param suffix optional suffix to be added to the URL
      * @returns string the URL
      */
-    public getUrl(hostname:string, suffix?:string):string {
-        var url:string = '';
+    public getUrl(hostname: string, suffix?: string): string {
+        var url: string = '';
         url = this._configuration.getProtocol(hostname);
-        url = url+hostname;
-        url = url+this._configuration.getPort(hostname);
-        url = url+this._configuration.getPrefix(hostname);
-        if(suffix) {
-            url = url+suffix;
+        url = url + hostname;
+        url = url + this._configuration.getPort(hostname);
+        url = url + this._configuration.getPrefix(hostname);
+        if (suffix) {
+            url = url + suffix;
         }
 
         return url;
@@ -53,14 +53,14 @@ class ConnectorBase implements Connector {
     /**
      * @returns number the configured {@link Config.Configuration.expiry}
      */
-    public getExpiry():number {
+    public getExpiry(): number {
         return this._configuration.getExpiry();
     }
 
     /**
      * Not implemented, must be overwritten
      */
-    public getRemoteData(model:MonitorModel):void {
+    public getRemoteData(model: MonitorModel): void {
         throw {
             name: 'Error',
             message: ConnectorBase.MESSAGE
@@ -70,7 +70,7 @@ class ConnectorBase implements Connector {
     /**
      * @returns number between 60 and 120 seconds, in milliseconds.
      */
-    public static getRandomTimeout():number {
+    public static getRandomTimeout(): number {
         return (ConnectorBase._TIMEOUT_BASE + (Math.random() * 60)) * 1000;
     }
 

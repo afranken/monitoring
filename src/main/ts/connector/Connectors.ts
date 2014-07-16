@@ -23,14 +23,14 @@ class Connectors {
      * @param type
      * @returns Connector
      */
-    public static createConnector(configuration:Configuration, type:string):Connector {
-        var connector:Connector = undefined;
+    public static createConnector(configuration: Configuration, type: string): Connector {
+        var connector: Connector = undefined;
 
-        if(Types.isJenkins(type)) {
+        if (Types.isJenkins(type)) {
             connector = new JenkinsConnector(configuration);
-        } else if(Types.isNagios(type)) {
+        } else if (Types.isNagios(type)) {
             connector = new NagiosConnector(configuration);
-        } else if(Types.isSonar(type)) {
+        } else if (Types.isSonar(type)) {
             connector = new SonarConnector(configuration);
         }
 
