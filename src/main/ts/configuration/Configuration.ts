@@ -21,12 +21,12 @@ class Configuration {
 
     constructor(private json: Config.Configuration) {
         this._expiry = json.expiry;
-        if(json.hosts !== undefined) {
+        if (json.hosts !== undefined) {
             json.hosts.forEach(host => {
                 this._hostConfigurations[host.hostname] = new HostConfiguration(host);
             });
         }
-        if(json.theme !== undefined && json.theme.customCss !== undefined) {
+        if (json.theme !== undefined && json.theme.customCss !== undefined) {
             this._customCss = json.theme.customCss;
         }
     }
@@ -44,7 +44,7 @@ class Configuration {
         return this._expiry !== undefined ? this._expiry : Configuration._DEFAULT_EXPIRY;
     }
 
-    public getCustomCss():string {
+    public getCustomCss(): string {
         return this._customCss;
     }
 
@@ -55,11 +55,11 @@ class Configuration {
      * @param hostname
      * @returns string {@link _SLASH} and the prefix (e.g. '/sonar'), or ''
      */
-    public getPrefix(hostname:string): string {
-        var prefix:string = '';
+    public getPrefix(hostname: string): string {
+        var prefix: string = '';
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
-        if(hostConfiguration !== undefined) {
-            if(hostConfiguration.getPrefix() !== undefined) {
+        if (hostConfiguration !== undefined) {
+            if (hostConfiguration.getPrefix() !== undefined) {
                 prefix = Configuration._SLASH + hostConfiguration.getPrefix();
             }
         }
@@ -74,11 +74,11 @@ class Configuration {
      * @param hostname
      * @returns string {@link _PORT_PREFIX} and the port (e.g. :8080), or ''
      */
-    public getPort(hostname:string): string {
-        var port:string = '';
+    public getPort(hostname: string): string {
+        var port: string = '';
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
-        if(hostConfiguration !== undefined) {
-            if(hostConfiguration.getPort() !== undefined) {
+        if (hostConfiguration !== undefined) {
+            if (hostConfiguration.getPort() !== undefined) {
                 port = Configuration._PORT_PREFIX + hostConfiguration.getPort();
             }
         }
@@ -96,7 +96,7 @@ class Configuration {
     public getUsername(hostname: string): string {
         var username: string = undefined;
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
-        if(hostConfiguration !== undefined) {
+        if (hostConfiguration !== undefined) {
             username = hostConfiguration.getUsername();
         }
 
@@ -113,7 +113,7 @@ class Configuration {
     public getPassword(hostname: string): string {
         var password: string = undefined;
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
-        if(hostConfiguration !== undefined) {
+        if (hostConfiguration !== undefined) {
             password = hostConfiguration.getPassword();
         }
 
@@ -130,14 +130,14 @@ class Configuration {
     public getProtocol(hostname: string): string {
         var protocol: string = undefined;
         var hostConfiguration: HostConfiguration = this.getHostConfiguration(hostname);
-        if(hostConfiguration !== undefined) {
+        if (hostConfiguration !== undefined) {
             protocol = hostConfiguration.getProtocol();
         }
-        if(protocol === undefined) {
+        if (protocol === undefined) {
             protocol = Configuration._DEFAULT_PROTOCOL;
         }
 
-        return protocol+Configuration._PROTOCOL_SUFFIX;
+        return protocol + Configuration._PROTOCOL_SUFFIX;
     }
 
     //==================================================================================================================
@@ -171,22 +171,22 @@ class HostConfiguration {
         this._password = json.password;
     }
 
-    public getPassword():string {
+    public getPassword(): string {
         return this._password;
     }
-    public getUsername():string {
+    public getUsername(): string {
         return this._username;
     }
-    public getPrefix():string {
+    public getPrefix(): string {
         return this._prefix;
     }
-    public getPort():string {
+    public getPort(): string {
         return this._port;
     }
-    public getProtocol():string {
+    public getProtocol(): string {
         return this._protocol;
     }
-    public getHostname():string {
+    public getHostname(): string {
         return this._hostname;
     }
 
