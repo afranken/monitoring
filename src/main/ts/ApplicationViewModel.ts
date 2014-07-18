@@ -20,7 +20,7 @@ import ko = require('knockout');
 import jQuery = require('jquery');
 
 //this global variable is set by the configuration JS.
-declare var configJson:Config.Application;
+declare var configJson: Config.Application;
 
 /**
  * Main application class and Knockout ViewModel.
@@ -28,17 +28,17 @@ declare var configJson:Config.Application;
  */
 class ApplicationViewModel {
 
-    private _title:KnockoutObservable<string> = ko.observable<string>();
-    private _failureText:KnockoutObservable<string> = ko.observable<string>();
-    private _isLoading:KnockoutObservable<boolean> = ko.observable<boolean>();
-    private _configuration:KnockoutObservable<Configuration> = ko.observable<Configuration>();
-    private _sections:KnockoutObservableArray<SectionViewModel> = ko.observableArray<SectionViewModel>();
+    private _title: KnockoutObservable<string> = ko.observable<string>();
+    private _failureText: KnockoutObservable<string> = ko.observable<string>();
+    private _isLoading: KnockoutObservable<boolean> = ko.observable<boolean>();
+    private _configuration: KnockoutObservable<Configuration> = ko.observable<Configuration>();
+    private _sections: KnockoutObservableArray<SectionViewModel> = ko.observableArray<SectionViewModel>();
 
     //==================================================================================================================
     // Construct
     //==================================================================================================================
 
-    constructor(configName:string) {
+    constructor(configName: string) {
         //slower jQuery effects to save CPU power
         jQuery.fx.interval = 40;
 
@@ -47,35 +47,37 @@ class ApplicationViewModel {
 
         var configParameter = ApplicationViewModel.getParameterByName('config');
 
-        if(configParameter === '') {
+        if (configParameter === '') {
             configParameter = configName;
         }
 
         //load configuration
         jQuery.getScript(configParameter)
-            .always(()=>{
+            .always(() => {
                 //done loading
                 this._isLoading(false);
             })
             .done(() => {
                 this._title(configJson.title);
 
-                if(configJson.configuration !== undefined) {
+                if (configJson.configuration !== undefined) {
                     this._configuration(new Configuration(configJson.configuration));
                 }
 
                 //TODO: add array at once to observableArray?
-                SectionModels.createViewModels(configJson.sections, this._configuration(), undefined).forEach((section:SectionViewModel)=>{
-                    this._sections.push(section);
-                });
+                SectionModels.createViewModels(configJson.sections, this._configuration(), undefined).forEach(
+                    (section: SectionViewModel) => {
+                        this._sections.push(section);
+                    }
+                );
             })
             .fail((jqXHR, textStatus, errorThrown) => {
-                this._failureText('Failure loading configuration from '+configParameter+'.\n'
-                    +'jqXHR: '+ jqXHR+'\n'
-                    +'textStatus: '+textStatus+'\n'
-                    +'errorThrown: '+errorThrown);
-                if(console) {
-                    console.log(jqXHR, textStatus, errorThrown, 'Failure loading configuration from '+configParameter);
+                this._failureText('Failure loading configuration from ' + configParameter + '.\n'
+                    + 'jqXHR: ' + jqXHR + '\n'
+                    + 'textStatus: ' + textStatus + '\n'
+                    + 'errorThrown: ' + errorThrown);
+                if (console) {
+                    console.log(jqXHR, textStatus, errorThrown, 'Failure loading configuration from ' + configParameter);
                 }
             }
         );
@@ -90,7 +92,7 @@ class ApplicationViewModel {
      *
      * @returns string the application's title
      */
-    public getTitle():string {
+    public getTitle(): string {
         return this._title();
     }
 
@@ -99,21 +101,21 @@ class ApplicationViewModel {
      *
      * @returns Array<SectionViewModel> the root sections
      */
-    public getSections():Array<SectionViewModel> {
+    public getSections(): Array<SectionViewModel> {
         return this._sections();
     }
 
     /**
      * @returns boolean true if external resources (e.g. the config.json) are still loading
      */
-    public isLoading():boolean {
+    public isLoading(): boolean {
         return this._isLoading();
     }
 
     /**
      * @returns boolean true if external resources (e.g. the config.json) are still loading
      */
-    public getFailureText():string {
+    public getFailureText(): string {
         return this._failureText();
     }
 
@@ -122,7 +124,7 @@ class ApplicationViewModel {
      *
      * @returns Types
      */
-    public getTypes():Types {
+    public getTypes(): Types {
         return Types;
     }
 
@@ -131,8 +133,8 @@ class ApplicationViewModel {
      *
      * @returns string a relative URI to a CSS file.
      */
-    public getCustomCss():string {
-        if(this._configuration() !== undefined) {
+    public getCustomCss(): string {
+        if (this._configuration() !== undefined) {
             return this._configuration().getCustomCss();
         } else {
             return undefined;
@@ -146,11 +148,11 @@ class ApplicationViewModel {
     /**
      * Best answer from http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
      */
-    private static getParameterByName(name):string {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    private static getParameterByName(name): string {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
             results = regex.exec(location.search);
-        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        return results == null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
 }
 
