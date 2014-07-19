@@ -3,6 +3,7 @@ module.exports = function(grunt) {
   "use strict";
 
   var tsSourceFiles = ['<%= dir.source_ts %>/**/*.ts'];
+  var tsLintSourceFiles = ['<%= dir.source_ts %>/**/*.ts','!<%= dir.source_ts %>/vendor/**'];
   var tsSourceFilesAndTests = ['<%= dir.source %>/**/*.ts'];
 
   grunt.initConfig({
@@ -145,7 +146,7 @@ module.exports = function(grunt) {
                 configuration: grunt.file.readJSON("tslint.json")
             },
             files: {
-                src: tsSourceFiles
+                src: tsLintSourceFiles
             }
         },
 
@@ -340,7 +341,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
     /*'clean',*/
       'copy',
-//      'tslint',
+      'tslint',
       'ts:compile'
 //      'ts:compile_test',
 //      'jasmine',
