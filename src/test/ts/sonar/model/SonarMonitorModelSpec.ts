@@ -8,7 +8,7 @@ import SonarSpecDataProvider = require('../SonarSpecDataProvider'); ///ts:import
 /**
  * Tests {@link SonarMonitorModel}
  */
-describe('SonarMonitorModel', function():void {
+describe('SonarMonitorModel', function(): void {
     var dataProvider: SonarSpecDataProvider = new SonarSpecDataProvider();
 
     var testling: SonarMonitorModel = <SonarMonitorModel>dataProvider.getSonarMonitorModel();

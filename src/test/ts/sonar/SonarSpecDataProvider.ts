@@ -72,9 +72,8 @@ class SonarSpecDataProvider {
         ]
     };
 
-    public static JSON_RESPONSE: SonarJsonResponse.Json =
-        {
-            id: parseInt(SonarSpecDataProvider.REF_ID_1),
+    public static JSON_RESPONSE: SonarJsonResponse.Json = {
+            id: parseInt(SonarSpecDataProvider.REF_ID_1, 10),
             name: 'CoreMedia Blueprint master-7.0',
             date: new Date(),
             msr: [

@@ -10,7 +10,7 @@ import SonarSpecDataProvider = require('../SonarSpecDataProvider'); ///ts:import
 /**
  * Tests {@link SonarConnector}
  */
-describe('SonarConnector', function():void {
+describe('SonarConnector', function(): void {
     var dataProvider: SonarSpecDataProvider = new SonarSpecDataProvider();
 
     var monitor: SonarMonitorModel = <SonarMonitorModel>dataProvider.getSonarMonitorModel();
@@ -22,9 +22,11 @@ describe('SonarConnector', function():void {
      */
     it('TestMethods', function(): void {
         expect(testling.getExpiry()).toBe(SonarSpecDataProvider.EXPIRY);
-        expect(testling.getApiUrl(monitor,'mymodule'))
-            .toBe('https://myhost:8080/myprefix/api/resources?callback=?&format=json&metrics=blocker_violations,critical_violations,major_violations,minor_violations,info_violations&resource=mymodule');
-        expect(testling.getModuleUrl(monitor,'mymodule')).toBe('https://myhost:8080/myprefix/drilldown/violations/mymodule');
+        expect(testling.getApiUrl(monitor, 'mymodule'))
+            .toBe('https://myhost:8080/myprefix/api/resources?callback=?&format=json' +
+                '&metrics=blocker_violations,critical_violations,major_violations,minor_violations,info_violations' +
+                '&resource=mymodule');
+        expect(testling.getModuleUrl(monitor, 'mymodule')).toBe('https://myhost:8080/myprefix/drilldown/violations/mymodule');
     });
 
 });

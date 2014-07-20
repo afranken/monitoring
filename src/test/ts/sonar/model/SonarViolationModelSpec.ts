@@ -15,13 +15,13 @@ import SonarSpecDataProvider = require('../SonarSpecDataProvider'); ///ts:import
 /**
  * Tests {@link SonarViolationModel}
  */
-describe('SonarViolationModel', function():void {
+describe('SonarViolationModel', function(): void {
     var dataProvider: SonarSpecDataProvider = new SonarSpecDataProvider();
     var model: SonarMonitorModel = dataProvider.getSonarMonitorModel();
     var connector: SonarConnector = dataProvider.getSonarConnector();
     var moduleModel;
     model.getModuleModels().forEach((localModuleModel) => {
-        if(localModuleModel.getModuleName() === SonarSpecDataProvider.REF_ID_1) {
+        if (localModuleModel.getModuleName() === SonarSpecDataProvider.REF_ID_1) {
             moduleModel = localModuleModel;
         }
     });
