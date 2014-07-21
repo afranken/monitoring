@@ -10,7 +10,7 @@ import NagiosSpecDataProvider = require('../NagiosSpecDataProvider'); ///ts:impo
 /**
  * Tests {@link NagiosMonitorViewModel}
  */
-describe('NagiosMonitorViewModel', function():void {
+describe('NagiosMonitorViewModel', function(): void {
 
     var dataProvider: NagiosSpecDataProvider = new NagiosSpecDataProvider();
 
