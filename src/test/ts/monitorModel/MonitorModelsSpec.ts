@@ -6,12 +6,12 @@ import MonitorModels = require('../../../main/ts/model/MonitorModels'); ///ts:im
 /**
  * Tests {@link MonitorModels}
  */
-describe("MonitorModelsBase", function():void {
+describe('MonitorModelsBase', function(): void {
 
     /**
      * Test all methods
      */
-    it("TestMethods", function():void {
+    it('TestMethods', function(): void {
         //implement
     });
 
