@@ -12,12 +12,12 @@ import JenkinsSpecDataProvider = require('../JenkinsSpecDataProvider'); ///ts:im
 /**
  * Tests {@link JenkinsMonitorViewModel}
  */
-describe("JenkinsMonitorViewModel", function():void {
+describe('JenkinsMonitorViewModel', function(): void {
 
-    var dataProvider:JenkinsSpecDataProvider = new JenkinsSpecDataProvider();
-    var testling:JenkinsMonitorViewModel = dataProvider.getJenkinsMonitorViewModel();
+    var dataProvider: JenkinsSpecDataProvider = new JenkinsSpecDataProvider();
+    var testling: JenkinsMonitorViewModel = dataProvider.getJenkinsMonitorViewModel();
 
-    it("Test methods", function():void{
+    it('Test methods', function(): void{
         expect(testling.getBox()).toBeDefined();
         expect(testling.getDetails()).toBeDefined();
         expect(testling.getHtmlsafeId()).toEqual(JenkinsSpecDataProvider.HTMLSAFE_REF);

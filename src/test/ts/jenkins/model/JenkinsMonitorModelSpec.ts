@@ -9,12 +9,12 @@ import JenkinsSpecDataProvider = require('../JenkinsSpecDataProvider'); ///ts:im
 /**
  * Tests {@link JenkinsMonitorModel}
  */
-describe("JenkinsMonitorModel", function():void {
+describe('JenkinsMonitorModel', function(): void {
 
-    var dataProvider:JenkinsSpecDataProvider = new JenkinsSpecDataProvider();
-    var testling:JenkinsMonitorModel = dataProvider.getJenkinsMonitorModel();
+    var dataProvider: JenkinsSpecDataProvider = new JenkinsSpecDataProvider();
+    var testling: JenkinsMonitorModel = dataProvider.getJenkinsMonitorModel();
 
-    it("Test Fields", function():void {
+    it('Test Fields', function(): void {
         expect(testling.getHostname()).toBe(JenkinsSpecDataProvider.HOST);
         expect(testling.getName()).toBe(JenkinsSpecDataProvider.NAME);
         expect(testling.getExternalRef()).toBe(JenkinsSpecDataProvider.REF);
@@ -24,7 +24,7 @@ describe("JenkinsMonitorModel", function():void {
         expect(testling.getJobUrl()).toBe(JenkinsSpecDataProvider.JOB_URL);
     });
 
-    it("Test data access without backend data", function():void{
+    it('Test data access without backend data', function(): void{
         expect(testling.getLastBuild()).toBeUndefined();
         expect(testling.getLastBuiltRevision()).toBeUndefined();
         expect(testling.getResponseColor()).toBeUndefined();
@@ -37,7 +37,7 @@ describe("JenkinsMonitorModel", function():void {
         expect(testling.getLastBuildBranchName()).toBeUndefined();
     });
 
-    it("Test Fields with backend data", function():void {
+    it('Test Fields with backend data', function(): void {
         testling.setData(JenkinsSpecDataProvider.JSON_RESPONSE);
 
         expect(testling.getHostname()).toBe(JenkinsSpecDataProvider.HOST);
@@ -49,7 +49,7 @@ describe("JenkinsMonitorModel", function():void {
         expect(testling.getJobUrl()).toBe(JenkinsSpecDataProvider.JOB_URL);
     });
 
-    it("Test data access with backend data", function():void {
+    it('Test data access with backend data', function(): void {
         testling.setData(JenkinsSpecDataProvider.JSON_RESPONSE);
 
         expect(testling.getLastBuild()).toBe(JenkinsSpecDataProvider.LAST_BUILD);

@@ -10,16 +10,16 @@ import JenkinsSpecDataProvider = require('../JenkinsSpecDataProvider'); ///ts:im
 /**
  * Tests {@link JenkinsDetailsViewModel}
  */
-describe("JenkinsDetailsViewModel", function():void {
+describe('JenkinsDetailsViewModel', function(): void {
 
-    var dataProvider:JenkinsSpecDataProvider = new JenkinsSpecDataProvider();
-    var model:JenkinsMonitorModel = dataProvider.getJenkinsMonitorModel();
-    var testling:JenkinsDetailsViewModel = new JenkinsDetailsViewModel(model);
+    var dataProvider: JenkinsSpecDataProvider = new JenkinsSpecDataProvider();
+    var model: JenkinsMonitorModel = dataProvider.getJenkinsMonitorModel();
+    var testling: JenkinsDetailsViewModel = new JenkinsDetailsViewModel(model);
 
-    var _START_DATE:string = "a few seconds ago";
-    var _DURATION:string = "an hour";
+    var _START_DATE: string = 'a few seconds ago';
+    var _DURATION: string = 'an hour';
 
-    it("Test methods without backend data", function():void{
+    it('Test methods without backend data', function(): void{
         expect(testling.getUrl()).toBe(JenkinsSpecDataProvider.JOB_URL);
         expect(testling.getName()).toBe(JenkinsSpecDataProvider.NAME);
         expect(testling.getCommitHash()).toBeUndefined();
@@ -30,7 +30,7 @@ describe("JenkinsDetailsViewModel", function():void {
         expect(testling.getStartDate()).toBeUndefined();
     });
 
-    it("Test methods with backend data", function():void {
+    it('Test methods with backend data', function(): void {
         model.setData(JenkinsSpecDataProvider.JSON_RESPONSE);
 
         expect(testling.getUrl()).toBe(JenkinsSpecDataProvider.JOB_URL);

@@ -10,13 +10,13 @@ import JenkinsSpecDataProvider = require('../JenkinsSpecDataProvider'); ///ts:im
 /**
  * Tests {@link JenkinsDetailsViewModel}
  */
-describe("JenkinsDetailsViewModel", function():void {
+describe('JenkinsDetailsViewModel', function(): void {
 
-    var dataProvider:JenkinsSpecDataProvider = new JenkinsSpecDataProvider();
-    var model:JenkinsMonitorModel = dataProvider.getJenkinsMonitorModel();
-    var testling:JenkinsBoxViewModel = new JenkinsBoxViewModel(model);
+    var dataProvider: JenkinsSpecDataProvider = new JenkinsSpecDataProvider();
+    var model: JenkinsMonitorModel = dataProvider.getJenkinsMonitorModel();
+    var testling: JenkinsBoxViewModel = new JenkinsBoxViewModel(model);
 
-    it("Test methods without backend data", function():void{
+    it('Test methods without backend data', function(): void{
         expect(testling.getHtmlsafeId()).toBe(JenkinsSpecDataProvider.HTMLSAFE_REF);
         expect(testling.getName()).toBe(JenkinsSpecDataProvider.NAME);
         expect(testling.getCompletedPercent()).toBeUndefined();
@@ -25,13 +25,13 @@ describe("JenkinsDetailsViewModel", function():void {
         expect(testling.getCss()).toEqual(' jobstatus  alert ');
     });
 
-    it("Test methods with backend data", function():void {
+    it('Test methods with backend data', function(): void {
         model.setData(JenkinsSpecDataProvider.JSON_RESPONSE);
 
         expect(testling.getHtmlsafeId()).toBe(JenkinsSpecDataProvider.HTMLSAFE_REF);
         expect(testling.getName()).toBe(JenkinsSpecDataProvider.NAME);
         expect(testling.getCompletedPercent()).toBe(0);
-        expect(testling.getStyle()).toMatch("opacity: 0.99\\d+");
+        expect(testling.getStyle()).toMatch('opacity: 0.99\\d+');
         expect(testling.getBuildingStyle()).toBeUndefined();
         expect(testling.getCss()).toEqual(' jobstatus  alert  alert-success ');
     });
