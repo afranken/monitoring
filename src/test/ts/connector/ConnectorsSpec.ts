@@ -16,18 +16,18 @@ import NagiosConnector = require('../../../main/ts/nagios/connector/NagiosConnec
 /**
  * Tests {@link Connectors}
  */
-describe("Connectors", function():void {
+describe('Connectors', function(): void {
 
-    var configuration:Configuration = new Configuration({});
+    var configuration: Configuration = new Configuration({});
 
-    var jenkinsConnector:Connector = Connectors.createConnector(configuration,"jenkins");
-    var nagiosConnector:Connector = Connectors.createConnector(configuration,"nagios");
-    var sonarConnector:Connector = Connectors.createConnector(configuration,"sonar");
+    var jenkinsConnector: Connector = Connectors.createConnector(configuration, 'jenkins');
+    var nagiosConnector: Connector = Connectors.createConnector(configuration, 'nagios');
+    var sonarConnector: Connector = Connectors.createConnector(configuration, 'sonar');
 
     /**
      * Test all methods
      */
-    it("TestMethods", function():void {
+    it('TestMethods', function(): void {
         expect(jenkinsConnector instanceof JenkinsConnector).toBeTruthy();
         expect(sonarConnector instanceof SonarConnector).toBeTruthy();
         expect(nagiosConnector instanceof NagiosConnector).toBeTruthy();

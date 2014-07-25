@@ -8,21 +8,21 @@ import ConnectorBase = require('../../../main/ts/connector/ConnectorBase'); ///t
 /**
  * Tests {@link ConnectorBase}
  */
-describe("ConnectorBase", function():void {
+describe('ConnectorBase', function(): void {
 
-    var _HOST:string = "myhost";
-    var _EXPIRY:number = 888;
+    var _HOST: string = 'myhost';
+    var _EXPIRY: number = 888;
 
     var configuration: Configuration = new Configuration({
-        "hosts": [
+        hosts: [
             {
-                "hostname": _HOST,
-                "protocol": "https",
-                "port": "8080",
-                "prefix": "myprefix"
+                hostname: _HOST,
+                protocol: 'https',
+                port: '8080',
+                prefix: 'myprefix'
             }
         ],
-        "expiry": _EXPIRY
+        expiry: _EXPIRY
     });
 
     var testling = new ConnectorBase(configuration);
@@ -30,10 +30,10 @@ describe("ConnectorBase", function():void {
     /**
      * Test all methods
      */
-    it("TestMethods", function():void {
+    it('TestMethods', function(): void {
         expect(testling.getExpiry()).toBe(_EXPIRY);
         expect(testling.getUrl(_HOST)).toBe('https://myhost:8080/myprefix');
-        expect(()=>testling.getRemoteData(undefined)).toThrow(ConnectorBase.MESSAGE);
+        expect(() => testling.getRemoteData(undefined)).toThrow(ConnectorBase.MESSAGE);
     });
 
 });
