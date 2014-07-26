@@ -16,47 +16,47 @@ import Config = require('Config');
 /**
  * Tests {@link Types}
  */
-describe("Types", function():void {
+describe('Types', function(): void {
 
-    var configuration:Configuration = new Configuration({});
+    var configuration: Configuration = new Configuration({});
 
-    var jenkinsConfig:Config.Monitor = {
-        "externalRef": "123",
-        "type": "jenkins"
+    var jenkinsConfig: Config.Monitor = {
+        externalRef: '123',
+        type: 'jenkins'
     };
-    var jenkinsModel:MonitorViewModel = MonitorModels.createViewModel(jenkinsConfig, configuration, "hostname");
+    var jenkinsModel: MonitorViewModel = MonitorModels.createViewModel(jenkinsConfig, configuration, 'hostname');
 
-    var nagiosConfig:Config.Monitor = {
-        "externalRef": [
+    var nagiosConfig: Config.Monitor = {
+        externalRef: [
             {
-                "name": "myname",
-                "externalId": "123"
+                name: 'myname',
+                externalId: '123'
             }
         ],
-        "type": "nagios"
+        type: 'nagios'
     };
-    var nagiosModel:MonitorViewModel = MonitorModels.createViewModel(nagiosConfig, configuration, "hostname");
+    var nagiosModel: MonitorViewModel = MonitorModels.createViewModel(nagiosConfig, configuration, 'hostname');
 
-    var sonarConfig:Config.Monitor = {
-        "externalRef": [
+    var sonarConfig: Config.Monitor = {
+        externalRef: [
             {
-                "externalId": "123"
+                externalId: '123'
             }
         ],
-        "type": "sonar"
+        type: 'sonar'
     };
-    var sonarModel:MonitorViewModel = MonitorModels.createViewModel(sonarConfig, configuration, "hostname");
+    var sonarModel: MonitorViewModel = MonitorModels.createViewModel(sonarConfig, configuration, 'hostname');
 
     /**
      * Test all methods
      */
-    it("TestMethods", function():void {
+    it('TestMethods', function(): void {
         expect(Types.isJenkinsModel(jenkinsModel)).toBeTruthy();
-        expect(Types.isJenkins("jenkins")).toBeTruthy();
+        expect(Types.isJenkins('jenkins')).toBeTruthy();
         expect(Types.isNagiosModel(nagiosModel)).toBeTruthy();
-        expect(Types.isNagios("nagios")).toBeTruthy();
+        expect(Types.isNagios('nagios')).toBeTruthy();
         expect(Types.isSonarModel(sonarModel)).toBeTruthy();
-        expect(Types.isSonar("sonar")).toBeTruthy();
+        expect(Types.isSonar('sonar')).toBeTruthy();
     });
 
 });
