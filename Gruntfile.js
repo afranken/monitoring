@@ -3,7 +3,8 @@ module.exports = function(grunt) {
   "use strict";
 
   var tsSourceFiles = ['<%= dir.source_ts %>/**/*.ts'];
-  var tsLintSourceFiles = ['<%= dir.source_ts %>/**/*.ts','!<%= dir.source_ts %>/vendor/**'];
+  var tsLintSourceFiles = ['<%= dir.source_ts %>/**/*.ts','<%= dir.source_test_ts %>/**/*.ts',
+    '!<%= dir.source_ts %>/vendor/**','!<%= dir.source_test_ts %>/jasmine*'];
   var tsSourceFilesAndTests = ['<%= dir.source %>/**/*.ts'];
 
   grunt.initConfig({
