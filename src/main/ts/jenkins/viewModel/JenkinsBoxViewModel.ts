@@ -1,5 +1,7 @@
 ///ts:ref=knockout.d.ts
 /// <reference path="../../vendor/knockout.d.ts"/> ///ts:ref:generated
+///ts:import=ExpirationCalculator
+import ExpirationCalculator = require('../../util/ExpirationCalculator'); ///ts:import:generated
 ///ts:import=CssClasses
 import CssClasses = require('../../util/CssClasses'); ///ts:import:generated
 ///ts:import=JenkinsMonitorModel
@@ -13,7 +15,6 @@ import ko = require('knockout');
 class JenkinsBoxViewModel {
 
     private static OPACITY: string = 'opacity: ';
-    private static DEFAULT_OPACITY: number = 1.0;
 
     private _model: JenkinsMonitorModel;
     private _css: KnockoutComputed<string>;
@@ -48,7 +49,7 @@ class JenkinsBoxViewModel {
         this._style = ko.computed<string>({
             read: () => {
                 return JenkinsBoxViewModel.OPACITY +
-                    JenkinsBoxViewModel.calculateExpiration(this._model.getResponseTimestamp(), this._model.getExpiry());
+                    ExpirationCalculator.calculateExpiration(this._model.getResponseTimestamp(), this._model.getExpiry());
             }
         });
         this._completedPercent = ko.computed<number>({
@@ -103,40 +104,6 @@ class JenkinsBoxViewModel {
         completedPercent = Math.round((nowTimestamp - buildTimestamp) * 100 / estimatedDuration);
 
         return completedPercent;
-    }
-
-    /**
-     * Get expiration based on the amount of time that passed between the {@link JenkinsJsonResponse.LastBuild.timestamp} and now.
-     *
-     * @param expiry time in hours
-     * @param buildTimestamp
-     *
-     * @returns number between 0.25 (=expired) and 1.0 (job ran recently)
-     */
-    private static calculateExpiration(buildTimestamp: number, expiry: number): number {
-
-        if (buildTimestamp === undefined) {
-            return JenkinsBoxViewModel.DEFAULT_OPACITY;
-        }
-
-        var expireStyle: number;
-
-        //calculate timestamp and expiration
-        var nowTimestamp: number = new Date().getTime();
-        var ageMinutes: number = Math.round(nowTimestamp - buildTimestamp) / (1000 * 60);
-        var expiredPercent = 1 - (ageMinutes / (expiry * 60));  // 0=expired, 1=fresh
-
-        if (expiredPercent < 0) {
-
-            // age has exceeded ttl
-            expireStyle = 0.25;
-        } else {
-
-            // age is within ttl
-            expireStyle = 0.5 + (expiredPercent * 0.5);
-        }
-
-        return expireStyle;
     }
 
     /**
