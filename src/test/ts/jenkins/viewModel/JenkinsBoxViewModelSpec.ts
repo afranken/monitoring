@@ -10,7 +10,7 @@ import JenkinsSpecDataProvider = require('../JenkinsSpecDataProvider'); ///ts:im
 /**
  * Tests {@link JenkinsDetailsViewModel}
  */
-describe('JenkinsDetailsViewModel', function(): void {
+describe('JenkinsBoxViewModel', function(): void {
 
     var dataProvider: JenkinsSpecDataProvider = new JenkinsSpecDataProvider();
     var model: JenkinsMonitorModel = dataProvider.getJenkinsMonitorModel();
