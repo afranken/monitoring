@@ -129,7 +129,7 @@ class TravisBoxViewModel {
                 colorTranslation = CssClasses.FAILURE;
                 break;
             default:
-                colorTranslation = undefined;
+                colorTranslation = '';
         }
 
         return colorTranslation;
