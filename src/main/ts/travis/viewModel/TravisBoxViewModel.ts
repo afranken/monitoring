@@ -19,6 +19,7 @@ class TravisBoxViewModel {
     private _model: TravisMonitorModel;
     private _css: KnockoutComputed<string>;
     private _style: KnockoutComputed<string>;
+    private _completedPercent: KnockoutComputed<number>;
     private _buildingStyle: KnockoutComputed<string>;
 
     //==================================================================================================================
@@ -37,13 +38,26 @@ class TravisBoxViewModel {
     private init(): void {
         this._css = ko.computed<string>({
             read: () => {
-                return CssClasses.BASIC_CLASSES + TravisBoxViewModel.translateColor(this._model.getResponseColor());
+                return CssClasses.BASIC_CLASSES + TravisBoxViewModel.translateColor(this._model.getResponseColor(),
+                    this._model.getState(), this._model.getLastResponseColor());
             }
         });
         this._style = ko.computed<string>({
             read: () => {
                 return TravisBoxViewModel.OPACITY + ExpirationCalculator
                     .calculateExpiration(this._model.getResponseTimestamp(), this._model.getExpiry());
+            }
+        });
+        this._buildingStyle = ko.computed<string>({
+            read: () => {
+                return TravisBoxViewModel.translateBuildingStyle(this._model.getState(),
+                    this._model.getLastResponseColor());
+            }
+        });
+        this._completedPercent = ko.computed<number>({
+            read: () => {
+                return TravisBoxViewModel.calculateCompletedPercent(this._model.getResponseTimestamp(),
+                    this._model.getLastDuration());
             }
         });
     }
@@ -56,12 +70,16 @@ class TravisBoxViewModel {
         return this._model.getHtmlsafeId();
     }
 
+    public getCompletedPercent(): number {
+        return this._completedPercent();
+    }
+
     public getStyle(): string {
         return this._style();
     }
 
     public getBuildingStyle(): string {
-        return undefined;
+        return this._buildingStyle();
     }
 
     public getCss(): string {
@@ -76,15 +94,34 @@ class TravisBoxViewModel {
     // Private
     //==================================================================================================================
 
+    private static calculateCompletedPercent(buildTimestamp: number, estimatedDuration: number): number {
+        var completedPercent: number;
+
+        var nowTimestamp: number = new Date().getTime();
+
+        if (buildTimestamp === undefined || estimatedDuration === undefined) {
+            return undefined;
+        }
+
+        completedPercent = Math.round((nowTimestamp - buildTimestamp) * 100 / estimatedDuration);
+
+        return completedPercent;
+    }
+
     /**
      * Translate colors from Travis to twitter bootstrap styles
      * @param color
      * @returns string
      */
-    private static translateColor(color: number): string {
+    private static translateColor(color: number, state: string, lastColor: number): string {
         var colorTranslation: string;
+        var toTranslate: number = color;
 
-        switch (color) {
+        if (state === 'started' || state === 'created') {
+            toTranslate = lastColor;
+        }
+
+        switch (toTranslate) {
             case 0:
                 colorTranslation = CssClasses.SUCCESS;
                 break;
@@ -92,7 +129,26 @@ class TravisBoxViewModel {
                 colorTranslation = CssClasses.FAILURE;
                 break;
             default:
-                colorTranslation = '';
+                colorTranslation = undefined;
+        }
+
+        return colorTranslation;
+    }
+
+    private static translateBuildingStyle(state: string, lastColor: number): string {
+        var colorTranslation: string;
+
+        if (state === 'started' || state === 'created') {
+            switch (lastColor) {
+                case 0:
+                    colorTranslation = CssClasses.SUCCESS_PROGRESS_BUILDING;
+                    break;
+                case 1:
+                    colorTranslation = CssClasses.FAILURE_PROGRESS_BUILDING;
+                    break;
+                default:
+                    colorTranslation = undefined;
+            }
         }
 
         return colorTranslation;

@@ -82,11 +82,29 @@ class TravisMonitorModel implements MonitorModel {
     public getLastBuild(): TravisJsonResponse.Json {
         var lastBuild: TravisJsonResponse.Json = undefined;
         if (this._jsonResponse()) {
-            if (this._jsonResponse()) {
+            if (this._jsonResponse()[0]) {
                 lastBuild = this._jsonResponse()[0];
             }
         }
         return lastBuild;
+    }
+
+    private getBuildBeforeLast(): TravisJsonResponse.Json {
+        var buildBeforeLast: TravisJsonResponse.Json = undefined;
+        if (this._jsonResponse()) {
+            if (this._jsonResponse()[1]) {
+                buildBeforeLast = this._jsonResponse()[1];
+            }
+        }
+        return buildBeforeLast;
+    }
+
+    public getLastResponseColor(): number {
+        var color: number = undefined;
+        if (this.getBuildBeforeLast()) {
+            color = this.getBuildBeforeLast().result;
+        }
+        return color;
     }
 
     public getResponseColor(): number {
@@ -95,6 +113,14 @@ class TravisMonitorModel implements MonitorModel {
             color = this.getLastBuild().result;
         }
         return color;
+    }
+
+    public getState(): string {
+        var state: string = undefined;
+        if (this.getLastBuild()) {
+            state = this.getLastBuild().state;
+        }
+        return state;
     }
 
     public getResponseTimestamp(): number {
@@ -110,6 +136,14 @@ class TravisMonitorModel implements MonitorModel {
         var duration: number = undefined;
         if (this.getLastBuild()) {
             duration = this.getLastBuild().duration;
+        }
+        return duration;
+    }
+
+    public getLastDuration(): number {
+        var duration: number = undefined;
+        if (this.getBuildBeforeLast()) {
+            duration = this.getBuildBeforeLast().duration;
         }
         return duration;
     }
