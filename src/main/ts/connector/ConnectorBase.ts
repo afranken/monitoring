@@ -35,11 +35,15 @@ class ConnectorBase implements Connector {
      *
      * @param hostname the hostname to get the URL for
      * @param suffix optional suffix to be added to the URL
+     * @param hostPrefix optional prefix to be added to the hostname
      * @returns string the URL
      */
-    public getUrl(hostname: string, suffix?: string): string {
+    public getUrl(hostname: string, suffix?: string, hostPrefix?: string): string {
         var url: string = '';
         url = this._configuration.getProtocol(hostname);
+        if (hostPrefix) {
+            url = url + hostPrefix;
+        }
         url = url + hostname;
         url = url + this._configuration.getPort(hostname);
         url = url + this._configuration.getPrefix(hostname);

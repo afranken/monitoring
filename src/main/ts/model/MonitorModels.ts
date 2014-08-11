@@ -28,6 +28,12 @@ import JenkinsMonitorModel = require('../jenkins/model/JenkinsMonitorModel'); //
 import JenkinsMonitorViewModel = require('../jenkins/viewModel/JenkinsMonitorViewModel'); ///ts:import:generated
 ///ts:import=JenkinsConnector
 import JenkinsConnector = require('../jenkins/connector/JenkinsConnector'); ///ts:import:generated
+///ts:import=TravisMonitorModel
+import TravisMonitorModel = require('../travis/model/TravisMonitorModel'); ///ts:import:generated
+///ts:import=TravisMonitorViewModel
+import TravisMonitorViewModel = require('../travis/viewModel/TravisMonitorViewModel'); ///ts:import:generated
+///ts:import=TravisConnector
+import TravisConnector = require('../travis/connector/TravisConnector'); ///ts:import:generated
 
 import Config = require('Config');
 
@@ -47,6 +53,8 @@ class MonitorModels {
             viewModel = new NagiosMonitorViewModel(<NagiosMonitorModel>model);
         } else if (Types.isSonar(monitor.type)) {
             viewModel = new SonarMonitorViewModel(<SonarMonitorModel>model);
+        } else if (Types.isTravis(monitor.type)) {
+            viewModel = new TravisMonitorViewModel(<TravisMonitorModel>model);
         }
 
         return viewModel;
@@ -69,6 +77,8 @@ class MonitorModels {
             model = new NagiosMonitorModel(monitor, <NagiosConnector>Connectors.createConnector(configuration, Types.NAGIOS), hostname);
         } else if (Types.isSonar(monitor.type)) {
             model = new SonarMonitorModel(monitor, <SonarConnector>Connectors.createConnector(configuration, Types.SONAR), hostname);
+        } else if (Types.isTravis(monitor.type)) {
+            model = new TravisMonitorModel(monitor, <TravisConnector>Connectors.createConnector(configuration, Types.TRAVIS), hostname);
         }
 
         return model;

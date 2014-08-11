@@ -10,6 +10,8 @@ import SonarConnector = require('../sonar/connector/SonarConnector'); ///ts:impo
 import NagiosConnector = require('../nagios/connector/NagiosConnector'); ///ts:import:generated
 ///ts:import=JenkinsConnector
 import JenkinsConnector = require('../jenkins/connector/JenkinsConnector'); ///ts:import:generated
+///ts:import=TravisConnector
+import TravisConnector = require('../travis/connector/TravisConnector'); ///ts:import:generated
 
 /**
  * This class contains static methods that help with {@link Connector}.
@@ -32,6 +34,8 @@ class Connectors {
             connector = new NagiosConnector(configuration);
         } else if (Types.isSonar(type)) {
             connector = new SonarConnector(configuration);
+        } else if (Types.isTravis(type)) {
+            connector = new TravisConnector(configuration);
         }
 
         return connector;

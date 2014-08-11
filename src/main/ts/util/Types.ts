@@ -10,33 +10,42 @@ class Types {
     public static SONAR: string = 'sonar';
     public static JENKINS: string = 'jenkins';
     public static NAGIOS: string = 'nagios';
+    public static TRAVIS: string = 'travis';
 
-    public static getTypes():Array<string> {
-        return [Types.JENKINS,Types.NAGIOS,Types.SONAR];
+    public static getTypes(): Array<string> {
+        return [Types.JENKINS, Types.NAGIOS, Types.SONAR, Types.TRAVIS];
     }
 
-    public static isJenkinsModel(monitorModel:MonitorViewModel):boolean {
+    public static isJenkinsModel(monitorModel: MonitorViewModel): boolean {
         return Types.isJenkins(monitorModel.getType());
     }
 
-    public static isJenkins(type:string):boolean {
+    public static isJenkins(type: string): boolean {
         return type === undefined || Types.JENKINS === type;
     }
 
-    public static isNagiosModel(monitorModel:MonitorViewModel):boolean {
+    public static isNagiosModel(monitorModel: MonitorViewModel): boolean {
         return Types.isNagios(monitorModel.getType());
     }
 
-    public static isNagios(type:string):boolean {
+    public static isNagios(type: string): boolean {
         return type !== undefined && Types.NAGIOS === type;
     }
 
-    public static isSonarModel(monitorModel:MonitorViewModel):boolean {
+    public static isSonarModel(monitorModel: MonitorViewModel): boolean {
         return Types.isSonar(monitorModel.getType());
     }
 
-    public static isSonar(type:string):boolean {
+    public static isSonar(type: string): boolean {
         return type !== undefined && Types.SONAR === type;
+    }
+
+    public static isTravisModel(monitorModel: MonitorViewModel): boolean {
+        return Types.isTravis(monitorModel.getType());
+    }
+
+    public static isTravis(type: string): boolean {
+        return type !== undefined && Types.TRAVIS === type;
     }
 
 }

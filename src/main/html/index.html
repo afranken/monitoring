@@ -117,14 +117,14 @@
     </script>
 
     <script type="text/html" id="monitor-template">
-        <!-- ko if: $root.getTypes().isJenkins(getType()) -->
+        <!-- ko if: $root.getTypes().isJenkins(getType()) || $root.getTypes().isTravis(getType()) -->
         <div class="panel panel-default">
             <div class="alert-none">
-                <!-- ko template: { name: 'jenkins-box-model-template', data: getBox() } -->
+                <!-- ko template: { name: 'ci-box-model-template', data: getBox() } -->
                 <!-- /ko -->
             </div>
             <div class="panel-collapse collapse" data-bind="attr: { id: getHtmlsafeId() + $index() }">
-                <!-- ko template: { name: 'jenkins-detail-model-template', data: getDetails() } -->
+                <!-- ko template: { name: 'ci-detail-model-template', data: getDetails() } -->
                 <!-- /ko -->
             </div>
         </div>
@@ -138,7 +138,7 @@
         <!-- /ko -->
     </script>
 
-    <script type="text/html" id="jenkins-box-model-template">
+    <script type="text/html" id="ci-box-model-template">
         <a class="detail-link" data-toggle="collapse" data-bind="attr: { href: '#' + getHtmlsafeId() + $index(), title: getName() }">
             <div data-bind='attr: {style: getStyle()}, css: getCss()'>
                 <span class="detail-name" data-bind="text: getName()"></span><br/>
@@ -151,7 +151,7 @@
         </a>
     </script>
 
-    <script type="text/html" id="jenkins-detail-model-template">
+    <script type="text/html" id="ci-detail-model-template">
         <dl class="jenkins-details-link">
             <dt>Job on Jenkins</dt>
             <dd><a class="monitor-link" data-bind="attr: { href: getUrl() }, text: getName()"></a></dd>
