@@ -22,6 +22,10 @@ import NagiosMonitorModel = require('../nagios/model/NagiosMonitorModel'); ///ts
 import NagiosMonitorViewModel = require('../nagios/viewModel/NagiosMonitorViewModel'); ///ts:import:generated
 ///ts:import=NagiosConnector
 import NagiosConnector = require('../nagios/connector/NagiosConnector'); ///ts:import:generated
+///ts:import=NavigatorMonitorModel
+import NavigatorMonitorModel = require('../navigator/model/NavigatorMonitorModel'); ///ts:import:generated
+///ts:import=NavigatorMonitorViewModel
+import NavigatorMonitorViewModel = require('../navigator/viewModel/NavigatorMonitorViewModel'); ///ts:import:generated
 ///ts:import=JenkinsMonitorModel
 import JenkinsMonitorModel = require('../jenkins/model/JenkinsMonitorModel'); ///ts:import:generated
 ///ts:import=JenkinsMonitorViewModel
@@ -35,7 +39,6 @@ import TravisMonitorViewModel = require('../travis/viewModel/TravisMonitorViewMo
 ///ts:import=TravisConnector
 import TravisConnector = require('../travis/connector/TravisConnector'); ///ts:import:generated
 
-import Config = require('Config');
 
 /**
  * This class contains static methods that help with MonitorModels.
@@ -55,6 +58,8 @@ class MonitorModels {
             viewModel = new SonarMonitorViewModel(<SonarMonitorModel>model);
         } else if (Types.isTravis(monitor.type)) {
             viewModel = new TravisMonitorViewModel(<TravisMonitorModel>model);
+        } else if (Types.isNavigator(monitor.type)) {
+            viewModel = new NavigatorMonitorViewModel(<NavigatorMonitorModel>model);
         }
 
         return viewModel;
@@ -79,6 +84,8 @@ class MonitorModels {
             model = new SonarMonitorModel(monitor, <SonarConnector>Connectors.createConnector(configuration, Types.SONAR), hostname);
         } else if (Types.isTravis(monitor.type)) {
             model = new TravisMonitorModel(monitor, <TravisConnector>Connectors.createConnector(configuration, Types.TRAVIS), hostname);
+        } else if (Types.isNavigator(monitor.type)) {
+            model = new NavigatorMonitorModel(monitor);
         }
 
         return model;

@@ -28,6 +28,8 @@ class CssClasses {
     public static DISABLED_PROGRESS_BUILDING = ' progress-bar progress-bar-info ';
     public static ABORTED_PROGRESS_BUILDING = CssClasses.DISABLED_PROGRESS_BUILDING;
 
+    public static NAVIGATOR_SEPARATOR = 'navigator-separator';
+
 }
 
 export = CssClasses;

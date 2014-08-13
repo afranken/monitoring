@@ -19,6 +19,10 @@ declare module Config {
          * host configuration used throughout the application
          */
         configuration?: Configuration;
+        /**
+         * Navigator containing links, e.g. to other SimonJS pages
+         */
+        navigator?: Navigator;
     }
 
         /**
@@ -100,6 +104,31 @@ declare module Config {
                      */
                     id: string;
                 }
+
+            /**
+             * Navigator containing links, e.g. to other SimonJS pages
+             */
+            interface Navigator extends Monitor {
+                externalRef: Link[];
+            }
+
+            /**
+             * Link used in a Navigator.
+             */
+            interface Link {
+                /**
+                 * Text displayed
+                 */
+                text: string;
+                /**
+                 * Href to link to
+                 */
+                link: string;
+                /**
+                 * Whether or not to display a separator above this link. Default: false
+                 */
+                separator?: boolean;
+            }
 
     /**
      * Application-wide config. {@see Configuration}

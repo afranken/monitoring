@@ -8,12 +8,16 @@
 import Types = require('./util/Types'); ///ts:import:generated
 ///ts:import=MonitorModel
 import MonitorModel = require('./model/MonitorModel'); ///ts:import:generated
+///ts:import=MonitorModels
+import MonitorModels = require('./model/MonitorModels'); ///ts:import:generated
 ///ts:import=SectionModels
 import SectionModels = require('./sections/SectionModels'); ///ts:import:generated
 ///ts:import=SectionViewModel
 import SectionViewModel = require('./sections/SectionViewModel'); ///ts:import:generated
 ///ts:import=Configuration
 import Configuration = require('./configuration/Configuration'); ///ts:import:generated
+///ts:import=NavigatorMonitorViewModel
+import NavigatorMonitorViewModel = require('./navigator/viewModel/NavigatorMonitorViewModel'); ///ts:import:generated
 
 import Config = require('Config');
 import ko = require('knockout');
@@ -33,6 +37,7 @@ class ApplicationViewModel {
     private _isLoading: KnockoutObservable<boolean> = ko.observable<boolean>();
     private _configuration: KnockoutObservable<Configuration> = ko.observable<Configuration>();
     private _sections: KnockoutObservableArray<SectionViewModel> = ko.observableArray<SectionViewModel>();
+    private _navigator: KnockoutObservable<NavigatorMonitorViewModel> = ko.observable<NavigatorMonitorViewModel>();
 
     //==================================================================================================================
     // Construct
@@ -70,6 +75,9 @@ class ApplicationViewModel {
                         this._sections.push(section);
                     }
                 );
+                if (configJson.navigator) {
+                    this._navigator(<NavigatorMonitorViewModel>MonitorModels.createViewModel(configJson.navigator, null, null));
+                }
             })
             .fail((jqXHR, textStatus, errorThrown) => {
                 this._failureText('Failure loading configuration from ' + configParameter + '.\n'
@@ -103,6 +111,10 @@ class ApplicationViewModel {
      */
     public getSections(): Array<SectionViewModel> {
         return this._sections();
+    }
+
+    public getNavigator(): NavigatorMonitorViewModel {
+        return this._navigator();
     }
 
     /**

@@ -60,6 +60,9 @@
         <!-- ko if: getTitle() -->
         <h1 id="mainTitle" class="alert alert-none monitor-heading" data-bind="text: getTitle()"></h1>
         <!-- /ko -->
+        <!-- ko if: getNavigator() -->
+        <div id="navigator" data-bind="template: { name: 'navigator-monitorviewmodel-template', data: getNavigator() }"></div>
+        <!-- /ko -->
         <div id="container-fluid" data-bind="template: { name: 'section-row-template', foreach: getSections() }" ></div>
     </script>
 
@@ -136,6 +139,13 @@
         <!-- ko if: $root.getTypes().isSonar(getType()) -->
         <div data-bind="template: { name: 'sonar-monitorviewmodel-template' }"></div>
         <!-- /ko -->
+    </script>
+
+    <script type="text/html" id="navigator-monitorviewmodel-template">
+        <span class="navigator-label" data-bind="text: getName()"></span>
+        <ul class="navigator-popup" data-bind="foreach: getLinks()">
+            <li data-bind="css: getStyle()"><a data-bind="attr: { href: getLink(), title: getText() }, text: getText()"></a></li>
+        </ul>
     </script>
 
     <script type="text/html" id="ci-box-model-template">

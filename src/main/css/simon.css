@@ -201,3 +201,45 @@ dl {
 .alert-danger .alert-link {
   color: #200203;
 }
+
+
+/* Navigator */
+#navigator {
+  background: none repeat scroll 0 0 #242c77;
+  color: #ffffff;
+  cursor: pointer;
+  left: 0;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+
+.navigator-label {
+  font-weight: bold;
+}
+
+.navigator-popup {
+  display: none;
+}
+
+.navigator-popup a {
+  color: #ffffff;
+  display: block;
+  text-decoration: none;
+}
+
+.navigator-popup a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+#navigator:hover .navigator-popup {
+  display: block;
+}
+
+.navigator-separator {
+  border-top: 1px solid white;
+  margin-top: 0.5em;
+  padding-top: 0.5em;
+}

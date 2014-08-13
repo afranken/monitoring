@@ -11,6 +11,7 @@ class Types {
     public static JENKINS: string = 'jenkins';
     public static NAGIOS: string = 'nagios';
     public static TRAVIS: string = 'travis';
+    public static NAVIGATOR: string = 'navigator';
 
     public static getTypes(): Array<string> {
         return [Types.JENKINS, Types.NAGIOS, Types.SONAR, Types.TRAVIS];
@@ -46,6 +47,14 @@ class Types {
 
     public static isTravis(type: string): boolean {
         return type !== undefined && Types.TRAVIS === type;
+    }
+
+    public static isNavigatorModel(monitorModel: MonitorViewModel): boolean {
+        return Types.isNavigator(monitorModel.getType());
+    }
+
+    public static isNavigator(type: string): boolean {
+        return type !== undefined && Types.NAVIGATOR === type;
     }
 
 }
